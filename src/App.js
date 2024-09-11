@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import HighsSolver from './components/HighsSolver';
+import GlpkSolver from './components/GlpkSolver';
 
 function App() {
   return (
