@@ -1,8 +1,5 @@
 import React from 'react';
 
-
-console.log();
-
 const View = ({ inputFormat, setInputFormat, inputData, setInputData, solveProblem, outputData }) => {
     return (
         <div className="solver-container">

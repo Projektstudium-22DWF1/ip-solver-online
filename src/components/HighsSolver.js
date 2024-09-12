@@ -49,7 +49,6 @@ const HighsSolver = () => {
   const solveProblem = async () => {
     try {
       let input = convertInput(inputData, inputFormat);
-      console.log(input);
       const highs = await highs_promise;
       const result = highs.solve(input);
       setOutputData(JSON.stringify(result, null, 2));

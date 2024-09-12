@@ -97,5 +97,4 @@ const GlpkSolver = () => {
         />
     );
 };
-
 export default GlpkSolver;
