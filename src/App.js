@@ -21,7 +21,7 @@ function App() {
       </select>
       {solver === 'highs' ? <HighsSolver /> : <GlpkSolver />}
     </div>
-  );
+  );schnappi
 }
 
 export default App;
