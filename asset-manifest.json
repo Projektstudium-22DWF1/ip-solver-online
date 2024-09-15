@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ip-solver-online/static/css/main.f855e6bc.css",
+    "main.js": "/ip-solver-online/static/js/main.b6dbe9ab.js",
+    "static/js/453.28fcc7f5.chunk.js": "/ip-solver-online/static/js/453.28fcc7f5.chunk.js",
+    "index.html": "/ip-solver-online/index.html",
+    "main.f855e6bc.css.map": "/ip-solver-online/static/css/main.f855e6bc.css.map",
+    "main.b6dbe9ab.js.map": "/ip-solver-online/static/js/main.b6dbe9ab.js.map",
+    "453.28fcc7f5.chunk.js.map": "/ip-solver-online/static/js/453.28fcc7f5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.b6dbe9ab.js"
+  ]
+}
