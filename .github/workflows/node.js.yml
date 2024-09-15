@@ -8,7 +8,7 @@ on:
     branches: 
       - "master"
       - "main"
-      - "github-actions-deploy"
+      - "feature/github-actions-deploy"
   
   workflow_dispatch:
 
