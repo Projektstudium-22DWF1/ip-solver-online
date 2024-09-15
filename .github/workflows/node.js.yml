@@ -5,7 +5,9 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [ "github-actions-deploy" ]
+    branches: 
+      - "master"
+      - "main"
 
 jobs:
   build-and-deploy:
