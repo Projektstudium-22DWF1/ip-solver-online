@@ -6,7 +6,10 @@ const View = ({ inputFormat, setInputFormat, inputData, setInputData, solveProbl
             <h2>Solver</h2>
             <div>
                 <label>Input Format:</label>
-                <select value={inputFormat} onChange={(e) => setInputFormat(e.target.value)}>
+                <select value={inputFormat} onChange={(e) => {
+                        setInputFormat(e.target.value)
+                    // console.log(e.target.value);
+                }}>
                     <option value="GMPL">GMPL</option>
                     <option value="LP">LP</option>
                 </select>

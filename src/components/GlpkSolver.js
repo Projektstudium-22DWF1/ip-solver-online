@@ -7,8 +7,13 @@ const GlpkSolver = () => {
     const [outputData, setOutputData] = useState(null);
     const [inputFormat, setInputFormat] = useState("GMPL");
 
+    // console.log(inputData);
+    // console.log(outputData);
+    // console.log(inputFormat);
+
     // GLPK GMPL-Problem
     const solveGmplProblem = (problem) => {
+        console.log("GMPL Syntax: " + problem);
         let tran = glpk.glp_mpl_alloc_wksp();
         let pos = 0;
 
@@ -34,17 +39,39 @@ const GlpkSolver = () => {
         glpk.glp_intopt(lp, iocp);
         glpk.glp_mpl_postsolve(tran, lp, glpk.GLP_MIP);
 
-        // Output Werte vom GLPK-Solver
-        console.log("obj: " + glpk.glp_mip_obj_val(lp));
+        // Ergebnisse sammeln
+        let results = [];
+
+        // Zielfunktionswert
+        results.push("Zielfunktionswert: " + glpk.glp_mip_obj_val(lp));
+
+        // Werte der Entscheidungsvariablen
         for (let i = 1; i <= glpk.glp_get_num_cols(lp); i++) {
-            console.log(glpk.glp_get_col_name(lp, i) + " = " + glpk.glp_mip_col_val(lp, i));
+            results.push(glpk.glp_get_col_name(lp, i) + " = " + glpk.glp_mip_col_val(lp, i));
         }
 
-        return glpk.glp_mip_obj_val(lp);
-    }
+        // Dualvariablen (Schattenpreise)
+        for (let i = 1; i <= glpk.glp_get_num_rows(lp); i++) {
+            results.push("Schattenpreis für " + glpk.glp_get_row_name(lp, i) + " = " + glpk.glp_get_row_dual(lp, i));
+        }
+
+        // Aktivitätswerte der Constraints
+        for (let i = 1; i <= glpk.glp_get_num_rows(lp); i++) {
+            results.push("Aktivitätswert für " + glpk.glp_get_row_name(lp, i) + " = " + glpk.glp_get_row_prim(lp, i));
+        }
+
+        // Ergebnisse ausgeben
+        console.log(results.join('\n'));
+
+        // Für die Ausgabe zurückgeben
+        return results.join('\n');
+    };
+
 
     // GLPK LP-Problem
     const solveLpProblem = (problem) => {
+        console.log("LP Syntax: " + problem);
+
         let lp = glpk.glp_create_prob();
 
         let pos = 0;
@@ -56,25 +83,40 @@ const GlpkSolver = () => {
                     return -1;
             }
         );
+
         let smcp = new glpk.SMCP({ presolve: glpk.GLP_ON });
         glpk.glp_simplex(lp, smcp);
 
         let iocp = new glpk.IOCP({ presolve: glpk.GLP_ON });
         glpk.glp_intopt(lp, iocp);
 
-        // Output Werte vom GLPK-Solver
-        console.log("obj: " + glpk.glp_mip_obj_val(lp));
+        // Ergebnis-Parameter sammeln
+        let results = [];
+
+        // Zielfunktionswert
+        results.push("Zielfunktionswert: " + glpk.glp_mip_obj_val(lp));
+
+        // Entscheidungsvariablen-Werte
         for (let i = 1; i <= glpk.glp_get_num_cols(lp); i++) {
-            console.log(glpk.glp_get_col_name(lp, i) + " = " + glpk.glp_mip_col_val(lp, i));
+            results.push(glpk.glp_get_col_name(lp, i) + " = " + glpk.glp_mip_col_val(lp, i));
         }
 
-        return glpk.glp_mip_obj_val(lp);
-    }
+        // Dualvariablen (Schattenpreise)
+        for (let i = 1; i <= glpk.glp_get_num_rows(lp); i++) {
+            results.push("Schattenpreis für " + glpk.glp_get_row_name(lp, i) + " = " + glpk.glp_get_row_dual(lp, i));
+        }
+
+        // Ergebnisse ausgeben
+        console.log(results.join('\n'));
+
+        return results.join('\n');
+    };
+
 
     // Logik für die Problem-Lösung
     const solveProblem = (problem) => {
         try {
-            let result;
+            let result = "";
             if (inputFormat === "GMPL") {
                 result = solveGmplProblem(problem);
             } else {
