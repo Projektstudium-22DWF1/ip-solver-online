@@ -17,7 +17,11 @@ jobs:
 
     runs-on: ubuntu-latest
     concurrency: ci-${{github.ref}}
-  
+    
+    permissions:
+      contents: write
+      actions: read
+
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
