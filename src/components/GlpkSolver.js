@@ -45,7 +45,7 @@ const GlpkSolver = () => {
         // Zielfunktionswert
         results.push("Zielfunktionswert: " + glpk.glp_mip_obj_val(lp));
 
-        // Werte der Entscheidungsvariablen
+        // Werte der Entscheidungsvariablen //TODO auslagern
         for (let i = 1; i <= glpk.glp_get_num_cols(lp); i++) {
             results.push(glpk.glp_get_col_name(lp, i) + " = " + glpk.glp_mip_col_val(lp, i));
         }
@@ -94,7 +94,7 @@ const GlpkSolver = () => {
         let results = [];
 
         // Zielfunktionswert
-        results.push("Zielfunktionswert: " + glpk.glp_mip_obj_val(lp));
+        results.push("Zielfunktionswert: " + glpk.glp_mip_obj_val(lp)); //TODO auslagern
 
         // Entscheidungsvariablen-Werte
         for (let i = 1; i <= glpk.glp_get_num_cols(lp); i++) {
