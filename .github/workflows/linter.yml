@@ -6,11 +6,13 @@ on:
   push:
     branches:
       - main
+      - master
       - feature/github-actions-deploy
-      
+
   pull_request:
     branches:
       - main
+      - master
 
 jobs:
   run-linters:
@@ -18,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      checks: write 
+      checks: write
       contents: read
 
     steps:
