@@ -8,7 +8,6 @@ const View = ({ inputFormat, setInputFormat, inputData, setInputData, solveProbl
                 <label>Input Format:</label>
                 <select value={inputFormat} onChange={(e) => {
                         setInputFormat(e.target.value)
-                    // console.log(e.target.value);
                 }}>
                     <option value="GMPL">GMPL</option>
                     <option value="LP">LP</option>
