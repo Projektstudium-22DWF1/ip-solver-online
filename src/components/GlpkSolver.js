@@ -5,7 +5,7 @@ import { solve, SolverOptions } from "./../services/SolverInterface";
 const GlpkSolver = () => {
   const [inputData, setInputData] = useState("");
   const [outputData, setOutputData] = useState(null);
-  const [inputFormat, setInputFormat] = useState("GMPL");
+  const [inputFormat, setInputFormat] = useState('GMPL');
 
   const solveProblem = async () => {
     try {
