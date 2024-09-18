@@ -1,0 +1,26 @@
+# Node modules und Build-Ordner ignorieren
+node_modules/
+build/
+dist/
+
+# Lockfiles ignorieren
+package-lock.json
+yarn.lock
+
+# CI/CD und Konfigurationsdateien ignorieren
+.github/workflows/*.yml
+Dockerfile
+
+# Bilder und Medien
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.ico
+*.mp4
+*.mp3
+*.wav
+
+# IDE und lokale Einstellungen ignorieren
+.vscode/
+.env
