@@ -9,14 +9,14 @@ const HighsSolver = () => {
 
   const solveProblem = async () => {
     try {
-      var startTime = performance.now();
+      const startTime = performance.now();
       const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
-      var endTime = performance.now();
+      const endTime = performance.now();
       result["Walltime"] = (endTime - startTime) / 1000;
 
-      setOutputData(JSON.stringify(result, null, 2));
+      setOutputData(result); // Store the result as an object
     } catch (error) {
-      setOutputData(`Fehler: ${error.message}`);
+      setOutputData({ error: error.message });
     }
   };
 
@@ -27,7 +27,7 @@ const HighsSolver = () => {
       inputData={inputData}
       setInputData={setInputData}
       solveProblem={solveProblem}
-      outputData={outputData}
+      outputData={outputData} // Pass the parsed result object to View
     />
   );
 };
