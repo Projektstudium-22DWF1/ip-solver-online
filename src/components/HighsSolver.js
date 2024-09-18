@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import View from './View';
+import React, { useState } from "react";
+import View from "./View";
 
 const highs_settings = {
   locateFile: (file) => "https://lovasoa.github.io/highs-js/" + file,
 };
 const highs_promise = require("highs")(highs_settings);
 
-let glpk = require('../dist/glpk.min.js');
+let glpk = require("../dist/glpk.min.js");
 
 const convertInput = (str, format) => {
   if (format === "GMPL") {
@@ -14,7 +14,7 @@ const convertInput = (str, format) => {
   } else {
     return str;
   }
-}
+};
 
 const convertGmplToLp = (str) => {
   let result = "";
@@ -23,23 +23,21 @@ const convertGmplToLp = (str) => {
   glpk._glp_mpl_init_rand(tran, 1);
   let pos = 0;
 
-  glpk.glp_mpl_read_model(tran, null,
-    function () {
-      if (pos < str.length) {
-        return str[pos++];
-      } else
-        return -1;
-    },
-  )
+  glpk.glp_mpl_read_model(tran, null, function () {
+    if (pos < str.length) {
+      return str[pos++];
+    } else return -1;
+  });
 
   glpk.glp_mpl_generate(tran, null, console.log);
   glpk.glp_mpl_build_prob(tran, lp);
-  
-  glpk.glp_write_lp(lp, null, function(str) {
-    result += str + `\n`;});
+
+  glpk.glp_write_lp(lp, null, function (str) {
+    result += str + `\n`;
+  });
 
   return result;
-}
+};
 
 const HighsSolver = () => {
   const [inputData, setInputData] = useState("");
@@ -59,14 +57,14 @@ const HighsSolver = () => {
   };
 
   return (
-      <View
-          inputFormat={inputFormat}
-          setInputFormat={setInputFormat}
-          inputData={inputData}
-          setInputData={setInputData}
-          solveProblem={solveProblem}
-          outputData={outputData}
-      />
+    <View
+      inputFormat={inputFormat}
+      setInputFormat={setInputFormat}
+      inputData={inputData}
+      setInputData={setInputData}
+      solveProblem={solveProblem}
+      outputData={outputData}
+    />
   );
 };
 
