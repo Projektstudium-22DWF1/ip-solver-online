@@ -1,22 +1,17 @@
 name: Linter
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
-
-
-  pull_request:
+  # Trigger the workflow on push to master
+  push:
     branches:
-      - main
       - master
 
 jobs:
   run-linters:
-    name: Run linters
+    name: Run linters on master
     runs-on: ubuntu-latest
 
     permissions:
-      checks: write
       contents: write
 
     steps:
@@ -28,7 +23,7 @@ jobs:
         with:
           node-version: 20
 
-      # ESLint and Prettier must be in `package.json`
+      # Install Node.js dependencies
       - name: Install Node.js dependencies
         run: npm ci
 
@@ -43,17 +38,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git checkout -b lint-fixes-branch
           git add .
           git commit -m "chore: format code with Prettier and fix lint issues" || echo "No changes to commit"
-          git push origin lint-fixes-branch
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: lint-fixes-branch
-          title: "chore: format code with Prettier and fix lint issues"
-          body: "Dieser PR enthält automatische Formatierungs- und Linting-Korrekturen."
-          labels: "autofix, linting"
-      
+          git push origin master
