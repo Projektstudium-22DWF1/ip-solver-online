@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - master
+      - feature/github-actions-deploy
 
 jobs:
   run-linters:
