@@ -153,17 +153,16 @@ const formatGlpkData = (lp) => {
                 break;
             default: colType = "Unknown"
                 break;
-
         }
 
         var ub = glpk.glp_get_col_ub(lp, i);
         if (ub >= Number.MAX_VALUE) {
-            ub = "+inf";
+            ub = null;
         }
 
         var lb = glpk.glp_get_col_lb(lp, i);
         if (lb <= -Number.MAX_VALUE) {
-            lb = "-inf";
+            lb = null;
         }
 
         var primal = glpk.glp_get_col_prim(lp, i); // Primalwert der Spalte
@@ -177,16 +176,10 @@ const formatGlpkData = (lp) => {
                 statusStr = "BS"; // Basis
                 break;
             case glpk.GLP_NL:
-                statusStr = "NL"; // Nicht Basis, untere Schranke
+                statusStr = "LB"; // Nicht Basis, untere Schranke
                 break;
             case glpk.GLP_NU:
-                statusStr = "NU"; // Nicht Basis, obere Schranke
-                break;
-            case glpk.GLP_LB:
-                statusStr = "LB"; // Untere Schranke aktiv
-                break;
-            case glpk.GLP_UB:
-                statusStr = "UB"; // Obere Schranke aktiv
+                statusStr = "UB"; // Nicht Basis, obere Schranke
                 break;
             default:
                 statusStr = "Unknown";
@@ -209,7 +202,8 @@ const formatGlpkData = (lp) => {
         };
     }
 
-    var rows = [];
+    var rows = []; 
+    /*
     for (var j = 1; j <= glpk.glp_get_num_rows(lp); j++) {
         var ubR = glpk.glp_get_row_ub(lp, j);
         if (ubR >= Number.MAX_VALUE) {
@@ -261,7 +255,7 @@ const formatGlpkData = (lp) => {
             Dual: dualR,           // Dualwert der Zeile
             Name: rowName         // Name der Zeile (z.B. c1, c2)
         });
-    }
+    } */
 
     var objectiveValue = glpk.glp_mip_obj_val(lp);
 
