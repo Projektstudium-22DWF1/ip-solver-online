@@ -7,7 +7,7 @@ export function KomplexeProbleme() {
     return (
         <React.Fragment>
             <div>
-                Test2
+                <span uk-icon="upload"></span>
             </div>
 
         </React.Fragment>

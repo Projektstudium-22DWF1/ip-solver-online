@@ -14,7 +14,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={{borderStyle: "solid"}}>
+    <div className="App" style={{borderStyle: ""}}>
       {/*<h1>LP Solver</h1>*/}
       {/*<select onChange={handleSolverChange} value={solver}>*/}
       {/*  <option value="highs">HiGHS Solver</option>*/}

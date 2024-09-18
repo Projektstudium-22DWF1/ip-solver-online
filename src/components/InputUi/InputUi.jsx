@@ -14,30 +14,53 @@ export function InputUi() {
 
     const handleNavClick = (component) => {
         setActiveComponent(component);
-
-
     };
 
 
     return (
         <React.Fragment>
             <div>
+                {/*Navigationsleiste*/}
                 <nav className="uk-navbar-container" uk-navbar={"true"}>
                     <div className="uk-navbar-left">
 
                         <ul className="uk-navbar-nav">
-                            <li className={`uk-active ${activeComponent === 'einfache' ? 'active' : ''}`}><a onClick={() => {handleNavClick("einfache")}}>Einfache Probleme</a></li>
-                            <li className={`uk-active ${activeComponent === 'komplexe' ? 'active' : ''}`}><a onClick={() => {handleNavClick("komplexe")}}>Komplexe Probleme</a></li>
-                            <li className={`uk-active ${activeComponent === 'beschreibung' ? 'active' : ''}`}><a onClick={() => {handleNavClick("beschreibung")}}>Beschreibung der Anwendung</a></li>
+                            <li className={`uk-active ${activeComponent === 'einfache' ? 'active' : ''}`}> {/*active ist nur für css*/}
+                                <a onClick={() => { handleNavClick("einfache") }}>
+                                    Einfache Probleme
+                                </a>
+                            </li>
+                            <li className={`uk-active ${activeComponent === 'komplexe' ? 'active' : ''}`}>
+                                <a onClick={() => { handleNavClick("komplexe") }}>
+                                    Komplexe Probleme
+                                </a>
+                            </li>
+                            <li className={`uk-active ${activeComponent === 'beschreibung' ? 'active' : ''}`}>
+                                <a onClick={() => { handleNavClick("beschreibung") }}>
+                                    Beschreibung der Anwendung
+                                </a>
+                            </li>
                         </ul>
+
+                        <span uk-icon="world"></span>
 
                     </div>
                 </nav>
-                <div className="uk-container">
+
+                {/*Laden der Komponente*/}
+                <div className="uk-container" id={"all"}>
                     {activeComponent === 'einfache' && <EinfacheProbleme/>}
                     {activeComponent === 'komplexe' && <KomplexeProbleme/>}
                     {activeComponent === 'beschreibung' && <Beschreibung/>}
                 </div>
+
+                {/*Footer*/}
+                <footer className="uk-section uk-section-small uk-text-center uk-background-muted">
+                    <div className="uk-container">
+                        <p>© Anwendung zur Lösung linearer Optimierungsprobleme</p>
+                    </div>
+                </footer>
+
             </div>
 
         </React.Fragment>

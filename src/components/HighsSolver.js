@@ -14,7 +14,7 @@ const convertInput = (str, format) => {
   } else {
     return str;
   }
-}
+};
 
 const convertGmplToLp = (str) => {
   let result = "";
@@ -24,37 +24,52 @@ const convertGmplToLp = (str) => {
   let pos = 0;
 
   glpk.glp_mpl_read_model(tran, null,
-    function () {
-      if (pos < str.length) {
-        return str[pos++];
-      } else
-        return -1;
-    },
-  )
+      function () {
+        if (pos < str.length) {
+          return str[pos++];
+        } else {
+          return -1;
+        }
+      },
+  );
 
   glpk.glp_mpl_generate(tran, null, console.log);
   glpk.glp_mpl_build_prob(tran, lp);
-  
+
   glpk.glp_write_lp(lp, null, function(str) {
-    result += str + `\n`;});
+    result += str + `\n`;
+  });
 
   return result;
-}
+};
 
+// Schritt 1 & 2: `solveProblem` Funktion außerhalb der Komponente und exportieren
+export const solveProblem = async (string, inputFormat) => {
+  try {
+    let input = convertInput(string, inputFormat);
+    const highs = await highs_promise;
+    const result = highs.solve(input);
+
+    return JSON.stringify(result, null, 2);
+  } catch (error) {
+    throw new Error(`Fehler: ${error.message}`);
+  }
+};
+
+// Schritt 3: Komponente `HighsSolver` anpassen
 const HighsSolver = () => {
   const [inputData, setInputData] = useState("");
   const [outputData, setOutputData] = useState(null);
   const [inputFormat, setInputFormat] = useState("GMPL");
 
-  const solveProblem = async () => {
+  // Aufruf der `solveProblem` Funktion
+  const handleSolveProblem = async () => {
     try {
-      let input = convertInput(inputData, inputFormat);
-      // console.log("HIER "+inputFormat);
-      const highs = await highs_promise;
-      const result = highs.solve(input);
-      setOutputData(JSON.stringify(result, null, 2));
+
+      const result = await solveProblem(inputData, inputFormat);
+      setOutputData(result);
     } catch (error) {
-      setOutputData(`Fehler: ${error.message}`);
+      setOutputData(error.message);
     }
   };
 
@@ -64,7 +79,7 @@ const HighsSolver = () => {
           setInputFormat={setInputFormat}
           inputData={inputData}
           setInputData={setInputData}
-          solveProblem={solveProblem}
+          solveProblem={handleSolveProblem} // Verwende `handleSolveProblem` hier
           outputData={outputData}
       />
   );

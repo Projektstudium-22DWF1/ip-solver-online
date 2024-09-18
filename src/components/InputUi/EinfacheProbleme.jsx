@@ -1,233 +1,131 @@
-import React from "react";
-import 'uikit/dist/css/uikit.min.css';
+import React, { useEffect, useState, useRef } from "react";
+// import 'uikit/dist/css/uikit.min.css';
+import UIkit from 'uikit';
+import Icons from 'uikit/dist/js/uikit-icons';
+import "./styles/navbar.css";
+import "../HighsSolver";
+import { solveProblem as highsSolveProblem } from "../HighsSolver";
+
+
+// Initialisiere UIkit mit Icons
+UIkit.use(Icons);
 
 export function EinfacheProbleme() {
 
+    const [problemOption, setProblemOption] = useState("maximize");
+    const [solverOption, setSolverOption] = useState("highs");
+    const [formatOption, setFormatOption] = useState("gmpl");
+
+    const [constraints, setConstraints] = useState([{ value: "" }]);
+    const [bounds, setBounds]           = useState([{ value: "" }]);
+
+    // Funktion zum Hinzufügen einer neuen Zeile in mainArea
+    const handleClick = (setCondition, condition) => {
+        setCondition([...condition, {value: ""}]); // Kopiere aktuellen Inhalt von constraints und füge Objekt hinten dran.
+    };
+
+
+    // Funktion zum Ändern einer Constraint
+    const handleconditionChange = (index, e, condition, setcondition) => {
+        const newcondition = [...condition]; // Kopie aktueller constraints
+        newcondition[index].value = e.target.value;   // value auf Eingabe setzen
+        setcondition(newcondition);                 // alte durch neue Constraints ersetzen
+    };
+
+    const deleteConstraint = (index, condition, setcondition) => {
+        if (condition.length === 1) {
+            alert("One constraint required");
+        } else {
+            const newcondition = condition.filter((currElm, i) => i !== index); // currElm = aktuelles Element, i = index
+            // i !== index -> index ist der index des Elements, auf was geklickt wurde
+            setcondition(newcondition);
+        }
+    }
+    
+
+    const solveProblem = async () => {
+        //TODO und anschließend muss in Abhängigkeit der Parameter das entsprechende Format gebaut werden (Template String)
+        //TODO Dieses Format wird dann an die entsprechende Funktion mit entsprechenden Parametern weitergeleitet (HIGHS oder GLPK)
+        //TODO Datenvalidierung muss als erstes gemacht werden bei Aufruf der Funktion
+
+        const param = `Maximize obj: x1 + 2 x2 + 4 x3 + x4 Subject To c1: - x1 + x2 + x3 + 10 x4 <= 20 c2: x1 - 4 x2 + x3 <= 30 c3: x2 - 0.5 x4 = 0 Bounds 0 <= x1 <= 40 2 <= x4 <= 3 End`;
+
+        await highsSolveProblem(param, "LP");
+
+        // console.log(rs);
+    }
 
     return (
         <React.Fragment>
-            <div>
-                Test
-            </div>
+                <div id={"dropdowns"}>
+                    <div className="uk-margin">
+                        {/* Maximize/Minimize Box */}
+                        <div uk-form-custom="target: > * > span:first-child">
+                            <select aria-label="Custom controls" onChange={(e) => setProblemOption(e.target.value)}>
+                                <option value="maximize">Maximize</option>
+                                <option value="minimize">Minimize</option>
+                            </select>
+                            <button className="uk-button uk-button-default" type="button" tabIndex="-1">
+                                <span></span>
+                                <span uk-icon="icon: chevron-down"></span>
+                            </button>
+                        </div>
+                        {/* Solver Box */}
+                        <div uk-form-custom="target: > * > span:first-child">
+                            <select aria-label="Custom controls" onChange={(e) => setSolverOption(e.target.value)}>
+                                <option value="highs">HIGHS</option>
+                                <option value="glpk">GLPK</option>
+                            </select>
+                            <button className="uk-button uk-button-default" type="button" tabIndex="-1">
+                                <span></span>
+                                <span uk-icon="icon: chevron-down"></span>
+                            </button>
+                        </div>
+                        {/* Format Box */}
+                        <div uk-form-custom="target: > * > span:first-child">
+                            <select aria-label="Custom controls" onChange={(e) => setFormatOption(e.target.value)}>
+                                <option value="gmpl">GMPL</option>
+                                <option value="lp">LP</option>
+                            </select>
+                            <button className="uk-button uk-button-default" type="button" tabIndex="-1">
+                                <span></span>
+                                <span uk-icon="icon: chevron-down"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={"tables-container"}>
+
+                    <label htmlFor="#constraints">Constraints</label>
+                    <table className="mainArea">
+                        <tbody>
+                        {constraints.map((constraint, index) => (
+                            <tr key={index}>
+                                <td><input className="uk-input" type="text" value={constraint.value} onChange={(e) => handleconditionChange(index, e, constraints, setConstraints)}/></td>
+                                <td><span className="addButton" uk-icon="plus" onClick={() => {handleClick(setConstraints, constraints)}}></span></td>
+                                <td><span className="removeButton" uk-icon="close" onClick={(e) => { deleteConstraint(index, constraints, setConstraints) }}></span></td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+
+                    <label htmlFor="#bounds">Bounds</label>
+                    <table className={"mainArea"}>
+                        <tbody>
+                        {bounds.map((bound, index) => (
+                            <tr key={index}>
+                                <td><input className="uk-input" type="text" value={bound.value} onChange={(e) => handleconditionChange(index, e, bounds, setBounds)}/></td>
+                                <td><span className="addButton" uk-icon="plus" onClick={() => {handleClick(setBounds, bounds)}}></span></td>
+                                <td><span className="removeButton" uk-icon="close" onClick={(e) => { deleteConstraint(index, bounds, setBounds) }}></span></td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+
+                    <button className="uk-button uk-button-secondary uk-button-large" onClick={solveProblem}>Solve problem</button>
 
         </React.Fragment>
     );
 }
-
-
-
-// import React, { useState } from 'react';
-//
-// const highs_settings = {
-//     locateFile: (file) => "https://lovasoa.github.io/highs-js/" + file,
-// };
-// const highs_promise = require("highs")(highs_settings);
-//
-// const HighsSolver = () => {
-//     const [objectiveType, setObjectiveType] = useState("Maximize");
-//     const [objectiveFunction, setObjectiveFunction] = useState("");
-//     const [objectiveIndex, setObjectiveIndex] = useState("obj");
-//     const [constraints, setConstraints] = useState([{ name: "c0", equation: "" }]);
-//     const [bounds, setBounds] = useState([{ equation: "" }]);
-//     const [outputData, setOutputData] = useState(null);
-//     const [fullProblem, setFullProblem] = useState(""); // State for full problem input
-//
-//     const addConstraint = () => {
-//         setConstraints([...constraints, { name: `c${constraints.length}`, equation: "" }]);
-//     };
-//
-//     const addBound = () => {
-//         setBounds([...bounds, { equation: "" }]);
-//     };
-//
-//     const updateConstraint = (index, key, value) => {
-//         const newConstraints = [...constraints];
-//         newConstraints[index][key] = value;
-//         setConstraints(newConstraints);
-//     };
-//
-//     const updateBound = (index, value) => {
-//         const newBounds = [...bounds];
-//         newBounds[index].equation = value;
-//         setBounds(newBounds);
-//     };
-//
-//     const removeConstraint = (index) => {
-//         const newConstraints = constraints.filter((_, i) => i !== index);
-//         setConstraints(newConstraints);
-//     };
-//
-//     const removeBound = (index) => {
-//         const newBounds = bounds.filter((_, i) => i !== index);
-//         setBounds(newBounds);
-//     };
-//
-//     const solveProblem = async () => {
-//         try {
-//             const highs = await highs_promise;
-//
-//             const fullInputData = `${objectiveType} ${objectiveIndex}:\n  ${objectiveFunction}\nSubject To\n${constraints
-//                 .filter((constraint) => constraint.equation.trim() !== "")
-//                 .map((constraint) => `${constraint.name}: ${constraint.equation.replace("=", "=")}`)
-//                 .join("\n")}\nBounds\n${bounds
-//                 .filter((bound) => bound.equation.trim() !== "")
-//                 .map((bound) => `${bound.equation}`)
-//                 .join("\n")}\nEnd`;
-//
-//             console.log("Full Input Data:", fullInputData);
-//
-//             const result = highs.solve(fullInputData);
-//
-//             setOutputData(JSON.stringify(result, null, 2));
-//         } catch (error) {
-//             setOutputData(`Fehler: ${error.message}`);
-//         }
-//     };
-//
-//     // Funktion zum Lösen des Problems mit manuell eingegebenem LP-Format
-//     const solveFullProblem = async () => {
-//         try {
-//             const highs = await highs_promise;
-//
-//             console.log("Full Problem Input:", fullProblem);
-//
-//             const result = highs.solve(fullProblem);
-//
-//             setOutputData(JSON.stringify(result, null, 2));
-//         } catch (error) {
-//             setOutputData(`Fehler: ${error.message}`);
-//         }
-//     };
-//
-//     return (
-//         <div className="solver-container">
-//             <h2>HIGHS Solver</h2>
-//
-//             {/* Standardfelder für Zielfunktion und Constraints */}
-//             <div className="objective-type-container" style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-//                 <select
-//                     id="objective-type"
-//                     value={objectiveType}
-//                     onChange={(e) => setObjectiveType(e.target.value)}
-//                     style={{ marginRight: '10px' }}
-//                 >
-//                     <option value="Maximize">Maximize</option>
-//                     <option value="Minimize">Minimize</option>
-//                 </select>
-//
-//                 <input
-//                     type="text"
-//                     value={objectiveIndex}
-//                     onChange={(e) => setObjectiveIndex(e.target.value)}
-//                     placeholder="Zielfunktionsindex"
-//                     style={{ width: '80px', marginRight: '10px' }}
-//                 />
-//
-//                 <textarea
-//                     id="objective-function"
-//                     className="input-textarea"
-//                     value={objectiveFunction}
-//                     onChange={(e) => setObjectiveFunction(e.target.value)}
-//                     placeholder="Function..."
-//                     style={{ flexGrow: 1 }}
-//                 />
-//             </div>
-//
-//             {constraints.map((constraint, index) => (
-//                 <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-//                     <input
-//                         type="text"
-//                         value={constraint.name}
-//                         onChange={(e) => updateConstraint(index, "name", e.target.value)}
-//                         placeholder="Name"
-//                         style={{ width: '60px', marginRight: '5px' }}
-//                     />
-//                     <span style={{ marginRight: '10px' }}>:</span>
-//                     <textarea
-//                         id={`constraint-${index}`}
-//                         className="input-textarea"
-//                         value={constraint.equation}
-//                         onChange={(e) => updateConstraint(index, "equation", e.target.value)}
-//                         placeholder={`Constraint ${index + 1} ...`}
-//                         style={{ flexGrow: 1, marginRight: '10px' }}
-//                     />
-//                     <button
-//                         className="remove-constraint-button"
-//                         onClick={() => removeConstraint(index)}
-//                         style={{ color: 'red', border: 'none', background: 'transparent', cursor: 'pointer' }}
-//                     >
-//                         X
-//                     </button>
-//                 </div>
-//             ))}
-//             <button className="add-constraint-button" onClick={addConstraint}>
-//                 + Add constraint
-//             </button>
-//
-//             {bounds.map((bound, index) => (
-//                 <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
-//           <textarea
-//               id={`bound-${index}`}
-//               className="input-textarea"
-//               value={bound.equation}
-//               onChange={(e) => updateBound(index, e.target.value)}
-//               placeholder={`Bound ${index + 1} ...`}
-//               style={{ flexGrow: 1, marginRight: '10px' }}
-//           />
-//                     <button
-//                         className="remove-bound-button"
-//                         onClick={() => removeBound(index)}
-//                         style={{ color: 'red', border: 'none', background: 'transparent', cursor: 'pointer' }}
-//                     >
-//                         X
-//                     </button>
-//                 </div>
-//             ))}
-//             <button className="add-bound-button" onClick={addBound}>
-//                 + Add bound
-//             </button>
-//
-//             <button className="solve-button" onClick={solveProblem} style={{ marginTop: '10px' }}>
-//                 Solve problem
-//             </button>
-//
-//             {/* Neuer Abschnitt für die Eingabe des gesamten Problems */}
-//             <h3>Or enter the full problem:</h3>
-//             <textarea
-//                 id="full-problem-input"
-//                 className="input-textarea"
-//                 value={fullProblem}
-//                 onChange={(e) => setFullProblem(e.target.value)}
-//                 placeholder="Enter the full optimization problem in LP format..."
-//                 style={{ width: '100%', height: '150px', marginBottom: '10px' }}
-//             />
-//             <button className="solve-full-button" onClick={solveFullProblem} style={{ marginBottom: '10px' }}>
-//                 Solve full problem
-//             </button>
-//
-//             {outputData && (
-//                 <div className="output-container">
-//                     <h2>Solution:</h2>
-//                     <pre className="output-data">{outputData}</pre>
-//                 </div>
-//             )}
-//
-//             <h3>Example:</h3>
-//             <pre>
-//         Maximize
-//         obj:
-//         x1 + 2 x2 + 4 x3 + x4
-//         Subject To
-//         c1: - x1 + x2 + x3 + 10 x4 &lt;= 20
-//         c2: x1 - 4 x2 + x3 &lt;= 30
-//         c3: x2 - 0.5 x4 = 0
-//         Bounds
-//         0 &lt;= x1 &lt;= 40
-//         2 &lt;= x4 &lt;= 3
-//         End
-//       </pre>
-//         </div>
-//     );
-// };
-//
-// export default HighsSolver;
