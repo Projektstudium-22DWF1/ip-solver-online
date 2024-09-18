@@ -31,23 +31,23 @@ const View = ({
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
-              <th>Variable</th>
-              <th>Primalwert</th>
-              <th>Status</th>
-              <th>Untere Schranke</th>
-              <th>Obere Schranke</th>
-              <th>Dualwert</th>
+              <th className="uk-text-center">Variable</th>
+              <th className="uk-text-center">Primalwert</th>
+              <th className="uk-text-center">Status</th>
+              <th className="uk-text-center">Untere Schranke</th>
+              <th className="uk-text-center">Obere Schranke</th>
+              <th className="uk-text-center">Dualwert</th>
             </tr>
           </thead>
           <tbody>
             {Object.entries(outputData.Columns).map(([key, variable]) => (
               <tr key={key}>
-                <td>{variable.Name}</td>
-                <td>{variable.Primal}</td>
-                <td>{variable.Status}</td>
-                <td>{variable.Lower}</td>
-                <td>{variable.Upper ?? "∞"}</td>
-                <td>{variable.Dual}</td>
+                <td className="uk-text-center">{variable.Name}</td>
+                <td className="uk-text-center">{variable.Primal}</td>
+                <td className="uk-text-center">{variable.Status}</td>
+                <td className="uk-text-center">{variable.Lower}</td>
+                <td className="uk-text-center">{variable.Upper ?? "∞"}</td>
+                <td className="uk-text-center">{variable.Dual}</td>
               </tr>
             ))}
           </tbody>
@@ -64,23 +64,23 @@ const View = ({
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
-              <th>Restriktion</th>
-              <th>Primalwert</th>
-              <th>Status</th>
-              <th>Untere Schranke</th>
-              <th>Obere Schranke</th>
-              <th>Dualwert</th>
+              <th className="uk-text-center">Restriktion</th>
+              <th className="uk-text-center">Primalwert</th>
+              <th className="uk-text-center">Status</th>
+              <th className="uk-text-center">Untere Schranke</th>
+              <th className="uk-text-center">Obere Schranke</th>
+              <th className="uk-text-center">Dualwert</th>
             </tr>
           </thead>
           <tbody>
             {outputData.Rows.map((row, index) => (
               <tr key={index}>
-                <td>{row.Name}</td>
-                <td>{row.Primal}</td>
-                <td>{row.Status}</td>
-                <td>{row.Lower ?? "Keine"}</td>
-                <td>{row.Upper ?? "∞"}</td>
-                <td>{row.Dual}</td>
+                <td className="uk-text-center">{row.Name}</td>
+                <td className="uk-text-center">{row.Primal}</td>
+                <td className="uk-text-center">{row.Status}</td>
+                <td className="uk-text-center">{row.Lower ?? "Keine"}</td>
+                <td className="uk-text-center">{row.Upper ?? "∞"}</td>
+                <td className="uk-text-center">{row.Dual}</td>
               </tr>
             ))}
           </tbody>
@@ -137,13 +137,13 @@ const View = ({
       </ul>
 
       {/* Content Switcher for Tabs */}
-      <ul>
-        {activeTab === "summary" && <div>{renderSummary()}</div>}
-        {activeTab === "logs" && <div><div>Logs werden hier angezeigt.</div></div>}
-        {activeTab === "output" && <div><div>Output wird hier angezeigt.</div></div>}
-        {activeTab === "variables" && <div>{renderVariables()}</div>}
-        {activeTab === "constraints" && <div>{renderConstraints()}</div>}
-      </ul>
+      <div>
+        {activeTab === "summary" && renderSummary()}
+        {activeTab === "logs" && <div>Logs werden hier angezeigt.</div>}
+        {activeTab === "output" && <div>Output wird hier angezeigt.</div>}
+        {activeTab === "variables" && renderVariables()}
+        {activeTab === "constraints" && renderConstraints()}
+      </div>
     </div>
   );
 };
