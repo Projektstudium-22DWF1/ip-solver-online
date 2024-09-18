@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import View from './View';
-import { solve, SolverOptions } from './../services/SolverInterface';  
+import React, { useState } from "react";
+import View from "./View";
+import { solve, SolverOptions } from "./../services/SolverInterface";
 
 const HighsSolver = () => {
   const [inputData, setInputData] = useState("");
@@ -13,7 +13,7 @@ const HighsSolver = () => {
       const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
       var endTime = performance.now();
       result["Walltime"] = (endTime - startTime) / 1000;
-      
+
       setOutputData(JSON.stringify(result, null, 2));
     } catch (error) {
       setOutputData(`Fehler: ${error.message}`);
