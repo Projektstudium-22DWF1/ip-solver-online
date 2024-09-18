@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import 'uikit/dist/css/uikit.min.css';
 
 const View = ({
   inputFormat,
@@ -27,26 +28,26 @@ const View = ({
 
     return (
       <div style={{ marginTop: "20px", textAlign: "center" }}>
-        <table style={{ margin: "0 auto", borderCollapse: "collapse", width: "80%" }}>
+        <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Variable</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Primalwert</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Status</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Untere Schranke</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Obere Schranke</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Dualwert</th>
+              <th>Variable</th>
+              <th>Primalwert</th>
+              <th>Status</th>
+              <th>Untere Schranke</th>
+              <th>Obere Schranke</th>
+              <th>Dualwert</th>
             </tr>
           </thead>
           <tbody>
             {Object.entries(outputData.Columns).map(([key, variable]) => (
               <tr key={key}>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{variable.Name}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{variable.Primal}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{variable.Status}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{variable.Lower}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{variable.Upper ?? "∞"}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{variable.Dual}</td>
+                <td>{variable.Name}</td>
+                <td>{variable.Primal}</td>
+                <td>{variable.Status}</td>
+                <td>{variable.Lower}</td>
+                <td>{variable.Upper ?? "∞"}</td>
+                <td>{variable.Dual}</td>
               </tr>
             ))}
           </tbody>
@@ -60,26 +61,26 @@ const View = ({
 
     return (
       <div style={{ marginTop: "20px", textAlign: "center" }}>
-        <table style={{ margin: "0 auto", borderCollapse: "collapse", width: "80%" }}>
+        <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Restriktion</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Primalwert</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Status</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Untere Schranke</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Obere Schranke</th>
-              <th style={{ border: "1px solid #ddd", padding: "8px" }}>Dualwert</th>
+              <th>Restriktion</th>
+              <th>Primalwert</th>
+              <th>Status</th>
+              <th>Untere Schranke</th>
+              <th>Obere Schranke</th>
+              <th>Dualwert</th>
             </tr>
           </thead>
           <tbody>
             {outputData.Rows.map((row, index) => (
               <tr key={index}>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{row.Name}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{row.Primal}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{row.Status}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{row.Lower ?? "Keine"}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{row.Upper ?? "∞"}</td>
-                <td style={{ border: "1px solid #ddd", padding: "8px" }}>{row.Dual}</td>
+                <td>{row.Name}</td>
+                <td>{row.Primal}</td>
+                <td>{row.Status}</td>
+                <td>{row.Lower ?? "Keine"}</td>
+                <td>{row.Upper ?? "∞"}</td>
+                <td>{row.Dual}</td>
               </tr>
             ))}
           </tbody>
@@ -89,11 +90,13 @@ const View = ({
   };
 
   return (
-    <div className="solver-container">
-      <h2>Solver</h2>
-      <div>
+    <div className="uk-container uk-margin-top">
+      <h2 className="uk-heading-line"><span>Solver</span></h2>
+
+      <div className="uk-margin">
         <label>Input Format:</label>
         <select
+          className="uk-select uk-form-width-medium"
           value={inputFormat}
           onChange={(e) => setInputFormat(e.target.value)}
         >
@@ -101,31 +104,46 @@ const View = ({
           <option value="LP">LP</option>
         </select>
       </div>
+
       <textarea
-        className="input-textarea"
+        className="uk-textarea uk-margin-bottom"
+        rows="5"
         value={inputData}
         onChange={(e) => setInputData(e.target.value)}
         placeholder="Gib dein Optimierungsproblem hier ein..."
       />
-      <button className="solve-button" onClick={solveProblem}>
+
+      <button className="uk-button uk-button-primary uk-margin-bottom" onClick={solveProblem}>
         Problem lösen
       </button>
 
-      <div className="tabs">
-        <button onClick={() => setActiveTab("summary")}>Summary</button>
-        <button onClick={() => setActiveTab("logs")}>Logs</button>
-        <button onClick={() => setActiveTab("output")}>Output</button>
-        <button onClick={() => setActiveTab("variables")}>Variables</button>
-        <button onClick={() => setActiveTab("constraints")}>Constraints</button>
-      </div>
+      {/* UIkit Tabs */}
+      <ul className="uk-tab" uk-tab="true">
+        <li className={activeTab === "summary" ? "uk-active" : ""}>
+          <a onClick={() => setActiveTab("summary")}>Summary</a>
+        </li>
+        <li className={activeTab === "logs" ? "uk-active" : ""}>
+          <a onClick={() => setActiveTab("logs")}>Logs</a>
+        </li>
+        <li className={activeTab === "output" ? "uk-active" : ""}>
+          <a onClick={() => setActiveTab("output")}>Output</a>
+        </li>
+        <li className={activeTab === "variables" ? "uk-active" : ""}>
+          <a onClick={() => setActiveTab("variables")}>Variables</a>
+        </li>
+        <li className={activeTab === "constraints" ? "uk-active" : ""}>
+          <a onClick={() => setActiveTab("constraints")}>Constraints</a>
+        </li>
+      </ul>
 
-      <div className="tab-content">
-        {activeTab === "summary" && renderSummary()}
-        {activeTab === "logs" && <div>Logs werden hier angezeigt.</div>}
-        {activeTab === "output" && <div>Output wird hier angezeigt.</div>}
-        {activeTab === "variables" && renderVariables()}
-        {activeTab === "constraints" && renderConstraints()}
-      </div>
+      {/* Content Switcher for Tabs */}
+      <ul>
+        {activeTab === "summary" && <div>{renderSummary()}</div>}
+        {activeTab === "logs" && <div><div>Logs werden hier angezeigt.</div></div>}
+        {activeTab === "output" && <div><div>Output wird hier angezeigt.</div></div>}
+        {activeTab === "variables" && <div>{renderVariables()}</div>}
+        {activeTab === "constraints" && <div>{renderConstraints()}</div>}
+      </ul>
     </div>
   );
 };
