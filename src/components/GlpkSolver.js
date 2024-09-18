@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import View from './View';  // Importiere die View-Komponente
-import { solve, SolverOptions } from './../services/SolverInterface';  // Importiere die View-Komponente
+import View from './View';  
+import { solve, SolverOptions } from './../services/SolverInterface';
 
 const GlpkSolver = () => {
     const [inputData, setInputData] = useState("");
@@ -9,7 +9,10 @@ const GlpkSolver = () => {
 
     const solveProblem = async () => {
         try {
+            var startTime = performance.now();
             const result = await solve(inputData, inputFormat, SolverOptions.GLPK);
+            var endTime = performance.now();
+            result["Walltime"] = (endTime - startTime) / 1000;
             
             setOutputData(JSON.stringify(result, null, 2));
         } catch (error) {
@@ -17,16 +20,16 @@ const GlpkSolver = () => {
         }
     };
 
-return (
-    <View
-        inputFormat={inputFormat}
-        setInputFormat={setInputFormat}
-        inputData={inputData}
-        setInputData={setInputData}
-        solveProblem={solveProblem}
-        outputData={outputData}
-    />
-);
+    return (
+        <View
+            inputFormat={inputFormat}
+            setInputFormat={setInputFormat}
+            inputData={inputData}
+            setInputData={setInputData}
+            solveProblem={solveProblem}
+            outputData={outputData}
+        />
+    );
 };
 
 export default GlpkSolver;
