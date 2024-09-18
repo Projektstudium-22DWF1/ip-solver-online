@@ -18,6 +18,7 @@ export function EinfacheProbleme() {
 
     const [constraints, setConstraints] = useState([{ value: "" }]);
     const [bounds, setBounds]           = useState([{ value: "" }]);
+    const [problem, setProblem]           = useState("");
 
     // Funktion zum Hinzufügen einer neuen Zeile in mainArea
     const handleClick = (setCondition, condition) => {
@@ -47,11 +48,11 @@ export function EinfacheProbleme() {
         //TODO und anschließend muss in Abhängigkeit der Parameter das entsprechende Format gebaut werden (Template String)
         //TODO Dieses Format wird dann an die entsprechende Funktion mit entsprechenden Parametern weitergeleitet (HIGHS oder GLPK)
         //TODO Datenvalidierung muss als erstes gemacht werden bei Aufruf der Funktion
-
-        const param = `Maximize obj: x1 + 2 x2 + 4 x3 + x4 Subject To c1: - x1 + x2 + x3 + 10 x4 <= 20 c2: x1 - 4 x2 + x3 <= 30 c3: x2 - 0.5 x4 = 0 Bounds 0 <= x1 <= 40 2 <= x4 <= 3 End`;
-
-        await highsSolveProblem(param, "LP");
-
+        const param = `Maximize obj: ${problem} Subject To ${constraints.map((e, index) => `c${index + 1}: ` + e.value).join(' ') } Bounds ${bounds.map(e => e.value).join(' ')} End`;
+        const param2 = `Maximize obj: x1 + 2 x2 + 4 x3 + x4 Subject To c1: - x1 + x2 + x3 + 10 x4 <= 20 c2: x1 - 4 x2 + x3 <= 30 c3: x2 - 0.5 x4 = 0 Bounds 0 <= x1 <= 40 2 <= x4 <= 3 End`;
+        console.log(formatOption);
+        console.log(await highsSolveProblem(param2, formatOption));
+        // console.log(problem);
         // console.log(rs);
     }
 
@@ -95,36 +96,58 @@ export function EinfacheProbleme() {
                     </div>
                 </div>
 
-                <div className={"tables-container"}>
+            <div className={"tables-container"}>
 
-                    <label htmlFor="#constraints">Constraints</label>
-                    <table className="mainArea">
-                        <tbody>
-                        {constraints.map((constraint, index) => (
-                            <tr key={index}>
-                                <td><input className="uk-input" type="text" value={constraint.value} onChange={(e) => handleconditionChange(index, e, constraints, setConstraints)}/></td>
-                                <td><span className="addButton" uk-icon="plus" onClick={() => {handleClick(setConstraints, constraints)}}></span></td>
-                                <td><span className="removeButton" uk-icon="close" onClick={(e) => { deleteConstraint(index, constraints, setConstraints) }}></span></td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                <label htmlFor="#problem">Function</label>
+                <table className="mainArea">
+                    <tbody>
+                        <tr>
+                            <td><input placeholder={"x1 + 2 x2 + 4 x3 + x4"} className="uk-input" type="text" onChange={(e) => setProblem(e.target.value)} /></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <label htmlFor="#bounds">Bounds</label>
-                    <table className={"mainArea"}>
-                        <tbody>
-                        {bounds.map((bound, index) => (
-                            <tr key={index}>
-                                <td><input className="uk-input" type="text" value={bound.value} onChange={(e) => handleconditionChange(index, e, bounds, setBounds)}/></td>
-                                <td><span className="addButton" uk-icon="plus" onClick={() => {handleClick(setBounds, bounds)}}></span></td>
-                                <td><span className="removeButton" uk-icon="close" onClick={(e) => { deleteConstraint(index, bounds, setBounds) }}></span></td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </div>
 
-                    <button className="uk-button uk-button-secondary uk-button-large" onClick={solveProblem}>Solve problem</button>
+                <label htmlFor="#constraints">Constraints</label>
+                <table className="mainArea">
+                    <tbody>
+                    {constraints.map((constraint, index) => (
+                        <tr key={index}>
+                            <td><input placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"} className="uk-input" type="text" value={constraint.value}
+                                       onChange={(e) => handleconditionChange(index, e, constraints, setConstraints)}/>
+                            </td>
+                            <td><span className="addButton" uk-icon="plus" onClick={() => {
+                                handleClick(setConstraints, constraints)
+                            }}></span></td>
+                            <td><span className="removeButton" uk-icon="close" onClick={(e) => {
+                                deleteConstraint(index, constraints, setConstraints)
+                            }}></span></td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+
+                <label htmlFor="#bounds">Bounds</label>
+                <table className={"mainArea"}>
+                    <tbody>
+                    {bounds.map((bound, index) => (
+                        <tr key={index}>
+                            <td><input placeholder={"0 <= x1 <= 40"} className="uk-input" type="text" value={bound.value}
+                                       onChange={(e) => handleconditionChange(index, e, bounds, setBounds)}/></td>
+                            <td><span className="addButton" uk-icon="plus" onClick={() => {
+                                handleClick(setBounds, bounds)
+                            }}></span></td>
+                            <td><span className="removeButton" uk-icon="close" onClick={(e) => {
+                                deleteConstraint(index, bounds, setBounds)
+                            }}></span></td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <button className="uk-button uk-button-secondary uk-button-large" onClick={solveProblem}>Solve problem
+            </button>
 
         </React.Fragment>
     );

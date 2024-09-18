@@ -21,7 +21,7 @@ function App() {
       {/*  <option value="glpk">GLPK Solver</option>*/}
       {/*</select>*/}
       {/*{solver === 'highs' ? <HighsSolver /> : <GlpkSolver />}*/}
-      {/*  <SolveExamples /> /!*{Zeigt die Beispiele in der Konsole an}*!/*/}
+        <SolveExamples /> {/*{Zeigt die Beispiele in der Konsole an}*/}
         <InputUi />
     </div>
   );
