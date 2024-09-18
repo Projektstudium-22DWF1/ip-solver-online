@@ -22,6 +22,7 @@ jobs:
     permissions:
       checks: write
       contents: write
+      pull-requests: write
 
     steps:
       - name: Check out Git repository
@@ -32,7 +33,7 @@ jobs:
         with:
           node-version: 20
 
-      # ESLint and Prettier must be in `package.json`
+      # Install Node.js dependencies
       - name: Install Node.js dependencies
         run: npm ci
 
@@ -42,11 +43,37 @@ jobs:
           npx prettier --write .
           npx eslint . --fix
 
+      # Check if there are any changes made by Prettier or ESLint
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --exit-code || echo "Linting changes detected"
+      
+      # Fail the workflow if there are changes that need to be committed (i.e., unlinted files)
+      - name: Fail if changes detected
+        if: ${{ steps.check_changes.outcome == 'success' }}
+        run: |
+          echo "Linting errors found. Failing the PR."
+          exit 1
+
       # Commit and push changes if Prettier or ESLint modified any files
       - name: Commit and push changes
+        if: ${{ steps.check_changes.outcome != 'success' }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git checkout -b lint-fixes/${{ github.sha }}
           git add .
-          git commit -m "chore: format code with Prettier and fix lint issues" || echo "No changes to commit"
-          git push
+          git commit -m "chore: format code with Prettier and fix lint issues"
+          git push origin lint-fixes/${{ github.sha }}
+
+      # Create a new pull request for the linted code
+      - name: Create Pull Request for Lint Fixes
+        if: ${{ steps.check_changes.outcome != 'success' }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: ${{ github.head_ref }}
+          head: lint-fixes/${{ github.sha }}
+          title: "chore: format code with Prettier and fix lint issues"
+          body: "This PR was created automatically by GitHub Actions to fix formatting and linting issues."
