@@ -5,7 +5,6 @@ on:
   push:
     branches:
       - master
-      - feature/github-actions-deploy
 
 jobs:
   run-linters:
@@ -41,4 +40,4 @@ jobs:
           git config --global user.email "actions@github.com"
           git add .
           git commit -m "chore: format code with Prettier and fix lint issues" || echo "No changes to commit"
-          git push origin master
+          git push origin master --force
