@@ -40,22 +40,26 @@ jobs:
       continue-on-error: true
 
     # Optionally, if you want to automatically fix the issues:
-    - name: Run Prettier fix (optional)
+    - name: Run Prettier fix
       run: npm run prettier:write
 
-    - name: Run ESLint fix (optional)
+    - name: Run ESLint fix
       run: npm run lint:fix
 
-    - name: Pull and rebase
-      run: |
-        git pull --rebase origin ${{ github.ref }}
-        
-    # Commit and push changes back to the PR branch if any fixes were applied
-    - name: Push changes back to PR branch
+    - name: Commit and stage changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
+
+    - name: Pull and rebase
+      run: |
+        git pull --rebase origin ${{ github.ref }}
+
+    # Commit and push changes back to the PR branch if any fixes were applied
+    - name: Push changes back to PR branch
+      run: |
+        
         git push origin HEAD:${{ github.head_ref }}
       if: success()
