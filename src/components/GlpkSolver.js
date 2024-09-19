@@ -9,14 +9,14 @@ const GlpkSolver = () => {
 
   const solveProblem = async () => {
     try {
-      var startTime = performance.now();
+      const startTime = performance.now();
       const result = await solve(inputData, inputFormat, SolverOptions.GLPK);
-      var endTime = performance.now();
+      const endTime = performance.now();
       result["Walltime"] = (endTime - startTime) / 1000;
 
-      setOutputData(JSON.stringify(result, null, 2));
+      setOutputData(result);
     } catch (error) {
-      setOutputData(`Fehler: ${error.message}`);
+      setOutputData({ error: error.message });
     }
   };
 
