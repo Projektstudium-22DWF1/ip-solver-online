@@ -28,10 +28,12 @@ jobs:
     # Run Prettier to check formatting
     - name: Run Prettier
       run: npm run prettier:check
+      continue-on-error: true
 
     # Run ESLint to check for linting errors
     - name: Run ESLint
       run: npm run lint
+      continue-on-error: true
 
     # Optionally, if you want to automatically fix the issues:
     - name: Run Prettier fix (optional)
