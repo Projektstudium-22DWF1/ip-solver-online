@@ -1,43 +1,51 @@
-name: Linter
+name: Lint PR
 
+# Trigger the action on pull request creation targeting master branch
 on:
-  # Trigger the workflow on push to master
-  push:
+  pull_request:
     branches:
       - master
 
 jobs:
-  run-linters:
-    name: Run linters on master
+  lint:
+    name: Run Prettier and ESLint
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    # Install Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
 
-      # Install Node.js dependencies
-      - name: Install Node.js dependencies
-        run: npm ci
+    # Install dependencies
+    - name: Install dependencies
+      run: npm ci
 
-      # Lint the code and automatically fix formatting errors
-      - name: Run Prettier and ESLint (with automatic fix)
-        run: |
-          npx prettier --write .
-          npx eslint . --fix
+    # Run Prettier to check formatting
+    - name: Run Prettier
+      run: npm run prettier:check
 
-      # Commit and push changes if Prettier or ESLint modified any files
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "chore: format code with Prettier and fix lint issues" || echo "No changes to commit"
-          git push origin master --force
+    # Run ESLint to check for linting errors
+    - name: Run ESLint
+      run: npm run lint
+
+    # Optionally, if you want to automatically fix the issues:
+    - name: Run Prettier fix (optional)
+      run: npm run prettier:write
+
+    - name: Run ESLint fix (optional)
+      run: npm run lint:fix
+
+    # Commit and push changes back to the PR branch if any fixes were applied
+    - name: Push changes back to PR branch
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
+        git push origin HEAD:${{ github.head_ref }}
+      if: success()
