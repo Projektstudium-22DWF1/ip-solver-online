@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import 'uikit/dist/css/uikit.min.css';
+import "uikit/dist/css/uikit.min.css";
 
 const View = ({
   inputFormat,
@@ -16,9 +16,17 @@ const View = ({
 
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <p><strong>Status:</strong> {outputData.Status}</p>
-        <p><strong>Zielfunktionswert (Objective Value):</strong> {outputData.ObjectiveValue}</p>
-        <p><strong>Berechnungszeit (Walltime):</strong> {outputData.Walltime} Sekunden</p>
+        <p>
+          <strong>Status:</strong> {outputData.Status}
+        </p>
+        <p>
+          <strong>Zielfunktionswert (Objective Value):</strong>{" "}
+          {outputData.ObjectiveValue}
+        </p>
+        <p>
+          <strong>Berechnungszeit (Walltime):</strong> {outputData.Walltime}{" "}
+          Sekunden
+        </p>
       </div>
     );
   };
@@ -91,7 +99,9 @@ const View = ({
 
   return (
     <div className="uk-container uk-margin-top">
-      <h2 className="uk-heading-line"><span>Input</span></h2>
+      <h2 className="uk-heading-line">
+        <span>Input</span>
+      </h2>
 
       <div className="uk-margin">
         <label>Format: </label>
@@ -113,7 +123,10 @@ const View = ({
         placeholder="Gib dein Optimierungsproblem hier ein..."
       />
 
-      <button className="uk-button uk-button-primary uk-margin-bottom" onClick={solveProblem}>
+      <button
+        className="uk-button uk-button-primary uk-margin-bottom"
+        onClick={solveProblem}
+      >
         Problem lösen
       </button>
 
