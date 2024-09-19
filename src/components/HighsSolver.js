@@ -9,6 +9,7 @@ const highs_promise = require("highs")(highs_settings);
 let glpk = require('../dist/glpk.min.js');
 
 const convertInput = (str, format) => {
+  console.log(format);
   if (format === "GMPL") {
     return convertGmplToLp(str);
   } else {

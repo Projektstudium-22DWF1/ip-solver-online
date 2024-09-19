@@ -14,7 +14,7 @@ export function EinfacheProbleme() {
 
     const [problemOption, setProblemOption] = useState("maximize");
     const [solverOption, setSolverOption] = useState("highs");
-    const [formatOption, setFormatOption] = useState("gmpl");
+    const [formatOption, setFormatOption] = useState("GMPL");
 
     const [constraints, setConstraints] = useState([{ value: "" }]);
     const [bounds, setBounds]           = useState([{ value: "" }]);
@@ -48,12 +48,15 @@ export function EinfacheProbleme() {
         //TODO und anschließend muss in Abhängigkeit der Parameter das entsprechende Format gebaut werden (Template String)
         //TODO Dieses Format wird dann an die entsprechende Funktion mit entsprechenden Parametern weitergeleitet (HIGHS oder GLPK)
         //TODO Datenvalidierung muss als erstes gemacht werden bei Aufruf der Funktion
-        const param = `Maximize obj: ${problem} Subject To ${constraints.map((e, index) => `c${index + 1}: ` + e.value).join(' ') } Bounds ${bounds.map(e => e.value).join(' ')} End`;
-        const param2 = `Maximize obj: x1 + 2 x2 + 4 x3 + x4 Subject To c1: - x1 + x2 + x3 + 10 x4 <= 20 c2: x1 - 4 x2 + x3 <= 30 c3: x2 - 0.5 x4 = 0 Bounds 0 <= x1 <= 40 2 <= x4 <= 3 End`;
-        console.log(formatOption);
-        console.log(await highsSolveProblem(param2, formatOption));
+
+        // const lp = `Maximize obj: ${problem} Subject To ${constraints.map((e, index) => `c${index + 1}: ` + e.value).join(' ') } Bounds ${bounds.map(e => e.value).join(' ')} End`;
+        const lpExample = `Maximize obj: x1 + 2 x2 + 4 x3 + x4 Subject To c1: - x1 + x2 + x3 + 10 x4 <= 20 c2: x1 - 4 x2 + x3 <= 30 c3: x2 - 0.5 x4 = 0 Bounds 0 <= x1 <= 40 2 <= x4 <= 3 End`;
+        const gmplExample = `var x1 >= 0, <= 40; var x2; var x3; var x4 >= 2, <= 3; maximize obj: x1 + 2*x2 + 4*x3 + x4; s.t. c1: -x1 + x2 + x3 + 10*x4 <= 20; s.t. c2: x1 - 4*x2 + x3 <= 30; s.t. c3: x2 - 0.5*x4 = 0; end;`;
+        console.log(await highsSolveProblem(gmplExample, formatOption)); // Lösen über HIGHS -> Wird in HighsSolver.js konvertiert
         // console.log(problem);
+
         // console.log(rs);
+
     }
 
     return (
@@ -85,8 +88,8 @@ export function EinfacheProbleme() {
                         {/* Format Box */}
                         <div uk-form-custom="target: > * > span:first-child">
                             <select aria-label="Custom controls" onChange={(e) => setFormatOption(e.target.value)}>
-                                <option value="gmpl">GMPL</option>
-                                <option value="lp">LP</option>
+                                <option value="GMPL">GMPL</option>
+                                <option value="LP">LP</option>
                             </select>
                             <button className="uk-button uk-button-default" type="button" tabIndex="-1">
                                 <span></span>
