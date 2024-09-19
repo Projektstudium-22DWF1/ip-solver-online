@@ -23,7 +23,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '18'
+        node-version: '20'
 
     # Install dependencies
     - name: Install dependencies
@@ -39,16 +39,19 @@ jobs:
       run: npm run lint
       continue-on-error: true
 
-    # Optionally, if you want to automatically fix the issues:
+    # Automatically fix the issues with Prettier
     - name: Run Prettier fix
       run: npm run prettier:write
 
+    # Automatically fix the issues with ESLint
     - name: Run ESLint fix
       run: npm run lint:fix
 
+    # Fetch latest changes and rebase
     - name: Fetch latest changes
       run: git fetch origin
 
+    # Commit and stage changes
     - name: Commit and stage changes
       run: |
         git config --local user.email "action@github.com"
@@ -56,13 +59,13 @@ jobs:
         git add .
         git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
 
+    # Pull and rebase the latest changes
     - name: Pull and rebase
       run: |
-        git pull --rebase origin ${{ github.ref }}
+        git pull --rebase origin ${{ github.head_ref }}
 
-    # Commit and push changes back to the PR branch if any fixes were applied
+    # Push changes back to the PR branch if any fixes were applied
     - name: Push changes back to PR branch
       run: |
-        
-        git push origin HEAD:${{ github.head_ref }}
+        git push --force origin HEAD:${{ github.head_ref }}
       if: success()
