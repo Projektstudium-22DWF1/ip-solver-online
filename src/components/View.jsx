@@ -91,10 +91,10 @@ const View = ({
 
   return (
     <div className="uk-container uk-margin-top">
-      <h2 className="uk-heading-line"><span>Solver</span></h2>
+      <h2 className="uk-heading-line"><span>Input</span></h2>
 
       <div className="uk-margin">
-        <label>Input Format:</label>
+        <label>Format: </label>
         <select
           className="uk-select uk-form-width-medium"
           value={inputFormat}
