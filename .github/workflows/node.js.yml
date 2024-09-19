@@ -8,16 +8,24 @@ on:
     branches: 
       - "master"
       - "main"
+      - "feature/github-actions-deploy"
+  
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
 
     runs-on: ubuntu-latest
     concurrency: ci-${{github.ref}}
-  
+    
+    permissions:
+      contents: write
+      actions: read
+
     strategy:
       matrix:
         node-version: [18.x, 20.x, 22.x]
+      max-parallel: 1
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:

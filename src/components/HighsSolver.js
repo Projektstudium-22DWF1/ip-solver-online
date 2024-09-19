@@ -21,14 +21,14 @@ const HighsSolver = () => {
   };
 
   return (
-      <View
-          inputFormat={inputFormat}
-          setInputFormat={setInputFormat}
-          inputData={inputData}
-          setInputData={setInputData}
-          solveProblem={solveProblem}
-          outputData={outputData} // Pass the parsed result object to View
-      />
+    <View
+      inputFormat={inputFormat}
+      setInputFormat={setInputFormat}
+      inputData={inputData}
+      setInputData={setInputData}
+      solveProblem={solveProblem}
+      outputData={outputData} // Pass the parsed result object to View
+    />
   );
 };
 

@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+.uk-container {
+  max-width: 960px;
+  margin: auto;
+}
+
+.uk-heading-line span {
+  background: #f0f0f0;
+}
+
+.uk-card {
+  margin-top: 20px;
+}
+
+.uk-button-primary {
+  background-color: #1e87f0;
+  color: white;
+}
+

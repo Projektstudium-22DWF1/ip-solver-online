@@ -1,0 +1,43 @@
+name: Linter
+
+on:
+  # Trigger the workflow on push to master
+  push:
+    branches:
+      - master
+
+jobs:
+  run-linters:
+    name: Run linters on master
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install Node.js dependencies
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      # Lint the code and automatically fix formatting errors
+      - name: Run Prettier and ESLint (with automatic fix)
+        run: |
+          npx prettier --write .
+          npx eslint . --fix
+
+      # Commit and push changes if Prettier or ESLint modified any files
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "chore: format code with Prettier and fix lint issues" || echo "No changes to commit"
+          git push origin master --force
