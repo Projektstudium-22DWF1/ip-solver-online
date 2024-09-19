@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import View from "./View";
-import { solve, SolverOptions } from "./../services/SolverInterface";
+import { solve, SolverOptions } from "../services/SolverInterface";
 
 const HighsSolver = () => {
   const [inputData, setInputData] = useState("");
