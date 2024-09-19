@@ -46,6 +46,10 @@ jobs:
     - name: Run ESLint fix (optional)
       run: npm run lint:fix
 
+    - name: Pull and rebase
+      run: |
+        git pull --rebase origin ${{ github.ref }}
+        
     # Commit and push changes back to the PR branch if any fixes were applied
     - name: Push changes back to PR branch
       run: |
