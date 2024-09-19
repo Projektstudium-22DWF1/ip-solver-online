@@ -17,27 +17,28 @@ function App() {
 
 
   return (
-    <div className="App uk-container uk-margin-top" style={{ borderStyle: "solid", padding: "20px" }}>
-      <h1 className="uk-heading-line"><span>Solver</span></h1>
-      
+    <div>
+      {/*<h1 className="uk-heading-line"><span>Solver</span></h1>*/}
+
       {/* Verwende die UIkit `uk-select` Klasse für das Dropdown */}
-      <div className="uk-margin">
-        <label htmlFor="solver-select">Wähle einen Solver: </label>
-        <select 
-          id="solver-select"
-          className="uk-select uk-form-width-medium" 
-          onChange={handleSolverChange} 
-          value={solver}
-        >
-          <option value="highs">HiGHS Solver</option>
-          <option value="glpk">GLPK Solver</option>
-        </select>
-      </div>
+      {/*<div className="uk-margin">*/}
+      {/*  <label htmlFor="solver-select">Wähle einen Solver: </label>*/}
+      {/*  <select */}
+      {/*    id="solver-select"*/}
+      {/*    className="uk-select uk-form-width-medium" */}
+      {/*    onChange={handleSolverChange} */}
+      {/*    value={solver}*/}
+      {/*  >*/}
+      {/*    <option value="highs">HiGHS Solver</option>*/}
+      {/*    <option value="glpk">GLPK Solver</option>*/}
+      {/*  </select>*/}
+      {/*</div>*/}
 
       {/* Dynamisches Rendering der Solver-Komponenten */}
-      {solver === "highs" ? <HighsSolver /> : <GlpkSolver />}
+      {/*{solver === "highs" ? <HighsSolver /> : <GlpkSolver />}*/}
 
       <SolveExamples /> {/* Zeigt die Beispiele in der Konsole an */}
+        <InputUi />
     </div>
   );
 }

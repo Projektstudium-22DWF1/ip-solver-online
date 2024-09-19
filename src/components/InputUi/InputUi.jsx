@@ -27,12 +27,12 @@ export function InputUi() {
                         <ul className="uk-navbar-nav">
                             <li className={`uk-active ${activeComponent === 'einfache' ? 'active' : ''}`}> {/*active ist nur für css*/}
                                 <a onClick={() => { handleNavClick("einfache") }}>
-                                    Einfache Probleme
+                                    LP Probleme
                                 </a>
                             </li>
                             <li className={`uk-active ${activeComponent === 'komplexe' ? 'active' : ''}`}>
                                 <a onClick={() => { handleNavClick("komplexe") }}>
-                                    Komplexe Probleme
+                                    GMPL Probleme
                                 </a>
                             </li>
                             <li className={`uk-active ${activeComponent === 'beschreibung' ? 'active' : ''}`}>

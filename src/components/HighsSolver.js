@@ -2,12 +2,28 @@ import React, { useState } from "react";
 import View from "./View";
 import { solve, SolverOptions } from "../services/SolverInterface";
 
+
+export const solveProblem1 = async (inputData, inputFormat) => {
+  try {
+    const startTime = performance.now();
+    const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
+    const endTime = performance.now();
+    result["Walltime"] = (endTime - startTime) / 1000;
+
+    return result; // Rückgabe des Ergebnisses
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+
+
 const HighsSolver = () => {
   const [inputData, setInputData] = useState("");
   const [outputData, setOutputData] = useState(null);
   const [inputFormat, setInputFormat] = useState("GMPL");
 
-  const solveProblem = async () => {
+  const solveProblem = async (inputData, inputFormat) => {
     try {
       const startTime = performance.now();
       const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
