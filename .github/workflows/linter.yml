@@ -46,6 +46,9 @@ jobs:
     - name: Run ESLint fix
       run: npm run lint:fix
 
+    - name: Fetch latest changes
+      run: git fetch origin
+
     - name: Commit and stage changes
       run: |
         git config --local user.email "action@github.com"
