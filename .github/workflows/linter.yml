@@ -18,6 +18,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
 
     # Install Node.js
     - name: Setup Node.js
@@ -47,22 +49,26 @@ jobs:
     - name: Run ESLint fix
       run: npm run lint:fix
 
-    # Fetch latest changes and rebase
+    # Fetch the latest changes from master
     - name: Fetch latest changes
-      run: git fetch origin
+      run: git fetch origin master
 
-    # Commit and stage changes
+    # Ensure we are on the right branch before rebasing
+    - name: Checkout current branch
+      run: git checkout ${{ github.head_ref }}
+
+    # Rebase the latest changes from master into the feature branch
+    - name: Pull and rebase with master
+      run: |
+        git rebase origin/master || git rebase --abort
+
+    # Commit and stage changes if there are any
     - name: Commit and stage changes
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
-
-    # Pull and rebase the latest changes
-    - name: Pull and rebase
-      run: |
-        git pull --rebase origin ${{ github.head_ref }}
 
     # Push changes back to the PR branch if any fixes were applied
     - name: Push changes back to PR branch
