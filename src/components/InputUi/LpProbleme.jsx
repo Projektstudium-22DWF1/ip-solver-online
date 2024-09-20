@@ -19,32 +19,32 @@ export function LpProbleme() {
     const [bounds, setBounds]                   = useState([{ value: "" }]);
     const [problem, setProblem]                         = useState("");
 
-    // Negiert immer wieder den Zustand von isTextareaVisible
+    {/********** Togglet immer wieder den Zustand von isTextareaVisible **********/}
     const toggleTextarea = () => {
         setIsTextareaVisible(!isTextareaVisible);
     };
 
-
-    // Funktion zum Hinzufügen einer neuen Zeile in mainArea
-    const handleClick = (setCondition, condition) => {
-        setCondition([...condition, {value: ""}]); // Kopiere aktuellen Inhalt von constraints und füge Objekt hinten dran.
+    {/********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/}
+    const addRestriction = (setRestriction, restriction) => {
+        setRestriction([...restriction, {value: ""}]); // Kopiere aktuellen Inhalt von constraints und füge Objekt hinten dran.
     };
 
 
-    // Funktion zum Ändern einer Constraint
-    const handleConditionChange = (index, e, condition, setcondition) => {
-        const newcondition = [...condition]; // Kopie aktueller constraints
-        newcondition[index].value = e.target.value;   // value auf Eingabe setzen
-        setcondition(newcondition);                 // alte durch neue Constraints ersetzen
+    {/********** Funktion zum Ändern einer Restriction **********/}
+    const handleRestrictionChange = (index, e, restriction, setRestriction) => {
+        const newRestriction = [...restriction]; // Kopie aktueller constraints
+        newRestriction[index].value = e.target.value;   // value auf Eingabe setzen
+        setRestriction(newRestriction);                 // alte durch neue Constraints ersetzen
     };
 
-    const deleteConstraint = (index, condition, setCondition) => {
-        if (condition.length === 1) {
+    {/********** Funktion zum Löschen einer Restriction **********/}
+    const deleteRestriction = (index, restriction, setRestriction) => {
+        if (restriction.length === 1) {
             alert("One constraint required"); //TODO alert mit UiKit umsetzen
         } else {
-            const newCondition = condition.filter((currElm, i) => i !== index); // currElm = aktuelles Element, i = index
+            const newRestriction = restriction.filter((currElm, i) => i !== index); // currElm = aktuelles Element, i = index
             // i !== index -> index ist der index des Elements, auf was geklickt wurde
-            setCondition(newCondition);
+            setRestriction(newRestriction);
         }
     }
 
@@ -65,17 +65,17 @@ ${constraints
 Bounds 
 ${bounds.map((e) => e.value).join('\n')} 
 End`;
+//TODO c${index +1} muss angepasst werden, sodass Name im Frontend entgegen genommen wird. Über Validierung -> Keine gleichen Namen
 
         }
 
-        // ********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********
-        if (solverOption === 'HIGHS') {
+        {/********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********/}
+        if (solverOption === 'HIGHS') { //TODO Logik in neue Datei (z.B. Utils.jsx) auslagern und von LpProbleme und GmplProbleme aus zugreifen
             const json = await solveHighsProblem(lpProblem, "LP", solverOption);
             console.log(json);
-        } else if (solverOption === 'GLPK') { //TODO Format noch korrekt einstellen für GLPK
+        } else if (solverOption === 'GLPK') {
             const json = await  solveGlpkProblem(lpProblem, "LP", solverOption);
             console.log(json);
-            // console.log(solverOption);
         }
 
     }
@@ -141,13 +141,13 @@ End`;
                                     <tr key={index}>
                                         <td><input placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"} className="uk-input" type="text"
                                                    value={constraint.value}
-                                                   onChange={(e) => handleConditionChange(index, e, constraints, setConstraints)}/>
+                                                   onChange={(e) => handleRestrictionChange(index, e, constraints, setConstraints)}/>
                                         </td>
                                         <td><span className="addButton" uk-icon="plus" onClick={() => {
-                                            handleClick(setConstraints, constraints)
+                                            addRestriction(setConstraints, constraints)
                                         }}></span></td>
                                         <td><span className="removeButton" uk-icon="close" onClick={(e) => {
-                                            deleteConstraint(index, constraints, setConstraints)
+                                            deleteRestriction(index, constraints, setConstraints)
                                         }}></span></td>
                                     </tr>
                                 ))}
@@ -162,12 +162,12 @@ End`;
                                     <tr key={index}>
                                         <td><input placeholder={"0 <= x1 <= 40"} className="uk-input" type="text"
                                                    value={bound.value}
-                                                   onChange={(e) => handleConditionChange(index, e, bounds, setBounds)}/></td>
+                                                   onChange={(e) => handleRestrictionChange(index, e, bounds, setBounds)}/></td>
                                         <td><span className="addButton" uk-icon="plus" onClick={() => {
-                                            handleClick(setBounds, bounds)
+                                            addRestriction(setBounds, bounds)
                                         }}></span></td>
                                         <td><span className="removeButton" uk-icon="close" onClick={(e) => {
-                                            deleteConstraint(index, bounds, setBounds)
+                                            deleteRestriction(index, bounds, setBounds)
                                         }}></span></td>
                                     </tr>
                                 ))}
@@ -194,7 +194,6 @@ End`;
             {/********** Solve-problem-button **********/}
             <button className="uk-button uk-button-secondary uk-button-large" onClick={solveProblem}>Solve problem
             </button>
-
         </React.Fragment>
     );
 }

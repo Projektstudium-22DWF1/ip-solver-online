@@ -10,7 +10,7 @@ export function GmplProbleme() {
 
     const solveProblem = async () => {
 
-        // ********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********
+        {/********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********/}
         if (solverOption === 'HIGHS') {
             const json = await solveHighsProblem(problem, "GMPL", solverOption);
             console.log(json);
@@ -44,6 +44,7 @@ export function GmplProbleme() {
 
                 <div id={"#problemContainer"}>
 
+                    {/********** Textarea **********/}
                     <div>
                         <label htmlFor="textareaInput">Eingabe</label>
                         <textarea

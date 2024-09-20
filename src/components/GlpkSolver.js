@@ -5,7 +5,7 @@ import { solve, SolverOptions } from "../services/SolverInterface";
 
 export const solveGlpkProblem = async (inputData, inputFormat, solver) => {
   try {
-    console.log(inputData);
+    console.log("SOLVER: " + solver);
     const startTime = performance.now();
     const result = await solve(inputData, inputFormat, SolverOptions[solver]);
 
