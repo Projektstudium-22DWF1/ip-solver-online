@@ -8,14 +8,12 @@ const HighsSolver = () => {
   const [inputFormat, setInputFormat] = useState("GMPL");
 
   const solveProblem = async () => {
-    
-      const startTime = performance.now();
-      const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
-      const endTime = performance.now();
-      result["Walltime"] = (endTime - startTime) / 1000;
+    const startTime = performance.now();
+    const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
+    const endTime = performance.now();
+    result["Walltime"] = (endTime - startTime) / 1000;
 
-      setOutputData(result); // Store the result as an object
-    
+    setOutputData(result); // Store the result as an object
   };
 
   return (
