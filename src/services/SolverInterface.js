@@ -244,6 +244,12 @@ const formatGlpkData = (lp, glpkOutput, glpkLog) => {
       case glpk.GLP_NU:
         statusStrR = "UB"; // Nicht Basis, obere Schranke
         break;
+      case glpk.GLP_NF:
+        statusStrR = "NF"; // Nicht Basis, freie Variable
+        break;
+      case glpk.GLP_NS:
+        statusStrR = "NS "; // Nicht Basis, festgesetzt
+        break;
       default:
         statusStrR = "Unknown";
         break;
