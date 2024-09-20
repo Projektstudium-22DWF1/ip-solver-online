@@ -30,6 +30,30 @@ const View = ({
       </div>
     );
   };
+  const renderLog = () => {
+    if (!outputData) return <p>Noch keine Logs verfügbar.</p>;
+    if (!outputData.hasOwnProperty("GlpkLog")) return <p>Logs sind von HIGHS Solver nicht unterstützt</p>;
+
+    return (
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <pre>
+          {outputData.GlpkLog}{" "}
+        </pre>
+      </div>
+    );
+  }
+  const renderOutput = () => {
+    if (!outputData) return <p>Noch kein Output verfügbar.</p>;
+    if (!outputData.hasOwnProperty("GlpkOutput")) return <p>Output ist von HIGHS Solver nicht unterstützt</p>;
+    if (outputData.GlpkOutput?.trim().length === 0) return <p>Dieses Modell generiert keinen Output.</p>;
+    return (
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <pre>
+          {outputData.GlpkOutput}{" "}
+        </pre>
+      </div>
+    );
+  }
 
   const renderVariables = () => {
     if (!outputData?.Columns) return <p>Noch keine Variablen verfügbar.</p>;
@@ -53,7 +77,7 @@ const View = ({
                 <td className="uk-text-center">{variable.Name}</td>
                 <td className="uk-text-center">{variable.Primal}</td>
                 <td className="uk-text-center">{variable.Status}</td>
-                <td className="uk-text-center">{variable.Lower}</td>
+                <td className="uk-text-center">{variable.Lower ?? "-∞"}</td>
                 <td className="uk-text-center">{variable.Upper ?? "∞"}</td>
                 <td className="uk-text-center">{variable.Dual}</td>
               </tr>
@@ -86,7 +110,7 @@ const View = ({
                 <td className="uk-text-center">{row.Name}</td>
                 <td className="uk-text-center">{row.Primal}</td>
                 <td className="uk-text-center">{row.Status}</td>
-                <td className="uk-text-center">{row.Lower ?? "Keine"}</td>
+                <td className="uk-text-center">{row.Lower ?? "-∞"}</td>
                 <td className="uk-text-center">{row.Upper ?? "∞"}</td>
                 <td className="uk-text-center">{row.Dual}</td>
               </tr>
@@ -152,8 +176,8 @@ const View = ({
       {/* Content Switcher for Tabs */}
       <div>
         {activeTab === "summary" && renderSummary()}
-        {activeTab === "logs" && <div>Logs werden hier angezeigt.</div>}
-        {activeTab === "output" && <div>Output wird hier angezeigt.</div>}
+        {activeTab === "logs" && renderLog()}
+        {activeTab === "output" && renderOutput()}
         {activeTab === "variables" && renderVariables()}
         {activeTab === "constraints" && renderConstraints()}
       </div>
