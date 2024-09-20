@@ -66,7 +66,7 @@ const convertGmplToLp = (str) => {
 
 const solveGmplProblemWithGlpk = (problem) => {
   var glpkOutput = "";
-  var glpkLog= "";
+  var glpkLog = "";
   glpk.glp_set_print_func(function (data) {
     glpkLog += data + "\n";
   });
@@ -101,7 +101,7 @@ const solveGmplProblemWithGlpk = (problem) => {
 const solveLpProblemWithGlpk = (problem) => {
   //Output is only supported with GMPL Problems
   var glpkOutput = null;
-  var glpkLog= "";
+  var glpkLog = "";
   glpk.glp_set_print_func(function (data) {
     glpkLog += data + "\n";
   });
