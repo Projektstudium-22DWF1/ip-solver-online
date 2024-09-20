@@ -32,28 +32,27 @@ const View = ({
   };
   const renderLog = () => {
     if (!outputData) return <p>Noch keine Logs verfügbar.</p>;
-    if (!outputData.hasOwnProperty("GlpkLog")) return <p>Logs sind von HIGHS Solver nicht unterstützt</p>;
+    if (!outputData.hasOwnProperty("GlpkLog"))
+      return <p>Logs sind von HIGHS Solver nicht unterstützt</p>;
 
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <pre>
-          {outputData.GlpkLog}{" "}
-        </pre>
+        <pre>{outputData.GlpkLog} </pre>
       </div>
     );
-  }
+  };
   const renderOutput = () => {
     if (!outputData) return <p>Noch kein Output verfügbar.</p>;
-    if (!outputData.hasOwnProperty("GlpkOutput")) return <p>Output ist von HIGHS Solver nicht unterstützt</p>;
-    if (outputData.GlpkOutput?.trim().length === 0) return <p>Dieses Modell generiert keinen Output.</p>;
+    if (!outputData.hasOwnProperty("GlpkOutput"))
+      return <p>Output ist von HIGHS Solver nicht unterstützt</p>;
+    if (outputData.GlpkOutput?.trim().length === 0)
+      return <p>Dieses Modell generiert keinen Output.</p>;
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <pre>
-          {outputData.GlpkOutput}{" "}
-        </pre>
+        <pre>{outputData.GlpkOutput} </pre>
       </div>
     );
-  }
+  };
 
   const renderVariables = () => {
     if (!outputData?.Columns) return <p>Noch keine Variablen verfügbar.</p>;
