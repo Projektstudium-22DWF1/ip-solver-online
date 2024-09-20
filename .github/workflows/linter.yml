@@ -49,6 +49,14 @@ jobs:
     - name: Run ESLint fix
       run: npm run lint:fix
 
+    # Commit and stage changes if there are any
+    - name: Commit and stage changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
+
     # Fetch the latest changes from master
     - name: Fetch latest changes
       run: git fetch origin master
@@ -61,14 +69,6 @@ jobs:
     - name: Pull and rebase with master
       run: |
         git rebase origin/master || git rebase --abort
-
-    # Commit and stage changes if there are any
-    - name: Commit and stage changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
 
     # Push changes back to the PR branch if any fixes were applied
     - name: Push changes back to PR branch
