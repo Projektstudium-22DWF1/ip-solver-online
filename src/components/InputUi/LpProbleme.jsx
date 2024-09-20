@@ -4,20 +4,20 @@ import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';
 import "./styles/navbar.css";
 import "../HighsSolver";
-import { solveProblem1 } from "../HighsSolver";
+import { solveHighsProblem } from "../HighsSolver";
+import { solveGlpkProblem } from "../GlpkSolver";
 
-// Initialisiere UIkit mit Icons
 UIkit.use(Icons);
 
-export function EinfacheProbleme() {
+export function LpProbleme() {
 
     const [problemOption, setProblemOption]             = useState("maximize");
-    const [solverOption, setSolverOption]               = useState("highs");
+    const [solverOption, setSolverOption]               = useState("HIGHS");
     const [isTextareaVisible, setIsTextareaVisible]   = useState(true);
 
-    const [constraints, setConstraints] = useState([{ value: "" }]);
-    const [bounds, setBounds]           = useState([{ value: "" }]);
-    const [problem, setProblem]                 = useState("");
+    const [constraints, setConstraints]         = useState([{ value: "" }]);
+    const [bounds, setBounds]                   = useState([{ value: "" }]);
+    const [problem, setProblem]                         = useState("");
 
     // Negiert immer wieder den Zustand von isTextareaVisible
     const toggleTextarea = () => {
@@ -38,37 +38,45 @@ export function EinfacheProbleme() {
         setcondition(newcondition);                 // alte durch neue Constraints ersetzen
     };
 
-    const deleteConstraint = (index, condition, setcondition) => {
+    const deleteConstraint = (index, condition, setCondition) => {
         if (condition.length === 1) {
-            alert("One constraint required");
+            alert("One constraint required"); //TODO alert mit UiKit umsetzen
         } else {
-            const newcondition = condition.filter((currElm, i) => i !== index); // currElm = aktuelles Element, i = index
+            const newCondition = condition.filter((currElm, i) => i !== index); // currElm = aktuelles Element, i = index
             // i !== index -> index ist der index des Elements, auf was geklickt wurde
-            setcondition(newcondition);
+            setCondition(newCondition);
         }
     }
 
-
     const solveProblem = async () => {
-        //TODO und anschließend muss in Abhängigkeit der Parameter das entsprechende Format gebaut werden (Template String)
-        //TODO Dieses Format wird dann an die entsprechende Funktion mit entsprechenden Parametern weitergeleitet (HIGHS oder GLPK)
+
         //TODO Datenvalidierung muss als erstes gemacht werden bei Aufruf der Funktion
-
-        // const lpExample = `Maximize obj: x1 + 2 x2 + 4 x3 + x4 Subject To c1: - x1 + x2 + x3 + 10 x4 <= 20 c2: x1 - 4 x2 + x3 <= 30 c3: x2 - 0.5 x4 = 0 Bounds 0 <= x1 <= 40 2 <= x4 <= 3 End`;
-        // const gmplExample = `var x1 >= 0, <= 40; var x2; var x3; var x4 >= 2, <= 3; maximize obj: x1 + 2*x2 + 4*x3 + x4; s.t. c1: -x1 + x2 + x3 + 10*x4 <= 20; s.t. c2: x1 - 4*x2 + x3 <= 30; s.t. c3: x2 - 0.5*x4 = 0; end;`;
-
-        let lp;
+        let lpProblem;
 
         if (!isTextareaVisible) {
-            lp = problem;
+            lpProblem = problem; //TODO Wenn man Daten in geführte Function einfügt, sollen sie NICHT in Textarea eingefügt werden
         } else {
-            lp = `Maximize obj: ${problem} Subject To ${constraints
-                .map((e, index) => `c${index + 1}: ${e.value}`)
-                .join(' ')} Bounds ${bounds.map((e) => e.value).join(' ')} End`;
+            lpProblem = `${problemOption} obj: 
+${problem}
+Subject To 
+${constraints
+.map((e, index) => `c${index + 1}: ${e.value}`)
+.join('\n')} 
+Bounds 
+${bounds.map((e) => e.value).join('\n')} 
+End`;
+
         }
 
-        const json = await solveProblem1(lp, "LP");
-        console.log(json);
+        // ********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********
+        if (solverOption === 'HIGHS') {
+            const json = await solveHighsProblem(lpProblem, "LP", solverOption);
+            console.log(json);
+        } else if (solverOption === 'GLPK') { //TODO Format noch korrekt einstellen für GLPK
+            const json = await  solveGlpkProblem(lpProblem, "LP", solverOption);
+            console.log(json);
+            // console.log(solverOption);
+        }
 
     }
 
@@ -77,7 +85,7 @@ export function EinfacheProbleme() {
             <div id={"dropdowns"}>
                 <div className="uk-margin">
 
-                    {/********** Maximize/Minimize Box **********/}
+                    {/********** Maximize/Minimize Dropdown **********/}
                     <div uk-form-custom="target: > * > span:first-child">
                         <select aria-label="Custom controls" onChange={(e) => setProblemOption(e.target.value)}>
                             <option value="maximize">Maximize</option>
@@ -88,11 +96,11 @@ export function EinfacheProbleme() {
                             <span uk-icon="icon: chevron-down"></span>
                         </button>
                     </div>
-                    {/********** Solver Box **********/}
+                    {/********** Solverauswahl Dropdown **********/}
                     <div uk-form-custom="target: > * > span:first-child">
                         <select aria-label="Custom controls" onChange={(e) => setSolverOption(e.target.value)}>
-                            <option value="highs">HIGHS</option>
-                            <option value="glpk">GLPK</option>
+                            <option value="HIGHS">HIGHS</option>
+                            <option value="GLPK">GLPK</option>
                         </select>
                         <button className="uk-button uk-button-default" type="button" tabIndex="-1">
                             <span></span>
@@ -103,14 +111,14 @@ export function EinfacheProbleme() {
             </div>
 
 
-            <div className={"tables-container"}>
+            <div className={"main-container"}>
 
+                {/********** Togglebutton **********/}
                 <button onClick={toggleTextarea} className="uk-button uk-button-secondary uk-button-small">
                     {isTextareaVisible ? 'Wechsle zu Textarea' : 'Wechsle zu Formular'}
                 </button>
 
                 <div id={"#problemContainer"}>
-
                     {isTextareaVisible ? (
 
                         <div>
@@ -170,6 +178,7 @@ export function EinfacheProbleme() {
 
                     ) : (
                         <div>
+                            {/********** Textarea for raw problem **********/}
                             <label htmlFor="textareaInput">Eingabe</label>
                             <textarea
                                 id="textareaInput"
@@ -182,7 +191,7 @@ export function EinfacheProbleme() {
                     )}
                 </div>
             </div>
-
+            {/********** Solve-problem-button **********/}
             <button className="uk-button uk-button-secondary uk-button-large" onClick={solveProblem}>Solve problem
             </button>
 

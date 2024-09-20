@@ -39,6 +39,13 @@ function App() {
 
       <SolveExamples /> {/* Zeigt die Beispiele in der Konsole an */}
         <InputUi />
+        {/* <OutputUI /> Hier muss die "OutputUi" von Ben gesetzt werden */}
+        {/********** Footer **********/}
+        <footer className="uk-section uk-section-small uk-text-center uk-background-muted">
+            <div className="uk-container">
+                <p>© Anwendung zur Lösung linearer Optimierungsprobleme</p>
+            </div>
+        </footer>
     </div>
   );
 }

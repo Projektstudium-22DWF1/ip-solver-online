@@ -16,7 +16,6 @@ export function SolveExamples() {
 
   return (
     <React.Fragment>
-      <div>
         <button
           className="uk-button uk-button-success"
           type="button"
@@ -24,7 +23,6 @@ export function SolveExamples() {
         >
           Beispiele in der Konsole anzeigen
         </button>
-      </div>
     </React.Fragment>
   );
 }

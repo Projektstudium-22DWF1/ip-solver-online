@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import 'uikit/dist/css/uikit.min.css';
-import { EinfacheProbleme } from "./EinfacheProbleme";
-import { KomplexeProbleme } from "./KomplexeProbleme";
+import { LpProbleme } from "./LpProbleme";
+import { GmplProbleme } from "./GmplProbleme";
 import { Beschreibung } from "./Beschreibung";
 import "./styles/navbar.css";
 
@@ -49,18 +49,10 @@ export function InputUi() {
 
                 {/*Laden der Komponente*/}
                 <div className="uk-container" id={"all"}>
-                    {activeComponent === 'einfache' && <EinfacheProbleme/>}
-                    {activeComponent === 'komplexe' && <KomplexeProbleme/>}
+                    {activeComponent === 'einfache' && <LpProbleme/>}
+                    {activeComponent === 'komplexe' && <GmplProbleme/>}
                     {activeComponent === 'beschreibung' && <Beschreibung/>}
                 </div>
-
-                {/*Footer*/}
-                <footer className="uk-section uk-section-small uk-text-center uk-background-muted">
-                    <div className="uk-container">
-                        <p>© Anwendung zur Lösung linearer Optimierungsprobleme</p>
-                    </div>
-                </footer>
-
             </div>
 
         </React.Fragment>

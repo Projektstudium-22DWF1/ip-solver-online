@@ -24,7 +24,7 @@ body {
 }
 
 /* Container für alle Tabellen und Labels */
-.tables-container {
+.main-container {
     background: #fff;            /* Weißer Hintergrund */
     padding: 20px;               /* Innenabstand */
     border-radius: 8px;          /* Abgerundete Ecken */

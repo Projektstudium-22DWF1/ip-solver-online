@@ -3,10 +3,11 @@ import View from "./View";
 import { solve, SolverOptions } from "../services/SolverInterface";
 
 
-export const solveProblem1 = async (inputData, inputFormat) => {
+export const solveHighsProblem = async (inputData, inputFormat, solver) => {
   try {
+    console.log("SOLVER: " + solver);
     const startTime = performance.now();
-    const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
+    const result = await solve(inputData, inputFormat, SolverOptions[solver]);
     const endTime = performance.now();
     result["Walltime"] = (endTime - startTime) / 1000;
 
