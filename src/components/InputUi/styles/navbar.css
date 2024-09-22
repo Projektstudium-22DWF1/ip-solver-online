@@ -1,0 +1,106 @@
+body {
+  background-color: #d3d3d3; /* Setzen Sie hier die gewünschte Hintergrundfarbe */
+  margin: 0; /* Entfernt den Standardabstand des Body */
+}
+
+/* Hauptcontainer für die gesamte Anwendung */
+#all {
+  display: flex; /* Aktiviert Flexbox */
+  flex-direction: column; /* Stellt sicher, dass die Elemente vertikal gestapelt werden */
+  align-items: center; /* Zentriert die Kinder horizontal */
+  justify-content: center; /* Zentriert die Kinder vertikal */
+  min-height: 100vh; /* Minimale Höhe auf 100% des Viewports setzen */
+  background-color: #d3d3d3; /* Heller Hintergrund für besseren Kontrast */
+  padding: 20px; /* Fügt Innenabstand hinzu */
+}
+
+/* Container für die Dropdowns */
+#dropdowns {
+  display: flex; /* Flexbox für horizontale Anordnung */
+  justify-content: center; /* Zentriert die Dropdowns horizontal */
+  gap: 20px; /* Abstand zwischen den Dropdowns */
+  margin-bottom: 20px; /* Abstand unter den Dropdowns */
+  font-weight: bold;
+}
+
+/* Container für alle Tabellen und Labels */
+.main-container {
+  background: #fff; /* Weißer Hintergrund */
+  padding: 20px; /* Innenabstand */
+  border-radius: 8px; /* Abgerundete Ecken */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Weicher Schatten */
+  max-width: 800px; /* Maximale Breite */
+  width: 100%; /* Breite auf 100% setzen */
+  margin-bottom: 20px; /* Abstand unter dem Container */
+}
+
+/* Zentriert die Tabellen innerhalb des Flexbox-Containers */
+table {
+  margin: 20px 0; /* Abstand nach oben und unten */
+  width: 100%; /* Breite der Tabelle auf 100% setzen */
+  border-collapse: collapse; /* Tabellenränder zusammenfügen */
+}
+
+/* Tabellenzellen-Stile */
+table td {
+  padding: 10px; /* Innenabstand */
+  border: 1px solid #ddd; /* Rand um Zellen */
+}
+
+/* Stellt sicher, dass Eingabefelder die volle Breite der Zellen einnehmen */
+.uk-input {
+  width: 100%; /* Eingabefelder nehmen die volle Breite der Zelle ein */
+  box-sizing: border-box; /* Box-Sizing für korrektes Breitenverhalten */
+}
+
+/* Buttons in den Tabellen */
+.addButton,
+.removeButton {
+  cursor: pointer;
+  display: inline-block;
+  padding: 5px; /* Innenabstand für besseren Klickbereich */
+  transition: background-color 0.3s; /* Weicher Übergang bei Hover */
+}
+
+.addButton:hover,
+.removeButton:hover {
+  background-color: #ececec; /* Hintergrundfarbe bei Hover */
+  border-radius: 4px; /* Abgerundete Ecken bei Hover */
+}
+
+/* Hauptbutton "Solve Problem" */
+.uk-button-secondary {
+  background-color: #343a40; /* Dunkler Hintergrund */
+  color: #fff; /* Weiße Schriftfarbe */
+  border-radius: 4px; /* Abgerundete Ecken */
+  padding: 10px 20px; /* Innenabstand */
+  margin-top: 20px; /* Abstand nach oben */
+  transition: background-color 0.3s; /* Weicher Übergang bei Hover */
+}
+
+.uk-button-secondary:hover {
+  background-color: #495057; /* Hintergrundfarbe bei Hover */
+}
+
+/* Labels für Constraints und Bounds */
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block; /* Block-Element für Abstände */
+  text-align: center; /* Zentriert den Text */
+  font-size: 1.2em; /* Größere Schrift */
+}
+
+/* Footer-Styles */
+footer {
+  padding: 20px 0;
+  margin-top: 40px;
+  border-top: 1px solid #e5e5e5; /* Optionaler oberer Rand */
+  background-color: #f8f8f8; /* Hintergrundfarbe des Footers */
+  text-align: center; /* Zentriert den Text im Footer */
+}
+
+.active {
+  background-color: #ececec;
+  font-weight: bold;
+}
