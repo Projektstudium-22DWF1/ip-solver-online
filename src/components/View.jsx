@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import 'uikit/dist/css/uikit.min.css';
+import "uikit/dist/css/uikit.min.css";
 
 const View = ({
   inputFormat,
@@ -16,9 +16,40 @@ const View = ({
 
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <p><strong>Status:</strong> {outputData.Status}</p>
-        <p><strong>Zielfunktionswert (Objective Value):</strong> {outputData.ObjectiveValue}</p>
-        <p><strong>Berechnungszeit (Walltime):</strong> {outputData.Walltime} Sekunden</p>
+        <p>
+          <strong>Status:</strong> {outputData.Status}
+        </p>
+        <p>
+          <strong>Zielfunktionswert (Objective Value):</strong>{" "}
+          {outputData.ObjectiveValue}
+        </p>
+        <p>
+          <strong>Berechnungszeit (Walltime):</strong> {outputData.Walltime}{" "}
+          Sekunden
+        </p>
+      </div>
+    );
+  };
+  const renderLog = () => {
+    if (!outputData) return <p>Noch keine Logs verfügbar.</p>;
+    if (!outputData.hasOwnProperty("GlpkLog"))
+      return <p>Logs sind von HIGHS Solver nicht unterstützt</p>;
+
+    return (
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <pre>{outputData.GlpkLog} </pre>
+      </div>
+    );
+  };
+  const renderOutput = () => {
+    if (!outputData) return <p>Noch kein Output verfügbar.</p>;
+    if (!outputData.hasOwnProperty("GlpkOutput"))
+      return <p>Output ist von HIGHS Solver nicht unterstützt</p>;
+    if (outputData.GlpkOutput?.trim().length === 0)
+      return <p>Dieses Modell generiert keinen Output.</p>;
+    return (
+      <div style={{ textAlign: "center", marginTop: "20px" }}>
+        <pre>{outputData.GlpkOutput} </pre>
       </div>
     );
   };
@@ -45,7 +76,7 @@ const View = ({
                 <td className="uk-text-center">{variable.Name}</td>
                 <td className="uk-text-center">{variable.Primal}</td>
                 <td className="uk-text-center">{variable.Status}</td>
-                <td className="uk-text-center">{variable.Lower}</td>
+                <td className="uk-text-center">{variable.Lower ?? "-∞"}</td>
                 <td className="uk-text-center">{variable.Upper ?? "∞"}</td>
                 <td className="uk-text-center">{variable.Dual}</td>
               </tr>
@@ -78,7 +109,7 @@ const View = ({
                 <td className="uk-text-center">{row.Name}</td>
                 <td className="uk-text-center">{row.Primal}</td>
                 <td className="uk-text-center">{row.Status}</td>
-                <td className="uk-text-center">{row.Lower ?? "Keine"}</td>
+                <td className="uk-text-center">{row.Lower ?? "-∞"}</td>
                 <td className="uk-text-center">{row.Upper ?? "∞"}</td>
                 <td className="uk-text-center">{row.Dual}</td>
               </tr>
@@ -91,7 +122,9 @@ const View = ({
 
   return (
     <div className="uk-container uk-margin-top">
-      <h2 className="uk-heading-line"><span>Input</span></h2>
+      <h2 className="uk-heading-line">
+        <span>Input</span>
+      </h2>
 
       <div className="uk-margin">
         <label>Format: </label>
@@ -113,7 +146,10 @@ const View = ({
         placeholder="Gib dein Optimierungsproblem hier ein..."
       />
 
-      <button className="uk-button uk-button-primary uk-margin-bottom" onClick={solveProblem}>
+      <button
+        className="uk-button uk-button-primary uk-margin-bottom"
+        onClick={solveProblem}
+      >
         Problem lösen
       </button>
 
@@ -139,8 +175,8 @@ const View = ({
       {/* Content Switcher for Tabs */}
       <div>
         {activeTab === "summary" && renderSummary()}
-        {activeTab === "logs" && <div>Logs werden hier angezeigt.</div>}
-        {activeTab === "output" && <div>Output wird hier angezeigt.</div>}
+        {activeTab === "logs" && renderLog()}
+        {activeTab === "output" && renderOutput()}
         {activeTab === "variables" && renderVariables()}
         {activeTab === "constraints" && renderConstraints()}
       </div>

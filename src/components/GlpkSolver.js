@@ -23,19 +23,15 @@ export const solveGlpkProblem = async (inputData, inputFormat, solver) => {
 const GlpkSolver = () => {
   const [inputData, setInputData] = useState("");
   const [outputData, setOutputData] = useState(null);
-  const [inputFormat, setInputFormat] = useState('GMPL');
+  const [inputFormat, setInputFormat] = useState("GMPL");
 
   const solveProblem = async () => {
-    try {
-      const startTime = performance.now();
-      const result = await solve(inputData, inputFormat, SolverOptions.GLPK);
-      const endTime = performance.now();
-      result["Walltime"] = (endTime - startTime) / 1000;
+    const startTime = performance.now();
+    const result = await solve(inputData, inputFormat, SolverOptions.GLPK);
+    const endTime = performance.now();
+    result["Walltime"] = (endTime - startTime) / 1000;
 
-      setOutputData(result);
-    } catch (error) {
-      setOutputData({ error: error.message });
-    }
+    setOutputData(result);
   };
 
   return (

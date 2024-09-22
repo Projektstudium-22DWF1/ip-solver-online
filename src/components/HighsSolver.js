@@ -31,10 +31,7 @@ const HighsSolver = () => {
       const endTime = performance.now();
       result["Walltime"] = (endTime - startTime) / 1000;
 
-      setOutputData(result); // Store the result as an object
-    } catch (error) {
-      setOutputData({ error: error.message });
-    }
+    setOutputData(result); // Store the result as an object
   };
 
   return (

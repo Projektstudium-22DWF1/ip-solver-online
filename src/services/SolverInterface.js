@@ -15,8 +15,6 @@ const highs_promise = require("highs")(highs_settings);
 
 let glpk = require("../dist/glpk.min.js");
 
-// Used in other components
-// eslint-disable-next-line no-unused-vars
 export const solve = async (problem, inputFormat, solver) => {
   var result;
   switch (solver) {
@@ -39,6 +37,7 @@ export const solve = async (problem, inputFormat, solver) => {
       console.log("Unknown solver.");
       break;
   }
+  console.log(JSON.stringify(result, null, 2));
   return result;
 };
 
@@ -66,6 +65,11 @@ const convertGmplToLp = (str) => {
 };
 
 const solveGmplProblemWithGlpk = (problem) => {
+  var glpkOutput = "";
+  var glpkLog = "";
+  glpk.glp_set_print_func(function (data) {
+    glpkLog += data + "\n";
+  });
   let tran = glpk.glp_mpl_alloc_wksp();
   let pos = 0;
 
@@ -76,7 +80,10 @@ const solveGmplProblemWithGlpk = (problem) => {
   });
 
   let lp = glpk.glp_create_prob();
-  glpk.glp_mpl_generate(tran, null, console.log);
+  //"model" is the model name in logs
+  glpk.glp_mpl_generate(tran, "model", function (data) {
+    glpkOutput += data + "\n";
+  });
   glpk.glp_mpl_build_prob(tran, lp);
   glpk.glp_scale_prob(lp);
   let smcp = new glpk.SMCP({ presolve: glpk.GLP_ON });
@@ -88,10 +95,17 @@ const solveGmplProblemWithGlpk = (problem) => {
   glpk.glp_intopt(lp, iocp);
   glpk.glp_mpl_postsolve(tran, lp, glpk.GLP_MIP);
 
-  return formatGlpkData(lp);
+  return formatGlpkData(lp, glpkOutput, glpkLog);
 };
 
 const solveLpProblemWithGlpk = (problem) => {
+  //Output is only supported with GMPL Problems
+  var glpkOutput = null;
+  var glpkLog = "";
+  glpk.glp_set_print_func(function (data) {
+    glpkLog += data + "\n";
+  });
+
   let lp = glpk.glp_create_prob();
 
   let pos = 0;
@@ -107,10 +121,10 @@ const solveLpProblemWithGlpk = (problem) => {
   let iocp = new glpk.IOCP({ presolve: glpk.GLP_ON });
   glpk.glp_intopt(lp, iocp);
 
-  return formatGlpkData(lp);
+  return formatGlpkData(lp, glpkOutput, glpkLog);
 };
 
-const formatGlpkData = (lp) => {
+const formatGlpkData = (lp, glpkOutput, glpkLog) => {
   var status;
   switch (glpk.glp_mip_status(lp)) {
     case glpk.GLP_OPT:
@@ -202,59 +216,57 @@ const formatGlpkData = (lp) => {
   }
 
   var rows = [];
-  /*
-    for (var j = 1; j <= glpk.glp_get_num_rows(lp); j++) {
-        var ubR = glpk.glp_get_row_ub(lp, j);
-        if (ubR >= Number.MAX_VALUE) {
-            ubR = "+inf";
-        }
+  //j = 2 to skip objective function, similar to HIGHS Output
+  for (var j = 1; j <= glpk.glp_get_num_rows(lp); j++) {
+    var ubR = glpk.glp_get_row_ub(lp, j);
+    if (ubR >= Number.MAX_VALUE) {
+      ubR = null;
+    }
 
-        var lbR = glpk.glp_get_row_lb(lp, j);
-        if (lbR <= -Number.MAX_VALUE) {
-            lbR = "-inf";
-        }
+    var lbR = glpk.glp_get_row_lb(lp, j);
+    if (lbR <= -Number.MAX_VALUE) {
+      lbR = null;
+    }
 
-        var primalR = glpk.glp_get_row_prim(lp, j); // Primalwert der Zeile
-        var dualR = glpk.glp_get_row_dual(lp, j);   // Dualwert der Zeile
-        var statusR = glpk.glp_get_row_stat(lp, j); // Status der Zeile
-        var statusStrR;
+    var primalR = glpk.glp_get_row_prim(lp, j); // Primalwert der Zeile
+    var dualR = glpk.glp_get_row_dual(lp, j); // Dualwert der Zeile
+    var statusR = glpk.glp_get_row_stat(lp, j); // Status der Zeile
+    var statusStrR;
 
-        // Setze den Status je nach Statuscode
-        switch (statusR) {
-            case glpk.GLP_BS:
-                statusStrR = "BS"; // Basis
-                break;
-            case glpk.GLP_NL:
-                statusStrR = "LB"; // Nicht Basis, untere Schranke
-                break;
-            case glpk.GLP_NU:
-                statusStrR = "UB"; // Nicht Basis, obere Schranke
-                break;
-            case glpk.GLP_LB:
-                statusStrR = "LB"; // Untere Schranke aktiv
-                break;
-            case glpk.GLP_UB:
-                statusStrR = "UB"; // Obere Schranke aktiv
-                break;
-            default:
-                statusStrR = "Unknown";
-                break;
-        }
+    // Setze den Status je nach Statuscode
+    switch (statusR) {
+      case glpk.GLP_BS:
+        statusStrR = "BS"; // Basis
+        break;
+      case glpk.GLP_NL:
+        statusStrR = "LB"; // Nicht Basis, untere Schranke
+        break;
+      case glpk.GLP_NU:
+        statusStrR = "UB"; // Nicht Basis, obere Schranke
+        break;
+      case glpk.GLP_NF:
+        statusStrR = "NF"; // Nicht Basis, freie Variable
+        break;
+      case glpk.GLP_NS:
+        statusStrR = "NS "; // Nicht Basis, festgesetzt
+        break;
+      default:
+        statusStrR = "Unknown";
+        break;
+    }
 
-        // Erstelle den Namen der Zeile (z.B. c1, c2, etc.)
-        var rowName = glpk.glp_get_row_name(lp, j);
+    var rowName = glpk.glp_get_row_name(lp, j);
 
-        // Füge die Zeile (Constraint) zum 'rows'-Array hinzu
-        rows.push({
-            Index: j - 1,         // Index beginnt bei 0
-            Status: statusStrR,    // Status der Zeile
-            Lower: lb !== "-inf" ? lb : null,  // Untere Schranke (null, wenn -inf)
-            Upper: ub !== "+inf" ? ub : null,  // Obere Schranke (null, wenn +inf)
-            Primal: primalR,       // Primalwert der Zeile
-            Dual: dualR,           // Dualwert der Zeile
-            Name: rowName         // Name der Zeile (z.B. c1, c2)
-        });
-    } */
+    rows.push({
+      Index: j - 1, // Index beginnt bei 0
+      Status: statusStrR, // Status der Zeile
+      Lower: lbR, // Untere Schranke
+      Upper: ubR, // Obere Schranke
+      Primal: primalR, // Primalwert der Zeile
+      Dual: dualR, // Dualwert der Zeile
+      Name: rowName, // Name der Zeile (z.B. c1, c2)
+    });
+  }
 
   var objectiveValue = glpk.glp_mip_obj_val(lp);
 
@@ -263,7 +275,8 @@ const formatGlpkData = (lp) => {
     Columns: columns,
     Rows: rows,
     ObjectiveValue: objectiveValue,
+    GlpkOutput: glpkOutput,
+    GlpkLog: glpkLog,
   };
-
   return result;
 };

@@ -1,43 +1,77 @@
-name: Linter
+name: Lint PR
 
+# Trigger the action on pull request creation targeting master branch
 on:
-  # Trigger the workflow on push to master
-  push:
+  pull_request:
     branches:
       - master
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  run-linters:
-    name: Run linters on master
+  lint:
+    name: Run Prettier and ESLint
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    # Install Node.js
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
 
-      # Install Node.js dependencies
-      - name: Install Node.js dependencies
-        run: npm ci
+    # Install dependencies
+    - name: Install dependencies
+      run: npm ci
 
-      # Lint the code and automatically fix formatting errors
-      - name: Run Prettier and ESLint (with automatic fix)
-        run: |
-          npx prettier --write .
-          npx eslint . --fix
+    # Run Prettier to check formatting
+    - name: Run Prettier
+      run: npm run prettier:check
+      continue-on-error: true
 
-      # Commit and push changes if Prettier or ESLint modified any files
-      - name: Commit and push changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "chore: format code with Prettier and fix lint issues" || echo "No changes to commit"
-          git push origin master --force
+    # Run ESLint to check for linting errors
+    - name: Run ESLint
+      run: npm run lint
+      continue-on-error: true
+
+    # Automatically fix the issues with Prettier
+    - name: Run Prettier fix
+      run: npm run prettier:write
+
+    # Automatically fix the issues with ESLint
+    - name: Run ESLint fix
+      run: npm run lint:fix
+
+    # Commit and stage changes if there are any
+    - name: Commit and stage changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "chore: apply prettier/eslint fixes" || echo "No changes to commit"
+
+    # Fetch the latest changes from master
+    - name: Fetch latest changes
+      run: git fetch origin master
+
+    # Ensure we are on the right branch before rebasing
+    - name: Checkout current branch
+      run: git checkout ${{ github.head_ref }}
+
+    # Rebase the latest changes from master into the feature branch
+    - name: Pull and rebase with master
+      run: |
+        git rebase origin/master || git rebase --abort
+
+    # Push changes back to the PR branch if any fixes were applied
+    - name: Push changes back to PR branch
+      run: |
+        git push --force origin HEAD:${{ github.head_ref }}
+      if: success()
