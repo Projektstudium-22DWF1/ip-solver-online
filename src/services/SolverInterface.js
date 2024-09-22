@@ -220,12 +220,12 @@ const formatGlpkData = (lp, glpkOutput, glpkLog) => {
   for (var j = 1; j <= glpk.glp_get_num_rows(lp); j++) {
     var ubR = glpk.glp_get_row_ub(lp, j);
     if (ubR >= Number.MAX_VALUE) {
-      ubR = "null";
+      ubR = null;
     }
 
     var lbR = glpk.glp_get_row_lb(lp, j);
     if (lbR <= -Number.MAX_VALUE) {
-      lbR = "null";
+      lbR = null;
     }
 
     var primalR = glpk.glp_get_row_prim(lp, j); // Primalwert der Zeile
