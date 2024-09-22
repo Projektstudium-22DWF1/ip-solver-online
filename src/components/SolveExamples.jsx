@@ -16,13 +16,13 @@ export function SolveExamples() {
 
   return (
     <React.Fragment>
-        <button
-          className="uk-button uk-button-success"
-          type="button"
-          onClick={logExamples}
-        >
-          Beispiele in der Konsole anzeigen
-        </button>
+      <button
+        className="uk-button uk-button-success"
+        type="button"
+        onClick={logExamples}
+      >
+        Beispiele in der Konsole anzeigen
+      </button>
     </React.Fragment>
   );
 }

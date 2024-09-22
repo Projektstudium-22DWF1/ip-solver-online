@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import View from "./View";
 import { solve, SolverOptions } from "../services/SolverInterface";
 
-
 export const solveGlpkProblem = async (inputData, inputFormat, solver) => {
   try {
     console.log("SOLVER: " + solver);
@@ -18,7 +17,6 @@ export const solveGlpkProblem = async (inputData, inputFormat, solver) => {
     // setOutputData({ error: error.message });
   }
 };
-
 
 const GlpkSolver = () => {
   const [inputData, setInputData] = useState("");

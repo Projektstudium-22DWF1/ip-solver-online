@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import View from "./View";
 import { solve, SolverOptions } from "../services/SolverInterface";
 
-
 export const solveHighsProblem = async (inputData, inputFormat, solver) => {
   try {
     console.log("SOLVER: " + solver);
@@ -16,8 +15,6 @@ export const solveHighsProblem = async (inputData, inputFormat, solver) => {
     return { error: error.message };
   }
 };
-
-
 
 const HighsSolver = () => {
   // const [inputData, setInputData] = useState("");
@@ -33,9 +30,9 @@ const HighsSolver = () => {
   //   setOutputData(result); // Store the result as an object
 
   return (
-      <React.Fragment>
-        <div>ferf</div>
-      </React.Fragment>
+    <React.Fragment>
+      <div>ferf</div>
+    </React.Fragment>
     // <View
     //   inputFormat={inputFormat}
     //   setInputFormat={setInputFormat}
