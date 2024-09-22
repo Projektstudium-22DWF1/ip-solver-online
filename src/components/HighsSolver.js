@@ -20,29 +20,30 @@ export const solveHighsProblem = async (inputData, inputFormat, solver) => {
 
 
 const HighsSolver = () => {
-  const [inputData, setInputData] = useState("");
-  const [outputData, setOutputData] = useState(null);
-  const [inputFormat, setInputFormat] = useState("GMPL");
-
-  const solveProblem = async (inputData, inputFormat) => {
-    try {
-      const startTime = performance.now();
-      const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
-      const endTime = performance.now();
-      result["Walltime"] = (endTime - startTime) / 1000;
-
-    setOutputData(result); // Store the result as an object
-  };
+  // const [inputData, setInputData] = useState("");
+  // const [outputData, setOutputData] = useState(null);
+  // const [inputFormat, setInputFormat] = useState("GMPL");
+  //
+  // const solveProblem = async (inputData, inputFormat) => {
+  //     const startTime = performance.now();
+  //     const result = await solve(inputData, inputFormat, SolverOptions.HIGHS);
+  //     const endTime = performance.now();
+  //     result["Walltime"] = (endTime - startTime) / 1000;
+  //
+  //   setOutputData(result); // Store the result as an object
 
   return (
-    <View
-      inputFormat={inputFormat}
-      setInputFormat={setInputFormat}
-      inputData={inputData}
-      setInputData={setInputData}
-      solveProblem={solveProblem}
-      outputData={outputData} // Pass the parsed result object to View
-    />
+      <React.Fragment>
+        <div>ferf</div>
+      </React.Fragment>
+    // <View
+    //   inputFormat={inputFormat}
+    //   setInputFormat={setInputFormat}
+    //   inputData={inputData}
+    //   setInputData={setInputData}
+    //   solveProblem={solveProblem}
+    //   outputData={outputData} // Pass the parsed result object to View
+    // />
   );
 };
 
