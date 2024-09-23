@@ -5,7 +5,6 @@ export function Beschreibung() {
   return (
     <React.Fragment>
       <div>Beschreibung der Anwendung</div>
-      
     </React.Fragment>
   );
 }

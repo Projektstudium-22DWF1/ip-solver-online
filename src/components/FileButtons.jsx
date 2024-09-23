@@ -1,5 +1,5 @@
-import React from 'react';
-import { openProblemFile, saveProblemToFile } from '../services/FileHandler'; 
+import React from "react";
+import { openProblemFile, saveProblemToFile } from "../services/FileHandler";
 import "uikit/dist/css/uikit.min.css";
 
 function FileButtons({ problem, setProblem }) {
@@ -7,9 +7,9 @@ function FileButtons({ problem, setProblem }) {
   const handleImport = async () => {
     try {
       const text = await openProblemFile();
-      setProblem(text); 
+      setProblem(text);
     } catch (error) {
-      console.error('Fehler beim Importieren der Datei:', error);
+      console.error("Fehler beim Importieren der Datei:", error);
     }
   };
 
@@ -18,14 +18,24 @@ function FileButtons({ problem, setProblem }) {
     try {
       await saveProblemToFile(problem);
     } catch (error) {
-      console.error('Fehler beim Exportieren der Datei:', error);
+      console.error("Fehler beim Exportieren der Datei:", error);
     }
   };
 
   return (
     <div>
-      <button className="uk-button uk-button-secondary uk-button-large" onClick={handleImport}>Importieren</button>
-      <button className="uk-button uk-button-secondary uk-button-large" onClick={handleExport}>Exportieren</button>
+      <button
+        className="uk-button uk-button-secondary uk-button-large"
+        onClick={handleImport}
+      >
+        Importieren
+      </button>
+      <button
+        className="uk-button uk-button-secondary uk-button-large"
+        onClick={handleExport}
+      >
+        Exportieren
+      </button>
     </div>
   );
 }
