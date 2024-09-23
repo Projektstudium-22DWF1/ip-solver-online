@@ -20,4 +20,3 @@ export const saveProblemToFile = async (content) => {
     extensions: ['.txt'],
   });
 };
-

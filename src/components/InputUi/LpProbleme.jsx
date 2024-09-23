@@ -6,6 +6,7 @@ import "./styles/navbar.css";
 import "../HighsSolver";
 import { solveHighsProblem } from "../HighsSolver";
 import { solveGlpkProblem } from "../GlpkSolver";
+import FileButtons from '../FileButtons';
 
 UIkit.use(Icons);
 
@@ -267,6 +268,9 @@ End`;
       >
         Solve problem
       </button>
+
+      <FileButtons problem={problem} setProblem={setProblem} />
+
     </React.Fragment>
   );
 }

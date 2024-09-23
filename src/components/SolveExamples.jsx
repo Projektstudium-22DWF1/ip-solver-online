@@ -1,6 +1,5 @@
 import React from "react";
 import "uikit/dist/css/uikit.min.css";
-import UIkit from "uikit";
 
 export function SolveExamples() {
   function logExamples() {

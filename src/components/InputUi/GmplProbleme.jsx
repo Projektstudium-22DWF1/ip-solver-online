@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
 import { solveGlpkProblem } from "../GlpkSolver";
 import { solveHighsProblem } from "../HighsSolver";
+import FileButtons from '../FileButtons';
 
 export function GmplProbleme() {
   const [problem, setProblem] = useState("");
@@ -67,6 +68,8 @@ export function GmplProbleme() {
       >
         Solve problem
       </button>
+      
+      <FileButtons problem={problem} setProblem={setProblem} />
     </React.Fragment>
   );
 }
