@@ -80,10 +80,8 @@ End`;
     if (solverOption === "HIGHS") {
       //TODO Logik in neue Datei (z.B. Utils.jsx) auslagern und von LpProbleme und GmplProbleme aus zugreifen
       var json = await solveHighsProblem(lpProblem, "LP", solverOption);
-
     } else if (solverOption === "GLPK") {
       var json = await solveGlpkProblem(lpProblem, "LP", solverOption);
-
     }
     setOutputData(json);
   };
@@ -273,7 +271,7 @@ End`;
       </button>
 
       <FileButtons problem={problem} setProblem={setProblem} />
-      <OutputUi outputData={outputData}/>
+      <OutputUi outputData={outputData} />
     </React.Fragment>
   );
 }

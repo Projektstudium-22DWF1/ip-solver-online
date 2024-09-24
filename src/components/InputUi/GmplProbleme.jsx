@@ -16,7 +16,6 @@ export function GmplProbleme() {
     }
     if (solverOption === "HIGHS") {
       var json = await solveHighsProblem(problem, "GMPL", solverOption);
-
     } else if (solverOption === "GLPK") {
       var json = await solveGlpkProblem(problem, "GMPL", solverOption);
     }
@@ -72,7 +71,7 @@ export function GmplProbleme() {
       </button>
 
       <FileButtons problem={problem} setProblem={setProblem} />
-      <OutputUi outputData={outputData}/>
+      <OutputUi outputData={outputData} />
     </React.Fragment>
   );
 }

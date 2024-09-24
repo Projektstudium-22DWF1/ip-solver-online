@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
 
-const OutputUi = ({
-  outputData,
-}) => {
+const OutputUi = ({ outputData }) => {
   const [activeTab, setActiveTab] = useState("summary");
 
   const renderSummary = () => {
