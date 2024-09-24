@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import View from "./View";
+import View from "./OutputUi";
 import { solve, SolverOptions } from "../services/SolverInterface";
 
 export const solveHighsProblem = async (inputData, inputFormat, solver) => {

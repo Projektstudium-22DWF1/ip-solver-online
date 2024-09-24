@@ -6,6 +6,7 @@ import "./styles/navbar.css";
 import "../HighsSolver";
 import { solveHighsProblem } from "../HighsSolver";
 import { solveGlpkProblem } from "../GlpkSolver";
+import OutputUi from "../OutputUi";
 
 UIkit.use(Icons);
 
@@ -17,6 +18,7 @@ export function LpProbleme() {
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [problem, setProblem] = useState("");
+  const [outputData, setOutputData] = useState("");
 
   {
     /********** Togglet immer wieder den Zustand von isTextareaVisible **********/
@@ -76,12 +78,13 @@ End`;
     }
     if (solverOption === "HIGHS") {
       //TODO Logik in neue Datei (z.B. Utils.jsx) auslagern und von LpProbleme und GmplProbleme aus zugreifen
-      const json = await solveHighsProblem(lpProblem, "LP", solverOption);
-      console.log(json);
+      var json = await solveHighsProblem(lpProblem, "LP", solverOption);
+
     } else if (solverOption === "GLPK") {
-      const json = await solveGlpkProblem(lpProblem, "LP", solverOption);
-      console.log(json);
+      var json = await solveGlpkProblem(lpProblem, "LP", solverOption);
+
     }
+    setOutputData(json);
   };
 
   return (
@@ -267,6 +270,7 @@ End`;
       >
         Solve problem
       </button>
+      <OutputUi outputData={outputData}/>
     </React.Fragment>
   );
 }
