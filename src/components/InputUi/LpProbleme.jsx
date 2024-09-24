@@ -6,6 +6,7 @@ import "./styles/navbar.css";
 import "../HighsSolver";
 import { solveHighsProblem } from "../HighsSolver";
 import { solveGlpkProblem } from "../GlpkSolver";
+import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
 
 UIkit.use(Icons);
@@ -270,6 +271,8 @@ End`;
       >
         Solve problem
       </button>
+
+      <FileButtons problem={problem} setProblem={setProblem} />
       <OutputUi outputData={outputData}/>
     </React.Fragment>
   );
