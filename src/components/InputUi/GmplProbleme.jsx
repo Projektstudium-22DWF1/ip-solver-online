@@ -3,22 +3,23 @@ import "uikit/dist/css/uikit.min.css";
 import { solveGlpkProblem } from "../GlpkSolver";
 import { solveHighsProblem } from "../HighsSolver";
 import FileButtons from "../FileButtons";
+import OutputUi from "../OutputUi";
 
 export function GmplProbleme() {
   const [problem, setProblem] = useState("");
   const [solverOption, setSolverOption] = useState("HIGHS");
+  const [outputData, setOutputData] = useState("");
 
   const solveProblem = async () => {
     {
       /********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********/
     }
     if (solverOption === "HIGHS") {
-      const json = await solveHighsProblem(problem, "GMPL", solverOption);
-      console.log(json);
+      var json = await solveHighsProblem(problem, "GMPL", solverOption);
     } else if (solverOption === "GLPK") {
-      const json = await solveGlpkProblem(problem, "GMPL", solverOption);
-      console.log(json);
+      var json = await solveGlpkProblem(problem, "GMPL", solverOption);
     }
+    setOutputData(json);
   };
 
   return (
@@ -70,6 +71,7 @@ export function GmplProbleme() {
       </button>
 
       <FileButtons problem={problem} setProblem={setProblem} />
+      <OutputUi outputData={outputData} />
     </React.Fragment>
   );
 }

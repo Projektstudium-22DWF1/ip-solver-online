@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
 
-const View = ({
-  inputFormat,
-  setInputFormat,
-  inputData,
-  setInputData,
-  solveProblem,
-  outputData,
-}) => {
+const OutputUi = ({ outputData }) => {
   const [activeTab, setActiveTab] = useState("summary");
 
   const renderSummary = () => {
@@ -122,37 +115,6 @@ const View = ({
 
   return (
     <div className="uk-container uk-margin-top">
-      <h2 className="uk-heading-line">
-        <span>Input</span>
-      </h2>
-
-      <div className="uk-margin">
-        <label>Format: </label>
-        <select
-          className="uk-select uk-form-width-medium"
-          value={inputFormat}
-          onChange={(e) => setInputFormat(e.target.value)}
-        >
-          <option value="GMPL">GMPL</option>
-          <option value="LP">LP</option>
-        </select>
-      </div>
-
-      <textarea
-        className="uk-textarea uk-margin-bottom"
-        rows="5"
-        value={inputData}
-        onChange={(e) => setInputData(e.target.value)}
-        placeholder="Gib dein Optimierungsproblem hier ein..."
-      />
-
-      <button
-        className="uk-button uk-button-primary uk-margin-bottom"
-        onClick={solveProblem}
-      >
-        Problem lösen
-      </button>
-
       {/* UIkit Tabs */}
       <ul className="uk-tab" uk-tab="true">
         <li className={activeTab === "summary" ? "uk-active" : ""}>
@@ -184,4 +146,4 @@ const View = ({
   );
 };
 
-export default View;
+export default OutputUi;
