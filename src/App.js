@@ -1,20 +1,10 @@
 import "./App.css";
-import React, { useState } from "react";
-import HighsSolver from "./components/HighsSolver";
-import GlpkSolver from "./components/GlpkSolver";
+import React from "react";
 import { SolveExamples } from "./components/SolveExamples";
 import "uikit/dist/css/uikit.min.css";
-import { InputUi } from "./components/InputUi/InputUi";
+import { InputUi } from "./components/Tabs/MainNavbar";
 
 function App() {
-  // Zustand für die Auswahl der Komponente
-  const [solver, setSolver] = useState("highs");
-
-  // Funktion zum Ändern der ausgewählten Komponente
-  const handleSolverChange = (event) => {
-    setSolver(event.target.value);
-  };
-
   return (
     <div>
       {/*<h1 className="uk-heading-line"><span>Solver</span></h1>*/}

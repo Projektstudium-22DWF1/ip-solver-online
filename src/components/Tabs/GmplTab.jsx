@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { solveGlpkProblem } from "../GlpkSolver";
-import { solveHighsProblem } from "../HighsSolver";
 import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
+import {solve, InputOptions, SolverOptions} from "../../services/SolverInterface"
 
 export function GmplProbleme() {
   const [problem, setProblem] = useState("");
-  const [solverOption, setSolverOption] = useState("HIGHS");
+  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
   const [outputData, setOutputData] = useState("");
 
   const solveProblem = async () => {
-    {
-      /********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********/
-    }
-    if (solverOption === "HIGHS") {
-      var json = await solveHighsProblem(problem, "GMPL", solverOption);
-    } else if (solverOption === "GLPK") {
-      var json = await solveGlpkProblem(problem, "GMPL", solverOption);
-    }
-    setOutputData(json);
+
+    const result = await solve(problem, InputOptions.GMPL, solverOption);
+    setOutputData(result);
   };
 
   return (
@@ -32,8 +25,8 @@ export function GmplProbleme() {
               aria-label="Custom controls"
               onChange={(e) => setSolverOption(e.target.value)}
             >
-              <option value="HIGHS">HIGHS</option>
-              <option value="GLPK">GLPK</option>
+              <option value={SolverOptions.HIGHS}>HIGHS</option>
+              <option value={SolverOptions.GLPK}>GLPK</option>
             </select>
             <button
               className="uk-button uk-button-default"
