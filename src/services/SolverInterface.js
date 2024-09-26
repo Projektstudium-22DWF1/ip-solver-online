@@ -16,7 +16,14 @@ const highs_promise = require("highs")(highs_settings);
 let glpk = require("../dist/glpk.min.js");
 
 export const solve = async (problem, inputFormat, solver) => {
-  console.log("Solver:"+ solver + "\n\nInputFormat:" + inputFormat+ "\n\nProblem:" + problem)
+  console.log(
+    "Solver:" +
+      solver +
+      "\n\nInputFormat:" +
+      inputFormat +
+      "\n\nProblem:" +
+      problem,
+  );
   const startTime = performance.now();
   var result;
   switch (solver) {

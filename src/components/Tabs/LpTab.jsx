@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import UIkit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";
 import "./styles/navbar.css";
-import { solve, SolverOptions, InputOptions } from "../../services/SolverInterface";
+import {
+  solve,
+  SolverOptions,
+  InputOptions,
+} from "../../services/SolverInterface";
 import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
 

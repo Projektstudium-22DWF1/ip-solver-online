@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
 import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
-import {solve, InputOptions, SolverOptions} from "../../services/SolverInterface"
+import {
+  solve,
+  InputOptions,
+  SolverOptions,
+} from "../../services/SolverInterface";
 
 export function GmplProbleme() {
   const [problem, setProblem] = useState("");
@@ -10,7 +14,6 @@ export function GmplProbleme() {
   const [outputData, setOutputData] = useState("");
 
   const solveProblem = async () => {
-
     const result = await solve(problem, InputOptions.GMPL, solverOption);
     setOutputData(result);
   };
