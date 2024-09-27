@@ -1,11 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 // import 'uikit/dist/css/uikit.min.css';
 import UIkit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";
 import "./styles/navbar.css";
-import "../HighsSolver";
-import { solveHighsProblem } from "../HighsSolver";
-import { solveGlpkProblem } from "../GlpkSolver";
+import {
+  solve,
+  SolverOptions,
+  InputOptions,
+} from "../../services/SolverInterface";
 import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
 
@@ -13,7 +15,7 @@ UIkit.use(Icons);
 
 export function LpProbleme() {
   const [problemOption, setProblemOption] = useState("maximize");
-  const [solverOption, setSolverOption] = useState("HIGHS");
+  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
   const [isTextareaVisible, setIsTextareaVisible] = useState(true);
 
   const [constraints, setConstraints] = useState([{ value: "" }]);
@@ -21,32 +23,24 @@ export function LpProbleme() {
   const [problem, setProblem] = useState("");
   const [outputData, setOutputData] = useState("");
 
-  {
-    /********** Togglet immer wieder den Zustand von isTextareaVisible **********/
-  }
+  /********** Togglet immer wieder den Zustand von isTextareaVisible **********/
   const toggleTextarea = () => {
     setIsTextareaVisible(!isTextareaVisible);
   };
 
-  {
-    /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
-  }
+  /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
   const addRestriction = (setRestriction, restriction) => {
     setRestriction([...restriction, { value: "" }]); // Kopiere aktuellen Inhalt von constraints und füge Objekt hinten dran.
   };
 
-  {
-    /********** Funktion zum Ändern einer Restriction **********/
-  }
+  /********** Funktion zum Ändern einer Restriction **********/
   const handleRestrictionChange = (index, e, restriction, setRestriction) => {
     const newRestriction = [...restriction]; // Kopie aktueller constraints
     newRestriction[index].value = e.target.value; // value auf Eingabe setzen
     setRestriction(newRestriction); // alte durch neue Constraints ersetzen
   };
 
-  {
-    /********** Funktion zum Löschen einer Restriction **********/
-  }
+  /********** Funktion zum Löschen einer Restriction **********/
   const deleteRestriction = (index, restriction, setRestriction) => {
     if (restriction.length === 1) {
       alert("One constraint required"); //TODO alert mit UiKit umsetzen
@@ -60,7 +54,6 @@ export function LpProbleme() {
   const solveProblem = async () => {
     //TODO Datenvalidierung muss als erstes gemacht werden bei Aufruf der Funktion
     let lpProblem;
-
     if (!isTextareaVisible) {
       lpProblem = problem; //TODO Wenn man Daten in geführte Function einfügt, sollen sie NICHT in Textarea eingefügt werden
     } else {
@@ -74,16 +67,8 @@ End`;
       //TODO c${index +1} muss angepasst werden, sodass Name im Frontend entgegen genommen wird. Über Validierung -> Keine gleichen Namen
     }
 
-    {
-      /********** Hier wird entschieden, welcher Solver für die Lösung des LP-Problems verwendet wird **********/
-    }
-    if (solverOption === "HIGHS") {
-      //TODO Logik in neue Datei (z.B. Utils.jsx) auslagern und von LpProbleme und GmplProbleme aus zugreifen
-      var json = await solveHighsProblem(lpProblem, "LP", solverOption);
-    } else if (solverOption === "GLPK") {
-      var json = await solveGlpkProblem(lpProblem, "LP", solverOption);
-    }
-    setOutputData(json);
+    const result = await solve(lpProblem, InputOptions.LP, solverOption);
+    setOutputData(result);
   };
 
   return (
@@ -114,8 +99,8 @@ End`;
               aria-label="Custom controls"
               onChange={(e) => setSolverOption(e.target.value)}
             >
-              <option value="HIGHS">HIGHS</option>
-              <option value="GLPK">GLPK</option>
+              <option value={SolverOptions.HIGHS}>HIGHS</option>
+              <option value={SolverOptions.GLPK}>GLPK</option>
             </select>
             <button
               className="uk-button uk-button-default"

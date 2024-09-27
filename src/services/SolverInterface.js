@@ -16,6 +16,15 @@ const highs_promise = require("highs")(highs_settings);
 let glpk = require("../dist/glpk.min.js");
 
 export const solve = async (problem, inputFormat, solver) => {
+  console.log(
+    "Solver:" +
+      solver +
+      "\n\nInputFormat:" +
+      inputFormat +
+      "\n\nProblem:" +
+      problem,
+  );
+  const startTime = performance.now();
   var result;
   switch (solver) {
     case SolverOptions.GLPK:
@@ -24,7 +33,6 @@ export const solve = async (problem, inputFormat, solver) => {
       } else if (inputFormat === InputOptions.LP) {
         result = solveLpProblemWithGlpk(problem);
       }
-
       break;
     case SolverOptions.HIGHS:
       if (inputFormat === InputOptions.GMPL) {
@@ -37,6 +45,8 @@ export const solve = async (problem, inputFormat, solver) => {
       console.log("Unknown solver.");
       break;
   }
+  const endTime = performance.now();
+  result["Walltime"] = (endTime - startTime) / 1000;
   console.log(JSON.stringify(result, null, 2));
   return result;
 };

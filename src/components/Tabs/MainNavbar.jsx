@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { LpProbleme } from "./LpProbleme";
-import { GmplProbleme } from "./GmplProbleme";
-import { Beschreibung } from "./Beschreibung";
+import { GmplProbleme } from "./GmplTab";
+import { LpProbleme } from "./LpTab";
+import { Beschreibung } from "./DescriptionTab";
 import "./styles/navbar.css";
 
 export function InputUi() {
