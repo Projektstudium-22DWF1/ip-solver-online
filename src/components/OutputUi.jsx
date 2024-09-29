@@ -38,7 +38,10 @@ const OutputUi = ({ outputData }) => {
     if (!outputData) return <p>Noch kein Output verfügbar.</p>;
     if (!outputData.hasOwnProperty("GlpkOutput"))
       return <p>Output ist von HIGHS Solver nicht unterstützt</p>;
-    if (outputData.GlpkOutput?.trim().length === 0)
+    if (
+      outputData.GlpkOutput?.trim().length === 0 ||
+      outputData.GlpkOutput?.trim().length === undefined
+    )
       return <p>Dieses Modell generiert keinen Output.</p>;
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
