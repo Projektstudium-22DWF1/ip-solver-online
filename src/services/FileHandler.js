@@ -2,7 +2,7 @@ import { fileOpen, fileSave } from "browser-fs-access";
 
 export const openProblemFile = async () => {
   const file = await fileOpen({
-    mimeTypes: ["text/plain"], // Nur Textdateien zulassen
+    //mimeTypes: ["text/plain"], // Nur Textdateien zulassen
     //extensions: ['.txt'], // TODO define sesible File Input Formats
     description: "Text-Dateien",
   });
