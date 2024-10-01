@@ -1,10 +1,10 @@
 import React from "react";
-import "uikit/dist/css/uikit.min.css";
 
-export function Beschreibung() {
+function DescriptionTab() {
   return (
     <React.Fragment>
       <div>Beschreibung der Anwendung</div>
     </React.Fragment>
   );
 }
+export default DescriptionTab;

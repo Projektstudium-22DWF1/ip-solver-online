@@ -1,17 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { GmplProbleme } from "./GmplTab";
-import { LpProbleme } from "./LpTab";
-import { Beschreibung } from "./DescriptionTab";
-import "./styles/navbar.css";
+import { SolverTab } from "./SolverTab";
+import DescriptionTab from "./DescriptionTab";
 
-export function InputUi() {
-  const [activeComponent, setActiveComponent] = useState("einfache");
-
-  const handleNavClick = (component) => {
-    setActiveComponent(component);
-  };
+export function MainNavbar() {
+  const [activeComponent, setActiveComponent] = useState("SolverTab");
 
   return (
     <React.Fragment>
@@ -21,38 +15,27 @@ export function InputUi() {
           <div className="uk-navbar-left">
             <ul className="uk-navbar-nav">
               <li
-                className={`uk-active ${activeComponent === "einfache" ? "active" : ""}`}
+                className={`uk-active ${activeComponent === "SolverTab" ? "active" : ""}`}
               >
                 {" "}
                 {/*active ist nur für css*/}
                 <a
                   onClick={() => {
-                    handleNavClick("einfache");
+                    setActiveComponent("SolverTab");
                   }}
                 >
-                  LP Probleme
+                  Solver
                 </a>
               </li>
               <li
-                className={`uk-active ${activeComponent === "komplexe" ? "active" : ""}`}
+                className={`uk-active ${activeComponent === "DescriptionTab" ? "active" : ""}`}
               >
                 <a
                   onClick={() => {
-                    handleNavClick("komplexe");
+                    setActiveComponent("DescriptionTab");
                   }}
                 >
-                  GMPL Probleme
-                </a>
-              </li>
-              <li
-                className={`uk-active ${activeComponent === "beschreibung" ? "active" : ""}`}
-              >
-                <a
-                  onClick={() => {
-                    handleNavClick("beschreibung");
-                  }}
-                >
-                  Beschreibung der Anwendung
+                  Description
                 </a>
               </li>
             </ul>
@@ -63,9 +46,8 @@ export function InputUi() {
 
         {/*Laden der Komponente*/}
         <div className="uk-container" id={"all"}>
-          {activeComponent === "einfache" && <LpProbleme />}
-          {activeComponent === "komplexe" && <GmplProbleme />}
-          {activeComponent === "beschreibung" && <Beschreibung />}
+          {activeComponent === "SolverTab" && <SolverTab />}
+          {activeComponent === "DescriptionTab" && <DescriptionTab />}
         </div>
       </div>
     </React.Fragment>
