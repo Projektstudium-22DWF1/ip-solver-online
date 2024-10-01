@@ -1,5 +1,4 @@
 import React from "react";
-import "uikit/dist/css/uikit.min.css";
 
 function DescriptionTab() {
   return (

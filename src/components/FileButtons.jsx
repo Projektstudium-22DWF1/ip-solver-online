@@ -23,18 +23,20 @@ function FileButtons({ problem, setProblem }) {
   };
 
   return (
-    <div>
+    <div         style={{ marginBottom: "10px" }}
+>
       <button
-        className="uk-button uk-button-secondary uk-button-large"
+        className="uk-button uk-button-secondary"
         onClick={handleImport}
+        style={{ marginRight: "10px" }}
       >
-        Importieren
+        Importieren<span uk-icon="icon: upload"></span>
       </button>
       <button
-        className="uk-button uk-button-secondary uk-button-large"
+        className="uk-button uk-button-secondary"
         onClick={handleExport}
       >
-        Exportieren
+        Exportieren<span uk-icon="icon: download"></span>
       </button>
     </div>
   );

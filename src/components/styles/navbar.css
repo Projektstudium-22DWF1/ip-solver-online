@@ -9,7 +9,7 @@ body {
   flex-direction: column; /* Stellt sicher, dass die Elemente vertikal gestapelt werden */
   align-items: center; /* Zentriert die Kinder horizontal */
   justify-content: center; /* Zentriert die Kinder vertikal */
-  min-height: 100vh; /* Minimale Höhe auf 100% des Viewports setzen */
+  min-height: 80vh; /* Minimale Höhe auf 100% des Viewports setzen */
   background-color: #d3d3d3; /* Heller Hintergrund für besseren Kontrast */
   padding: 20px; /* Fügt Innenabstand hinzu */
 }

@@ -6,21 +6,19 @@ function RawTextarea({problem, setProblem}) {
 
     return (
         <React.Fragment>
-            <div className={"main-container"}>
-        <div id={"#problemContainer"}>
+        <div>
           {/********** Textarea **********/}
           <div>
             <label htmlFor="textareaInput">Input</label>
             <textarea
               id="textareaInput"
               className="uk-textarea"
-              rows="10"
+              rows="18"
               value={problem}
               onChange={(e) => setProblem(e.target.value)}
             ></textarea>
           </div>
         </div>
-      </div>
         </React.Fragment>
     )
 }

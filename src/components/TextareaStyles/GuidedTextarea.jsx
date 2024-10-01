@@ -42,16 +42,15 @@ function GuidedTextarea({ setProblem }) {
             Bounds 
             ${bounds.map((e) => e.value).join("\n    ")} 
             End`;
-
         setProblem(problem);
     };
 
     return (
         <React.Fragment>
-            <OptimizationDirectionChooser setOptimizationDirection={setOptimizationDirection} />
-            <div className={"main-container"}>
-
-                <div id={"#problemContainer"}>
+            
+            <OptimizationDirectionChooser optimizationDirection={optimizationDirection} setOptimizationDirection={setOptimizationDirection} />
+           
+                <div>
                     {/********** Function **********/}
                     <label htmlFor="#problem">Problem Statement</label>
                     <table className="mainArea">
@@ -166,7 +165,6 @@ function GuidedTextarea({ setProblem }) {
                         </tbody>
                     </table>
                 </div>
-            </div>
 
         </React.Fragment>
     )

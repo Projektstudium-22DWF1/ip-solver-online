@@ -1,7 +1,7 @@
 import React from "react";
 import Chooser from "./Chooser";
 
-function OptimizationDirectionChooser({ setOptimizationDirection }) {
+function OptimizationDirectionChooser({ optimizationDirection, setOptimizationDirection }) {
     const solverOptions = [
         { value: "Maximize", label: "Maximize" },
         { value: "Minimize", label: "Minimize" },
@@ -11,7 +11,8 @@ function OptimizationDirectionChooser({ setOptimizationDirection }) {
         <Chooser 
             options={solverOptions} 
             onChange={ setOptimizationDirection } 
-            label="Input Textbox Style" 
+            label="Optimization Direction" 
+            value={ optimizationDirection }
         />
     );
 }

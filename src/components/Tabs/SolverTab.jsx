@@ -24,7 +24,7 @@ export function SolverTab() {
   const [outputData, setOutputData] = useState("");
 
 
-  
+
   const solveProblem = async () => {
     const result = await solve(problem, inputFormat, solverOption);
     setOutputData(result);
@@ -32,14 +32,16 @@ export function SolverTab() {
 
   return (
     <React.Fragment>
-      <SolverChooser setSolverOption={setSolverOption}></SolverChooser>
 
-      <InputFormatChooser inputFormat={inputFormat} setInputFormat={setInputFormat} textAreaStyle={textareaStyle} ></InputFormatChooser>
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '20px' }}>
+        <SolverChooser solverOption={solverOption} setSolverOption={setSolverOption}  />
+        <InputFormatChooser inputFormat={inputFormat} setInputFormat={setInputFormat} textAreaStyle={textareaStyle} />
+      </div>
 
-      <InputTextareaStyleChooser setTextareaStyle={setTextareaStyle} />
 
 
-      <div>
+      <div className={"main-container"}>
+        <InputTextareaStyleChooser textareaStyle={textareaStyle} setTextareaStyle={setTextareaStyle} inputFormat={inputFormat} />
         {textareaStyle === "Guided" && (
           <GuidedTextarea problem={problem} setProblem={setProblem} />
 
@@ -53,7 +55,10 @@ export function SolverTab() {
 
       <FileButtons problem={problem} setProblem={setProblem} />
 
-      <OutputUi outputData={outputData} />
+      <div className={"main-container"}>
+        <OutputUi outputData={outputData} />
+      </div>
+
     </React.Fragment>
   );
 }

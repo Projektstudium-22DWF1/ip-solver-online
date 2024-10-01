@@ -6,17 +6,17 @@ import { MainNavbar } from "./components/Tabs/MainNavbar";
 
 function App() {
   return (
-    <div>
+    <div className={"all"}>
      
       <MainNavbar /> 
       {/* Zeigt die Beispiele in der Konsole an */}
-      <SolveExamples/>
       {/********** Footer **********/}
       <footer className="uk-section uk-section-small uk-text-center uk-background-muted">
         <div className="uk-container">
           <p>© Anwendung zur Lösung linearer Optimierungsprobleme</p>
         </div>
       </footer>
+      <SolveExamples/>
     </div>
   );
 }

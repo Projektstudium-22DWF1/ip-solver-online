@@ -3,14 +3,14 @@ import { useState } from "react";
 import "uikit/dist/css/uikit.min.css";
 import {SolverTab} from "./SolverTab";
 import DescriptionTab from "./DescriptionTab";
-import "./../styles/navbar.css"
+
 
 export function MainNavbar() {
   const [activeComponent, setActiveComponent] = useState("SolverTab");
 
   return (
     <React.Fragment>
-      <div>
+      <div >
         {/*Navigationsleiste*/}
         <nav className="uk-navbar-container" uk-navbar={"true"}>
           <div className="uk-navbar-left">
