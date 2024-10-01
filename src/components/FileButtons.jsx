@@ -23,8 +23,7 @@ function FileButtons({ problem, setProblem }) {
   };
 
   return (
-    <div         style={{ marginBottom: "10px" }}
->
+    <div style={{ marginBottom: "10px" }}>
       <button
         className="uk-button uk-button-secondary"
         onClick={handleImport}
@@ -32,10 +31,7 @@ function FileButtons({ problem, setProblem }) {
       >
         Importieren<span uk-icon="icon: upload"></span>
       </button>
-      <button
-        className="uk-button uk-button-secondary"
-        onClick={handleExport}
-      >
+      <button className="uk-button uk-button-secondary" onClick={handleExport}>
         Exportieren<span uk-icon="icon: download"></span>
       </button>
     </div>

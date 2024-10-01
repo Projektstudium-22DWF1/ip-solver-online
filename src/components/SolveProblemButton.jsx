@@ -1,7 +1,7 @@
 import React from "react";
 import "uikit/dist/css/uikit.min.css";
 
-function SolveProblemButton({solveProblem}) {
+function SolveProblemButton({ solveProblem }) {
   return (
     <button
       className="uk-button uk-button-secondary uk-button-large"
@@ -9,6 +9,6 @@ function SolveProblemButton({solveProblem}) {
     >
       Solve problem
     </button>
-  )
+  );
 }
 export default SolveProblemButton;
