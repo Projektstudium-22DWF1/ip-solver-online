@@ -2,6 +2,7 @@
   "solver": "Solver",
   "description": "Description",
   "language": "Language",
+  "activeLanguage": "English",
   "descriptionText": "Description of the application",
   "inputFormatOptions": "Input Format",
   "gmplTooltip": "Textarea style cannot be changed in GMPL format.",
@@ -38,5 +39,7 @@
   "dualValue": "Dual Value",
   "noConstraintsAvailable": "No constraints available.",
   "constraint": "Constraint",
-  "footerText": "Application for solving linear optimization problems"
+  "footerText": "Application for solving linear optimization problems",
+  "solverOptions": "Solver",
+  "optimizationDirection": "Optimization Direction"
 }

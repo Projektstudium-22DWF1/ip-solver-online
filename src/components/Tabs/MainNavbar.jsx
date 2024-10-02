@@ -26,15 +26,30 @@ export function MainNavbar() {
                 </a>
               </li>
             </ul>
+          </div>
 
-            {/* Sprachwahl */}
+          {/* Sprachwahl */}
+          <div className="uk-navbar-right">
             <div className="uk-navbar-item">
               <span uk-icon="world"></span>
               <div className="uk-margin-small-left">
-                <select onChange={(e) => changeLanguage(e.target.value)} defaultValue="en">
-                  <option value="en">English</option>
-                  <option value="de">Deutsch</option>
-                </select>
+                <button className="uk-button uk-button-default" type="button">
+                  {translations.activeLanguage}
+                </button>
+                <div uk-dropdown="mode: click">
+                  <ul className="uk-nav uk-dropdown-nav">
+                    <li>
+                      <a onClick={() => changeLanguage('en')}>
+                        <span className="uk-margin-small-right" uk-icon="icon: flag"></span> English
+                      </a>
+                    </li>
+                    <li>
+                      <a onClick={() => changeLanguage('de')}>
+                        <span className="uk-margin-small-right" uk-icon="icon: flag"></span> Deutsch
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>

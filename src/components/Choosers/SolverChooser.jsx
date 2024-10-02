@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { SolverOptions } from "../../services/SolverInterface";
 import Chooser from "./Chooser";
+import { LanguageContext } from "../../context/LanguageContext"; // Importiere den LanguageContext
 
 function SolverChooser({ solverOption, setSolverOption }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+
   const solverOptions = [
     { value: SolverOptions.HIGHS, label: SolverOptions.HIGHS },
     { value: SolverOptions.GLPK, label: SolverOptions.GLPK },
@@ -12,7 +15,7 @@ function SolverChooser({ solverOption, setSolverOption }) {
     <Chooser
       options={solverOptions}
       onChange={setSolverOption}
-      label="Solver Options"
+      label={translations.solverOptions} // Verwende die Übersetzung
       value={solverOption}
     />
   );
