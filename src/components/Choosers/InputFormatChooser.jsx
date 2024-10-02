@@ -7,8 +7,8 @@ function InputFormatChooser({ inputFormat, setInputFormat }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
 
   const inputOptions = [
-    { value: InputOptions.GMPL, label: InputOptions.GMPL },
     { value: InputOptions.LP, label: InputOptions.LP },
+    { value: InputOptions.GMPL, label: InputOptions.GMPL },
   ];
 
   return (

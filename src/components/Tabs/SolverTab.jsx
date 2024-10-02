@@ -13,11 +13,12 @@ import {
   InputOptions,
   SolverOptions,
 } from "../../services/SolverInterface";
+import InputFormatInformationIcon from "../InputFormatInformationIcon";
 
 export function SolverTab() {
   const [problem, setProblem] = useState("");
   const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
-  const [inputFormat, setInputFormat] = useState(InputOptions.GMPL);
+  const [inputFormat, setInputFormat] = useState(InputOptions.LP);
   const [textareaStyle, setTextareaStyle] = useState("Guided");
 
   const [outputData, setOutputData] = useState("");
@@ -48,11 +49,22 @@ export function SolverTab() {
       </div>
 
       <div className={"main-container"}>
-        <InputTextareaStyleChooser
-          textareaStyle={textareaStyle}
-          setTextareaStyle={setTextareaStyle}
-          inputFormat={inputFormat}
-        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <InputTextareaStyleChooser
+            textareaStyle={textareaStyle}
+            setTextareaStyle={setTextareaStyle}
+            inputFormat={inputFormat}
+          />
+
+          <InputFormatInformationIcon inputFormat={inputFormat} />
+        </div>
+
         {textareaStyle === "Guided" && (
           <GuidedTextarea problem={problem} setProblem={setProblem} />
         )}
