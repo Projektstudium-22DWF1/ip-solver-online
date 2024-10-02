@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
 import "./../styles/navbar.css";
 import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChooser";
+import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 
 function GuidedTextarea({ setProblem }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
   const [constraints, setConstraints] = useState([{ value: "" }]);
@@ -12,29 +14,27 @@ function GuidedTextarea({ setProblem }) {
 
   /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
   const addRestriction = (setRestriction, restriction) => {
-    setRestriction([...restriction, { value: "" }]); // Kopiere aktuellen Inhalt von constraints und füge Objekt hinten dran.
+    setRestriction([...restriction, { value: "" }]);
   };
 
   /********** Funktion zum Ändern einer Restriction **********/
   const handleRestrictionChange = (index, e, restriction, setRestriction) => {
-    const newRestriction = [...restriction]; // Kopie aktueller constraints
-    newRestriction[index].value = e.target.value; // value auf Eingabe setzen
-    setRestriction(newRestriction); // alte durch neue Constraints ersetzen
+    const newRestriction = [...restriction];
+    newRestriction[index].value = e.target.value;
+    setRestriction(newRestriction);
   };
 
   /********** Funktion zum Löschen einer Restriction **********/
   const deleteRestriction = (index, restriction, setRestriction) => {
     if (restriction.length === 1) {
-      alert("One constraint required"); //TODO alert mit UiKit umsetzen
+      alert(translations.oneConstraintRequired); // Verwende Übersetzung
     } else {
-      const newRestriction = restriction.filter((currElm, i) => i !== index); // currElm = aktuelles Element, i = index
-      // i !== index -> index ist der index des Elements, auf was geklickt wurde
+      const newRestriction = restriction.filter((_, i) => i !== index);
       setRestriction(newRestriction);
     }
   };
 
   const returnProblem = () => {
-    //TODO Datenvalidierung muss als erstes gemacht werden bei Aufruf der Funktion
     let problem = `${optimizationDirection} obj: 
             ${problemStatement}
             Subject To 
@@ -53,8 +53,8 @@ function GuidedTextarea({ setProblem }) {
       />
 
       <div>
-        {/********** Function **********/}
-        <label htmlFor="#problem">Problem Statement</label>
+        {/********** Problem Statement **********/}
+        <label htmlFor="#problem">{translations.problemStatement}</label>
         <table className="mainArea">
           <tbody>
             <tr>
@@ -74,7 +74,7 @@ function GuidedTextarea({ setProblem }) {
         </table>
 
         {/********** Constraints **********/}
-        <label htmlFor="#constraints">Constraints</label>
+        <label htmlFor="#constraints">{translations.constraints}</label>
         <table className="mainArea">
           <tbody>
             {constraints.map((constraint, index) => (
@@ -109,7 +109,7 @@ function GuidedTextarea({ setProblem }) {
                   <span
                     className="removeButton"
                     uk-icon="close"
-                    onClick={(e) => {
+                    onClick={() => {
                       deleteRestriction(index, constraints, setConstraints);
                       returnProblem();
                     }}
@@ -121,7 +121,7 @@ function GuidedTextarea({ setProblem }) {
         </table>
 
         {/********** Bounds **********/}
-        <label htmlFor="#bounds">Bounds</label>
+        <label htmlFor="#bounds">{translations.bounds}</label>
         <table className={"mainArea"}>
           <tbody>
             {bounds.map((bound, index) => (

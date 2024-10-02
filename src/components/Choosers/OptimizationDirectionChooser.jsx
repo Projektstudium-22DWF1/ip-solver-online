@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Chooser from "./Chooser";
+import { LanguageContext } from "../../context/LanguageContext"; // Importiere den LanguageContext
 
 function OptimizationDirectionChooser({
   optimizationDirection,
   setOptimizationDirection,
 }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+
   const solverOptions = [
     { value: "Maximize", label: "Maximize" },
     { value: "Minimize", label: "Minimize" },
@@ -14,7 +17,7 @@ function OptimizationDirectionChooser({
     <Chooser
       options={solverOptions}
       onChange={setOptimizationDirection}
-      label="Optimization Direction"
+      label={translations.optimizationDirection} // Verwende die Übersetzung
       value={optimizationDirection}
     />
   );

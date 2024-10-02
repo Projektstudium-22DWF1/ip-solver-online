@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { openProblemFile, saveProblemToFile } from "../services/FileHandler";
 import "uikit/dist/css/uikit.min.css";
+import { LanguageContext } from "../context/LanguageContext"; // Importiere den Kontext
 
 function FileButtons({ problem, setProblem }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+
   // Funktion zum Importieren der Datei
   const handleImport = async () => {
     try {
@@ -29,10 +32,10 @@ function FileButtons({ problem, setProblem }) {
         onClick={handleImport}
         style={{ marginRight: "10px" }}
       >
-        Importieren<span uk-icon="icon: upload"></span>
+        {translations.import} <span uk-icon="icon: upload"></span>
       </button>
       <button className="uk-button uk-button-secondary" onClick={handleExport}>
-        Exportieren<span uk-icon="icon: download"></span>
+        {translations.export} <span uk-icon="icon: download"></span>
       </button>
     </div>
   );

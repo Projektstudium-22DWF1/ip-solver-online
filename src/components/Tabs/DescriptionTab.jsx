@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LanguageContext } from "../../context/LanguageContext";
 
 function DescriptionTab() {
+  const { translations } = useContext(LanguageContext);
+
   return (
     <React.Fragment>
-      <div>Beschreibung der Anwendung</div>
+      <div>{translations.descriptionText}</div>
     </React.Fragment>
   );
 }
+
 export default DescriptionTab;
