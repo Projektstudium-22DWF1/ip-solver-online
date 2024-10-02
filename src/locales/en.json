@@ -1,6 +1,7 @@
 {
     "solver": "Solver",
     "description": "Description",
-    "language": "Language"
+    "language": "Language",
+    "descriptionText": "Description of the application"
   }
   

@@ -1,6 +1,7 @@
 {
     "solver": "Löser",
     "description": "Beschreibung",
-    "language": "Sprache"
+    "language": "Sprache",
+    "descriptionText": "Beschreibung der Anwendung"
   }
   
