@@ -1,16 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 
-function ImportTextareaStyleChooser({
-  textareaStyle,
-  setTextareaStyle,
-  inputFormat,
-}) {
+function ImportTextareaStyleChooser({ textareaStyle, setTextareaStyle, inputFormat }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const isGMPL = inputFormat === "GMPL"; // Überprüfen, ob das Property 'GMPL' ist
 
   // Funktion zum Umschalten zwischen Raw und Guided
   const toggleStyle = () => {
     setTextareaStyle((prevStyle) =>
-      prevStyle === "Guided" ? "Raw" : "Guided",
+      prevStyle === "Guided" ? "Raw" : "Guided"
     );
   };
 
@@ -28,20 +26,18 @@ function ImportTextareaStyleChooser({
         onClick={toggleStyle}
         className={`uk-button uk-button-secondary ${isGMPL ? "disabled-button" : ""}`}
         disabled={isGMPL}
-        uk-tooltip={
-          isGMPL ? "Textarea style cannot be changed in GMPL format." : ""
-        }
+        uk-tooltip={isGMPL ? translations.gmplTooltip : ""}
       >
-        Switch to {textareaStyle === "Guided" ? "Raw" : "Guided"}
+        {translations.switchTo} {textareaStyle === "Guided" ? translations.raw : translations.guided}
       </button>
 
       {/* CSS für deaktivierten Button */}
       <style>{`
-                .disabled-button {
-                    background-color: grey !important;
-                    cursor: not-allowed;
-                }
-            `}</style>
+        .disabled-button {
+          background-color: grey !important;
+          cursor: not-allowed;
+        }
+      `}</style>
     </div>
   );
 }

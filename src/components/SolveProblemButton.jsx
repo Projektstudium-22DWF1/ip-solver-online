@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
+import { LanguageContext } from "../context/LanguageContext"; // Importiere den Kontext
 
 function SolveProblemButton({ solveProblem }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+
   return (
     <button
       className="uk-button uk-button-secondary uk-button-large"
       onClick={solveProblem}
     >
-      Solve problem
+      {translations.solveProblem} {/* Verwende Übersetzung */}
     </button>
   );
 }
+
 export default SolveProblemButton;

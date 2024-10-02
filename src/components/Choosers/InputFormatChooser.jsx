@@ -1,8 +1,11 @@
+import React, { useContext } from "react";
 import Chooser from "./Chooser";
-import React from "react";
 import { InputOptions } from "../../services/SolverInterface";
+import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 
 function InputFormatChooser({ inputFormat, setInputFormat }) {
+  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+
   const inputOptions = [
     { value: InputOptions.GMPL, label: InputOptions.GMPL },
     { value: InputOptions.LP, label: InputOptions.LP },
@@ -12,7 +15,7 @@ function InputFormatChooser({ inputFormat, setInputFormat }) {
     <Chooser
       options={inputOptions}
       onChange={setInputFormat}
-      label="Input Format Options"
+      label={translations.inputFormatOptions} // Verwende den übersetzten Text
       value={inputFormat}
     />
   );
