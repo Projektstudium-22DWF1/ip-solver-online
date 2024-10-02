@@ -1,14 +1,18 @@
 import React, { useEffect, useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 
-function ImportTextareaStyleChooser({ textareaStyle, setTextareaStyle, inputFormat }) {
+function ImportTextareaStyleChooser({
+  textareaStyle,
+  setTextareaStyle,
+  inputFormat,
+}) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const isGMPL = inputFormat === "GMPL"; // Überprüfen, ob das Property 'GMPL' ist
 
   // Funktion zum Umschalten zwischen Raw und Guided
   const toggleStyle = () => {
     setTextareaStyle((prevStyle) =>
-      prevStyle === "Guided" ? "Raw" : "Guided"
+      prevStyle === "Guided" ? "Raw" : "Guided",
     );
   };
 
@@ -28,7 +32,8 @@ function ImportTextareaStyleChooser({ textareaStyle, setTextareaStyle, inputForm
         disabled={isGMPL}
         uk-tooltip={isGMPL ? translations.gmplTooltip : ""}
       >
-        {translations.switchTo} {textareaStyle === "Guided" ? translations.raw : translations.guided}
+        {translations.switchTo}{" "}
+        {textareaStyle === "Guided" ? translations.raw : translations.guided}
       </button>
 
       {/* CSS für deaktivierten Button */}

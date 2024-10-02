@@ -11,7 +11,8 @@ function RawTextarea({ problem, setProblem }) {
       <div>
         {/********** Textarea **********/}
         <div>
-          <label htmlFor="textareaInput">{translations.input}</label> {/* Verwende Übersetzung */}
+          <label htmlFor="textareaInput">{translations.input}</label>{" "}
+          {/* Verwende Übersetzung */}
           <textarea
             id="textareaInput"
             className="uk-textarea"

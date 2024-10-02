@@ -8,10 +8,12 @@ import Footer from "./components/Footer"; // Importiere die neue Footer-Komponen
 
 function App() {
   return (
-    <LanguageProvider> {/* Umhülle die App mit LanguageProvider */}
+    <LanguageProvider>
+      {" "}
+      {/* Umhülle die App mit LanguageProvider */}
       <div className={"all"}>
         <MainNavbar />
-        
+
         {/* Zeigt die Beispiele in der Konsole an */}
         <SolveExamples />
 

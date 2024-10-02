@@ -6,7 +6,8 @@ import { LanguageContext } from "../../context/LanguageContext"; // Importiere d
 
 function GuidedTextarea({ setProblem }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
-  const [optimizationDirection, setOptimizationDirection] = useState("Maximize");
+  const [optimizationDirection, setOptimizationDirection] =
+    useState("Maximize");
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [problemStatement, setProblemStatement] = useState("");
@@ -85,7 +86,12 @@ function GuidedTextarea({ setProblem }) {
                     type="text"
                     value={constraint.value}
                     onChange={(e) => {
-                      handleRestrictionChange(index, e, constraints, setConstraints);
+                      handleRestrictionChange(
+                        index,
+                        e,
+                        constraints,
+                        setConstraints,
+                      );
                       returnProblem();
                     }}
                   />

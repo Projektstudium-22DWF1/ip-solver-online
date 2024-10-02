@@ -13,7 +13,9 @@ const LanguageProvider = ({ children }) => {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, changeLanguage, translations: languages[language] }}>
+    <LanguageContext.Provider
+      value={{ language, changeLanguage, translations: languages[language] }}
+    >
       {children}
     </LanguageContext.Provider>
   );

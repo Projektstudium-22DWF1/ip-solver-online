@@ -6,7 +6,7 @@ import { LanguageContext } from "../context/LanguageContext"; // Import the Lang
 const OutputUi = ({ outputData }) => {
   // Get the translations from the context
   const { translations } = useContext(LanguageContext);
-  
+
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("summary");
 
@@ -22,10 +22,12 @@ const OutputUi = ({ outputData }) => {
           <strong>{translations.status}:</strong> {outputData.Status}
         </p>
         <p>
-          <strong>{translations.objectiveValue}:</strong> {outputData.ObjectiveValue}
+          <strong>{translations.objectiveValue}:</strong>{" "}
+          {outputData.ObjectiveValue}
         </p>
         <p>
-          <strong>{translations.walltime}:</strong> {outputData.Walltime} {translations.seconds}
+          <strong>{translations.walltime}:</strong> {outputData.Walltime}{" "}
+          {translations.seconds}
         </p>
       </div>
     );
@@ -150,10 +152,14 @@ const OutputUi = ({ outputData }) => {
           <a onClick={() => setActiveTab("output")}>{translations.output}</a>
         </li>
         <li className={activeTab === "variables" ? "uk-active" : ""}>
-          <a onClick={() => setActiveTab("variables")}>{translations.variables}</a>
+          <a onClick={() => setActiveTab("variables")}>
+            {translations.variables}
+          </a>
         </li>
         <li className={activeTab === "constraints" ? "uk-active" : ""}>
-          <a onClick={() => setActiveTab("constraints")}>{translations.constraints}</a>
+          <a onClick={() => setActiveTab("constraints")}>
+            {translations.constraints}
+          </a>
         </li>
       </ul>
 

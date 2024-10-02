@@ -15,12 +15,16 @@ export function MainNavbar() {
         <nav className="uk-navbar-container" uk-navbar={"true"}>
           <div className="uk-navbar-left">
             <ul className="uk-navbar-nav">
-              <li className={`uk-active ${activeComponent === "SolverTab" ? "active" : ""}`}>
+              <li
+                className={`uk-active ${activeComponent === "SolverTab" ? "active" : ""}`}
+              >
                 <a onClick={() => setActiveComponent("SolverTab")}>
                   {translations.solver}
                 </a>
               </li>
-              <li className={`uk-active ${activeComponent === "DescriptionTab" ? "active" : ""}`}>
+              <li
+                className={`uk-active ${activeComponent === "DescriptionTab" ? "active" : ""}`}
+              >
                 <a onClick={() => setActiveComponent("DescriptionTab")}>
                   {translations.description}
                 </a>
@@ -39,13 +43,21 @@ export function MainNavbar() {
                 <div uk-dropdown="mode: click">
                   <ul className="uk-nav uk-dropdown-nav">
                     <li>
-                      <a onClick={() => changeLanguage('en')}>
-                        <span className="uk-margin-small-right" uk-icon="icon: flag"></span> English
+                      <a onClick={() => changeLanguage("en")}>
+                        <span
+                          className="uk-margin-small-right"
+                          uk-icon="icon: flag"
+                        ></span>{" "}
+                        English
                       </a>
                     </li>
                     <li>
-                      <a onClick={() => changeLanguage('de')}>
-                        <span className="uk-margin-small-right" uk-icon="icon: flag"></span> Deutsch
+                      <a onClick={() => changeLanguage("de")}>
+                        <span
+                          className="uk-margin-small-right"
+                          uk-icon="icon: flag"
+                        ></span>{" "}
+                        Deutsch
                       </a>
                     </li>
                   </ul>
