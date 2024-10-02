@@ -1,14 +1,21 @@
 import React, { useState, useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { LanguageContext } from "../context/LanguageContext"; // Importiere den Kontext
+import { LanguageContext } from "../context/LanguageContext"; // Import the LanguageContext for translations
 
+// Component to display the output UI with various tabs for summary, logs, output, variables, and constraints
 const OutputUi = ({ outputData }) => {
-  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+  // Get the translations from the context
+  const { translations } = useContext(LanguageContext);
+  
+  // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("summary");
 
+  // Function to render the summary tab content
   const renderSummary = () => {
+    // If there is no output data, display a message
     if (!outputData) return <p>{translations.noDataAvailable}</p>;
 
+    // Render the summary details with status, objective value, and walltime
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <p>
@@ -24,11 +31,14 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
+  // Function to render the logs tab content
   const renderLog = () => {
+    // Display message if no output data or logs are not available/supported
     if (!outputData) return <p>{translations.noLogsAvailable}</p>;
     if (!outputData.hasOwnProperty("GlpkLog"))
       return <p>{translations.logsNotSupported}</p>;
 
+    // Render the log details
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <pre>{outputData.GlpkLog}</pre>
@@ -36,13 +46,16 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
+  // Function to render the output tab content
   const renderOutput = () => {
+    // Display message if no output data or output is not supported
     if (!outputData) return <p>{translations.noOutputAvailable}</p>;
     if (!outputData.hasOwnProperty("GlpkOutput"))
       return <p>{translations.outputNotSupported}</p>;
     if (outputData.GlpkOutput?.trim().length === 0)
       return <p>{translations.modelGeneratesNoOutput}</p>;
 
+    // Render the output details
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <pre>{outputData.GlpkOutput}</pre>
@@ -50,9 +63,12 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
+  // Function to render the variables tab content
   const renderVariables = () => {
+    // Display message if no variables are available
     if (!outputData?.Columns) return <p>{translations.noVariablesAvailable}</p>;
 
+    // Render a table of variables with their properties
     return (
       <div style={{ marginTop: "20px", textAlign: "center" }}>
         <table className="uk-table uk-table-divider uk-table-hover">
@@ -83,9 +99,12 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
+  // Function to render the constraints tab content
   const renderConstraints = () => {
+    // Display message if no constraints are available
     if (!outputData?.Rows) return <p>{translations.noConstraintsAvailable}</p>;
 
+    // Render a table of constraints with their properties
     return (
       <div style={{ marginTop: "20px", textAlign: "center" }}>
         <table className="uk-table uk-table-divider uk-table-hover">
@@ -116,9 +135,10 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
+  // Main render function for the component
   return (
     <div className="uk-container uk-margin-top">
-      {/* UIkit Tabs */}
+      {/* UIkit Tabs for navigation between different sections */}
       <ul className="uk-tab" uk-tab="true">
         <li className={activeTab === "summary" ? "uk-active" : ""}>
           <a onClick={() => setActiveTab("summary")}>{translations.summary}</a>
