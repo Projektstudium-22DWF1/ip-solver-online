@@ -68,9 +68,12 @@ export function SolverTab() {
 
       <FileButtons problem={problem} setProblem={setProblem} />
 
-      <div className={"main-container"}>
-        <OutputUi outputData={outputData} />
-      </div>
+      {/* Only render OutputUi if there is outputData */}
+      {outputData && (
+        <div className={"main-container"}>
+          <OutputUi outputData={outputData} />
+        </div>
+      )}
     </React.Fragment>
   );
 }
