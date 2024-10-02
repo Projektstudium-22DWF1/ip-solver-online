@@ -23,6 +23,12 @@ function ImportTextareaStyleChooser({
     }
   }, [isGMPL, setTextareaStyle]); // Läuft, wenn isGMPL sich ändert
 
+  useEffect(() => {
+    if (!isGMPL) {
+      setTextareaStyle("Guided");
+    }
+  }, [isGMPL, setTextareaStyle]);
+
   return (
     <div>
       {/* Button mit Tooltip und Styling für disabled Zustand */}
@@ -30,7 +36,7 @@ function ImportTextareaStyleChooser({
         onClick={toggleStyle}
         className={`uk-button uk-button-secondary ${isGMPL ? "disabled-button" : ""}`}
         disabled={isGMPL}
-        uk-tooltip={isGMPL ? translations.gmplTooltip : ""}
+        data-uk-tooltip={`title:${isGMPL ? translations.gmplTooltip : ""}; pos: bottom-right`}
       >
         {translations.switchTo}{" "}
         {textareaStyle === "Guided" ? translations.raw : translations.guided}
