@@ -6,7 +6,6 @@ import "uikit/dist/css/uikit.min.css";
 UIkit.use(Icons);
 
 function InputFormatInformationIcon({ inputFormat }) {
-
   const lpProblem = `<pre>
   Maximize
      obj: 60 x<sub>1</sub> + 40 x<sub>2</sub>
@@ -18,8 +17,8 @@ function InputFormatInformationIcon({ inputFormat }) {
      x<sub>2</sub> >= 0
   End</pre>
   `;
-  
-    const gmplProblem = `<pre>
+
+  const gmplProblem = `<pre>
   set Products;
   param cost{Products};
   param availability{Products};
@@ -43,8 +42,8 @@ function InputFormatInformationIcon({ inputFormat }) {
     inputFormat === "LP"
       ? lpProblem
       : inputFormat === "GMPL"
-      ? gmplProblem
-      : "Unbekanntes Format";
+        ? gmplProblem
+        : "Unbekanntes Format";
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -69,7 +68,8 @@ function InputFormatInformationIcon({ inputFormat }) {
             maxWidth: "500px",
           }}
         >
-<div dangerouslySetInnerHTML={{ __html: problemText }} /></div>
+          <div dangerouslySetInnerHTML={{ __html: problemText }} />
+        </div>
       )}
     </div>
   );

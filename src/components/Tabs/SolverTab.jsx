@@ -49,16 +49,20 @@ export function SolverTab() {
       </div>
 
       <div className={"main-container"}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <InputTextareaStyleChooser
             textareaStyle={textareaStyle}
             setTextareaStyle={setTextareaStyle}
             inputFormat={inputFormat}
           />
 
-          <InputFormatInformationIcon
-            inputFormat={inputFormat}
-          />
+          <InputFormatInformationIcon inputFormat={inputFormat} />
         </div>
 
         {textareaStyle === "Guided" && (
