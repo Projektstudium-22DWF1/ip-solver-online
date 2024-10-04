@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import Chooser from "./Chooser";
-import { LanguageContext } from "../../context/LanguageContext"; // Importiere den LanguageContext
+import { LanguageContext } from "../../context/LanguageContext"; // Import the LanguageContext
 
 function OptimizationDirectionChooser({
   optimizationDirection,
   setOptimizationDirection,
 }) {
-  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+  const { translations } = useContext(LanguageContext); // Access translations
 
   const solverOptions = [
     { value: "Maximize", label: "Maximize" },
@@ -14,12 +14,14 @@ function OptimizationDirectionChooser({
   ];
 
   return (
-    <Chooser
-      options={solverOptions}
-      onChange={setOptimizationDirection}
-      label={translations.optimizationDirection} // Verwende die Übersetzung
-      value={optimizationDirection}
-    />
+    <div className="uk-margin-top"> {/* UIkit class for top margin */}
+      <Chooser
+        options={solverOptions}
+        onChange={setOptimizationDirection}
+        label={translations.optimizationDirection} // Use translation
+        value={optimizationDirection}
+      />
+    </div>
   );
 }
 
