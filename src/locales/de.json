@@ -2,7 +2,7 @@
   "solver": "Solver",
   "description": "Beschreibung",
   "language": "Sprache",
-  "activeLanguage": "Deutsch",
+  "activeLanguage": "DE",
   "descriptionText": "Beschreibung der Anwendung",
   "inputFormatOptions": "Eingabeformat",
   "gmplTooltip": "Textarea-Stil kann im GMPL-Format nicht geändert werden.",
