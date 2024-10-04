@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
-import "./../Styles/navbar.css";
+import "./../styles/styles.css";
 import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChooser";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 

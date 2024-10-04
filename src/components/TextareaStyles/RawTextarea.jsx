@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
-import "./../Styles/navbar.css";
+import "./../styles/styles.css";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 
 function RawTextarea({ problem, setProblem }) {
