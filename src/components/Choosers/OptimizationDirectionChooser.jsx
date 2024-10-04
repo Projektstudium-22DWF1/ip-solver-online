@@ -14,7 +14,9 @@ function OptimizationDirectionChooser({
   ];
 
   return (
-    <div className="uk-margin-top"> {/* UIkit class for top margin */}
+    <div className="uk-margin-top">
+      {" "}
+      {/* UIkit class for top margin */}
       <Chooser
         options={solverOptions}
         onChange={setOptimizationDirection}

@@ -16,21 +16,34 @@ export function MainNavbar() {
     <React.Fragment>
       <div>
         {/* Sticky Navbar */}
-        <nav 
-          className="uk-navbar-container" 
-          uk-navbar="true" 
-          uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar; cls-active: uk-navbar-sticky; top: 0; z-index: 1000;">
-          
+        <nav
+          className="uk-navbar-container"
+          uk-navbar="true"
+          uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar; cls-active: uk-navbar-sticky; top: 0; z-index: 1000;"
+        >
           <div className="uk-navbar-left">
             {/* Tabs for larger screens */}
-            <ul className="uk-navbar-nav uk-flex uk-visible@s" style={{ minWidth: "300px" }}>
-              <li className={`uk-active uk-width-expand ${activeComponent === "SolverTab" ? "active" : ""}`}>
-                <a className="uk-text-center" onClick={() => setActiveComponent("SolverTab")}>
+            <ul
+              className="uk-navbar-nav uk-flex uk-visible@s"
+              style={{ minWidth: "300px" }}
+            >
+              <li
+                className={`uk-active uk-width-expand ${activeComponent === "SolverTab" ? "active" : ""}`}
+              >
+                <a
+                  className="uk-text-center"
+                  onClick={() => setActiveComponent("SolverTab")}
+                >
                   {translations.solver}
                 </a>
               </li>
-              <li className={`uk-active uk-width-expand ${activeComponent === "DescriptionTab" ? "active" : ""}`}>
-                <a className="uk-text-center" onClick={() => setActiveComponent("DescriptionTab")}>
+              <li
+                className={`uk-active uk-width-expand ${activeComponent === "DescriptionTab" ? "active" : ""}`}
+              >
+                <a
+                  className="uk-text-center"
+                  onClick={() => setActiveComponent("DescriptionTab")}
+                >
                   {translations.description}
                 </a>
               </li>

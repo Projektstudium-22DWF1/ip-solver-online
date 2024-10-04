@@ -11,7 +11,10 @@ const LanguageSelector = () => {
     <div className="uk-navbar-item">
       <div className="uk-margin-small-left">
         {/* Button mit Welt-Icon */}
-        <button className="uk-button uk-button-default uk-flex uk-flex-middle" type="button">
+        <button
+          className="uk-button uk-button-default uk-flex uk-flex-middle"
+          type="button"
+        >
           <span uk-icon="world" className="uk-margin-small-right"></span>
           {translations.activeLanguage}
         </button>
@@ -20,13 +23,23 @@ const LanguageSelector = () => {
           <ul className="uk-nav uk-dropdown-nav">
             <li>
               <a onClick={() => changeLanguage("en")}>
-                <img src={enFlag} alt="English" className="uk-margin-small-right" style={{ width: "20px" }} />
+                <img
+                  src={enFlag}
+                  alt="English"
+                  className="uk-margin-small-right"
+                  style={{ width: "20px" }}
+                />
                 English
               </a>
             </li>
             <li>
               <a onClick={() => changeLanguage("de")}>
-                <img src={deFlag} alt="Deutsch" className="uk-margin-small-right" style={{ width: "20px" }} />
+                <img
+                  src={deFlag}
+                  alt="Deutsch"
+                  className="uk-margin-small-right"
+                  style={{ width: "20px" }}
+                />
                 Deutsch
               </a>
             </li>
