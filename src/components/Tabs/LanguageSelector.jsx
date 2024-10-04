@@ -3,15 +3,17 @@ import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
 
 const LanguageSelector = () => {
-  const { changeLanguage, translations } = useContext(LanguageContext); // Zugriff auf den Sprachkontext
+  const { changeLanguage, translations } = useContext(LanguageContext); // Access the language context
 
   return (
     <div className="uk-navbar-item">
-      <span uk-icon="world"></span>
       <div className="uk-margin-small-left">
-        <button className="uk-button uk-button-default" type="button">
+        {/* Button with the world icon */}
+        <button className="uk-button uk-button-default uk-flex uk-flex-middle" type="button">
+          <span uk-icon="world" className="uk-margin-small-right"></span>
           {translations.activeLanguage}
         </button>
+        {/* Dropdown menu */}
         <div uk-dropdown="mode: click">
           <ul className="uk-nav uk-dropdown-nav">
             <li>
