@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import "uikit/dist/css/uikit.min.css";
-import { MainNavbar } from "./components/Tabs/MainNavbar";
+import { MainNavbar } from "./components/Navigation/MainNavbar";
 import { LanguageProvider } from "./context/LanguageContext"; // Importiere den LanguageProvider
 import Footer from "./components/Footer"; // Importiere die neue Footer-Komponente
 
