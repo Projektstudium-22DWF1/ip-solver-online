@@ -90,8 +90,8 @@ const OutputUi = ({ outputData }) => {
                 <td className="uk-text-center">{variable.Name}</td>
                 <td className="uk-text-center">{variable.Primal}</td>
                 <td className="uk-text-center">{variable.Status}</td>
-                <td className="uk-text-center">{variable.Lower ?? "-∞"}</td>
-                <td className="uk-text-center">{variable.Upper ?? "∞"}</td>
+                <td className="uk-text-center">{variable.Lower === null || variable.Lower === -Infinity ? "-∞" : variable.Lower}</td>
+                <td className="uk-text-center">{variable.Upper === null || variable.Upper === Infinity ? "∞" : variable.Upper}</td>
                 <td className="uk-text-center">{variable.Dual}</td>
               </tr>
             ))}
@@ -114,7 +114,6 @@ const OutputUi = ({ outputData }) => {
             <tr>
               <th className="uk-text-center">{translations.constraint}</th>
               <th className="uk-text-center">{translations.primalValue}</th>
-              <th className="uk-text-center">{translations.status}</th>
               <th className="uk-text-center">{translations.lowerBound}</th>
               <th className="uk-text-center">{translations.upperBound}</th>
               <th className="uk-text-center">{translations.dualValue}</th>
@@ -125,9 +124,8 @@ const OutputUi = ({ outputData }) => {
               <tr key={index}>
                 <td className="uk-text-center">{row.Name}</td>
                 <td className="uk-text-center">{row.Primal}</td>
-                <td className="uk-text-center">{row.Status}</td>
-                <td className="uk-text-center">{row.Lower ?? "-∞"}</td>
-                <td className="uk-text-center">{row.Upper ?? "∞"}</td>
+                <td className="uk-text-center">{row.Lower === null || row.Lower === -Infinity ? "-∞" : row.Lower}</td>
+                <td className="uk-text-center">{row.Upper === null || row.Upper === Infinity ? "∞" : row.Upper}</td>
                 <td className="uk-text-center">{row.Dual}</td>
               </tr>
             ))}
