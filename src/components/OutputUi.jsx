@@ -54,7 +54,7 @@ const OutputUi = ({ outputData }) => {
     if (!outputData) return <p>{translations.noOutputAvailable}</p>;
     if (!outputData.hasOwnProperty("GlpkOutput"))
       return <p>{translations.outputNotSupported}</p>;
-    if (outputData.GlpkOutput?.trim().length === 0)
+    if (!outputData.GlpkOutput || outputData.GlpkOutput?.trim().length === 0)
       return <p>{translations.modelGeneratesNoOutput}</p>;
 
     // Render the output details
