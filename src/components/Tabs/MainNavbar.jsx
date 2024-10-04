@@ -39,7 +39,7 @@ export function MainNavbar() {
         </nav>
 
         {/* Main content */}
-        <div className="uk-container" id="all" style={{ paddingTop: "80px" }}>
+        <div className="uk-container" id="all" style={{ paddingTop: "50px" }}>
           {activeComponent === "SolverTab" && <SolverTab />}
           {activeComponent === "DescriptionTab" && <DescriptionTab />}
         </div>
