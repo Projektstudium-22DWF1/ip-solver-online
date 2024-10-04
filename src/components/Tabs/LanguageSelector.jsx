@@ -1,29 +1,33 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
+import enFlag from "../../assets/flags/en.png"; // Importiere die englische Flagge
+import deFlag from "../../assets/flags/de.png"; // Importiere die deutsche Flagge
 
 const LanguageSelector = () => {
-  const { changeLanguage, translations } = useContext(LanguageContext); // Access the language context
+  const { changeLanguage, translations } = useContext(LanguageContext); // Zugriff auf den Sprachkontext
 
   return (
     <div className="uk-navbar-item">
       <div className="uk-margin-small-left">
-        {/* Button with the world icon */}
+        {/* Button mit Welt-Icon */}
         <button className="uk-button uk-button-default uk-flex uk-flex-middle" type="button">
           <span uk-icon="world" className="uk-margin-small-right"></span>
           {translations.activeLanguage}
         </button>
-        {/* Dropdown menu */}
+        {/* Dropdown-Menü */}
         <div uk-dropdown="mode: click">
           <ul className="uk-nav uk-dropdown-nav">
             <li>
               <a onClick={() => changeLanguage("en")}>
-                <span className="uk-margin-small-right" uk-icon="icon: flag"></span> English
+                <img src={enFlag} alt="English" className="uk-margin-small-right" style={{ width: "20px" }} />
+                English
               </a>
             </li>
             <li>
               <a onClick={() => changeLanguage("de")}>
-                <span className="uk-margin-small-right" uk-icon="icon: flag"></span> Deutsch
+                <img src={deFlag} alt="Deutsch" className="uk-margin-small-right" style={{ width: "20px" }} />
+                Deutsch
               </a>
             </li>
           </ul>
