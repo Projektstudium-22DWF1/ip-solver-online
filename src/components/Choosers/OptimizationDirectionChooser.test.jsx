@@ -16,7 +16,7 @@ describe("OptimizationDirectionChooser Component", () => {
           optimizationDirection={optimizationDirection}
           setOptimizationDirection={mockSetOptimizationDirection}
         />
-      </LanguageContext.Provider>
+      </LanguageContext.Provider>,
     );
   };
 

@@ -34,14 +34,16 @@ describe("OutputUi Component", () => {
     Columns: {
       x1: { Name: "x1", Primal: 1, Status: "BS", Lower: 0, Upper: 10, Dual: 0 },
     },
-    Rows: [{ Name: "c1", Primal: 0, Status: "UB", Lower: 0, Upper: 5, Dual: 1 }],
+    Rows: [
+      { Name: "c1", Primal: 0, Status: "UB", Lower: 0, Upper: 5, Dual: 1 },
+    ],
   };
 
   test("renders summary tab by default", () => {
     render(
       <LanguageContext.Provider value={{ translations }}>
         <OutputUi outputData={mockOutputData} />
-      </LanguageContext.Provider>
+      </LanguageContext.Provider>,
     );
     expect(screen.getByText("Summary")).toBeInTheDocument();
     expect(screen.getByText(/Status:/i)).toBeInTheDocument();
@@ -52,7 +54,7 @@ describe("OutputUi Component", () => {
     render(
       <LanguageContext.Provider value={{ translations }}>
         <OutputUi outputData={null} />
-      </LanguageContext.Provider>
+      </LanguageContext.Provider>,
     );
     expect(screen.getByText("No data available")).toBeInTheDocument();
   });
@@ -61,7 +63,7 @@ describe("OutputUi Component", () => {
     render(
       <LanguageContext.Provider value={{ translations }}>
         <OutputUi outputData={mockOutputData} />
-      </LanguageContext.Provider>
+      </LanguageContext.Provider>,
     );
 
     // Wrap the fireEvent in `act` to ensure it triggers state updates correctly
@@ -70,6 +72,8 @@ describe("OutputUi Component", () => {
     });
 
     // Wait for the log content to appear
-    await waitFor(() => expect(screen.getByText("Sample log data")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText("Sample log data")).toBeInTheDocument(),
+    );
   });
 });

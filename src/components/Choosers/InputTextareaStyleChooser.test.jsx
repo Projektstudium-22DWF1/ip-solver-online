@@ -20,7 +20,7 @@ describe("ImportTextareaStyleChooser Component", () => {
           setTextareaStyle={mockSetTextareaStyle}
           inputFormat={inputFormat}
         />
-      </LanguageContext.Provider>
+      </LanguageContext.Provider>,
     );
   };
 
@@ -33,16 +33,14 @@ describe("ImportTextareaStyleChooser Component", () => {
 
   test("toggles textarea style when the button is clicked", () => {
     renderComponent("Guided", "LP");
-  
+
     // Klicke auf den Button und überprüfe, ob die Funktion aufgerufen wurde
     const button = screen.getByText("Switch to Raw");
     fireEvent.click(button);
-  
+
     // Überprüfe, ob `setTextareaStyle` aufgerufen wurde (einmalige Überprüfung, unabhängig vom Argument)
     expect(mockSetTextareaStyle).toHaveBeenCalled();
   });
-  
-  
 
   test("disables the button and shows tooltip when inputFormat is GMPL", () => {
     renderComponent("Raw", "GMPL");
@@ -54,7 +52,7 @@ describe("ImportTextareaStyleChooser Component", () => {
     // Überprüfe, ob das Tooltip den richtigen Text enthält
     expect(button).toHaveAttribute(
       "data-uk-tooltip",
-      `title:${mockTranslations.gmplTooltip}; pos: bottom-right`
+      `title:${mockTranslations.gmplTooltip}; pos: bottom-right`,
     );
   });
 

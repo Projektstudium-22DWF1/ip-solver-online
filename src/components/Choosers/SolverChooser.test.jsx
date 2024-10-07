@@ -20,8 +20,11 @@ describe("SolverChooser Component", () => {
   const renderComponent = (solverOption) => {
     render(
       <LanguageContext.Provider value={{ translations: mockTranslations }}>
-        <SolverChooser solverOption={solverOption} setSolverOption={mockSetSolverOption} />
-      </LanguageContext.Provider>
+        <SolverChooser
+          solverOption={solverOption}
+          setSolverOption={mockSetSolverOption}
+        />
+      </LanguageContext.Provider>,
     );
   };
 

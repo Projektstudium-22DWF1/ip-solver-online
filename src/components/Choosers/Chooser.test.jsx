@@ -20,7 +20,7 @@ describe("Chooser Component", () => {
         onChange={mockOnChange}
         label={mockLabel}
         value={mockValue}
-      />
+      />,
     );
     expect(screen.getByLabelText(mockLabel)).toBeInTheDocument();
   });
@@ -32,7 +32,7 @@ describe("Chooser Component", () => {
         onChange={mockOnChange}
         label={mockLabel}
         value={mockValue}
-      />
+      />,
     );
 
     // Öffnen des Dropdowns
@@ -51,7 +51,7 @@ describe("Chooser Component", () => {
         onChange={mockOnChange}
         label={mockLabel}
         value={mockValue}
-      />
+      />,
     );
 
     // Öffnen des Dropdowns
@@ -72,12 +72,16 @@ describe("Chooser Component", () => {
         onChange={mockOnChange}
         label={mockLabel}
         value={mockValue}
-      />
+      />,
     );
 
     // Überprüfen, dass der Button den korrekten Initialwert anzeigt
-    expect(screen.getByText((content, element) => {
-      return element.tagName.toLowerCase() === 'span' && content === mockValue;
-    })).toBeInTheDocument();
+    expect(
+      screen.getByText((content, element) => {
+        return (
+          element.tagName.toLowerCase() === "span" && content === mockValue
+        );
+      }),
+    ).toBeInTheDocument();
   });
 });
