@@ -12,6 +12,9 @@ function GuidedTextarea({ setProblem }) {
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [problemStatement, setProblemStatement] = useState("");
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
+  const [validConstraint, setValidConstraint] = useState(
+      Array(constraintNames.length).fill(true)
+  );
   const [validConstraintNames, setValidConstraintNames] = useState(
       Array(constraintNames.length).fill(true) // Initialisiere mit true für jedes Feld
   );
@@ -63,9 +66,9 @@ function GuidedTextarea({ setProblem }) {
         <label htmlFor="#problem">{translations.problemStatement}</label>
         <table className="mainArea">
           <tbody>
-            <tr>
-              <td>
-                <input
+          <tr>
+            <td>
+              <input
                   placeholder={"x1 + 2 x2 + 4 x3 + x4"}
                   className="uk-input"
                   type="text"
@@ -73,9 +76,9 @@ function GuidedTextarea({ setProblem }) {
                     setProblemStatement(e.target.value);
                     returnProblem();
                   }}
-                />
-              </td>
-            </tr>
+              />
+            </td>
+          </tr>
           </tbody>
         </table>
 
@@ -83,67 +86,73 @@ function GuidedTextarea({ setProblem }) {
         <label htmlFor="#constraints">{translations.constraints}</label>
         <table className="mainArea">
           <tbody>
-            {constraints.map((constraint, index) => (
-                <tr key={index}>
-                  <td className={"constraintName"}>
-                    {/********** Enter name **********/}
-                    <input
-                        placeholder={"Enter name"}
-                        className={"uk-input"}
-                        type="text"
-                        style={{
-                          borderColor: validConstraintNames[index] === false ? "#ff0000" : "#ccc",
-                        }}
-                        value={constraintNames[index].value}
-                        onChange={(e) => {
-                          handleRestrictionChange(
-                              index,
-                              e,
-                              constraintNames,
-                              setConstraintNames
-                          );
-                        }
-                        }
-                    />
-                  </td>
-                  <td>
-                    <input
-                        placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"}
-                        className="uk-input"
-                        type="text"
-                        value={constraint.value}
-                        onChange={(e) => {
+          {constraints.map((constraint, index) => (
+              <tr key={index}>
+                <td className={"constraintName"}>
+                  {/********** Enter name **********/}
+                  <input
+                      placeholder={"Enter name"}
+                      className={"uk-input"}
+                      type="text"
+                      style={{
+                        borderColor: validConstraintNames[index] === false ? "#ff0000" : "#ccc",
+                      }}
+                      value={constraintNames[index].value}
+                      onChange={(e) => {
+                        handleRestrictionChange(
+                            index,
+                            e,
+                            constraintNames,
+                            setConstraintNames
+                        );
+                      }
+                      }
+                  />
+                </td>
+                <td>
+                  <input
+                      placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"}
+                      className="uk-input"
+                      type="text"
+                      style={{
+                        borderColor: validConstraint[index] === false ? "#ff0000" : "#ccc",
+                      }}
+                      value={constraint.value}
+                      onChange={(e) =>
                           handleRestrictionChange(
                               index,
                               e,
                               constraints,
                               setConstraints,
-                          );
-                          returnProblem();
-                        }}
-                    />
-                  </td>
-                  <td>
-                  <span
-                      className="addButton"
-                      uk-icon="plus"
-                      onClick={() => {
-                        addRestriction(setConstraints, constraints);
-                      }}
-                  ></span>
-                  </td>
-                  <td>
-                  <span
-                      className="removeButton"
-                      uk-icon="close"
-                      onClick={() => {
-                        deleteRestriction(index, constraints, setConstraints);
-                        returnProblem();
-                      }}
-                  ></span>
-                  </td>
-                </tr>
-            ))}
+                          )
+                      }
+                  />
+                </td>
+                <td>
+                        <span
+                            className="addButton"
+                            uk-icon="plus"
+                            onClick={() => {
+                              addRestriction(setConstraints, constraints);
+                              addRestriction(setConstraintNames, constraintNames);
+                            }}
+                        ></span>
+                </td>
+                <td>
+                        <span
+                            className="removeButton"
+                            uk-icon="close"
+                            onClick={(e) => {
+                              deleteRestriction(
+                                  index,
+                                  constraints,
+                                  setConstraints,
+                              );
+                            }}
+                        ></span>
+                </td>
+              </tr>
+          ))}
           </tbody>
         </table>
 
@@ -172,21 +181,21 @@ function GuidedTextarea({ setProblem }) {
                       onClick={() => {
                         addRestriction(setBounds, bounds);
                         returnProblem();
-                    }}
+                      }}
                   ></span>
                 </td>
                 <td>
                   <span
-                    className="removeButton"
-                    uk-icon="close"
-                    onClick={() => {
-                      deleteRestriction(index, bounds, setBounds);
-                      returnProblem();
-                    }}
+                      className="removeButton"
+                      uk-icon="close"
+                      onClick={() => {
+                        deleteRestriction(index, bounds, setBounds);
+                        returnProblem();
+                      }}
                   ></span>
                 </td>
               </tr>
-            ))}
+          ))}
           </tbody>
         </table>
       </div>
