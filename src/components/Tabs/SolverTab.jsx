@@ -7,6 +7,7 @@ import SolveProblemButton from "../SolveProblemButton";
 import RawTextInput from "../TextareaStyles/RawTextarea";
 import GuidedTextarea from "../TextareaStyles/GuidedTextarea";
 import InputFormatChooser from "../Choosers/InputFormatChooser";
+import { validateGuidedProblem } from "../../services/Validation";
 import InputTextareaStyleChooser from "../Choosers/InputTextareaStyleChooser";
 import {
   solve,
@@ -14,7 +15,6 @@ import {
   SolverOptions,
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
-import {validateGuidedProblem} from "../../services/Validation";
 
 export function SolverTab() {
     const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
