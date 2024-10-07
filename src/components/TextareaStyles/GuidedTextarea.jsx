@@ -11,7 +11,7 @@ function GuidedTextarea({ setProblem }) {
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [problemStatement, setProblemStatement] = useState("");
-  const [constraintNames, setConstraintNames] = useState("");
+  const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
   const [validConstraintNames, setValidConstraintNames] = useState(
       Array(constraintNames.length).fill(true) // Initialisiere mit true für jedes Feld
   );
