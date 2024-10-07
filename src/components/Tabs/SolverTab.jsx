@@ -14,14 +14,32 @@ import {
   SolverOptions,
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
+import {validateGuidedProblem} from "../../services/Validation";
 
 export function SolverTab() {
-  const [problem, setProblem] = useState("");
-  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
-  const [inputFormat, setInputFormat] = useState(InputOptions.LP);
-  const [textareaStyle, setTextareaStyle] = useState("Guided");
+    const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
 
-  const [outputData, setOutputData] = useState("");
+    const [constraints, setConstraints] = useState([{ value: "" }]);
+    const [bounds, setBounds] = useState([{ value: "" }]);
+    const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
+    const [problem, setProblem] = useState("");
+
+    const [validProblem, setValidProblem] = useState(true);
+    const [validConstraint, setValidConstraint] = useState(
+        Array(constraintNames.length).fill(true)
+    );
+    const [validBound, setValidBound] = useState(
+        Array(constraintNames.length).fill(true)
+    );
+    const [validConstraintNames, setValidConstraintNames] = useState(
+        Array(constraintNames.length).fill(true) // Initialisiere mit true für jedes Feld
+    );
+
+
+    const [inputFormat, setInputFormat] = useState(InputOptions.LP);
+    const [textareaStyle, setTextareaStyle] = useState("Guided");
+
+    const [outputData, setOutputData] = useState("");
 
   const solveProblem = async () => {
     const result = await solve(problem, inputFormat, solverOption);
@@ -76,7 +94,12 @@ export function SolverTab() {
         )}
       </div>
 
-      <SolveProblemButton solveProblem={solveProblem} />
+        <SolveProblemButton solveProblem={()=> {
+            if (validateGuidedProblem(problem, constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound)) {
+                solveProblem();
+            }
+        }
+        } />
 
       <FileButtons problem={problem} setProblem={setProblem} />
 
