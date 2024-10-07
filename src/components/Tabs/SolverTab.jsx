@@ -109,6 +109,12 @@ export function SolverTab() {
           <OutputUi outputData={outputData} />
         </div>
       )}
+
+        <GuidedTextarea
+            constraintNames={constraintNames}
+            setConstraintNames={setConstraintNames}
+        />
+
     </React.Fragment>
   );
 }
