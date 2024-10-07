@@ -14,6 +14,7 @@ import {
   SolverOptions,
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
+import ErrorMessage from "../ErrorMessage";
 
 export function SolverTab() {
   const [problem, setProblem] = useState("");
@@ -22,10 +23,15 @@ export function SolverTab() {
   const [textareaStyle, setTextareaStyle] = useState("Guided");
 
   const [outputData, setOutputData] = useState("");
-
+  const [errorData, setErrorData] = useState("");
+ 
   const solveProblem = async () => {
-    const result = await solve(problem, inputFormat, solverOption);
-    setOutputData(result);
+    try {
+      const result = await solve(problem, inputFormat, solverOption);
+      setOutputData(result);
+    } catch (error) {
+      setErrorData(error.message)
+    }
   };
 
   return (
@@ -74,6 +80,7 @@ export function SolverTab() {
             setProblem={setProblem}
           ></RawTextInput>
         )}
+        <ErrorMessage errorData={errorData} setErrorData={setErrorData}/>
       </div>
 
       <SolveProblemButton solveProblem={solveProblem} />
