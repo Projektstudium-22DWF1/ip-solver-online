@@ -11,25 +11,21 @@ function ErrorMessage({ errorData, setErrorData }) {
       }
 
       timerRef.current = setTimeout(() => {
-        setErrorData(""); 
+        setErrorData("");
       }, 10000);
     }
 
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
-        timerRef.current = null; 
+        timerRef.current = null;
       }
     };
   }, [errorData, errorData.id, setErrorData]);
 
   if (!errorData || !errorData.message) return null;
 
-  return (
-    <div className="error-container">
-      {"Error: " + errorData.message}
-    </div>
-  );
+  return <div className="error-container">{"Error: " + errorData.message}</div>;
 }
 
 export default ErrorMessage;

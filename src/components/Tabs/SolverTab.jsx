@@ -24,13 +24,13 @@ export function SolverTab() {
 
   const [outputData, setOutputData] = useState("");
   const [errorData, setErrorData] = useState("");
- 
+
   const solveProblem = async () => {
     try {
       const result = await solve(problem, inputFormat, solverOption);
       setOutputData(result);
     } catch (error) {
-      setErrorData({message: error.message, id: Date.now()})
+      setErrorData({ message: error.message, id: Date.now() });
     }
   };
 
@@ -80,7 +80,7 @@ export function SolverTab() {
             setProblem={setProblem}
           ></RawTextInput>
         )}
-        <ErrorMessage errorData={errorData} setErrorData={setErrorData}/>
+        <ErrorMessage errorData={errorData} setErrorData={setErrorData} />
       </div>
 
       <SolveProblemButton solveProblem={solveProblem} />
