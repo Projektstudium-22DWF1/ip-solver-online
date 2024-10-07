@@ -1,25 +1,35 @@
-import React, { useEffect } from "react";
-import "./styles/styles.css"
+import React, { useEffect, useRef } from "react";
+import "./styles/styles.css";
 
-function ErrorMessage({ errorData, setErrorData }){
+function ErrorMessage({ errorData, setErrorData }) {
+  const timerRef = useRef(null);
 
   useEffect(() => {
-    if (errorData) {
-      const timer = setTimeout(() => {
-        setErrorData(""); // Fehlerzustand nach 10 Sekunden zurücksetzen
-      }, 10000); // 10000ms = 10 Sekunden
+    if (errorData && errorData.message) {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
 
-      return () => clearTimeout(timer); // Timer bereinigen, wenn die Komponente neu gerendert wird
+      timerRef.current = setTimeout(() => {
+        setErrorData(""); 
+      }, 10000);
     }
-  }, [errorData, setErrorData]);
 
-  if (!errorData) return null;
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null; 
+      }
+    };
+  }, [errorData, errorData.id, setErrorData]);
+
+  if (!errorData || !errorData.message) return null;
 
   return (
     <div className="error-container">
-      {errorData}
+      {"Error: " + errorData.message}
     </div>
   );
-};
+}
 
 export default ErrorMessage;

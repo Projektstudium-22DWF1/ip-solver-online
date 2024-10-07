@@ -30,7 +30,7 @@ export function SolverTab() {
       const result = await solve(problem, inputFormat, solverOption);
       setOutputData(result);
     } catch (error) {
-      setErrorData(error.message)
+      setErrorData({message: error.message, id: Date.now()})
     }
   };
 
