@@ -10,7 +10,6 @@ function InputFormatChooser({ inputFormat, setInputFormat, setProblem }) {
     setProblem("");
   }, [inputFormat, setProblem]);
 
-
   const inputOptions = [
     { value: InputOptions.LP, label: InputOptions.LP },
     { value: InputOptions.GMPL, label: InputOptions.GMPL },

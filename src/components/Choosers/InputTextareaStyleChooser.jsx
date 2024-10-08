@@ -5,7 +5,7 @@ function ImportTextareaStyleChooser({
   textareaStyle,
   setTextareaStyle,
   inputFormat,
-  setProblem
+  setProblem,
 }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const isGMPL = inputFormat === "GMPL"; // Überprüfen, ob das Property 'GMPL' ist
