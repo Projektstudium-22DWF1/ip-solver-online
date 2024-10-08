@@ -1,13 +1,51 @@
 // cypress/integration/navigation.spec.js
-describe('Navigation Tests', () => {
-  it('Navigiert zur Startseite und überprüft den Inhalt', () => {
+describe('Navigation and Language Selector Tests', () => {
+  it('Wechselt die Sprache, fügt ein Beispiel ein, klickt auf den SolveProblemButton und prüft, ob der Status optimal ist', () => {
     // 1. Öffnet die Webseite
     cy.visit('http://localhost:3000');
 
-    // 2. Klickt auf einen Menüpunkt (z.B. "Startseite")
-    cy.contains('Description').click();
+    // 2. Klickt auf den Language Selector Button
+    cy.get('[data-testid="language-selector-button"]').click();
 
-    // 3. Überprüft, ob der erwartete Inhalt auf der Seite vorhanden ist
-    cy.get('div').should('contain', 'Description of the application');
+    // 3. Wählt die Sprache "Deutsch" aus
+    cy.get('[data-testid="language-option-de"]').click();
+
+    // 4. Überprüft, ob der Text auf Deutsch angezeigt wird
+    cy.get('div').should('contain', 'Optimierungsrichtung');
+
+    // 5. Wechselt zurück auf Englisch
+    cy.get('[data-testid="language-option-en"]').click({ force: true });
+
+    // 6. Überprüft, ob der Text wieder auf Englisch angezeigt wird
+    cy.get('div').should('contain', 'Optimization Direction');
+
+    // 7. Klickt auf den Button "Switch to Raw"
+    cy.contains('Switch to Raw').click();
+
+    // 8. Fügt das Beispiel in das Textarea-Feld ein
+    const exampleInput = 
+    `Maximize obj: x1 + 2 x2 + 4 x3 + x4
+     Subject To
+     c1: - x1 + x2 + x3 + 10 x4 <= 20
+     c2: x1 - 4 x2 + x3 <= 30
+     c3: x2 - 0.5 x4 = 0
+     Bounds
+     0 <= x1 <= 40
+     2 <= x4 <= 3
+     End`;
+
+    cy.get('[data-testid="raw-textarea"]').clear().type(exampleInput, { delay: 0 });
+
+    // 9. Überprüft, ob der Text korrekt im Textfeld ist
+    cy.get('[data-testid="raw-textarea"]').should('have.value', exampleInput);
+
+    // 10. Klickt auf den SolveProblemButton
+    cy.get('[data-testid="solve-problem-button"]').click();
+
+    // 11. Wechselt zum Summary-Tab (wenn nicht bereits aktiv)
+    cy.contains('Summary').click();
+
+    // 12. Überprüft, ob der Status der Lösung "optimal" ist
+    cy.get('div').should('contain', 'Status: Optimal'); // Überprüft, ob der Status "optimal" ist
   });
 });

@@ -15,6 +15,7 @@ function RawTextarea({ problem, setProblem }) {
           {/* Verwende Übersetzung */}
           <textarea
             id="textareaInput"
+            data-testid="raw-textarea" // Hinzufügen eines data-testid-Attributs
             className="uk-textarea"
             rows="18"
             value={problem}
