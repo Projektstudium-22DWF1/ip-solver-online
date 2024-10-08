@@ -229,6 +229,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                       placeholder={"0 <= x1 <= 40"}
                       className="uk-input"
                       type="text"
+                      style={{
+                        borderColor: validBound[index] === false ? "#ff0000" : "#ccc",
+                      }}
                       value={bound.value}
                       onChange={(e) => {
                         handleRestrictionChange(index, e, bounds, setBounds);
