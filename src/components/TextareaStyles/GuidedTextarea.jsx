@@ -67,7 +67,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
   };
 
-  const returnProblem = () => {
+  const returnProblem = () => { //TODO returnProblem Aufrufe mit Master vergleichen. Ergebnis funktioniert nicht mehr
     let problem = `${optimizationDirection} obj: 
             ${problemStatement}
             Subject To 

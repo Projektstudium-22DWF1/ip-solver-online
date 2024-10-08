@@ -89,7 +89,7 @@ export function SolverTab() {
 
         <SolveProblemButton solveProblem={()=> {
             // if (validateGuidedProblem(problem, solverData.constraints, solverData.constraintNames, solverData.bounds, validProblem, solverData.validConstraint, solverData.validConstraintNames, solverData.validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound)) {
-            console.log(solverData);
+            console.log(solverData); //TODO Daten bereitstellen für Validierung und dann mit if prüfen
             solveProblem();
             // }
         }
