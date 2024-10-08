@@ -15,6 +15,7 @@ import {
   SolverOptions,
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
+import ErrorMessage from "../ErrorMessage";
 
 export function SolverTab() {
     // constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound
@@ -24,7 +25,8 @@ export function SolverTab() {
     const [inputFormat, setInputFormat] = useState(InputOptions.LP);
     const [textareaStyle, setTextareaStyle] = useState("Guided");
 
-    const [outputData, setOutputData] = useState("");
+  const [outputData, setOutputData] = useState("");
+  const [errorData, setErrorData] = useState("");
 
 
     const [solverData, setSolverData] = useState([]);
@@ -34,9 +36,12 @@ export function SolverTab() {
     }, []);
 
   const solveProblem = async () => {
-      console.log(problem);
-    const result = await solve(problem, inputFormat, solverOption);
-    setOutputData(result);
+    try {
+      const result = await solve(problem, inputFormat, solverOption);
+      setOutputData(result);
+    } catch (error) {
+      setErrorData({ message: error.message, id: Date.now() });
+    }
   };
 
   return (
@@ -85,6 +90,7 @@ export function SolverTab() {
             setProblem={setProblem}
           ></RawTextInput>
         )}
+        <ErrorMessage errorData={errorData} setErrorData={setErrorData} />
       </div>
 
         <SolveProblemButton solveProblem={()=> {
