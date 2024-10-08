@@ -10,7 +10,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
   const [problemStatement, setProblemStatement] = useState("");
-  const [validProblem, setValidProblem] = useState("");
+  const [validProblem, setValidProblem] = useState(true);
 
 
   const [constraints, setConstraints] = useState([{ value: "" }]);
@@ -34,7 +34,11 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       validConstraint,
       validConstraintNames,
       validBound,
-      validProblem
+      validProblem,
+      setValidProblem,
+      setValidConstraint,
+      setValidBound,
+      setValidConstraintNames
     };
 
     setSolverData(dataToSend);
@@ -47,6 +51,10 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     validBound,
     validProblem,
     setSolverData,
+    setValidProblem,
+    setValidConstraint,
+    setValidBound,
+    setValidConstraintNames
   ]);
 
   /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
