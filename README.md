@@ -35,12 +35,12 @@ To get the project running locally, follow these steps:
    cd ip-solver-online
 
 2. **Install dependencies**:
-
-run `npm install`
+   ```bash
+   npm install
 
 3. **Run the project**:
-
-run `npm start`
+   ```bash
+   npm start
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
