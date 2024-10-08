@@ -3,14 +3,63 @@ import "uikit/dist/css/uikit.min.css";
 import "./../styles/styles.css";
 import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChooser";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
+import { useEffect } from "react";
 
-function GuidedTextarea({ setProblem }) {
+function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
+  const [problemStatement, setProblemStatement] = useState("");
+
+  const [validProblem, setValidProblem] = useState(true);
+  const [prob, setProb] = useState([{ value: "" }]); //TODO Muss auf rawProblem geändert werden
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
-  const [problemStatement, setProblemStatement] = useState("");
+  const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
+  const [validConstraint, setValidConstraint] = useState(
+    Array(constraintNames.length).fill(true),
+  );
+  const [validBound, setValidBound] = useState(
+    Array(constraintNames.length).fill(true),
+  );
+  const [validConstraintNames, setValidConstraintNames] = useState(
+    Array(constraintNames.length).fill(true), // Initialisiere mit true für jedes Feld
+  );
+
+  useEffect(() => {
+    const dataToSend = {
+      constraints,
+      constraintNames,
+      bounds,
+      validConstraint,
+      validConstraintNames,
+      validBound,
+      validProblem,
+      setValidProblem,
+      setValidConstraint,
+      setValidBound,
+      setValidConstraintNames,
+      prob,
+      setProb,
+    };
+
+    setSolverData(dataToSend);
+  }, [
+    constraints,
+    constraintNames,
+    bounds,
+    validConstraint,
+    validConstraintNames,
+    validBound,
+    validProblem,
+    setSolverData,
+    setValidProblem,
+    setValidConstraint,
+    setValidBound,
+    setValidConstraintNames,
+    prob,
+    setProb,
+  ]);
 
   /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
   const addRestriction = (setRestriction, restriction) => {
@@ -35,13 +84,35 @@ function GuidedTextarea({ setProblem }) {
   };
 
   const returnProblem = () => {
-    let problem = `${optimizationDirection} obj: 
+    let problem =
+      optimizationDirection +
+      " obj: \n" +
+      prob +
+      "\n" +
+      "Subject To \n" +
+      constraints
+        .map(function (e, index) {
+          return constraintNames[index].value + ": " + e.value;
+        })
+        .join("\n") +
+      "\n" +
+      "Bounds \n" +
+      bounds
+        .map(function (e) {
+          return e.value;
+        })
+        .join("\n") +
+      "\n" +
+      "End";
+    // kann raus?
+    let problem2 = `${optimizationDirection} obj: 
             ${problemStatement}
             Subject To 
             ${constraints.map((e) => e.value).join("\n    ")} 
             Bounds 
             ${bounds.map((e) => e.value).join("\n    ")} 
             End`;
+
     setProblem(problem);
   };
 
@@ -63,8 +134,12 @@ function GuidedTextarea({ setProblem }) {
                   placeholder={"x1 + 2 x2 + 4 x3 + x4"}
                   className="uk-input"
                   type="text"
+                  style={{
+                    borderColor: validProblem === false ? "#ff0000" : "#ccc",
+                  }}
                   onChange={(e) => {
-                    setProblemStatement(e.target.value);
+                    // setProblem(e.target.value);
+                    setProb(e.target.value);
                     returnProblem();
                   }}
                 />
@@ -79,11 +154,39 @@ function GuidedTextarea({ setProblem }) {
           <tbody>
             {constraints.map((constraint, index) => (
               <tr key={index}>
+                <td className={"constraintName"}>
+                  {/********** Enter name **********/}
+                  <input
+                    placeholder={"Enter name"}
+                    className={"uk-input"}
+                    type="text"
+                    style={{
+                      borderColor:
+                        validConstraintNames[index] === false
+                          ? "#ff0000"
+                          : "#ccc",
+                    }}
+                    value={constraintNames[index].value}
+                    onChange={(e) => {
+                      handleRestrictionChange(
+                        index,
+                        e,
+                        constraintNames,
+                        setConstraintNames,
+                      );
+                      returnProblem();
+                    }}
+                  />
+                </td>
                 <td>
                   <input
                     placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"}
                     className="uk-input"
                     type="text"
+                    style={{
+                      borderColor:
+                        validConstraint[index] === false ? "#ff0000" : "#ccc",
+                    }}
                     value={constraint.value}
                     onChange={(e) => {
                       handleRestrictionChange(
@@ -102,6 +205,7 @@ function GuidedTextarea({ setProblem }) {
                     uk-icon="plus"
                     onClick={() => {
                       addRestriction(setConstraints, constraints);
+                      addRestriction(setConstraintNames, constraintNames);
                     }}
                   ></span>
                 </td>
@@ -109,9 +213,8 @@ function GuidedTextarea({ setProblem }) {
                   <span
                     className="removeButton"
                     uk-icon="close"
-                    onClick={() => {
+                    onClick={(e) => {
                       deleteRestriction(index, constraints, setConstraints);
-                      returnProblem();
                     }}
                   ></span>
                 </td>
@@ -131,6 +234,10 @@ function GuidedTextarea({ setProblem }) {
                     placeholder={"0 <= x1 <= 40"}
                     className="uk-input"
                     type="text"
+                    style={{
+                      borderColor:
+                        validBound[index] === false ? "#ff0000" : "#ccc",
+                    }}
                     value={bound.value}
                     onChange={(e) => {
                       handleRestrictionChange(index, e, bounds, setBounds);
