@@ -115,24 +115,6 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       <div>
         {/********** Problem Statement **********/}
         <label htmlFor="#problem">{translations.problemStatement}</label>
-        {/*<table className="mainArea">*/}
-        {/*  <tbody>*/}
-        {/*  <tr>*/}
-        {/*    <td>*/}
-        {/*      <input*/}
-        {/*          placeholder={"x1 + 2 x2 + 4 x3 + x4"}*/}
-        {/*          className="uk-input"*/}
-        {/*          type="text"*/}
-        {/*          onChange={(e) => {*/}
-        {/*            setProblemStatement(e.target.value);*/}
-        {/*            returnProblem();*/}
-        {/*          }}*/}
-        {/*      />*/}
-        {/*    </td>*/}
-        {/*  </tr>*/}
-        {/*  </tbody>*/}
-        {/*</table>*/}
-
         <table className="mainArea">
           <tbody>
           <tr>
