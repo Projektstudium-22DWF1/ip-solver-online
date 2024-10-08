@@ -7,36 +7,36 @@ UIkit.use(Icons);
 
 function InputFormatInformationIcon({ inputFormat }) {
   const lpProblem = `<pre>
-  Maximize
-     obj: 60 x<sub>1</sub> + 40 x<sub>2</sub>
-  Subject To
-     machine_time: 2 x<sub>1</sub> + 3 x<sub>2</sub> <= 50
-     material: 3 x<sub>1</sub> + 2 x<sub>2</sub> <= 60
-  Bounds
-     x<sub>1</sub> >= 0
-     x<sub>2</sub> >= 0
-  End</pre>
+Maximize
+  obj: 60 x<sub>1</sub> + 40 x<sub>2</sub>
+Subject To
+  machine_time: 2 x<sub>1</sub> + 3 x<sub>2</sub> <= 50
+  material: 3 x<sub>1</sub> + 2 x<sub>2</sub> <= 60
+Bounds
+  x<sub>1</sub> >= 0
+  x<sub>2</sub> >= 0
+End</pre>
   `;
 
   const gmplProblem = `<pre>
-  set Products;
-  param cost{Products};
-  param availability{Products};
-  param profit{Products};
-  var Production{Products} >= 0;
+set Products;
+param cost{Products};
+param availability{Products};
+param profit{Products};
+var Production{Products} >= 0;
 
-  maximize TotalProfit:
-     sum {p in Products} profit[p] * Production[p];
+maximize TotalProfit:
+  sum {p in Products} profit[p] * Production[p];
   
-  subject to ResourceConstraint:
-     sum {p in Products} cost[p] * Production[p] <= 1000;
+subject to ResourceConstraint:
+  sum {p in Products} cost[p] * Production[p] <= 1000;
      
-  data;
-  set Products := Product1 Product2;
-  param cost := Product1 2 Product2 3;
-  param availability := Product1 100 Product2 200;
-  param profit := Product1 50 Product2 40;
-  end;</pre>`;
+data;
+set Products := Product1 Product2;
+param cost := Product1 2 Product2 3;
+param availability := Product1 100 Product2 200;
+param profit := Product1 50 Product2 40;
+end;</pre>`;
 
   const problemText =
     inputFormat === "LP"

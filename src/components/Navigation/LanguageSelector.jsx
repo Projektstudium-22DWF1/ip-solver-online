@@ -12,6 +12,7 @@ const LanguageSelector = () => {
       <div className="uk-margin-small-left">
         {/* Button mit Welt-Icon */}
         <button
+          data-testid="language-selector-button" // Hinzugefügt
           className="uk-button uk-button-default uk-flex uk-flex-middle"
           type="button"
         >
@@ -22,7 +23,10 @@ const LanguageSelector = () => {
         <div uk-dropdown="mode: click">
           <ul className="uk-nav uk-dropdown-nav">
             <li>
-              <a onClick={() => changeLanguage("en")}>
+              <a
+                data-testid="language-option-en"
+                onClick={() => changeLanguage("en")}
+              >
                 <img
                   src={enFlag}
                   alt="English"
@@ -33,7 +37,10 @@ const LanguageSelector = () => {
               </a>
             </li>
             <li>
-              <a onClick={() => changeLanguage("de")}>
+              <a
+                data-testid="language-option-de"
+                onClick={() => changeLanguage("de")}
+              >
                 <img
                   src={deFlag}
                   alt="Deutsch"
