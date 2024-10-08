@@ -59,13 +59,19 @@ end;</pre>`;
 
       {isVisible && (
         <div
-          className="uk-card uk-card-default uk-width-auto"
+          className="uk-card uk-card-default"
           style={{
             position: "absolute",
-            top: "40px", // Positionierung direkt unterhalb des Icons (ggf. anpassen)
-            left: "0", // Links ausrichten (oder nach Bedarf anpassen)
-            zIndex: "1000", // Sicherstellen, dass die Box über anderen Elementen liegt
-            maxWidth: "500px",
+            top: "40px",
+            right: "0", // Sicherstellen, dass es nicht über die rechte Seite hinausgeht
+            zIndex: "1000",
+            maxWidth: "90vw", // Auf 90% des Viewports beschränken
+            width: "fit-content", // Inhalt wird auf die tatsächliche Breite beschränkt
+            overflowX: "auto", // Scrollen, wenn der Inhalt breiter ist als der Container
+            wordWrap: "break-word", // Lange Wörter umbrechen
+            padding: "10px",
+            boxSizing: "border-box", // Padding wird in die Berechnung der Breite einbezogen
+            whiteSpace: "pre-wrap", // Zeilenumbrüche respektieren und Text umbrechen
           }}
         >
           <div dangerouslySetInnerHTML={{ __html: problemText }} />
