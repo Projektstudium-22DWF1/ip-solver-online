@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback  } from "react";
 import "uikit/dist/css/uikit.min.css";
 import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
@@ -17,32 +17,25 @@ import {
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
 
 export function SolverTab() {
+    // constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound
     const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
-
-    const [constraints, setConstraints] = useState([{ value: "" }]);
-    const [bounds, setBounds] = useState([{ value: "" }]);
-    const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
     const [problem, setProblem] = useState("");
-
-    const [validProblem, setValidProblem] = useState(true);
-    const [validConstraint, setValidConstraint] = useState(
-        Array(constraintNames.length).fill(true)
-    );
-    const [validBound, setValidBound] = useState(
-        Array(constraintNames.length).fill(true)
-    );
-    const [validConstraintNames, setValidConstraintNames] = useState(
-        Array(constraintNames.length).fill(true) // Initialisiere mit true für jedes Feld
-    );
-
 
     const [inputFormat, setInputFormat] = useState(InputOptions.LP);
     const [textareaStyle, setTextareaStyle] = useState("Guided");
 
     const [outputData, setOutputData] = useState("");
 
+
+    const [solverData, setSolverData] = useState([]);
+    const handleDataFromChild = useCallback((data) => {
+        // console.log("Daten von der Kindkomponente:", data);
+        setSolverData(data);
+    }, []);
+
   const solveProblem = async () => {
     const result = await solve(problem, inputFormat, solverOption);
+      console.log(problem);
     setOutputData(result);
   };
 
@@ -84,7 +77,7 @@ export function SolverTab() {
         </div>
 
         {textareaStyle === "Guided" && (
-          <GuidedTextarea problem={problem} setProblem={setProblem} />
+          <GuidedTextarea problem={problem} setProblem={setProblem} solverData={solverData} setSolverData={handleDataFromChild}/>
         )}
         {textareaStyle === "Raw" && (
           <RawTextInput
@@ -95,9 +88,10 @@ export function SolverTab() {
       </div>
 
         <SolveProblemButton solveProblem={()=> {
-            if (validateGuidedProblem(problem, constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound)) {
-                solveProblem();
-            }
+            // if (validateGuidedProblem(problem, solverData.constraints, solverData.constraintNames, solverData.bounds, validProblem, solverData.validConstraint, solverData.validConstraintNames, solverData.validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound)) {
+            console.log(solverData);
+            solveProblem();
+            // }
         }
         } />
 
@@ -109,12 +103,6 @@ export function SolverTab() {
           <OutputUi outputData={outputData} />
         </div>
       )}
-
-        <GuidedTextarea
-            constraintNames={constraintNames}
-            setConstraintNames={setConstraintNames}
-        />
-
     </React.Fragment>
   );
 }

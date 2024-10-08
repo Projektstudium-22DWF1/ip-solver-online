@@ -104,3 +104,6 @@ footer {
   background-color: #ececec;
   font-weight: bold;
 }
+.constraintName, .boundName {
+  width: 105px;
+}

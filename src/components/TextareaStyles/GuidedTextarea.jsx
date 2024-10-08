@@ -3,23 +3,47 @@ import "uikit/dist/css/uikit.min.css";
 import "./../styles/styles.css";
 import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChooser";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
+import {useEffect} from "react";
 
-function GuidedTextarea({ setProblem }) {
+function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
+  const [problemStatement, setProblemStatement] = useState("");
+
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
-  const [problemStatement, setProblemStatement] = useState("");
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
   const [validConstraint, setValidConstraint] = useState(
+      Array(constraintNames.length).fill(true)
+  );
+  const [validBound, setValidBound] = useState(
       Array(constraintNames.length).fill(true)
   );
   const [validConstraintNames, setValidConstraintNames] = useState(
       Array(constraintNames.length).fill(true) // Initialisiere mit true für jedes Feld
   );
 
-  console.log(constraintNames);
+  useEffect(() => {
+    const dataToSend = {
+      constraints,
+      constraintNames,
+      bounds,
+      validConstraint,
+      validConstraintNames,
+      validBound,
+    };
+
+    setSolverData(dataToSend);
+  }, [
+    constraints,
+    constraintNames,
+    bounds,
+    validConstraint,
+    validConstraintNames,
+    validBound,
+    setSolverData,
+  ]);
 
   /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
   const addRestriction = (setRestriction, restriction) => {
