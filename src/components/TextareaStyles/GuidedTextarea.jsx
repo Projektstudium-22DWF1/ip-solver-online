@@ -3,7 +3,7 @@ import "uikit/dist/css/uikit.min.css";
 import "./../styles/styles.css";
 import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChooser";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
@@ -17,13 +17,13 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
   const [validConstraint, setValidConstraint] = useState(
-      Array(constraintNames.length).fill(true)
+    Array(constraintNames.length).fill(true),
   );
   const [validBound, setValidBound] = useState(
-      Array(constraintNames.length).fill(true)
+    Array(constraintNames.length).fill(true),
   );
   const [validConstraintNames, setValidConstraintNames] = useState(
-      Array(constraintNames.length).fill(true) // Initialisiere mit true für jedes Feld
+    Array(constraintNames.length).fill(true), // Initialisiere mit true für jedes Feld
   );
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       setValidBound,
       setValidConstraintNames,
       prob,
-      setProb
+      setProb,
     };
 
     setSolverData(dataToSend);
@@ -58,7 +58,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     setValidBound,
     setValidConstraintNames,
     prob,
-    setProb
+    setProb,
   ]);
 
   /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
@@ -84,18 +84,26 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   };
 
   const returnProblem = () => {
-
-    let problem = optimizationDirection + " obj: \n" +
-        prob + "\n" +
-        "Subject To \n" +
-        constraints.map(function(e, index) {
+    let problem =
+      optimizationDirection +
+      " obj: \n" +
+      prob +
+      "\n" +
+      "Subject To \n" +
+      constraints
+        .map(function (e, index) {
           return constraintNames[index].value + ": " + e.value;
-        }).join("\n") + "\n" +
-        "Bounds \n" +
-        bounds.map(function(e) {
+        })
+        .join("\n") +
+      "\n" +
+      "Bounds \n" +
+      bounds
+        .map(function (e) {
           return e.value;
-        }).join("\n") + "\n" +
-        "End";
+        })
+        .join("\n") +
+      "\n" +
+      "End";
     // kann raus?
     let problem2 = `${optimizationDirection} obj: 
             ${problemStatement}
@@ -107,7 +115,6 @@ function GuidedTextarea({ setProblem, setSolverData }) {
 
     setProblem(problem);
   };
-
 
   return (
     <React.Fragment>
@@ -121,9 +128,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
         <label htmlFor="#problem">{translations.problemStatement}</label>
         <table className="mainArea">
           <tbody>
-          <tr>
-            <td>
-              <input
+            <tr>
+              <td>
+                <input
                   placeholder={"x1 + 2 x2 + 4 x3 + x4"}
                   className="uk-input"
                   type="text"
@@ -135,9 +142,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     setProb(e.target.value);
                     returnProblem();
                   }}
-              />
-            </td>
-          </tr>
+                />
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -145,76 +152,74 @@ function GuidedTextarea({ setProblem, setSolverData }) {
         <label htmlFor="#constraints">{translations.constraints}</label>
         <table className="mainArea">
           <tbody>
-          {constraints.map((constraint, index) => (
+            {constraints.map((constraint, index) => (
               <tr key={index}>
                 <td className={"constraintName"}>
                   {/********** Enter name **********/}
                   <input
-                      placeholder={"Enter name"}
-                      className={"uk-input"}
-                      type="text"
-                      style={{
-                        borderColor: validConstraintNames[index] === false ? "#ff0000" : "#ccc",
-                      }}
-                      value={constraintNames[index].value}
-                      onChange={(e) => {
-                        handleRestrictionChange(
-                            index,
-                            e,
-                            constraintNames,
-                            setConstraintNames
-                        );
-                        returnProblem();
-                      }
-                      }
+                    placeholder={"Enter name"}
+                    className={"uk-input"}
+                    type="text"
+                    style={{
+                      borderColor:
+                        validConstraintNames[index] === false
+                          ? "#ff0000"
+                          : "#ccc",
+                    }}
+                    value={constraintNames[index].value}
+                    onChange={(e) => {
+                      handleRestrictionChange(
+                        index,
+                        e,
+                        constraintNames,
+                        setConstraintNames,
+                      );
+                      returnProblem();
+                    }}
                   />
                 </td>
                 <td>
                   <input
-                      placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"}
-                      className="uk-input"
-                      type="text"
-                      style={{
-                        borderColor: validConstraint[index] === false ? "#ff0000" : "#ccc",
-                      }}
-                      value={constraint.value}
-                      onChange={(e) => {
-                        handleRestrictionChange(
-                            index,
-                            e,
-                            constraints,
-                            setConstraints,
-                        )
-                        returnProblem();
-                      }
-                      }
+                    placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"}
+                    className="uk-input"
+                    type="text"
+                    style={{
+                      borderColor:
+                        validConstraint[index] === false ? "#ff0000" : "#ccc",
+                    }}
+                    value={constraint.value}
+                    onChange={(e) => {
+                      handleRestrictionChange(
+                        index,
+                        e,
+                        constraints,
+                        setConstraints,
+                      );
+                      returnProblem();
+                    }}
                   />
                 </td>
                 <td>
-                        <span
-                            className="addButton"
-                            uk-icon="plus"
-                            onClick={() => {
-                              addRestriction(setConstraints, constraints);
-                              addRestriction(setConstraintNames, constraintNames);
-                            }}
-                        ></span>
+                  <span
+                    className="addButton"
+                    uk-icon="plus"
+                    onClick={() => {
+                      addRestriction(setConstraints, constraints);
+                      addRestriction(setConstraintNames, constraintNames);
+                    }}
+                  ></span>
                 </td>
                 <td>
-                        <span
-                            className="removeButton"
-                            uk-icon="close"
-                            onClick={(e) => {
-                              deleteRestriction(
-                                  index,
-                                  constraints,
-                                  setConstraints,
-                              );
-                            }}
-                        ></span>
+                  <span
+                    className="removeButton"
+                    uk-icon="close"
+                    onClick={(e) => {
+                      deleteRestriction(index, constraints, setConstraints);
+                    }}
+                  ></span>
                 </td>
               </tr>
-          ))}
+            ))}
           </tbody>
         </table>
 
@@ -222,45 +227,46 @@ function GuidedTextarea({ setProblem, setSolverData }) {
         <label htmlFor="#bounds">{translations.bounds}</label>
         <table className={"mainArea"}>
           <tbody>
-          {bounds.map((bound, index) => (
+            {bounds.map((bound, index) => (
               <tr key={index}>
                 <td>
                   <input
-                      placeholder={"0 <= x1 <= 40"}
-                      className="uk-input"
-                      type="text"
-                      style={{
-                        borderColor: validBound[index] === false ? "#ff0000" : "#ccc",
-                      }}
-                      value={bound.value}
-                      onChange={(e) => {
-                        handleRestrictionChange(index, e, bounds, setBounds);
-                        returnProblem();
-                      }}
+                    placeholder={"0 <= x1 <= 40"}
+                    className="uk-input"
+                    type="text"
+                    style={{
+                      borderColor:
+                        validBound[index] === false ? "#ff0000" : "#ccc",
+                    }}
+                    value={bound.value}
+                    onChange={(e) => {
+                      handleRestrictionChange(index, e, bounds, setBounds);
+                      returnProblem();
+                    }}
                   />
                 </td>
                 <td>
                   <span
-                      className="addButton"
-                      uk-icon="plus"
-                      onClick={() => {
-                        addRestriction(setBounds, bounds);
-                        returnProblem();
-                      }}
+                    className="addButton"
+                    uk-icon="plus"
+                    onClick={() => {
+                      addRestriction(setBounds, bounds);
+                      returnProblem();
+                    }}
                   ></span>
                 </td>
                 <td>
                   <span
-                      className="removeButton"
-                      uk-icon="close"
-                      onClick={() => {
-                        deleteRestriction(index, bounds, setBounds);
-                        returnProblem();
-                      }}
+                    className="removeButton"
+                    uk-icon="close"
+                    onClick={() => {
+                      deleteRestriction(index, bounds, setBounds);
+                      returnProblem();
+                    }}
                   ></span>
                 </td>
               </tr>
-          ))}
+            ))}
           </tbody>
         </table>
       </div>

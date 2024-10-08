@@ -114,6 +114,7 @@ footer {
   margin: 10px 0;
 }
 
-.constraintName, .boundName {
+.constraintName,
+.boundName {
   width: 105px;
 }

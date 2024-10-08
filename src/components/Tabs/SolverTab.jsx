@@ -1,4 +1,4 @@
-import React, { useState, useCallback  } from "react";
+import React, { useState, useCallback } from "react";
 import "uikit/dist/css/uikit.min.css";
 import FileButtons from "../FileButtons";
 import OutputUi from "../OutputUi";
@@ -18,22 +18,21 @@ import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
 
 export function SolverTab() {
-    // constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound
-    const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
-    const [problem, setProblem] = useState(""); //TODO Muss auf rawProblem geändert werden
+  // constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound
+  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
+  const [problem, setProblem] = useState(""); //TODO Muss auf rawProblem geändert werden
 
-    const [inputFormat, setInputFormat] = useState(InputOptions.LP);
-    const [textareaStyle, setTextareaStyle] = useState("Guided");
+  const [inputFormat, setInputFormat] = useState(InputOptions.LP);
+  const [textareaStyle, setTextareaStyle] = useState("Guided");
 
   const [outputData, setOutputData] = useState("");
   const [errorData, setErrorData] = useState("");
 
-
-    const [solverData, setSolverData] = useState([]);
-    const handleDataFromChild = useCallback((data) => {
-        // console.log("Daten von der Kindkomponente:", data);
-        setSolverData(data);
-    }, []);
+  const [solverData, setSolverData] = useState([]);
+  const handleDataFromChild = useCallback((data) => {
+    // console.log("Daten von der Kindkomponente:", data);
+    setSolverData(data);
+  }, []);
 
   const solveProblem = async () => {
     try {
@@ -82,7 +81,12 @@ export function SolverTab() {
         </div>
 
         {textareaStyle === "Guided" && (
-          <GuidedTextarea problem={problem} setProblem={setProblem} solverData={solverData} setSolverData={handleDataFromChild}/>
+          <GuidedTextarea
+            problem={problem}
+            setProblem={setProblem}
+            solverData={solverData}
+            setSolverData={handleDataFromChild}
+          />
         )}
         {textareaStyle === "Raw" && (
           <RawTextInput
@@ -93,14 +97,31 @@ export function SolverTab() {
         <ErrorMessage errorData={errorData} setErrorData={setErrorData} />
       </div>
 
-        <SolveProblemButton solveProblem={()=> {
-            if (textareaStyle === "Guided" && validateGuidedProblem(solverData.prob, solverData.constraints, solverData.constraintNames, solverData.bounds, solverData.validProblem, solverData.validConstraint, solverData.validConstraintNames, solverData.validBound, solverData.setValidProblem, solverData.setValidConstraint, solverData.setValidConstraintNames, solverData.setValidBound)) {
-                solveProblem();
-            } else if (textareaStyle === "Raw") {
-                solveProblem();
-            }
-        }
-        } />
+      <SolveProblemButton
+        solveProblem={() => {
+          if (
+            textareaStyle === "Guided" &&
+            validateGuidedProblem(
+              solverData.prob,
+              solverData.constraints,
+              solverData.constraintNames,
+              solverData.bounds,
+              solverData.validProblem,
+              solverData.validConstraint,
+              solverData.validConstraintNames,
+              solverData.validBound,
+              solverData.setValidProblem,
+              solverData.setValidConstraint,
+              solverData.setValidConstraintNames,
+              solverData.setValidBound,
+            )
+          ) {
+            solveProblem();
+          } else if (textareaStyle === "Raw") {
+            solveProblem();
+          }
+        }}
+      />
 
       <FileButtons problem={problem} setProblem={setProblem} />
 
