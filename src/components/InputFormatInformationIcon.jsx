@@ -41,8 +41,8 @@ end;</pre>`;
     inputFormat === "LP"
       ? lpProblem
       : inputFormat === "GMPL"
-      ? gmplProblem
-      : "Unbekanntes Format";
+        ? gmplProblem
+        : "Unbekanntes Format";
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -51,11 +51,11 @@ end;</pre>`;
     const hideTooltip = () => setIsVisible(false);
 
     // Add event listener to listen for the offcanvas events
-    UIkit.util.on(document, 'show', '#offcanvas-nav', hideTooltip);
+    UIkit.util.on(document, "show", "#offcanvas-nav", hideTooltip);
 
     // Cleanup event listener
     return () => {
-      UIkit.util.off(document, 'show', '#offcanvas-nav', hideTooltip);
+      UIkit.util.off(document, "show", "#offcanvas-nav", hideTooltip);
     };
   }, []);
 

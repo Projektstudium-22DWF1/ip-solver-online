@@ -10,7 +10,7 @@ const LanguageSelector = () => {
 
   // Funktion zum Schließen des Dropdowns
   const closeDropdown = () => {
-    const dropdown = UIkit.dropdown('.uk-dropdown'); // Selektiert das Dropdown
+    const dropdown = UIkit.dropdown(".uk-dropdown"); // Selektiert das Dropdown
     dropdown.hide(); // Schließt das Dropdown
   };
 

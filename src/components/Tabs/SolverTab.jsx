@@ -127,7 +127,10 @@ export function SolverTab() {
 
       {/* Only render OutputUi if there is outputData */}
       {outputData && (
-        <div style={{ textAlign: "center", marginTop: "20px" }} className={"main-container"} >
+        <div
+          style={{ textAlign: "center", marginTop: "20px" }}
+          className={"main-container"}
+        >
           <OutputUi outputData={outputData} />
         </div>
       )}
