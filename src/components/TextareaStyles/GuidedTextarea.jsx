@@ -67,16 +67,31 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
   };
 
-  const returnProblem = () => { //TODO returnProblem Aufrufe mit Master vergleichen. Ergebnis funktioniert nicht mehr
-    let problem = `${optimizationDirection} obj: 
+  const returnProblem = () => {
+
+    let problem = optimizationDirection + " obj: \n" +
+        problemStatement + "\n" +
+        "Subject To \n" +
+        constraints.map(function(e, index) {
+          return constraintNames[index].value + ": " + e.value;
+        }).join("\n") + "\n" +
+        "Bounds \n" +
+        bounds.map(function(e) {
+          return e.value;
+        }).join("\n") + "\n" +
+        "End";
+    // kann raus?
+    let problem2 = `${optimizationDirection} obj: 
             ${problemStatement}
             Subject To 
             ${constraints.map((e) => e.value).join("\n    ")} 
             Bounds 
             ${bounds.map((e) => e.value).join("\n    ")} 
             End`;
+
     setProblem(problem);
   };
+
 
   return (
     <React.Fragment>
