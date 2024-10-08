@@ -23,7 +23,10 @@ const LanguageSelector = () => {
         <div uk-dropdown="mode: click">
           <ul className="uk-nav uk-dropdown-nav">
             <li>
-              <a data-testid="language-option-en" onClick={() => changeLanguage("en")}>
+              <a
+                data-testid="language-option-en"
+                onClick={() => changeLanguage("en")}
+              >
                 <img
                   src={enFlag}
                   alt="English"
@@ -34,7 +37,10 @@ const LanguageSelector = () => {
               </a>
             </li>
             <li>
-              <a data-testid="language-option-de" onClick={() => changeLanguage("de")}>
+              <a
+                data-testid="language-option-de"
+                onClick={() => changeLanguage("de")}
+              >
                 <img
                   src={deFlag}
                   alt="Deutsch"

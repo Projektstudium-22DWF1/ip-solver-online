@@ -7,7 +7,7 @@ function SolveProblemButton({ solveProblem }) {
 
   return (
     <button
-      data-testid="solve-problem-button" 
+      data-testid="solve-problem-button"
       className="uk-button uk-button-secondary uk-button-large"
       onClick={solveProblem}
     >
