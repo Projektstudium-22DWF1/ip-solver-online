@@ -6,7 +6,7 @@ import "uikit/dist/css/uikit.min.css";
 UIkit.use(Icons);
 
 function InputFormatInformationIcon({ inputFormat }) {
-  const lpProblem = `<pre>
+  const lpProblem = `<pre style="background-color: #f0f0f0; margin: 0; padding: 10px;">
 Maximize
   obj: 60 x<sub>1</sub> + 40 x<sub>2</sub>
 Subject To
@@ -15,10 +15,9 @@ Subject To
 Bounds
   x<sub>1</sub> >= 0
   x<sub>2</sub> >= 0
-End</pre>
-  `;
+End</pre>`;
 
-  const gmplProblem = `<pre>
+  const gmplProblem = `<pre style="background-color: #f0f0f0; margin: 0; padding: 10px;">
 set Products;
 param cost{Products};
 param availability{Products};
@@ -82,11 +81,13 @@ end;</pre>`;
             width: "fit-content",
             overflowX: "auto",
             wordWrap: "break-word",
-            padding: "10px",
+            padding: "10px", // Gleichmäßiger Rand um das Feld herum
             boxSizing: "border-box",
             whiteSpace: "pre-wrap",
+            backgroundColor: "#f0f0f0", // Heller grauer Hintergrund
           }}
         >
+          {/* Der Inhalt wird hier im inneren Container gerendert */}
           <div dangerouslySetInnerHTML={{ __html: problemText }} />
         </div>
       )}

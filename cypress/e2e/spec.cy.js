@@ -47,6 +47,6 @@ describe("Navigation and Language Selector Tests", () => {
     cy.get('[data-testid="solve-problem-button"]').click();
 
     // 11. Optional: Überprüfe das Verhalten nach dem Klick (zum Beispiel eine Ergebnisanzeige)
-    cy.get("div").should("contain", "Solution found"); // Beispielhaft
+    cy.get("div").should("contain", "Status: Optimal"); // Beispielhaft
   });
 });
