@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UIkit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";
 import "uikit/dist/css/uikit.min.css";
@@ -42,10 +42,23 @@ end;</pre>`;
     inputFormat === "LP"
       ? lpProblem
       : inputFormat === "GMPL"
-        ? gmplProblem
-        : "Unbekanntes Format";
+      ? gmplProblem
+      : "Unbekanntes Format";
 
   const [isVisible, setIsVisible] = useState(false);
+
+  // UseEffect to listen for offcanvas open and close events
+  useEffect(() => {
+    const hideTooltip = () => setIsVisible(false);
+
+    // Add event listener to listen for the offcanvas events
+    UIkit.util.on(document, 'show', '#offcanvas-nav', hideTooltip);
+
+    // Cleanup event listener
+    return () => {
+      UIkit.util.off(document, 'show', '#offcanvas-nav', hideTooltip);
+    };
+  }, []);
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
@@ -63,15 +76,15 @@ end;</pre>`;
           style={{
             position: "absolute",
             top: "40px",
-            right: "0", // Sicherstellen, dass es nicht über die rechte Seite hinausgeht
+            right: "0",
             zIndex: "1000",
-            maxWidth: "90vw", // Auf 90% des Viewports beschränken
-            width: "fit-content", // Inhalt wird auf die tatsächliche Breite beschränkt
-            overflowX: "auto", // Scrollen, wenn der Inhalt breiter ist als der Container
-            wordWrap: "break-word", // Lange Wörter umbrechen
+            maxWidth: "90vw",
+            width: "fit-content",
+            overflowX: "auto",
+            wordWrap: "break-word",
             padding: "10px",
-            boxSizing: "border-box", // Padding wird in die Berechnung der Breite einbezogen
-            whiteSpace: "pre-wrap", // Zeilenumbrüche respektieren und Text umbrechen
+            boxSizing: "border-box",
+            whiteSpace: "pre-wrap",
           }}
         >
           <div dangerouslySetInnerHTML={{ __html: problemText }} />
