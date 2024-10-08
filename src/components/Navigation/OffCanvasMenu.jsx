@@ -2,18 +2,26 @@
 import React, { useContext } from "react";
 import UIkit from "uikit";
 import { LanguageContext } from "../../context/LanguageContext";
+import logo from "../../assets/logo.png";
 
 const OffCanvasMenu = ({ setActiveComponent }) => {
   const { translations } = useContext(LanguageContext);
 
   return (
     <div id="offcanvas-nav" uk-offcanvas="overlay: true">
-      <div className="uk-offcanvas-bar" style={{ backgroundColor: "#fff" }}>
+      <div className="uk-offcanvas-bar uk-width-1-2" style={{ backgroundColor: "#fff" }}>
         <button
           className="uk-offcanvas-close"
           type="button"
           uk-close="true"
         ></button>
+        <div style={{ textAlign: "center", marginBottom: "30px", marginTop: "5px" }}>
+          <img
+            src={logo}
+            alt="OptiMize Logo"
+            style={{ width: "60px" }} // Passe die Größe des Logos an, wie du möchtest
+          />
+        </div>
         <ul className="uk-nav uk-nav-default">
         <li>
             <a
