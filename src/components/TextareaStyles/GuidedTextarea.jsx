@@ -12,7 +12,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [problemStatement, setProblemStatement] = useState("");
 
   const [validProblem, setValidProblem] = useState(true);
-  const [prob, setProb] = useState([{ value: "" }]); //TODO Problem (Function) separieren von problemStatement
+  const [prob, setProb] = useState([{ value: "" }]); //TODO Muss auf rawProblem geändert werden
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);

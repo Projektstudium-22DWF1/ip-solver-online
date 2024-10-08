@@ -53,7 +53,7 @@ export function validateGuidedProblem (problem, constraints, constraintNames, bo
         if (e.value !== "" && !regexBounds.test(e.value) && !regexDualBounds.test(e.value) && !regexScalarBounds.test(e.value)){
             valid = false;
             newValidBound[index] = false;
-            console.log("Ungültiger Constraint: Bitte Format beachten!");
+            console.log("Ungültiger Bound: Bitte Format beachten!");
         } else {
             newValidBound[index] = true;
         }

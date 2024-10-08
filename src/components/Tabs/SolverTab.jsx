@@ -19,7 +19,7 @@ import InputFormatInformationIcon from "../InputFormatInformationIcon";
 export function SolverTab() {
     // constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound
     const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
-    const [problem, setProblem] = useState("");
+    const [problem, setProblem] = useState(""); //TODO Muss auf rawProblem geändert werden
 
     const [inputFormat, setInputFormat] = useState(InputOptions.LP);
     const [textareaStyle, setTextareaStyle] = useState("Guided");
