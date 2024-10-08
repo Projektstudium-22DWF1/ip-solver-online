@@ -10,6 +10,8 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
   const [problemStatement, setProblemStatement] = useState("");
+  const [validProblem, setValidProblem] = useState("");
+
 
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
@@ -32,6 +34,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       validConstraint,
       validConstraintNames,
       validBound,
+      validProblem
     };
 
     setSolverData(dataToSend);
@@ -42,6 +45,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     validConstraint,
     validConstraintNames,
     validBound,
+    validProblem,
     setSolverData,
   ]);
 
