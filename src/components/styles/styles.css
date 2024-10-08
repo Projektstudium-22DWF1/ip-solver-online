@@ -113,3 +113,8 @@ footer {
   border-radius: 5px;
   margin: 10px 0;
 }
+
+.constraintName,
+.boundName {
+  width: 105px;
+}
