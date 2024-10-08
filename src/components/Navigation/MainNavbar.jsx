@@ -11,7 +11,7 @@ import OffCanvasMenu from "./OffCanvasMenu";
 import logo from "../../assets/logo.png";
 
 export function MainNavbar() {
-  const [activeComponent, setActiveComponent] = useState("SolverTab");
+  const [activeComponent, setActiveComponent] = useState("LandingPageTab");
   const { translations } = useContext(LanguageContext);
 
   return (
@@ -76,8 +76,8 @@ export function MainNavbar() {
         <OffCanvasMenu setActiveComponent={setActiveComponent} />
 
         {/* Main content */}
-        <div className="uk-container" id="all" style={{ paddingTop: "50px" }}>
-          {activeComponent === "LandingPageTab" && <LandingPageTab />}
+        <div className="uk-container" id="all" style={{ paddingTop: "30px" }}>
+          {activeComponent === "LandingPageTab" && <LandingPageTab setActiveComponent={setActiveComponent}/>}
           {activeComponent === "SolverTab" && <SolverTab />}
           {activeComponent === "DescriptionTab" && <DescriptionTab />}
         </div>
