@@ -129,6 +129,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                             constraintNames,
                             setConstraintNames
                         );
+                        returnProblem();
                       }
                       }
                   />
@@ -142,13 +143,15 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         borderColor: validConstraint[index] === false ? "#ff0000" : "#ccc",
                       }}
                       value={constraint.value}
-                      onChange={(e) =>
-                          handleRestrictionChange(
-                              index,
-                              e,
-                              constraints,
-                              setConstraints,
-                          )
+                      onChange={(e) => {
+                        handleRestrictionChange(
+                            index,
+                            e,
+                            constraints,
+                            setConstraints,
+                        )
+                        returnProblem();
+                      }
                       }
                   />
                 </td>
