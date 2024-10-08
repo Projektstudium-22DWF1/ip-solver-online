@@ -70,9 +70,11 @@ const OutputUi = ({ outputData }) => {
     // Display message if no variables are available
     if (!outputData?.Columns) return <p>{translations.noVariablesAvailable}</p>;
 
-    // Render a table of variables with their properties
+    // Render a table of variables with their properties, wrapped in a scrollable div
     return (
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
+      <div
+        style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}
+      >
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
@@ -114,9 +116,11 @@ const OutputUi = ({ outputData }) => {
     // Display message if no constraints are available
     if (!outputData?.Rows) return <p>{translations.noConstraintsAvailable}</p>;
 
-    // Render a table of constraints with their properties
+    // Render a table of constraints with their properties, wrapped in a scrollable div
     return (
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
+      <div
+        style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}
+      >
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
