@@ -70,9 +70,9 @@ const OutputUi = ({ outputData }) => {
     // Display message if no variables are available
     if (!outputData?.Columns) return <p>{translations.noVariablesAvailable}</p>;
 
-    // Render a table of variables with their properties
+    // Render a table of variables with their properties, wrapped in a scrollable div
     return (
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
+      <div style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}>
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
@@ -114,9 +114,9 @@ const OutputUi = ({ outputData }) => {
     // Display message if no constraints are available
     if (!outputData?.Rows) return <p>{translations.noConstraintsAvailable}</p>;
 
-    // Render a table of constraints with their properties
+    // Render a table of constraints with their properties, wrapped in a scrollable div
     return (
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
+      <div style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}>
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
@@ -133,14 +133,10 @@ const OutputUi = ({ outputData }) => {
                 <td className="uk-text-center">{row.Name}</td>
                 <td className="uk-text-center">{row.Primal}</td>
                 <td className="uk-text-center">
-                  {row.Lower === null || row.Lower === -Infinity
-                    ? "-∞"
-                    : row.Lower}
+                  {row.Lower === null || row.Lower === -Infinity ? "-∞" : row.Lower}
                 </td>
                 <td className="uk-text-center">
-                  {row.Upper === null || row.Upper === Infinity
-                    ? "∞"
-                    : row.Upper}
+                  {row.Upper === null || row.Upper === Infinity ? "∞" : row.Upper}
                 </td>
                 <td className="uk-text-center">{row.Dual}</td>
               </tr>
@@ -166,14 +162,10 @@ const OutputUi = ({ outputData }) => {
           <a onClick={() => setActiveTab("output")}>{translations.output}</a>
         </li>
         <li className={activeTab === "variables" ? "uk-active" : ""}>
-          <a onClick={() => setActiveTab("variables")}>
-            {translations.variables}
-          </a>
+          <a onClick={() => setActiveTab("variables")}>{translations.variables}</a>
         </li>
         <li className={activeTab === "constraints" ? "uk-active" : ""}>
-          <a onClick={() => setActiveTab("constraints")}>
-            {translations.constraints}
-          </a>
+          <a onClick={() => setActiveTab("constraints")}>{translations.constraints}</a>
         </li>
       </ul>
 
