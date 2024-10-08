@@ -2,11 +2,13 @@
 import React, { useContext, useState } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
+import LandingPageTab from "../Tabs/LandingPageTab";
 import { SolverTab } from "../Tabs/SolverTab";
 import DescriptionTab from "../Tabs/DescriptionTab";
 import LanguageSelector from "./LanguageSelector";
 import BurgerMenuButton from "./BurgerMenuButton";
 import OffCanvasMenu from "./OffCanvasMenu";
+import logo from "../../assets/logo.png";
 
 export function MainNavbar() {
   const [activeComponent, setActiveComponent] = useState("SolverTab");
@@ -25,8 +27,19 @@ export function MainNavbar() {
             {/* Tabs for larger screens */}
             <ul
               className="uk-navbar-nav uk-flex uk-visible@s"
-              style={{ minWidth: "300px" }}
+              style={{ minWidth: "380px", padding: "0", margin: "0", gap: "0" }}
             >
+              <li
+                className={`uk-active uk-width-expand ${activeComponent === "LandingPageTab" ? "active" : ""}`}
+              >
+                <a
+                  className="uk-text-center"
+                  onClick={() => setActiveComponent("LandingPageTab")}
+                >
+                  <img src={logo} alt="OptiMize Logo" style={{width: "35px", marginRight: "2px"}}/>
+                  {translations.landingpage}
+                </a>
+              </li>
               <li
                 className={`uk-active uk-width-expand ${activeComponent === "SolverTab" ? "active" : ""}`}
               >
@@ -64,6 +77,7 @@ export function MainNavbar() {
 
         {/* Main content */}
         <div className="uk-container" id="all" style={{ paddingTop: "50px" }}>
+          {activeComponent === "LandingPageTab" && <LandingPageTab />}
           {activeComponent === "SolverTab" && <SolverTab />}
           {activeComponent === "DescriptionTab" && <DescriptionTab />}
         </div>

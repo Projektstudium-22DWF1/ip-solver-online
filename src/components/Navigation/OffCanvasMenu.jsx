@@ -15,6 +15,17 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
           uk-close="true"
         ></button>
         <ul className="uk-nav uk-nav-default">
+        <li>
+            <a
+              onClick={() => {
+                setActiveComponent("LandingPageTab");
+                UIkit.offcanvas("#offcanvas-nav").hide(); // Close off-canvas on click
+              }}
+              style={{ color: "#000" }}
+            >
+              {translations.landingpage}
+            </a>
+          </li>
           <li>
             <a
               onClick={() => {
