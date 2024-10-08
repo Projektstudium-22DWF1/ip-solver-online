@@ -13,7 +13,6 @@ export function validateGuidedProblem (problem, constraints, constraintNames, bo
     const newValidConstraint = [...validConstraint];
     const newValidBound = [...validBound];
 
-    console.log(constraints);
     // Validation for problem
     if (problem === "" || !regexProblem.test(problem)) {
         valid = false;

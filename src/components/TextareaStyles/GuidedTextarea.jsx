@@ -38,7 +38,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       setValidProblem,
       setValidConstraint,
       setValidBound,
-      setValidConstraintNames
+      setValidConstraintNames,
+      prob,
+      setProb
     };
 
     setSolverData(dataToSend);
@@ -54,7 +56,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     setValidProblem,
     setValidConstraint,
     setValidBound,
-    setValidConstraintNames
+    setValidConstraintNames,
+    prob,
+    setProb
   ]);
 
   /********** Funktion zum Hinzufügen einer neuen Zeile in mainArea **********/
@@ -127,7 +131,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     borderColor: validProblem === false ? "#ff0000" : "#ccc",
                   }}
                   onChange={(e) => {
-                    setProblemStatement(e.target.value);
+                    setProb(e.target.value);
                     returnProblem();
                   }}
               />

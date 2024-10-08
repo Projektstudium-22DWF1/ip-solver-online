@@ -34,6 +34,7 @@ export function SolverTab() {
     }, []);
 
   const solveProblem = async () => {
+      console.log(problem);
     const result = await solve(problem, inputFormat, solverOption);
     setOutputData(result);
   };
@@ -87,10 +88,10 @@ export function SolverTab() {
       </div>
 
         <SolveProblemButton solveProblem={()=> {
-            // if (validateGuidedProblem(problem, solverData.constraints, solverData.constraintNames, solverData.bounds, solverData.validProblem, solverData.validConstraint, solverData.validConstraintNames, solverData.validBound, solverData.setValidProblem, solverData.setValidConstraint, solverData.setValidConstraintNames, solverData.setValidBound)) {
-            console.log(problem); //TODO Daten bereitstellen für Validierung und dann mit if prüfen
+            if (validateGuidedProblem(solverData.prob, solverData.constraints, solverData.constraintNames, solverData.bounds, solverData.validProblem, solverData.validConstraint, solverData.validConstraintNames, solverData.validBound, solverData.setValidProblem, solverData.setValidConstraint, solverData.setValidConstraintNames, solverData.setValidBound)) {
+            // console.log(solverData); //TODO Daten bereitstellen für Validierung und dann mit if prüfen
             solveProblem();
-            // }
+            }
         }
         } />
 
