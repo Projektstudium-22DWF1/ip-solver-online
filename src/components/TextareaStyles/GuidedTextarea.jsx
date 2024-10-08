@@ -105,7 +105,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
             ${bounds.map((e) => e.value).join("\n    ")} 
             End`;
 
-    setProblem(problem);
+    setProblem(problem2);
   };
 
 
