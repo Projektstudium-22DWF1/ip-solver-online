@@ -1,11 +1,23 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
+import UIkit from "uikit"; // UIkit importieren, um Dropdown manuell zu schließen
 import enFlag from "../../assets/flags/en.png"; // Importiere die englische Flagge
 import deFlag from "../../assets/flags/de.png"; // Importiere die deutsche Flagge
 
 const LanguageSelector = () => {
   const { changeLanguage, translations } = useContext(LanguageContext); // Zugriff auf den Sprachkontext
+
+  // Funktion zum Schließen des Dropdowns
+  const closeDropdown = () => {
+    const dropdown = UIkit.dropdown('.uk-dropdown'); // Selektiert das Dropdown
+    dropdown.hide(); // Schließt das Dropdown
+  };
+
+  const handleLanguageChange = (language) => {
+    closeDropdown(); // Schließe das Dropdown sofort
+    changeLanguage(language); // Wechsel der Sprache nach Schließen des Dropdowns
+  };
 
   return (
     <div className="uk-navbar-item">
@@ -25,7 +37,7 @@ const LanguageSelector = () => {
             <li>
               <a
                 data-testid="language-option-en"
-                onClick={() => changeLanguage("en")}
+                onClick={() => handleLanguageChange("en")} // Schließt Dropdown sofort und wechselt Sprache
               >
                 <img
                   src={enFlag}
@@ -39,7 +51,7 @@ const LanguageSelector = () => {
             <li>
               <a
                 data-testid="language-option-de"
-                onClick={() => changeLanguage("de")}
+                onClick={() => handleLanguageChange("de")} // Schließt Dropdown sofort und wechselt Sprache
               >
                 <img
                   src={deFlag}
