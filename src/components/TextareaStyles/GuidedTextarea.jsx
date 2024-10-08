@@ -86,7 +86,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const returnProblem = () => {
 
     let problem = optimizationDirection + " obj: \n" +
-        problemStatement + "\n" +
+        prob + "\n" +
         "Subject To \n" +
         constraints.map(function(e, index) {
           return constraintNames[index].value + ": " + e.value;
@@ -105,7 +105,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
             ${bounds.map((e) => e.value).join("\n    ")} 
             End`;
 
-    setProblem(problem2);
+    setProblem(problem);
   };
 
 
@@ -131,6 +131,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     borderColor: validProblem === false ? "#ff0000" : "#ccc",
                   }}
                   onChange={(e) => {
+                    // setProblem(e.target.value);
                     setProb(e.target.value);
                     returnProblem();
                   }}
