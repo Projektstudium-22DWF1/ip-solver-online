@@ -5,6 +5,7 @@ function ImportTextareaStyleChooser({
   textareaStyle,
   setTextareaStyle,
   inputFormat,
+  setProblem
 }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
   const isGMPL = inputFormat === "GMPL"; // Überprüfen, ob das Property 'GMPL' ist
@@ -15,6 +16,10 @@ function ImportTextareaStyleChooser({
       prevStyle === "Guided" ? "Raw" : "Guided",
     );
   };
+
+  useEffect(() => {
+    setProblem("");
+  }, [textareaStyle, setProblem]);
 
   // useEffect-Hook, um textareaStyle automatisch auf "Raw" zu setzen, wenn format "GMPL" ist
   useEffect(() => {
