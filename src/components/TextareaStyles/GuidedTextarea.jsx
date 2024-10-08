@@ -10,9 +10,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
   const [problemStatement, setProblemStatement] = useState("");
+
   const [validProblem, setValidProblem] = useState(true);
-
-
+  const [prob, setProb] = useState([{ value: "" }]); //TODO Problem (Function) separieren von problemStatement
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
@@ -115,6 +115,24 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       <div>
         {/********** Problem Statement **********/}
         <label htmlFor="#problem">{translations.problemStatement}</label>
+        {/*<table className="mainArea">*/}
+        {/*  <tbody>*/}
+        {/*  <tr>*/}
+        {/*    <td>*/}
+        {/*      <input*/}
+        {/*          placeholder={"x1 + 2 x2 + 4 x3 + x4"}*/}
+        {/*          className="uk-input"*/}
+        {/*          type="text"*/}
+        {/*          onChange={(e) => {*/}
+        {/*            setProblemStatement(e.target.value);*/}
+        {/*            returnProblem();*/}
+        {/*          }}*/}
+        {/*      />*/}
+        {/*    </td>*/}
+        {/*  </tr>*/}
+        {/*  </tbody>*/}
+        {/*</table>*/}
+
         <table className="mainArea">
           <tbody>
           <tr>
@@ -123,6 +141,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                   placeholder={"x1 + 2 x2 + 4 x3 + x4"}
                   className="uk-input"
                   type="text"
+                  style={{
+                    borderColor: validProblem === false ? "#ff0000" : "#ccc",
+                  }}
                   onChange={(e) => {
                     setProblemStatement(e.target.value);
                     returnProblem();
