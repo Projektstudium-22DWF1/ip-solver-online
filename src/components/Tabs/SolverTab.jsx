@@ -88,17 +88,7 @@ export function SolverTab() {
       </div>
 
         <SolveProblemButton solveProblem={()=> {
-
-            // if (isTextareaVisible === true && validateGuidedProblem(problem, constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound)) {
-            console.log(problem);
-
-            // solveProblem();
-            // } else if (isTextareaVisible === false && validateRawProblem()) {
-            //   solveProblem();
-            // }
-
             if (textareaStyle === "Guided" && validateGuidedProblem(solverData.prob, solverData.constraints, solverData.constraintNames, solverData.bounds, solverData.validProblem, solverData.validConstraint, solverData.validConstraintNames, solverData.validBound, solverData.setValidProblem, solverData.setValidConstraint, solverData.setValidConstraintNames, solverData.setValidBound)) {
-            // console.log(solverData); //TODO Daten bereitstellen für Validierung und dann mit if prüfen
                 solveProblem();
             } else if (textareaStyle === "Raw") {
                 solveProblem();
