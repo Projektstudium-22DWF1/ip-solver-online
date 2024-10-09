@@ -135,5 +135,5 @@ footer {
 /* Specific column widths for constraint and bound names */
 .constraintName,
 .boundName {
-  width: 105px;
+  width: 66px;
 }

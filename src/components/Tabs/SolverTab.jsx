@@ -7,7 +7,6 @@ import SolveProblemButton from "../SolveProblemButton";
 import RawTextInput from "../TextareaStyles/RawTextarea";
 import GuidedTextarea from "../TextareaStyles/GuidedTextarea";
 import InputFormatChooser from "../Choosers/InputFormatChooser";
-import { validateGuidedProblem } from "../../services/Validation";
 import InputTextareaStyleChooser from "../Choosers/InputTextareaStyleChooser";
 import {
   solve,
@@ -102,23 +101,7 @@ export function SolverTab() {
       {/* Solve problem button with validation for guided mode */}
       <SolveProblemButton
         solveProblem={() => {
-          if (
-            textareaStyle === "Guided" &&
-            validateGuidedProblem(
-              solverData.prob,
-              solverData.constraints,
-              solverData.constraintNames,
-              solverData.bounds,
-              solverData.validProblem,
-              solverData.validConstraint,
-              solverData.validConstraintNames,
-              solverData.validBound,
-              solverData.setValidProblem,
-              solverData.setValidConstraint,
-              solverData.setValidConstraintNames,
-              solverData.setValidBound,
-            )
-          ) {
+          if (textareaStyle === "Guided") {
             solveProblem();
           } else if (textareaStyle === "Raw") {
             solveProblem();
