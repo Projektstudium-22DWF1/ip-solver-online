@@ -43,8 +43,8 @@ end;</pre>`;
     inputFormat === "LP"
       ? lpProblem
       : inputFormat === "GMPL"
-      ? gmplProblem
-      : "Unbekanntes Format";
+        ? gmplProblem
+        : "Unbekanntes Format";
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -64,7 +64,7 @@ end;</pre>`;
       <span
         uk-icon="icon: info; ratio: 2"
         style={{ cursor: "pointer" }}
-        onClick={() => setIsVisible(!isVisible)} 
+        onClick={() => setIsVisible(!isVisible)}
       ></span>
 
       {isVisible && (
@@ -78,8 +78,8 @@ end;</pre>`;
             maxWidth: "90vw",
             width: "fit-content",
             overflowX: "auto",
-            padding: "10px", 
-            backgroundColor: "#f0f0f0", 
+            padding: "10px",
+            backgroundColor: "#f0f0f0",
           }}
         >
           <div dangerouslySetInnerHTML={{ __html: problemText }} />

@@ -18,18 +18,18 @@ import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
 
 export function SolverTab() {
-  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS); 
-  const [problem, setProblem] = useState(""); 
+  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
+  const [problem, setProblem] = useState("");
 
-  const [inputFormat, setInputFormat] = useState(InputOptions.LP); 
-  const [textareaStyle, setTextareaStyle] = useState("Guided"); 
+  const [inputFormat, setInputFormat] = useState(InputOptions.LP);
+  const [textareaStyle, setTextareaStyle] = useState("Guided");
 
-  const [outputData, setOutputData] = useState(""); 
-  const [errorData, setErrorData] = useState(""); 
+  const [outputData, setOutputData] = useState("");
+  const [errorData, setErrorData] = useState("");
 
-  const [solverData, setSolverData] = useState([]); 
+  const [solverData, setSolverData] = useState([]);
   const handleDataFromChild = useCallback((data) => {
-    setSolverData(data); 
+    setSolverData(data);
   }, []);
 
   const solveProblem = async () => {

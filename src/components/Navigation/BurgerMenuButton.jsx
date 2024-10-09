@@ -8,9 +8,9 @@ const BurgerMenuButton = () => {
       uk-toggle="target: #offcanvas-nav"
       aria-label="Open Menu"
       style={{
-        width: "40px", 
-        height: "40px", 
-        backgroundColor: "#fff", 
+        width: "40px",
+        height: "40px",
+        backgroundColor: "#fff",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

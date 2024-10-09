@@ -16,10 +16,10 @@ function OptimizationDirectionChooser({
   return (
     <div className="uk-margin-top">
       <Chooser
-        options={solverOptions} 
-        onChange={setOptimizationDirection} 
-        label={translations.optimizationDirection} 
-        value={optimizationDirection} 
+        options={solverOptions}
+        onChange={setOptimizationDirection}
+        label={translations.optimizationDirection}
+        value={optimizationDirection}
       />
     </div>
   );

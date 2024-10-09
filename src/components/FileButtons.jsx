@@ -4,24 +4,24 @@ import "uikit/dist/css/uikit.min.css";
 import { LanguageContext } from "../context/LanguageContext";
 
 function FileButtons({ problem, setProblem }) {
-  const { translations } = useContext(LanguageContext); 
+  const { translations } = useContext(LanguageContext);
 
   // Handle importing a file (reads a file and sets the content as problem)
   const handleImport = async () => {
     try {
       const text = await openProblemFile();
-      setProblem(text); 
+      setProblem(text);
     } catch (error) {
-      console.error("Error importing file:", error); 
+      console.error("Error importing file:", error);
     }
   };
 
   // Handle exporting the current problem to a file
   const handleExport = async () => {
     try {
-      await saveProblemToFile(problem); 
+      await saveProblemToFile(problem);
     } catch (error) {
-      console.error("Error exporting file:", error); 
+      console.error("Error exporting file:", error);
     }
   };
 

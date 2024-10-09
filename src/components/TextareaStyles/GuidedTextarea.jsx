@@ -5,20 +5,27 @@ import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChoos
 import { LanguageContext } from "../../context/LanguageContext";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
-  const { translations } = useContext(LanguageContext); 
-  const [optimizationDirection, setOptimizationDirection] = useState("Maximize");
+  const { translations } = useContext(LanguageContext);
+  const [optimizationDirection, setOptimizationDirection] =
+    useState("Maximize");
   const [problemStatement, setProblemStatement] = useState("");
 
-  const [validProblem, setValidProblem] = useState(true); 
-  const [prob, setProb] = useState([{ value: "" }]); 
-  const [constraints, setConstraints] = useState([{ value: "" }]); 
-  const [bounds, setBounds] = useState([{ value: "" }]); 
-  const [constraintNames, setConstraintNames] = useState([{ value: "" }]); 
+  const [validProblem, setValidProblem] = useState(true);
+  const [prob, setProb] = useState([{ value: "" }]);
+  const [constraints, setConstraints] = useState([{ value: "" }]);
+  const [bounds, setBounds] = useState([{ value: "" }]);
+  const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
 
   // State for validation of constraints and bounds
-  const [validConstraint, setValidConstraint] = useState(Array(constraintNames.length).fill(true));
-  const [validBound, setValidBound] = useState(Array(constraintNames.length).fill(true));
-  const [validConstraintNames, setValidConstraintNames] = useState(Array(constraintNames.length).fill(true));
+  const [validConstraint, setValidConstraint] = useState(
+    Array(constraintNames.length).fill(true),
+  );
+  const [validBound, setValidBound] = useState(
+    Array(constraintNames.length).fill(true),
+  );
+  const [validConstraintNames, setValidConstraintNames] = useState(
+    Array(constraintNames.length).fill(true),
+  );
 
   // Effect to send updated solver data back to parent component
   useEffect(() => {
@@ -68,25 +75,25 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       "\nBounds \n" +
       bounds.map((e) => e.value).join("\n") +
       "\nEnd";
-    setProblem(problem); 
+    setProblem(problem);
   };
 
   // Add new constraint, bound, or name
   const addRestriction = (setRestriction, restriction) => {
-    setRestriction([...restriction, { value: "" }]); 
+    setRestriction([...restriction, { value: "" }]);
   };
 
   // Modify existing constraint, bound, or name
   const handleRestrictionChange = (index, e, restriction, setRestriction) => {
     const newRestriction = [...restriction];
     newRestriction[index].value = e.target.value;
-    setRestriction(newRestriction); 
+    setRestriction(newRestriction);
   };
 
   // Delete a constraint, bound, or name
   const deleteRestriction = (index, restriction, setRestriction) => {
     if (restriction.length === 1) {
-      alert(translations.oneConstraintRequired); 
+      alert(translations.oneConstraintRequired);
     } else {
       const newRestriction = restriction.filter((_, i) => i !== index);
       setRestriction(newRestriction);
@@ -112,10 +119,12 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                   placeholder={"x1 + 2 x2 + 4 x3 + x4"}
                   className="uk-input"
                   type="text"
-                  style={{ borderColor: validProblem === false ? "#ff0000" : "#ccc" }}
+                  style={{
+                    borderColor: validProblem === false ? "#ff0000" : "#ccc",
+                  }}
                   onChange={(e) => {
-                    setProb(e.target.value); 
-                    returnProblem(); 
+                    setProb(e.target.value);
+                    returnProblem();
                   }}
                 />
               </td>
@@ -134,11 +143,21 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     placeholder={"Enter name"}
                     className={"uk-input"}
                     type="text"
-                    style={{ borderColor: validConstraintNames[index] === false ? "#ff0000" : "#ccc" }}
+                    style={{
+                      borderColor:
+                        validConstraintNames[index] === false
+                          ? "#ff0000"
+                          : "#ccc",
+                    }}
                     value={constraintNames[index].value}
                     onChange={(e) => {
-                      handleRestrictionChange(index, e, constraintNames, setConstraintNames);
-                      returnProblem(); 
+                      handleRestrictionChange(
+                        index,
+                        e,
+                        constraintNames,
+                        setConstraintNames,
+                      );
+                      returnProblem();
                     }}
                   />
                 </td>
@@ -147,10 +166,18 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     placeholder={"-x1 + x2 + x3 + 10 x4 <= 20"}
                     className="uk-input"
                     type="text"
-                    style={{ borderColor: validConstraint[index] === false ? "#ff0000" : "#ccc" }}
+                    style={{
+                      borderColor:
+                        validConstraint[index] === false ? "#ff0000" : "#ccc",
+                    }}
                     value={constraint.value}
                     onChange={(e) => {
-                      handleRestrictionChange(index, e, constraints, setConstraints);
+                      handleRestrictionChange(
+                        index,
+                        e,
+                        constraints,
+                        setConstraints,
+                      );
                       returnProblem();
                     }}
                   />
@@ -190,7 +217,10 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     placeholder={"0 <= x1 <= 40"}
                     className="uk-input"
                     type="text"
-                    style={{ borderColor: validBound[index] === false ? "#ff0000" : "#ccc" }}
+                    style={{
+                      borderColor:
+                        validBound[index] === false ? "#ff0000" : "#ccc",
+                    }}
                     value={bound.value}
                     onChange={(e) => {
                       handleRestrictionChange(index, e, bounds, setBounds);

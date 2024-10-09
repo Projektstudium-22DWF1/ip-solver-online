@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import Chooser from "./Chooser";
 import { InputOptions } from "../../services/SolverInterface";
-import { LanguageContext } from "../../context/LanguageContext"; 
+import { LanguageContext } from "../../context/LanguageContext";
 
 function InputFormatChooser({ inputFormat, setInputFormat, setProblem }) {
-  const { translations } = useContext(LanguageContext); 
+  const { translations } = useContext(LanguageContext);
 
   // Clears the problem whenever input format changes
   useEffect(() => {
@@ -22,7 +22,7 @@ function InputFormatChooser({ inputFormat, setInputFormat, setProblem }) {
     <Chooser
       options={inputOptions}
       onChange={setInputFormat}
-      label={translations.inputFormatOptions} 
+      label={translations.inputFormatOptions}
       value={inputFormat}
     />
   );

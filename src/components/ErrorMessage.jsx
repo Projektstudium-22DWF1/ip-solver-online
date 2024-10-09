@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import "./styles/styles.css";
 
 function ErrorMessage({ errorData, setErrorData }) {
-  const timerRef = useRef(null); 
+  const timerRef = useRef(null);
 
   useEffect(() => {
     // Check if there is an error message
@@ -13,7 +13,7 @@ function ErrorMessage({ errorData, setErrorData }) {
 
       // Set a timeout to clear the error message after 10 seconds
       timerRef.current = setTimeout(() => {
-        setErrorData(""); 
+        setErrorData("");
       }, 10000);
     }
 
@@ -21,7 +21,7 @@ function ErrorMessage({ errorData, setErrorData }) {
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
-        timerRef.current = null; 
+        timerRef.current = null;
       }
     };
   }, [errorData, errorData.id, setErrorData]);

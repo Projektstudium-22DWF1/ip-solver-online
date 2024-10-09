@@ -4,7 +4,7 @@ import "./../styles/styles.css";
 import { LanguageContext } from "../../context/LanguageContext";
 
 function RawTextarea({ problem, setProblem }) {
-  const { translations } = useContext(LanguageContext); 
+  const { translations } = useContext(LanguageContext);
 
   return (
     <React.Fragment>
@@ -13,13 +13,13 @@ function RawTextarea({ problem, setProblem }) {
         <div>
           <label
             htmlFor="textareaInput"
-            style={{ marginTop: "20px", display: "block" }} 
+            style={{ marginTop: "20px", display: "block" }}
           >
             {translations.input}
           </label>{" "}
           <textarea
             id="textareaInput"
-            data-testid="raw-textarea" 
+            data-testid="raw-textarea"
             className="uk-textarea"
             rows="18"
             value={problem}

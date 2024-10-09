@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
-import UIkit from "uikit"; 
-import enFlag from "../../assets/flags/en.png"; 
-import deFlag from "../../assets/flags/de.png"; 
+import UIkit from "uikit";
+import enFlag from "../../assets/flags/en.png";
+import deFlag from "../../assets/flags/de.png";
 
 const LanguageSelector = () => {
   const { changeLanguage, translations } = useContext(LanguageContext); // Access language context

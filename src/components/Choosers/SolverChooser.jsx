@@ -15,7 +15,7 @@ function SolverChooser({ solverOption, setSolverOption }) {
     <Chooser
       options={solverOptions}
       onChange={setSolverOption}
-      label={translations.solverOptions} 
+      label={translations.solverOptions}
       value={solverOption}
     />
   );

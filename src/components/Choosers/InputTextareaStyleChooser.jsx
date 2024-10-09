@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { LanguageContext } from "../../context/LanguageContext"; 
+import { LanguageContext } from "../../context/LanguageContext";
 
 function ImportTextareaStyleChooser({
   textareaStyle,
@@ -8,7 +8,7 @@ function ImportTextareaStyleChooser({
   setProblem,
 }) {
   const { translations } = useContext(LanguageContext); // Access translations
-  const isGMPL = inputFormat === "GMPL"; 
+  const isGMPL = inputFormat === "GMPL";
 
   // Toggles between "Raw" and "Guided"
   const toggleStyle = () => {

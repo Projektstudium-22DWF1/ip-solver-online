@@ -7,7 +7,7 @@ UIkit.use(Icons);
 
 function Chooser({ options, onChange, label, value }) {
   // Create a unique ID for the label based on the provided label text
-  const uniqueId = `chooser-${label.replace(/\s+/g, "-")}`; 
+  const uniqueId = `chooser-${label.replace(/\s+/g, "-")}`;
 
   return (
     <React.Fragment>
@@ -21,9 +21,9 @@ function Chooser({ options, onChange, label, value }) {
           {/********** Dropdown Chooser Box **********/}
           <div uk-form-custom="target: > * > span:first-child">
             <select
-              id={uniqueId} 
-              aria-label={label} 
-              onChange={(e) => onChange(e.target.value)} 
+              id={uniqueId}
+              aria-label={label}
+              onChange={(e) => onChange(e.target.value)}
             >
               {/* Maps over the options and creates each option element */}
               {options.map((option) => (
@@ -36,7 +36,7 @@ function Chooser({ options, onChange, label, value }) {
             <button
               className="uk-button uk-button-default"
               type="button"
-              tabIndex="-1" 
+              tabIndex="-1"
             >
               <span>{value}</span>
               <span uk-icon="icon: chevron-down"></span>

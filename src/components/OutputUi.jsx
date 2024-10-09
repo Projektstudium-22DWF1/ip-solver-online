@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { LanguageContext } from "../context/LanguageContext"; 
+import { LanguageContext } from "../context/LanguageContext";
 
 const OutputUi = ({ outputData }) => {
   const { translations } = useContext(LanguageContext);
@@ -56,7 +56,9 @@ const OutputUi = ({ outputData }) => {
     if (!outputData?.Columns) return <p>{translations.noVariablesAvailable}</p>;
 
     return (
-      <div style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}>
+      <div
+        style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}
+      >
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
@@ -90,7 +92,9 @@ const OutputUi = ({ outputData }) => {
     if (!outputData?.Rows) return <p>{translations.noConstraintsAvailable}</p>;
 
     return (
-      <div style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}>
+      <div
+        style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}
+      >
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
