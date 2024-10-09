@@ -13,6 +13,8 @@
   "gmplTooltip": "Textarea style cannot be changed in GMPL format.",
   "switchTo": "Switch to",
   "raw": "Raw",
+  "copy": "COPY",
+  "copied": "Copied!",
   "guided": "Guided",
   "problemStatement": "Problem Statement",
   "constraints": "Constraints",
