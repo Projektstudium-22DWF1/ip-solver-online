@@ -82,6 +82,22 @@ table td {
   background-color: #495057; /* Hintergrundfarbe bei Hover */
 }
 
+/* LandingPage Button */
+.landing-page-button {
+  background-color: #28a745; /* Grüner Hintergrund */
+  color: #fff; /* Weiße Schrift */
+  border: none; /* Kein Rand */
+  padding: 10px 20px; /* Innenabstand */
+  border-radius: 5px; /* Abgerundete Ecken */
+  font-size: 1.2em; /* Größere Schrift */
+  cursor: pointer; /* Hand-Cursor beim Hover */
+  transition: background-color 0.3s ease; /* Weicher Übergang bei Hover */
+}
+
+.landing-page-button:hover {
+  background-color: #218838; /* Dunkleres Grün bei Hover */
+}
+
 /* Labels für Constraints und Bounds */
 label {
   font-weight: bold;
