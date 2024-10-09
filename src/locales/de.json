@@ -12,6 +12,8 @@
   "gmplTooltip": "Textarea-Stil kann im GMPL-Format nicht geändert werden.",
   "switchTo": "Wechseln zu",
   "raw": "Textbox",
+  "copy": "KOPIEREN",
+  "copied": "Kopiert!",
   "guided": "Geführt",
   "problemStatement": "Zielfunktion",
   "constraints": "Restriktionen",
