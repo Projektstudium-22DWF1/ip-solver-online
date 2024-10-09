@@ -19,7 +19,6 @@
 
 ## Usage
 
-
 ## Installation
 
 To get the project running locally, follow these steps:
