@@ -8,7 +8,7 @@ function LandingPageTab({ setActiveComponent }) {
 
   return (
     <React.Fragment>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 50px)" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 500px)" }}>
         <h1>{translations.landingpageheader}</h1>
         <p>{translations.landingpagetext}</p>
         <button className="landing-page-button" onClick={() => setActiveComponent("SolverTab")}>
