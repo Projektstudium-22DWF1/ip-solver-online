@@ -25,8 +25,21 @@ export function MainNavbar() {
         >
           <div className="uk-navbar-left">
             {/* Logo (separate from tabs) */}
-            <div className="uk-navbar-item uk-logo uk-visible@s" onClick={() => setActiveComponent("LandingPageTab")} style={{ cursor: "pointer" }}>
-              <img src={logo} alt="OptiMize Logo" style={{ width: "50px", height: "auto", marginLeft: "20px", marginRight: "0px" }} />
+            <div
+              className="uk-navbar-item uk-logo uk-visible@s"
+              onClick={() => setActiveComponent("LandingPageTab")}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={logo}
+                alt="OptiMize Logo"
+                style={{
+                  width: "50px",
+                  height: "auto",
+                  marginLeft: "20px",
+                  marginRight: "0px",
+                }}
+              />
             </div>
 
             {/* Tabs for larger screens */}
@@ -81,7 +94,9 @@ export function MainNavbar() {
 
         {/* Main content */}
         <div className="uk-container" id="all" style={{ paddingTop: "30px" }}>
-          {activeComponent === "LandingPageTab" && <LandingPageTab setActiveComponent={setActiveComponent}/>}
+          {activeComponent === "LandingPageTab" && (
+            <LandingPageTab setActiveComponent={setActiveComponent} />
+          )}
           {activeComponent === "SolverTab" && <SolverTab />}
           {activeComponent === "DescriptionTab" && <DescriptionTab />}
         </div>

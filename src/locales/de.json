@@ -2,7 +2,7 @@
   "landingpage": "Startseite",
   "landingpageheader": "Optimale Lösungen - Erweitere deinen Erfolg mit OptiMize",
   "landingpagetext": "Auf dieser Webseite können Sie sowohl spezifische als auch allgemeine lineare Optimierungsprobleme einfach lösen. Wählen Sie zwischen den leistungsstarken Solvern HIGHS und GLPK, um Ihre Berechnungen durchzuführen. Zusätzlich können Sie Ihre Probleme entweder im LP- oder GMPL-Format eingeben, um in der für Sie passenden Umgebung zu arbeiten.",
-  "landingpagebutton":"Beginne jetzt deine Lösungen zu optimieren!",
+  "landingpagebutton": "Beginne jetzt deine Lösungen zu optimieren!",
   "solver": "Solver",
   "description": "Beschreibung",
   "language": "Sprache",

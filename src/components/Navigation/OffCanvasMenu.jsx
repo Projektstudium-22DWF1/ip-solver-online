@@ -9,21 +9,26 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
 
   return (
     <div id="offcanvas-nav" uk-offcanvas="overlay: true">
-      <div className="uk-offcanvas-bar uk-width-1-2" style={{ backgroundColor: "#fff" }}>
+      <div
+        className="uk-offcanvas-bar uk-width-1-2"
+        style={{ backgroundColor: "#fff" }}
+      >
         <button
           className="uk-offcanvas-close"
           type="button"
           uk-close="true"
         ></button>
-        <div style={{ textAlign: "center", marginBottom: "30px", marginTop: "5px" }}>
-          <img
-            src={logo}
-            alt="OptiMize Logo"
-            style={{ width: "60px" }}
-          />
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "30px",
+            marginTop: "5px",
+          }}
+        >
+          <img src={logo} alt="OptiMize Logo" style={{ width: "60px" }} />
         </div>
         <ul className="uk-nav uk-nav-default">
-        <li>
+          <li>
             <a
               onClick={() => {
                 setActiveComponent("LandingPageTab");

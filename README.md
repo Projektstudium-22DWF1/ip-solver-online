@@ -33,13 +33,19 @@ To get the project running locally, follow these steps:
    git clone https://github.com/Projektstudium-22DWF1/ip-solver-online.git
    cd ip-solver-online
 
+   ```
+
 2. **Install dependencies**:
+
    ```bash
    npm install
+
+   ```
 
 3. **Run the project**:
    ```bash
    npm start
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
