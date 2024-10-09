@@ -3,6 +3,12 @@ import "uikit/dist/css/uikit.min.css";
 import "./../styles/styles.css";
 import OptimizationDirectionChooser from "../Choosers/OptimizationDirectionChooser";
 import { LanguageContext } from "../../context/LanguageContext";
+import {
+  validateBound,
+  validateConstraintNames,
+  validateConstraints,
+  validateProblem
+} from "../../services/Validation";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext);
@@ -10,64 +16,35 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     useState("Maximize");
   const [problemStatement, setProblemStatement] = useState("");
 
-  const [validProblem, setValidProblem] = useState(true);
   const [prob, setProb] = useState([{ value: "" }]);
   const [constraints, setConstraints] = useState([{ value: "" }]);
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
-
-  // State for validation of constraints and bounds
+  const [validProblem, setValidProblem] = useState(
+      Array(prob.length).fill(true),
+  );
   const [validConstraint, setValidConstraint] = useState(
-    Array(constraintNames.length).fill(true),
+    Array(constraints.length).fill(true),
   );
   const [validBound, setValidBound] = useState(
-    Array(constraintNames.length).fill(true),
+    Array(bounds.length).fill(true),
   );
   const [validConstraintNames, setValidConstraintNames] = useState(
     Array(constraintNames.length).fill(true),
   );
 
-  // Effect to send updated solver data back to parent component
   useEffect(() => {
-    const dataToSend = {
-      constraints,
-      constraintNames,
-      bounds,
-      validConstraint,
-      validConstraintNames,
-      validBound,
-      validProblem,
-      setValidProblem,
-      setValidConstraint,
-      setValidBound,
-      setValidConstraintNames,
-      prob,
-      setProb,
-    };
+    const dataToSend = {prob, setProb};
     setSolverData(dataToSend); // Updates parent with current solver data
-  }, [
-    constraints,
-    constraintNames,
-    bounds,
-    validConstraint,
-    validConstraintNames,
-    validBound,
-    validProblem,
-    setSolverData,
-    setValidProblem,
-    setValidConstraint,
-    setValidBound,
-    setValidConstraintNames,
-    prob,
-    setProb,
-  ]);
+  }, [prob, setProb]);
 
   // Helper function to generate the complete problem text
   const returnProblem = () => {
+    console.log(prob[0].value);
     let problem =
       optimizationDirection +
       " obj: \n" +
-      prob +
+      prob[0].value +
       "\nSubject To \n" +
       constraints
         .map((e, index) => constraintNames[index].value + ": " + e.value)
@@ -75,6 +52,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       "\nBounds \n" +
       bounds.map((e) => e.value).join("\n") +
       "\nEnd";
+
     setProblem(problem);
   };
 
@@ -86,6 +64,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   // Modify existing constraint, bound, or name
   const handleRestrictionChange = (index, e, restriction, setRestriction) => {
     const newRestriction = [...restriction];
+    console.log(newRestriction);
     newRestriction[index].value = e.target.value;
     setRestriction(newRestriction);
   };
@@ -113,22 +92,27 @@ function GuidedTextarea({ setProblem, setSolverData }) {
         <label htmlFor="#problem">{translations.problemStatement}</label>
         <table className="mainArea">
           <tbody>
-            <tr>
+          {prob.map((p, index) => (
+          <tr key={index}>
               <td>
                 <input
                   placeholder={"x1 + 2 x2 + 4 x3 + x4"}
                   className="uk-input"
                   type="text"
                   style={{
-                    borderColor: validProblem === false ? "#ff0000" : "#ccc",
+                    borderColor: validProblem[index] === false ? "#ff0000" : "#ccc",
                   }}
+                  value={p.value}
                   onChange={(e) => {
-                    setProb(e.target.value);
+                    // setProb(e.target.value);
+                    handleRestrictionChange(index, e, prob, setProb);
+                    validateProblem(prob, validProblem, setValidProblem);
                     returnProblem();
                   }}
                 />
               </td>
             </tr>
+          ))}
           </tbody>
         </table>
 
@@ -157,6 +141,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraintNames,
                         setConstraintNames,
                       );
+                      validateConstraintNames(constraintNames, validConstraintNames, setValidConstraintNames);
                       returnProblem();
                     }}
                   />
@@ -178,6 +163,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraints,
                         setConstraints,
                       );
+                      validateConstraints(constraints, validConstraint, setValidConstraint);
                       returnProblem();
                     }}
                   />
@@ -223,7 +209,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     }}
                     value={bound.value}
                     onChange={(e) => {
+                      console.log(bound);
                       handleRestrictionChange(index, e, bounds, setBounds);
+                      validateBound(bounds, validBound, setValidBound);
                       returnProblem();
                     }}
                   />
