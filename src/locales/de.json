@@ -45,5 +45,50 @@
   "constraint": "Restriktion",
   "footerText": "Anwendung zur Lösung linearer Optimierungsprobleme",
   "solverOptions": "Solver",
-  "optimizationDirection": "Optimierungsrichtung"
+  "optimizationDirection": "Optimierungsrichtung",
+
+  "optimizationTitle": "Grundlagen der Linearen Optimierung",
+  "optimizationIntro": "Die lineare Optimierung ist eine Methode zur Lösung mathematischer Probleme mit linearen Beziehungen...",
+
+  "linearOptimizationTitle": "Was ist Lineare Optimierung?",
+  "linearOptimizationDescription": "Lineare Optimierung zielt darauf ab, eine Zielfunktion zu maximieren oder zu minimieren...",
+  "objectiveFunction": "Zielfunktion",
+  "objectiveFunctionDescription": "Die Funktion, die optimiert wird.",
+  "constraints_description": "Nebenbedingungen",
+  "constraintsDescription": "Einschränkungen in Form von linearen Gleichungen oder Ungleichungen.",
+  "variables_description": "Variablen",
+  "variablesDescription": "Unbekannte, die innerhalb des Problems optimiert werden sollen.",
+
+  "highsTitle": "HIGHS Solver",
+  "highsDescription": "HIGHS ist ein schneller Solver für große lineare Optimierungsprobleme...",
+  "highsFeature1": "Unterstützt LP und MIP.",
+  "highsFeature2": "Verwendet den Simplex- und Innenpunktmethoden.",
+  "highsFeature3": "Sehr leistungsfähig für große Probleme.",
+
+  "glpkTitle": "GLPK Solver",
+  "glpkDescription": "GLPK ist ein vielseitiger Open-Source-Solver für LP und MIP...",
+  "glpkFeature1": "Unterstützt LP und GMPL.",
+  "glpkFeature2": "Verwendet Simplex- und Branch-and-Bound-Methoden.",
+  "glpkFeature3": "Geeignet für kleinere bis mittlere Optimierungsprobleme.",
+
+  "inputLanguagesTitle": "Unterstützte Input-Sprachen",
+  "lpFormatTitle": "LP Format",
+  "lpFormatDescription": "Das LP-Format wird verwendet, um einfache lineare Programme zu beschreiben...",
+  "gmplFormatTitle": "GMPL Format",
+  "gmplFormatDescription": "GMPL ist eine Modellierungssprache, die von GLPK unterstützt wird...",
+
+  "comparisonTitle": "Vergleich zwischen HIGHS und GLPK",
+  "comparisonDescription": "Hier sind die Hauptunterschiede zwischen HIGHS und GLPK...",
+  "comparisonFeature1Title": "Geschwindigkeit",
+  "comparisonFeature1Description": "HIGHS ist für größere Probleme schneller als GLPK.",
+  "comparisonFeature2Title": "Skalierbarkeit",
+  "comparisonFeature2Description": "HIGHS eignet sich für sehr große Probleme.",
+  "comparisonFeature3Title": "Flexibilität",
+  "comparisonFeature3Description": "GLPK unterstützt mehr Modellierungsfunktionen über GMPL.",
+
+  "resourcesTitle": "Nützliche Ressourcen",
+  "highsDocumentationLink": "HIGHS Dokumentation",
+  "glpkDocumentationLink": "GLPK Dokumentation",
+  "cplexDocumentationLink": "CPLEX Dokumentation",
+  "gmplDocumentationLink": "GMPL Dokumentation"
 }

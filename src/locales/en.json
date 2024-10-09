@@ -1,8 +1,11 @@
 {
+
   "landingpage": "Homepage",
   "landingpageheader": "Optimized Solutions - Enhance your success with OptiMize",
   "landingpagetext": "On this website, you can solve both specific and general linear optimization problems with ease. Choose between the powerful HIGHS and GLPK solvers to handle your computations. Additionally, you can input your problem in either the LP or GMPL formats, giving you the flexibility to work in the environment you prefer.",
   "landingpagebutton": "Start optimizing your solutions right now!",
+
+
   "solver": "Solver",
   "description": "Description",
   "language": "Language",
@@ -45,5 +48,45 @@
   "constraint": "Constraint",
   "footerText": "Application for solving linear optimization problems",
   "solverOptions": "Solver",
-  "optimizationDirection": "Optimization Direction"
+  "optimizationDirection": "Optimization Direction",
+
+
+  "optimizationTitle": "Basics of Linear Optimization",
+  "optimizationIntro": "Linear optimization is a method used to solve mathematical problems involving linear relationships...",
+  "linearOptimizationTitle": "What is Linear Optimization?",
+  "linearOptimizationDescription": "Linear optimization aims to maximize or minimize an objective function...",
+  "objectiveFunction": "Objective Function",
+  "objectiveFunctionDescription": "The function to be optimized.",
+  "constraints_description": "Constraints",
+  "constraintsDescription": "Restrictions in the form of linear equations or inequalities.",
+  "variables_description": "Variables",
+  "variablesDescription": "Unknowns that are to be optimized within the problem.",
+  "highsTitle": "HIGHS Solver",
+  "highsDescription": "HIGHS is a fast solver for large linear optimization problems...",
+  "highsFeature1": "Supports LP and MIP.",
+  "highsFeature2": "Uses Simplex and interior-point methods.",
+  "highsFeature3": "Highly efficient for large-scale problems.",
+  "glpkTitle": "GLPK Solver",
+  "glpkDescription": "GLPK is a versatile open-source solver for LP and MIP...",
+  "glpkFeature1": "Supports LP and GMPL.",
+  "glpkFeature2": "Uses Simplex and branch-and-bound methods.",
+  "glpkFeature3": "Suitable for small to medium-sized optimization problems.",
+  "inputLanguagesTitle": "Supported Input Languages",
+  "lpFormatTitle": "LP Format",
+  "lpFormatDescription": "The LP format is used to describe simple linear programs...",
+  "gmplFormatTitle": "GMPL Format",
+  "gmplFormatDescription": "GMPL is a modeling language supported by GLPK...",
+  "comparisonTitle": "Comparison between HIGHS and GLPK",
+  "comparisonDescription": "Here are the key differences between HIGHS and GLPK...",
+  "comparisonFeature1Title": "Speed",
+  "comparisonFeature1Description": "HIGHS is faster than GLPK for larger problems.",
+  "comparisonFeature2Title": "Scalability",
+  "comparisonFeature2Description": "HIGHS is suited for very large problems.",
+  "comparisonFeature3Title": "Flexibility",
+  "comparisonFeature3Description": "GLPK supports more modeling capabilities via GMPL.",
+  "resourcesTitle": "Useful Resources",
+  "highsDocumentationLink": "HIGHS Documentation",
+  "glpkDocumentationLink": "GLPK Documentation",
+  "cplexDocumentationLink": "CPLEX Documentation",
+  "gmplDocumentationLink": "GMPL Documentation"
 }
