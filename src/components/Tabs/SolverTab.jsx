@@ -60,6 +60,7 @@ export function SolverTab() {
           inputFormat={inputFormat}
           setInputFormat={setInputFormat}
           textAreaStyle={textareaStyle}
+          setProblem={setProblem}
         />
       </div>
 
@@ -75,6 +76,7 @@ export function SolverTab() {
             textareaStyle={textareaStyle}
             setTextareaStyle={setTextareaStyle}
             inputFormat={inputFormat}
+            setProblem={setProblem}
           />
 
           <InputFormatInformationIcon inputFormat={inputFormat} />

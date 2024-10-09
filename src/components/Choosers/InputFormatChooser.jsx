@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Chooser from "./Chooser";
 import { InputOptions } from "../../services/SolverInterface";
 import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
 
-function InputFormatChooser({ inputFormat, setInputFormat }) {
+function InputFormatChooser({ inputFormat, setInputFormat, setProblem }) {
   const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+
+  useEffect(() => {
+    setProblem("");
+  }, [inputFormat, setProblem]);
 
   const inputOptions = [
     { value: InputOptions.LP, label: InputOptions.LP },
