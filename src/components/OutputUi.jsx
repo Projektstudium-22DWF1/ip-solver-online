@@ -1,15 +1,21 @@
 import React, { useState, useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { LanguageContext } from "../context/LanguageContext";
+import { LanguageContext } from "../context/LanguageContext"; // Import the LanguageContext for translations
 
+// Component to display the output UI with various tabs for summary, logs, output, variables, and constraints
 const OutputUi = ({ outputData }) => {
+  // Get the translations from the context
   const { translations } = useContext(LanguageContext);
+
+  // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("summary");
 
-  // Render summary tab content
+  // Function to render the summary tab content
   const renderSummary = () => {
+    // If there is no output data, display a message
     if (!outputData) return <p>{translations.noDataAvailable}</p>;
 
+    // Render the summary details with status, objective value, and walltime
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <p>
@@ -27,11 +33,14 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
-  // Render logs tab content
+  // Function to render the logs tab content
   const renderLog = () => {
-    if (!outputData || !outputData.hasOwnProperty("GlpkLog"))
-      return <p>{translations.noLogsAvailable}</p>;
+    // Display message if no output data or logs are not available/supported
+    if (!outputData) return <p>{translations.noLogsAvailable}</p>;
+    if (!outputData.hasOwnProperty("GlpkLog"))
+      return <p>{translations.logsNotSupported}</p>;
 
+    // Render the log details
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <pre>{outputData.GlpkLog}</pre>
@@ -39,11 +48,16 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
-  // Render output tab content
+  // Function to render the output tab content
   const renderOutput = () => {
-    if (!outputData || !outputData.hasOwnProperty("GlpkOutput"))
-      return <p>{translations.noOutputAvailable}</p>;
+    // Display message if no output data or output is not supported
+    if (!outputData) return <p>{translations.noOutputAvailable}</p>;
+    if (!outputData.hasOwnProperty("GlpkOutput"))
+      return <p>{translations.outputNotSupported}</p>;
+    if (!outputData.GlpkOutput || outputData.GlpkOutput?.trim().length === 0)
+      return <p>{translations.modelGeneratesNoOutput}</p>;
 
+    // Render the output details
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <pre>{outputData.GlpkOutput}</pre>
@@ -51,10 +65,12 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
-  // Render variables tab with scroll if necessary
+  // Function to render the variables tab content
   const renderVariables = () => {
+    // Display message if no variables are available
     if (!outputData?.Columns) return <p>{translations.noVariablesAvailable}</p>;
 
+    // Render a table of variables with their properties, wrapped in a scrollable div
     return (
       <div
         style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}
@@ -62,23 +78,31 @@ const OutputUi = ({ outputData }) => {
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
-              <th>{translations.variable}</th>
-              <th>{translations.primalValue}</th>
-              <th>{translations.status}</th>
-              <th>{translations.lowerBound}</th>
-              <th>{translations.upperBound}</th>
-              <th>{translations.dualValue}</th>
+              <th className="uk-text-center">{translations.variable}</th>
+              <th className="uk-text-center">{translations.primalValue}</th>
+              <th className="uk-text-center">{translations.status}</th>
+              <th className="uk-text-center">{translations.lowerBound}</th>
+              <th className="uk-text-center">{translations.upperBound}</th>
+              <th className="uk-text-center">{translations.dualValue}</th>
             </tr>
           </thead>
           <tbody>
             {Object.entries(outputData.Columns).map(([key, variable]) => (
               <tr key={key}>
-                <td>{variable.Name}</td>
-                <td>{variable.Primal}</td>
-                <td>{variable.Status}</td>
-                <td>{variable.Lower ?? "-∞"}</td>
-                <td>{variable.Upper ?? "∞"}</td>
-                <td>{variable.Dual}</td>
+                <td className="uk-text-center">{variable.Name}</td>
+                <td className="uk-text-center">{variable.Primal}</td>
+                <td className="uk-text-center">{variable.Status}</td>
+                <td className="uk-text-center">
+                  {variable.Lower === null || variable.Lower === -Infinity
+                    ? "-∞"
+                    : variable.Lower}
+                </td>
+                <td className="uk-text-center">
+                  {variable.Upper === null || variable.Upper === Infinity
+                    ? "∞"
+                    : variable.Upper}
+                </td>
+                <td className="uk-text-center">{variable.Dual}</td>
               </tr>
             ))}
           </tbody>
@@ -87,10 +111,12 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
-  // Render constraints tab with scroll if necessary
+  // Function to render the constraints tab content
   const renderConstraints = () => {
+    // Display message if no constraints are available
     if (!outputData?.Rows) return <p>{translations.noConstraintsAvailable}</p>;
 
+    // Render a table of constraints with their properties, wrapped in a scrollable div
     return (
       <div
         style={{ marginTop: "20px", textAlign: "center", overflowX: "auto" }}
@@ -98,21 +124,29 @@ const OutputUi = ({ outputData }) => {
         <table className="uk-table uk-table-divider uk-table-hover">
           <thead>
             <tr>
-              <th>{translations.constraint}</th>
-              <th>{translations.primalValue}</th>
-              <th>{translations.lowerBound}</th>
-              <th>{translations.upperBound}</th>
-              <th>{translations.dualValue}</th>
+              <th className="uk-text-center">{translations.constraint}</th>
+              <th className="uk-text-center">{translations.primalValue}</th>
+              <th className="uk-text-center">{translations.lowerBound}</th>
+              <th className="uk-text-center">{translations.upperBound}</th>
+              <th className="uk-text-center">{translations.dualValue}</th>
             </tr>
           </thead>
           <tbody>
             {outputData.Rows.map((row, index) => (
               <tr key={index}>
-                <td>{row.Name}</td>
-                <td>{row.Primal}</td>
-                <td>{row.Lower ?? "-∞"}</td>
-                <td>{row.Upper ?? "∞"}</td>
-                <td>{row.Dual}</td>
+                <td className="uk-text-center">{row.Name}</td>
+                <td className="uk-text-center">{row.Primal}</td>
+                <td className="uk-text-center">
+                  {row.Lower === null || row.Lower === -Infinity
+                    ? "-∞"
+                    : row.Lower}
+                </td>
+                <td className="uk-text-center">
+                  {row.Upper === null || row.Upper === Infinity
+                    ? "∞"
+                    : row.Upper}
+                </td>
+                <td className="uk-text-center">{row.Dual}</td>
               </tr>
             ))}
           </tbody>
@@ -121,9 +155,10 @@ const OutputUi = ({ outputData }) => {
     );
   };
 
-  // Main render for tabs and content
+  // Main render function for the component
   return (
     <div className="uk-container uk-margin-top">
+      {/* UIkit Tabs for navigation between different sections */}
       <ul className="uk-tab" uk-tab="true">
         <li className={activeTab === "summary" ? "uk-active" : ""}>
           <a onClick={() => setActiveTab("summary")}>{translations.summary}</a>
@@ -146,6 +181,7 @@ const OutputUi = ({ outputData }) => {
         </li>
       </ul>
 
+      {/* Content Switcher for Tabs */}
       <div>
         {activeTab === "summary" && renderSummary()}
         {activeTab === "logs" && renderLog()}

@@ -11,7 +11,9 @@ describe("InputFormatChooser Component", () => {
   const mockTranslations = {
     inputFormatOptions: "Input Format",
   };
+
   const mockSetInputFormat = jest.fn();
+  const mockSetProblem = jest.fn(); // Mock für setProblem
 
   test("renders without crashing and displays correct label", () => {
     render(
@@ -19,6 +21,7 @@ describe("InputFormatChooser Component", () => {
         <InputFormatChooser
           inputFormat={InputOptions.LP}
           setInputFormat={mockSetInputFormat}
+          setProblem={mockSetProblem} // Hinzufügen der Mock-Funktion für setProblem
         />
       </LanguageContext.Provider>,
     );
@@ -35,6 +38,7 @@ describe("InputFormatChooser Component", () => {
         <InputFormatChooser
           inputFormat={InputOptions.LP}
           setInputFormat={mockSetInputFormat}
+          setProblem={mockSetProblem} // Hinzufügen der Mock-Funktion für setProblem
         />
       </LanguageContext.Provider>,
     );
@@ -55,6 +59,7 @@ describe("InputFormatChooser Component", () => {
         <InputFormatChooser
           inputFormat={InputOptions.LP}
           setInputFormat={mockSetInputFormat}
+          setProblem={mockSetProblem} // Hinzufügen der Mock-Funktion für setProblem
         />
       </LanguageContext.Provider>,
     );
@@ -69,6 +74,7 @@ describe("InputFormatChooser Component", () => {
         <InputFormatChooser
           inputFormat={InputOptions.LP}
           setInputFormat={mockSetInputFormat}
+          setProblem={mockSetProblem} // Hinzufügen der Mock-Funktion für setProblem
         />
       </LanguageContext.Provider>,
     );
