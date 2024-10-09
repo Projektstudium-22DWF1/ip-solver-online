@@ -15,6 +15,7 @@ import {
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
+import {validateGuidedProblem} from "../../services/Validation";
 
 export function SolverTab() {
   const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
@@ -100,6 +101,7 @@ export function SolverTab() {
 
       {/* Solve problem button with validation for guided mode */}
       <SolveProblemButton
+        solveControl={solverData.solveControl}
         solveProblem={() => {
           if (textareaStyle === "Guided") {
             solveProblem();

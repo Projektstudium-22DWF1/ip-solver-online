@@ -1,5 +1,8 @@
-export function validateGuidedProblem(state) {
+export function validateGuidedProblem(states) {
   let valid = true;
+
+
+
 
   return valid;
 }

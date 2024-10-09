@@ -9,6 +9,7 @@ import {
   validateConstraints,
   validateProblem,
 } from "../../services/Validation";
+import {solve} from "../../services/SolverInterface";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext);
@@ -30,11 +31,12 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [validConstraintNames, setValidConstraintNames] = useState(
     Array(constraintNames.length).fill(true),
   );
+  const [solveControl, setSolveControl] = useState(true);
 
   useEffect(() => {
-    const dataToSend = { prob, setProb };
+    const dataToSend = { prob, setProb, solveControl, setSolveControl };
     setSolverData(dataToSend); // Updates parent with current solver data
-  }, [prob, setProb]);
+  }, [prob, setProb, solveControl, setSolveControl]);
 
   // Helper function to generate the complete problem text
   const returnProblem = () => {
@@ -76,6 +78,18 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       setRestriction(newRestriction);
     }
   };
+
+  useEffect(() => {
+    const allValid =
+        validProblem.every(Boolean) &&
+        validConstraint.every(Boolean) &&
+        validConstraintNames.every(Boolean) &&
+        validBound.every(Boolean);
+
+    setSolveControl(!allValid);
+  }, [validProblem, validConstraint, validConstraintNames, validBound]);
+
+
 
   return (
     <React.Fragment>
@@ -140,11 +154,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraintNames,
                         setConstraintNames,
                       );
-                      validateConstraintNames(
-                        constraintNames,
-                        validConstraintNames,
-                        setValidConstraintNames,
-                      );
+                      validateConstraintNames(constraintNames, validConstraintNames, setValidConstraintNames);
                       returnProblem();
                     }}
                   />
@@ -166,11 +176,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraints,
                         setConstraints,
                       );
-                      validateConstraints(
-                        constraints,
-                        validConstraint,
-                        setValidConstraint,
-                      );
+                      validateConstraints(constraints, validConstraint, setValidConstraint);
                       returnProblem();
                     }}
                   />
