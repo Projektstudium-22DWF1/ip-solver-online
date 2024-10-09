@@ -100,7 +100,7 @@ subject to con{i in I}: sum{j in J} A[i,j] * x[j] >= b[i];`}
             </a>
           </li>
           <li>
-            <a href="https://www.ibm.com/docs/en/icos/20.1.0?topic=cplex" target="_blank" rel="noopener noreferrer">
+            <a href="https://gusek.sourceforge.net/gmpl.pdf" target="_blank" rel="noopener noreferrer">
               {translations.cplexDocumentationLink}
             </a>
           </li>
