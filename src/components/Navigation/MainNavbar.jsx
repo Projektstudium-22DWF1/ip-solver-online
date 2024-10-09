@@ -24,6 +24,11 @@ export function MainNavbar() {
           uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar; cls-active: uk-navbar-sticky; top: 0; z-index: 1000;"
         >
           <div className="uk-navbar-left">
+            {/* Logo (separate from tabs) */}
+            <div className="uk-navbar-item uk-logo uk-visible@s" onClick={() => setActiveComponent("LandingPageTab")} style={{ cursor: "pointer" }}>
+              <img src={logo} alt="OptiMize Logo" style={{ width: "50px", height: "auto", marginLeft: "20px", marginRight: "0px" }} />
+            </div>
+
             {/* Tabs for larger screens */}
             <ul
               className="uk-navbar-nav uk-flex uk-visible@s"
@@ -36,7 +41,6 @@ export function MainNavbar() {
                   className="uk-text-center"
                   onClick={() => setActiveComponent("LandingPageTab")}
                 >
-                  <img src={logo} alt="OptiMize Logo" style={{width: "35px", marginRight: "2px"}}/>
                   {translations.landingpage}
                 </a>
               </li>

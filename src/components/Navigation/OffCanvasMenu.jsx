@@ -19,7 +19,7 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
           <img
             src={logo}
             alt="OptiMize Logo"
-            style={{ width: "60px" }} // Passe die Größe des Logos an, wie du möchtest
+            style={{ width: "60px" }}
           />
         </div>
         <ul className="uk-nav uk-nav-default">
