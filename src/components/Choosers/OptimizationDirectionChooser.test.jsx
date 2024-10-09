@@ -30,7 +30,6 @@ describe("OptimizationDirectionChooser Component", () => {
   test("renders correct options", () => {
     renderComponent("Maximize");
 
-    // Open the dropdown by clicking the button
     fireEvent.click(screen.getByRole("button"));
 
     // Check if both options are rendered using more specific queries
@@ -41,10 +40,8 @@ describe("OptimizationDirectionChooser Component", () => {
   test("calls setOptimizationDirection when an option is selected", () => {
     renderComponent("Maximize");
 
-    // Open the dropdown by clicking the button
     fireEvent.click(screen.getByRole("button"));
 
-    // Select a different option
     fireEvent.change(screen.getByLabelText("Optimization Direction"), {
       target: { value: "Minimize" },
     });

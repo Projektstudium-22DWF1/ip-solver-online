@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
 import "./../styles/styles.css";
-import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
+import { LanguageContext } from "../../context/LanguageContext";
 
 function RawTextarea({ problem, setProblem }) {
-  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+  const { translations } = useContext(LanguageContext);
 
   return (
     <React.Fragment>
@@ -13,14 +13,13 @@ function RawTextarea({ problem, setProblem }) {
         <div>
           <label
             htmlFor="textareaInput"
-            style={{ marginTop: "20px", display: "block" }} // Inline-Stil für Abstand
+            style={{ marginTop: "20px", display: "block" }}
           >
             {translations.input}
           </label>{" "}
-          {/* Verwende Übersetzung */}
           <textarea
             id="textareaInput"
-            data-testid="raw-textarea" // Hinzufügen eines data-testid-Attributs
+            data-testid="raw-textarea"
             className="uk-textarea"
             rows="18"
             value={problem}

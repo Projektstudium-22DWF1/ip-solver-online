@@ -1,25 +1,28 @@
 import React, { useContext, useEffect } from "react";
 import Chooser from "./Chooser";
 import { InputOptions } from "../../services/SolverInterface";
-import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
+import { LanguageContext } from "../../context/LanguageContext";
 
 function InputFormatChooser({ inputFormat, setInputFormat, setProblem }) {
-  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+  const { translations } = useContext(LanguageContext);
 
+  // Clears the problem whenever input format changes
   useEffect(() => {
     setProblem("");
   }, [inputFormat, setProblem]);
 
+  // Defines input options for the dropdown
   const inputOptions = [
     { value: InputOptions.LP, label: InputOptions.LP },
     { value: InputOptions.GMPL, label: InputOptions.GMPL },
   ];
 
+  // Renders the Chooser component with input options
   return (
     <Chooser
       options={inputOptions}
       onChange={setInputFormat}
-      label={translations.inputFormatOptions} // Verwende den übersetzten Text
+      label={translations.inputFormatOptions}
       value={inputFormat}
     />
   );

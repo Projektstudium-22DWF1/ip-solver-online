@@ -25,31 +25,24 @@ describe("ImportTextareaStyleChooser Component", () => {
   };
 
   test("renders the button with Guided as initial textarea style", () => {
+    // Checks if button is rendered with "Switch to Raw" when textareaStyle is Guided
     renderComponent("Guided", "LP");
-
-    // Überprüfe, ob der Button mit dem korrekten Text gerendert wird
     expect(screen.getByText("Switch to Raw")).toBeInTheDocument();
   });
 
   test("toggles textarea style when the button is clicked", () => {
+    // Simulates button click and checks if setTextareaStyle is called
     renderComponent("Guided", "LP");
-
-    // Klicke auf den Button und überprüfe, ob die Funktion aufgerufen wurde
     const button = screen.getByText("Switch to Raw");
     fireEvent.click(button);
-
-    // Überprüfe, ob `setTextareaStyle` aufgerufen wurde (einmalige Überprüfung, unabhängig vom Argument)
     expect(mockSetTextareaStyle).toHaveBeenCalled();
   });
 
   test("disables the button and shows tooltip when inputFormat is GMPL", () => {
+    // Checks if button is disabled and tooltip is shown when inputFormat is GMPL
     renderComponent("Raw", "GMPL");
-
-    // Überprüfe, ob der Button deaktiviert ist
     const button = screen.getByText("Switch to Guided");
     expect(button).toBeDisabled();
-
-    // Überprüfe, ob das Tooltip den richtigen Text enthält
     expect(button).toHaveAttribute(
       "data-uk-tooltip",
       `title:${mockTranslations.gmplTooltip}; pos: bottom-right`,
@@ -57,16 +50,14 @@ describe("ImportTextareaStyleChooser Component", () => {
   });
 
   test("automatically sets textareaStyle to Raw when inputFormat is GMPL", () => {
+    // Checks if textareaStyle is automatically set to Raw when inputFormat is GMPL
     renderComponent("Guided", "GMPL");
-
-    // Überprüfe, ob die Funktion aufgerufen wurde, um textareaStyle auf "Raw" zu setzen
     expect(mockSetTextareaStyle).toHaveBeenCalledWith("Raw");
   });
 
   test("automatically sets textareaStyle to Guided when inputFormat is not GMPL", () => {
+    // Checks if textareaStyle is automatically set to Guided when inputFormat is not GMPL
     renderComponent("Raw", "LP");
-
-    // Überprüfe, ob die Funktion aufgerufen wurde, um textareaStyle auf "Guided" zu setzen
     expect(mockSetTextareaStyle).toHaveBeenCalledWith("Guided");
   });
 });

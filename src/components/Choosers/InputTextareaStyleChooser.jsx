@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { LanguageContext } from "../../context/LanguageContext"; // Importiere den Kontext
+import { LanguageContext } from "../../context/LanguageContext";
 
 function ImportTextareaStyleChooser({
   textareaStyle,
@@ -7,27 +7,29 @@ function ImportTextareaStyleChooser({
   inputFormat,
   setProblem,
 }) {
-  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
-  const isGMPL = inputFormat === "GMPL"; // Überprüfen, ob das Property 'GMPL' ist
+  const { translations } = useContext(LanguageContext); // Access translations
+  const isGMPL = inputFormat === "GMPL";
 
-  // Funktion zum Umschalten zwischen Raw und Guided
+  // Toggles between "Raw" and "Guided"
   const toggleStyle = () => {
     setTextareaStyle((prevStyle) =>
       prevStyle === "Guided" ? "Raw" : "Guided",
     );
   };
 
+  // Clears problem when textareaStyle changes
   useEffect(() => {
     setProblem("");
   }, [textareaStyle, setProblem]);
 
-  // useEffect-Hook, um textareaStyle automatisch auf "Raw" zu setzen, wenn format "GMPL" ist
+  // Automatically sets textareaStyle to "Raw" if format is GMPL
   useEffect(() => {
     if (isGMPL) {
       setTextareaStyle("Raw");
     }
-  }, [isGMPL, setTextareaStyle]); // Läuft, wenn isGMPL sich ändert
+  }, [isGMPL, setTextareaStyle]);
 
+  // Resets textareaStyle to "Guided" when not using GMPL
   useEffect(() => {
     if (!isGMPL) {
       setTextareaStyle("Guided");
@@ -36,7 +38,7 @@ function ImportTextareaStyleChooser({
 
   return (
     <div>
-      {/* Button mit Tooltip und Styling für disabled Zustand */}
+      {/* Button with tooltip, disabled when GMPL is selected */}
       <button
         onClick={toggleStyle}
         className={`uk-button uk-button-secondary ${isGMPL ? "disabled-button" : ""}`}
@@ -47,7 +49,7 @@ function ImportTextareaStyleChooser({
         {textareaStyle === "Guided" ? translations.raw : translations.guided}
       </button>
 
-      {/* CSS für deaktivierten Button */}
+      {/* CSS for disabled button */}
       <style>{`
         .disabled-button {
           background-color: grey !important;

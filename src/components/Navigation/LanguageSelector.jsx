@@ -1,43 +1,44 @@
 import React, { useContext } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
-import UIkit from "uikit"; // UIkit importieren, um Dropdown manuell zu schließen
-import enFlag from "../../assets/flags/en.png"; // Importiere die englische Flagge
-import deFlag from "../../assets/flags/de.png"; // Importiere die deutsche Flagge
+import UIkit from "uikit";
+import enFlag from "../../assets/flags/en.png";
+import deFlag from "../../assets/flags/de.png";
 
 const LanguageSelector = () => {
-  const { changeLanguage, translations } = useContext(LanguageContext); // Zugriff auf den Sprachkontext
+  const { changeLanguage, translations } = useContext(LanguageContext); // Access language context
 
-  // Funktion zum Schließen des Dropdowns
+  // Close dropdown after selecting language
   const closeDropdown = () => {
-    const dropdown = UIkit.dropdown(".uk-dropdown"); // Selektiert das Dropdown
-    dropdown.hide(); // Schließt das Dropdown
+    const dropdown = UIkit.dropdown(".uk-dropdown");
+    dropdown.hide();
   };
 
+  // Change language and close dropdown
   const handleLanguageChange = (language) => {
-    closeDropdown(); // Schließe das Dropdown sofort
-    changeLanguage(language); // Wechsel der Sprache nach Schließen des Dropdowns
+    closeDropdown();
+    changeLanguage(language);
   };
 
   return (
     <div className="uk-navbar-item">
       <div className="uk-margin-small-left">
-        {/* Button mit Welt-Icon */}
         <button
-          data-testid="language-selector-button" // Hinzugefügt
+          data-testid="language-selector-button"
           className="uk-button uk-button-default uk-flex uk-flex-middle"
           type="button"
         >
           <span uk-icon="world" className="uk-margin-small-right"></span>
           {translations.activeLanguage}
         </button>
-        {/* Dropdown-Menü */}
+
+        {/* Dropdown for language options */}
         <div uk-dropdown="mode: click">
           <ul className="uk-nav uk-dropdown-nav">
             <li>
               <a
                 data-testid="language-option-en"
-                onClick={() => handleLanguageChange("en")} // Schließt Dropdown sofort und wechselt Sprache
+                onClick={() => handleLanguageChange("en")}
               >
                 <img
                   src={enFlag}
@@ -51,7 +52,7 @@ const LanguageSelector = () => {
             <li>
               <a
                 data-testid="language-option-de"
-                onClick={() => handleLanguageChange("de")} // Schließt Dropdown sofort und wechselt Sprache
+                onClick={() => handleLanguageChange("de")}
               >
                 <img
                   src={deFlag}

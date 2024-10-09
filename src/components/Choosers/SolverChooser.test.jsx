@@ -38,7 +38,6 @@ describe("SolverChooser Component", () => {
   test("renders correct solver options", () => {
     renderComponent("HIGHS");
 
-    // Open the dropdown by clicking the button
     fireEvent.click(screen.getByRole("button"));
 
     // Check if both solver options are rendered
@@ -49,10 +48,8 @@ describe("SolverChooser Component", () => {
   test("calls setSolverOption when an option is selected", () => {
     renderComponent("HIGHS");
 
-    // Open the dropdown by clicking the button
     fireEvent.click(screen.getByRole("button"));
 
-    // Select a different option
     fireEvent.change(screen.getByLabelText("Solver Options"), {
       target: { value: "GLPK" },
     });
