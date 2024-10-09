@@ -8,7 +8,7 @@ function ImportTextareaStyleChooser({
   setProblem,
 }) {
   const { translations } = useContext(LanguageContext); // Access translations
-  const isGMPL = inputFormat === "GMPL"; // Check if inputFormat is GMPL
+  const isGMPL = inputFormat === "GMPL"; 
 
   // Toggles between "Raw" and "Guided"
   const toggleStyle = () => {

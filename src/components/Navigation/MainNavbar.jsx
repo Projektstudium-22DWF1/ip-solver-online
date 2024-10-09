@@ -1,4 +1,3 @@
-// components/Tabs/MainNavbar.jsx
 import React, { useContext, useState } from "react";
 import { LanguageContext } from "../../context/LanguageContext";
 import "uikit/dist/css/uikit.min.css";
@@ -15,7 +14,7 @@ export function MainNavbar() {
   return (
     <React.Fragment>
       <div>
-        {/* Sticky Navbar */}
+        {/* Sticky Navbar with UIkit settings */}
         <nav
           className="uk-navbar-container"
           uk-navbar="true"
@@ -27,6 +26,7 @@ export function MainNavbar() {
               className="uk-navbar-nav uk-flex uk-visible@s"
               style={{ minWidth: "300px" }}
             >
+              {/* SolverTab and DescriptionTab with active state */}
               <li
                 className={`uk-active uk-width-expand ${activeComponent === "SolverTab" ? "active" : ""}`}
               >
@@ -53,7 +53,7 @@ export function MainNavbar() {
             <BurgerMenuButton />
           </div>
 
-          {/* Language Selector */}
+          {/* Language Selector in the right side of navbar */}
           <div className="uk-navbar-right">
             <LanguageSelector />
           </div>
@@ -62,7 +62,7 @@ export function MainNavbar() {
         {/* Off-canvas Menu for mobile screens */}
         <OffCanvasMenu setActiveComponent={setActiveComponent} />
 
-        {/* Main content */}
+        {/* Main content area that switches between SolverTab and DescriptionTab */}
         <div className="uk-container" id="all" style={{ paddingTop: "50px" }}>
           {activeComponent === "SolverTab" && <SolverTab />}
           {activeComponent === "DescriptionTab" && <DescriptionTab />}

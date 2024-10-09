@@ -37,7 +37,6 @@ describe("Chooser Component", () => {
       />,
     );
 
-    // Simulates opening the dropdown
     fireEvent.click(screen.getByRole("button"));
 
     // Verifies all options are rendered

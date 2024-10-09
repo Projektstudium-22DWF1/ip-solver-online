@@ -39,7 +39,6 @@ describe("InputFormatChooser Component", () => {
       </LanguageContext.Provider>,
     );
 
-    // Simulates opening the dropdown
     fireEvent.click(screen.getByRole("button"));
 
     // Verifies that both input options are rendered in the dropdown
@@ -74,10 +73,8 @@ describe("InputFormatChooser Component", () => {
       </LanguageContext.Provider>,
     );
 
-    // Simulates opening the dropdown
     fireEvent.click(screen.getByRole("button"));
 
-    // Simulates selecting a new option
     fireEvent.change(
       screen.getByLabelText(mockTranslations.inputFormatOptions),
       {
