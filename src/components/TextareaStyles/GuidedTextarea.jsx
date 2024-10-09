@@ -140,7 +140,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
               <tr key={index}>
                 <td className={"constraintName"}>
                   <input
-                    placeholder={"Enter name"}
+                    placeholder={"Name"}
                     className={"uk-input"}
                     type="text"
                     style={{
