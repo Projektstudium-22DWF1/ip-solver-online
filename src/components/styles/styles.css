@@ -104,3 +104,17 @@ footer {
   background-color: #ececec;
   font-weight: bold;
 }
+
+.error-container {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.constraintName,
+.boundName {
+  width: 105px;
+}

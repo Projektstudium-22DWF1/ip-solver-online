@@ -11,10 +11,16 @@ function RawTextarea({ problem, setProblem }) {
       <div>
         {/********** Textarea **********/}
         <div>
-          <label htmlFor="textareaInput">{translations.input}</label>{" "}
+          <label
+            htmlFor="textareaInput"
+            style={{ marginTop: "20px", display: "block" }} // Inline-Stil für Abstand
+          >
+            {translations.input}
+          </label>{" "}
           {/* Verwende Übersetzung */}
           <textarea
             id="textareaInput"
+            data-testid="raw-textarea" // Hinzufügen eines data-testid-Attributs
             className="uk-textarea"
             rows="18"
             value={problem}
