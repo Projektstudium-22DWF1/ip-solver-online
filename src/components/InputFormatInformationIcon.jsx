@@ -6,6 +6,7 @@ import "uikit/dist/css/uikit.min.css";
 UIkit.use(Icons);
 
 function InputFormatInformationIcon({ inputFormat }) {
+  // Define example problems for LP and GMPL formats
   const lpProblem = `<pre style="background-color: #f0f0f0; margin: 0; padding: 10px;">
 Maximize
   obj: 60 x<sub>1</sub> + 40 x<sub>2</sub>
@@ -37,23 +38,22 @@ param availability := Product1 100 Product2 200;
 param profit := Product1 50 Product2 40;
 end;</pre>`;
 
+  // Set problem text based on the input format
   const problemText =
     inputFormat === "LP"
       ? lpProblem
       : inputFormat === "GMPL"
-        ? gmplProblem
-        : "Unbekanntes Format";
+      ? gmplProblem
+      : "Unbekanntes Format";
 
   const [isVisible, setIsVisible] = useState(false);
 
-  // UseEffect to listen for offcanvas open and close events
+  // Close tooltip when offcanvas menu is opened
   useEffect(() => {
     const hideTooltip = () => setIsVisible(false);
 
-    // Add event listener to listen for the offcanvas events
     UIkit.util.on(document, "show", "#offcanvas-nav", hideTooltip);
 
-    // Cleanup event listener
     return () => {
       UIkit.util.off(document, "show", "#offcanvas-nav", hideTooltip);
     };
@@ -63,10 +63,8 @@ end;</pre>`;
     <div style={{ position: "relative", display: "inline-block" }}>
       <span
         uk-icon="icon: info; ratio: 2"
-        style={{
-          cursor: "pointer",
-        }}
-        onClick={() => setIsVisible(!isVisible)} // Toggle visibility
+        style={{ cursor: "pointer" }}
+        onClick={() => setIsVisible(!isVisible)} 
       ></span>
 
       {isVisible && (
@@ -80,14 +78,10 @@ end;</pre>`;
             maxWidth: "90vw",
             width: "fit-content",
             overflowX: "auto",
-            wordWrap: "break-word",
-            padding: "10px", // Gleichmäßiger Rand um das Feld herum
-            boxSizing: "border-box",
-            whiteSpace: "pre-wrap",
-            backgroundColor: "#f0f0f0", // Heller grauer Hintergrund
+            padding: "10px", 
+            backgroundColor: "#f0f0f0", 
           }}
         >
-          {/* Der Inhalt wird hier im inneren Container gerendert */}
           <div dangerouslySetInnerHTML={{ __html: problemText }} />
         </div>
       )}

@@ -2,19 +2,17 @@ import "./App.css";
 import React from "react";
 import "uikit/dist/css/uikit.min.css";
 import { MainNavbar } from "./components/Navigation/MainNavbar";
-import { LanguageProvider } from "./context/LanguageContext"; // Importiere den LanguageProvider
-import Footer from "./components/Footer"; // Importiere die neue Footer-Komponente
+import { LanguageProvider } from "./context/LanguageContext";
+import Footer from "./components/Footer"; 
 
 function App() {
   return (
     <LanguageProvider>
-      {" "}
-      {/* Umhülle die App mit LanguageProvider */}
+      {/* Wrap the app with LanguageProvider to manage translations */}
       <div className={"all"}>
-        <MainNavbar />
+        <MainNavbar /> {/* Include the main navigation bar */}
 
-        {/* Verwende die Footer-Komponente */}
-        <Footer />
+        <Footer /> {/* Include the footer component */}
       </div>
     </LanguageProvider>
   );

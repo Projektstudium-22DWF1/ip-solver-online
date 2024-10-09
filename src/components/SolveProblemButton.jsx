@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
-import { LanguageContext } from "../context/LanguageContext"; // Importiere den Kontext
+import { LanguageContext } from "../context/LanguageContext"; 
 
 function SolveProblemButton({ solveProblem }) {
-  const { translations } = useContext(LanguageContext); // Zugriff auf Übersetzungen
+  const { translations } = useContext(LanguageContext); 
 
   return (
     <button
@@ -11,7 +11,7 @@ function SolveProblemButton({ solveProblem }) {
       className="uk-button uk-button-secondary uk-button-large"
       onClick={solveProblem}
     >
-      {translations.solveProblem} {/* Verwende Übersetzung */}
+      {translations.solveProblem}
     </button>
   );
 }

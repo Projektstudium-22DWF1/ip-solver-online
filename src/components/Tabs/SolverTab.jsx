@@ -18,28 +18,26 @@ import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
 
 export function SolverTab() {
-  // constraints, constraintNames, bounds, validProblem, validConstraint, validConstraintNames, validBound, setValidProblem, setValidConstraint, setValidConstraintNames, setValidBound
-  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
-  const [problem, setProblem] = useState(""); //TODO Muss auf rawProblem geändert werden
+  const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS); 
+  const [problem, setProblem] = useState(""); 
 
-  const [inputFormat, setInputFormat] = useState(InputOptions.LP);
-  const [textareaStyle, setTextareaStyle] = useState("Guided");
+  const [inputFormat, setInputFormat] = useState(InputOptions.LP); 
+  const [textareaStyle, setTextareaStyle] = useState("Guided"); 
 
-  const [outputData, setOutputData] = useState("");
-  const [errorData, setErrorData] = useState("");
+  const [outputData, setOutputData] = useState(""); 
+  const [errorData, setErrorData] = useState(""); 
 
-  const [solverData, setSolverData] = useState([]);
+  const [solverData, setSolverData] = useState([]); 
   const handleDataFromChild = useCallback((data) => {
-    // console.log("Daten von der Kindkomponente:", data);
-    setSolverData(data);
+    setSolverData(data); 
   }, []);
 
   const solveProblem = async () => {
     try {
-      const result = await solve(problem, inputFormat, solverOption);
-      setOutputData(result);
+      const result = await solve(problem, inputFormat, solverOption); // Solves the problem
+      setOutputData(result); // Updates output data
     } catch (error) {
-      setErrorData({ message: error.message, id: Date.now() });
+      setErrorData({ message: error.message, id: Date.now() }); // Handles error
     }
   };
 
@@ -52,6 +50,7 @@ export function SolverTab() {
           gap: "20px",
         }}
       >
+        {/* Solver selector and input format chooser */}
         <SolverChooser
           solverOption={solverOption}
           setSolverOption={setSolverOption}
@@ -65,6 +64,7 @@ export function SolverTab() {
       </div>
 
       <div className={"main-container"}>
+        {/* Input format information and style chooser */}
         <div
           style={{
             display: "flex",
@@ -78,10 +78,10 @@ export function SolverTab() {
             inputFormat={inputFormat}
             setProblem={setProblem}
           />
-
           <InputFormatInformationIcon inputFormat={inputFormat} />
         </div>
 
+        {/* Conditional rendering based on textarea style */}
         {textareaStyle === "Guided" && (
           <GuidedTextarea
             problem={problem}
@@ -99,6 +99,7 @@ export function SolverTab() {
         <ErrorMessage errorData={errorData} setErrorData={setErrorData} />
       </div>
 
+      {/* Solve problem button with validation for guided mode */}
       <SolveProblemButton
         solveProblem={() => {
           if (
@@ -125,9 +126,10 @@ export function SolverTab() {
         }}
       />
 
+      {/* File buttons for problem management */}
       <FileButtons problem={problem} setProblem={setProblem} />
 
-      {/* Only render OutputUi if there is outputData */}
+      {/* Output UI rendering if output data is available */}
       {outputData && (
         <div
           style={{ textAlign: "center", marginTop: "20px" }}
