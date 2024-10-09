@@ -16,13 +16,16 @@ function DescriptionTab() {
         <p>{translations.linearOptimizationDescription}</p>
         <ul>
           <li>
-            <strong>{translations.objectiveFunction}</strong>: {translations.objectiveFunctionDescription}
+            <strong>{translations.objectiveFunction}</strong>:{" "}
+            {translations.objectiveFunctionDescription}
           </li>
           <li>
-            <strong>{translations.constraints_description}</strong>: {translations.constraintsDescription}
+            <strong>{translations.constraints_description}</strong>:{" "}
+            {translations.constraintsDescription}
           </li>
           <li>
-            <strong>{translations.variables_description}</strong>: {translations.variablesDescription}
+            <strong>{translations.variables_description}</strong>:{" "}
+            {translations.variablesDescription}
           </li>
         </ul>
 
@@ -81,31 +84,56 @@ subject to con{i in I}: sum{j in J} A[i,j] * x[j] >= b[i];`}
         <h2>{translations.comparisonTitle}</h2>
         <p>{translations.comparisonDescription}</p>
         <ul>
-          <li><strong>{translations.comparisonFeature1Title}</strong>: {translations.comparisonFeature1Description}</li>
-          <li><strong>{translations.comparisonFeature2Title}</strong>: {translations.comparisonFeature2Description}</li>
-          <li><strong>{translations.comparisonFeature3Title}</strong>: {translations.comparisonFeature3Description}</li>
+          <li>
+            <strong>{translations.comparisonFeature1Title}</strong>:{" "}
+            {translations.comparisonFeature1Description}
+          </li>
+          <li>
+            <strong>{translations.comparisonFeature2Title}</strong>:{" "}
+            {translations.comparisonFeature2Description}
+          </li>
+          <li>
+            <strong>{translations.comparisonFeature3Title}</strong>:{" "}
+            {translations.comparisonFeature3Description}
+          </li>
         </ul>
 
         {/* Ressourcen */}
         <h2>{translations.resourcesTitle}</h2>
         <ul>
           <li>
-            <a href="https://highs.dev" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://highs.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {translations.highsDocumentationLink}
             </a>
           </li>
           <li>
-            <a href="https://www.gnu.org/software/glpk/" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.gnu.org/software/glpk/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {translations.glpkDocumentationLink}
             </a>
           </li>
           <li>
-            <a href="https://gusek.sourceforge.net/gmpl.pdf" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://gusek.sourceforge.net/gmpl.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {translations.cplexDocumentationLink}
             </a>
           </li>
           <li>
-            <a href="https://gusek.sourceforge.net/gmpl.pdf" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://gusek.sourceforge.net/gmpl.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {translations.gmplDocumentationLink}
             </a>
           </li>

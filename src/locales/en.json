@@ -1,10 +1,8 @@
 {
-
   "landingpage": "Homepage",
   "landingpageheader": "Optimized Solutions - Enhance your success with OptiMize",
   "landingpagetext": "On this website, you can solve both specific and general linear optimization problems with ease. Choose between the powerful HIGHS and GLPK solvers to handle your computations. Additionally, you can input your problem in either the LP or GMPL formats, giving you the flexibility to work in the environment you prefer.",
   "landingpagebutton": "Start optimizing your solutions right now!",
-
 
   "solver": "Solver",
   "description": "Description",
@@ -49,7 +47,6 @@
   "footerText": "Application for solving linear optimization problems",
   "solverOptions": "Solver",
   "optimizationDirection": "Optimization Direction",
-
 
   "optimizationTitle": "Basics of Linear Optimization",
   "optimizationIntro": "Linear optimization is a method used to solve mathematical problems involving linear relationships...",
