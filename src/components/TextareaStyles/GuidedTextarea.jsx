@@ -7,7 +7,7 @@ import {
   validateBound,
   validateConstraintNames,
   validateConstraints,
-  validateProblem
+  validateProblem,
 } from "../../services/Validation";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
@@ -21,20 +21,18 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
   const [validProblem, setValidProblem] = useState(
-      Array(prob.length).fill(true),
+    Array(prob.length).fill(true),
   );
   const [validConstraint, setValidConstraint] = useState(
     Array(constraints.length).fill(true),
   );
-  const [validBound, setValidBound] = useState(
-    Array(bounds.length).fill(true),
-  );
+  const [validBound, setValidBound] = useState(Array(bounds.length).fill(true));
   const [validConstraintNames, setValidConstraintNames] = useState(
     Array(constraintNames.length).fill(true),
   );
 
   useEffect(() => {
-    const dataToSend = {prob, setProb};
+    const dataToSend = { prob, setProb };
     setSolverData(dataToSend); // Updates parent with current solver data
   }, [prob, setProb]);
 
@@ -92,27 +90,28 @@ function GuidedTextarea({ setProblem, setSolverData }) {
         <label htmlFor="#problem">{translations.problemStatement}</label>
         <table className="mainArea">
           <tbody>
-          {prob.map((p, index) => (
-          <tr key={index}>
-              <td>
-                <input
-                  placeholder={"x1 + 2 x2 + 4 x3 + x4"}
-                  className="uk-input"
-                  type="text"
-                  style={{
-                    borderColor: validProblem[index] === false ? "#ff0000" : "#ccc",
-                  }}
-                  value={p.value}
-                  onChange={(e) => {
-                    // setProb(e.target.value);
-                    handleRestrictionChange(index, e, prob, setProb);
-                    validateProblem(prob, validProblem, setValidProblem);
-                    returnProblem();
-                  }}
-                />
-              </td>
-            </tr>
-          ))}
+            {prob.map((p, index) => (
+              <tr key={index}>
+                <td>
+                  <input
+                    placeholder={"x1 + 2 x2 + 4 x3 + x4"}
+                    className="uk-input"
+                    type="text"
+                    style={{
+                      borderColor:
+                        validProblem[index] === false ? "#ff0000" : "#ccc",
+                    }}
+                    value={p.value}
+                    onChange={(e) => {
+                      // setProb(e.target.value);
+                      handleRestrictionChange(index, e, prob, setProb);
+                      validateProblem(prob, validProblem, setValidProblem);
+                      returnProblem();
+                    }}
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
 
@@ -141,7 +140,11 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraintNames,
                         setConstraintNames,
                       );
-                      validateConstraintNames(constraintNames, validConstraintNames, setValidConstraintNames);
+                      validateConstraintNames(
+                        constraintNames,
+                        validConstraintNames,
+                        setValidConstraintNames,
+                      );
                       returnProblem();
                     }}
                   />
@@ -163,7 +166,11 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraints,
                         setConstraints,
                       );
-                      validateConstraints(constraints, validConstraint, setValidConstraint);
+                      validateConstraints(
+                        constraints,
+                        validConstraint,
+                        setValidConstraint,
+                      );
                       returnProblem();
                     }}
                   />

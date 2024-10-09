@@ -4,32 +4,36 @@ export function validateGuidedProblem(state) {
   return valid;
 }
 
-export function validateProblem (prob, validProblem,setValidProblem) {
-
+export function validateProblem(prob, validProblem, setValidProblem) {
   let valid = true;
-  const regexProblem = /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)*\s*$/;
+  const regexProblem =
+    /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)*\s*$/;
   const newValidProb = [...validProblem];
 
   prob.forEach((e, index) => {
     console.log(e.value);
-  if (e.value === "" || !regexProblem.test(e.value)) {
-    valid = false;
-    newValidProb[index] = false;
-    console.log(
+    if (e.value === "" || !regexProblem.test(e.value)) {
+      valid = false;
+      newValidProb[index] = false;
+      console.log(
         "Ungültiges Problem: Bitte das Format der Zielfunktion beachten!",
-    );
-  } else {
-    newValidProb[index] = true;
-  }
-  setValidProblem(newValidProb);
+      );
+    } else {
+      newValidProb[index] = true;
+    }
+    setValidProblem(newValidProb);
   });
   return valid;
 }
 
-export function validateConstraints (constraints, validConstraint,setValidConstraint){
-
+export function validateConstraints(
+  constraints,
+  validConstraint,
+  setValidConstraint,
+) {
   let valid = true;
-  const regexConstraint = /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*\s*)*\s*(<=|>=|=)\s*[0-9]\d*\s*$/;
+  const regexConstraint =
+    /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*\s*)*\s*(<=|>=|=)\s*[0-9]\d*\s*$/;
   const newValidConstraint = [...validConstraint];
 
   // Validation for constraints
@@ -47,8 +51,11 @@ export function validateConstraints (constraints, validConstraint,setValidConstr
   return valid;
 }
 
-export function validateConstraintNames (constraintNames, validConstraintNames, setValidConstraintNames){
-
+export function validateConstraintNames(
+  constraintNames,
+  validConstraintNames,
+  setValidConstraintNames,
+) {
   let valid = true;
   const regexConstraintName = /^[A-Za-z_][A-Za-z0-9_]*$/;
   const newValidConstraintNames = [...validConstraintNames];
@@ -60,7 +67,7 @@ export function validateConstraintNames (constraintNames, validConstraintNames, 
       valid = false;
       newValidConstraintNames[index] = false;
       console.log(
-          "Ungültiger Name: Bitte keine Zahlen verwenden und Namen eingeben!",
+        "Ungültiger Name: Bitte keine Zahlen verwenden und Namen eingeben!",
       );
     } else {
       newValidConstraintNames[index] = true;
@@ -71,21 +78,24 @@ export function validateConstraintNames (constraintNames, validConstraintNames, 
   return valid;
 }
 
-export function validateBound (bounds, validBound,setValidBound){
+export function validateBound(bounds, validBound, setValidBound) {
   console.log(bounds);
 
-  let valid= true;
-  const regexBounds= /^([0-9]*\s*[a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|>=|<|>|=)\s*([0-9]\d*)$/;
-  const regexDualBounds= /^(\d+)\s*(<=|<)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|<)\s*(\d+)$/;
-  const regexScalarBounds= /^(\d+)\s*(<=|<|=|>|>=)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*$/;
+  let valid = true;
+  const regexBounds =
+    /^([0-9]*\s*[a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|>=|<|>|=)\s*([0-9]\d*)$/;
+  const regexDualBounds =
+    /^(\d+)\s*(<=|<)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|<)\s*(\d+)$/;
+  const regexScalarBounds =
+    /^(\d+)\s*(<=|<|=|>|>=)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*$/;
   const newValidBound = [...validBound];
 
   bounds.forEach((e, index) => {
     if (
-        e.value !== "" &&
-        !regexBounds.test(e.value) &&
-        !regexDualBounds.test(e.value) &&
-        !regexScalarBounds.test(e.value)
+      e.value !== "" &&
+      !regexBounds.test(e.value) &&
+      !regexDualBounds.test(e.value) &&
+      !regexScalarBounds.test(e.value)
     ) {
       valid = false;
       newValidBound[index] = false;
