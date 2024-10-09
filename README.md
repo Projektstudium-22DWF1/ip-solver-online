@@ -1,9 +1,10 @@
 ## Table of Contents
 
 1. [Features](#features)
-2. [Installation](#installation)
-3. [Learn More](#learn-lore)
-4. [License](#license)
+2. [Usage](#usage)
+3. [Installation](#installation)
+4. [Learn More](#learn-lore)
+5. [License](#license)
 
 ## Features
 
@@ -15,6 +16,9 @@
 6. Export and Import functions for general linear problems provided!
 7. Currently supports the languages english and german!
 8. Usable on mobile devices as well!
+
+## Usage
+
 
 ## Installation
 
