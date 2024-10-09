@@ -136,10 +136,10 @@ const solveLpProblemWithGlpk = (problem) => {
 };
 
 const formatGlpkInput = (input) => {
-// List of all possible keywords in CPLEX/GLPK problem definitions
+// List of all possible keywords in CPLEX problem definitions
 const keywords = [
   // Objectives
-  "Maximize", "Minimize", "Objective",
+  "Maximize", "Minimize",
   // Constraints
   "Subject To", "Such That", "St",
   // Variable Declarations
