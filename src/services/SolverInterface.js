@@ -31,6 +31,7 @@ export const solve = async (problem, inputFormat, solver) => {
       if (inputFormat === InputOptions.GMPL) {
         result = solveGmplProblemWithGlpk(problem);
       } else if (inputFormat === InputOptions.LP) {
+        problem = formatGlpkInput(problem)
         result = solveLpProblemWithGlpk(problem);
       }
       break;
@@ -105,7 +106,7 @@ const solveGmplProblemWithGlpk = (problem) => {
   glpk.glp_intopt(lp, iocp);
   glpk.glp_mpl_postsolve(tran, lp, glpk.GLP_MIP);
 
-  return formatGlpkData(lp, glpkOutput, glpkLog);
+  return formatGlpkOutput(lp, glpkOutput, glpkLog);
 };
 
 const solveLpProblemWithGlpk = (problem) => {
@@ -131,10 +132,93 @@ const solveLpProblemWithGlpk = (problem) => {
   let iocp = new glpk.IOCP({ presolve: glpk.GLP_ON });
   glpk.glp_intopt(lp, iocp);
 
-  return formatGlpkData(lp, glpkOutput, glpkLog);
+  return formatGlpkOutput(lp, glpkOutput, glpkLog);
 };
 
-const formatGlpkData = (lp, glpkOutput, glpkLog) => {
+const formatGlpkInput = (input) => {
+// List of all possible keywords in CPLEX/GLPK problem definitions
+const keywords = [
+  // Objectives
+  "Maximize", "Minimize", "Objective",
+  // Constraints
+  "Subject To", "Such That", "St",
+  // Variable Declarations
+  "Bounds",
+  "General", "Generals", "Gen", "Gens",
+  "Integer", "Integers", "Int", "Ints",
+  "Binary", "Binaries", "Bin", "Bins",
+  "Semi-Continuous", "Semi", "Semis",
+  // Special Ordered Sets
+  "SOS", "SOS1", "SOS2",
+  // End Statement
+  "End"
+];
+
+// Erstellen eines Regex, um die Keywords zu erkennen (Case-Insensitive)
+const regex = new RegExp('\\b(' + keywords.join('|') + ')\\b', 'gi');
+
+// Teilt den Input-String in Abschnitte basierend auf den Keywords
+const sections = input.split(regex);
+
+let output = '';
+for (let i = 0; i < sections.length; i++) {
+  const section = sections[i].trim();
+  if (keywords.map(k => k.toLowerCase()).includes(section.toLowerCase())) {
+      // Fügt das Keyword zur Ausgabe hinzu
+      output += section + '\n';
+      // Nächster Abschnitt ist der Inhalt
+      const content = sections[i + 1];
+      i++; // Überspringt den Inhalt im nächsten Loop
+      if (typeof content === 'string' && content.trim()) {
+          const trimmedContent = content.trim();
+          // Bestimmt den Sektionstyp und parst entsprechend
+          if (["Subject To", "Such That", "St"].map(k => k.toLowerCase()).includes(section.toLowerCase())) {
+              // Constraints
+              // Annahme: Jede Restriktion beginnt mit optionalem Namen gefolgt von einem Doppelpunkt
+              const lines = trimmedContent.split(/(?=\b\w+:)/g);
+              for (const line of lines) {
+                  if (line.trim()) {
+                      output += '  ' + line.trim() + '\n';
+                  }
+              }
+          } else if (section.toLowerCase() === 'bounds') {
+              // Bounds
+              // Annahme: Jede Bound ist eine separate Ungleichung
+              const lines = trimmedContent.split(/(?<=\d)(?=\s*[a-zA-Z_])/g);
+              for (const line of lines) {
+                  if (line.trim()) {
+                      output += '  ' + line.trim() + '\n';
+                  }
+              }
+          } else if ([
+              "General", "Generals", "Gen", "Gens",
+              "Integer", "Integers", "Int", "Ints",
+              "Binary", "Binaries", "Bin", "Bins",
+              "Semi-Continuous", "Semi", "Semis"
+          ].map(k => k.toLowerCase()).includes(section.toLowerCase())) {
+              // Variablendeklarationen
+              const variables = trimmedContent.split(/\s+/);
+              for (const variable of variables) {
+                  if (variable.trim()) {
+                      output += '  ' + variable.trim() + '\n';
+                  }
+              }
+          } else {
+              // Andere Sektionen (z.B. Maximize, Minimize)
+              output += '  ' + trimmedContent + '\n';
+          }
+      }
+  }
+}
+
+// Return the formatted output string without trailing whitespace
+console.log(output.trim())
+  return output.trim();
+}
+
+
+
+const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
   var status;
   switch (glpk.glp_mip_status(lp)) {
     case glpk.GLP_OPT:
