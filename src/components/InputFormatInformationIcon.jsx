@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import UIkit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";
 import "uikit/dist/css/uikit.min.css";
-import { LanguageContext } from "../context/LanguageContext"; 
+import { LanguageContext } from "../context/LanguageContext";
 
 UIkit.use(Icons);
 
 function InputFormatInformationIcon({ inputFormat }) {
-  const { translations } = useContext(LanguageContext); 
+  const { translations } = useContext(LanguageContext);
 
   // Define example problems for LP and GMPL formats
   const lpProblemText = `Maximize
@@ -73,9 +73,17 @@ end;</pre>`;
 
   // Choose text or HTML depending on the input format
   const problemText =
-    inputFormat === "LP" ? lpProblemText : inputFormat === "GMPL" ? gmplProblemText : "";
+    inputFormat === "LP"
+      ? lpProblemText
+      : inputFormat === "GMPL"
+        ? gmplProblemText
+        : "";
   const problemHtml =
-    inputFormat === "LP" ? lpProblemHtml : inputFormat === "GMPL" ? gmplProblemHtml : "Unknown format";
+    inputFormat === "LP"
+      ? lpProblemHtml
+      : inputFormat === "GMPL"
+        ? gmplProblemHtml
+        : "Unknown format";
 
   const [isVisible, setIsVisible] = useState(false);
   const [copySuccess, setCopySuccess] = useState("");
@@ -145,7 +153,8 @@ end;</pre>`;
               cursor: "pointer",
             }}
           >
-            {translations.copy} {/* Label for the "Copy" button based on the selected language */}
+            {translations.copy}{" "}
+            {/* Label for the "Copy" button based on the selected language */}
           </button>
 
           {/* Problem text rendered with HTML */}
