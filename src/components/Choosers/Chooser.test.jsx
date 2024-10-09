@@ -14,6 +14,7 @@ describe("Chooser Component", () => {
   const mockValue = "Option 1";
 
   test("renders without crashing", () => {
+    // Renders the Chooser component
     render(
       <Chooser
         options={mockOptions}
@@ -22,6 +23,7 @@ describe("Chooser Component", () => {
         value={mockValue}
       />,
     );
+    // Checks if the component is rendered
     expect(screen.getByLabelText(mockLabel)).toBeInTheDocument();
   });
 
@@ -35,10 +37,10 @@ describe("Chooser Component", () => {
       />,
     );
 
-    // Öffnen des Dropdowns
+    // Simulates opening the dropdown
     fireEvent.click(screen.getByRole("button"));
 
-    // Verwende getAllByText, um mehrere Elemente mit demselben Text zu finden
+    // Verifies all options are rendered
     mockOptions.forEach((option) => {
       expect(screen.getAllByText(option.label).length).toBeGreaterThan(0);
     });
@@ -54,14 +56,12 @@ describe("Chooser Component", () => {
       />,
     );
 
-    // Öffnen des Dropdowns
     fireEvent.click(screen.getByRole("button"));
-
-    // Wähle eine andere Option aus
     fireEvent.change(screen.getByLabelText(mockLabel), {
       target: { value: "option2" },
     });
 
+    // Verifies onChange is called with the selected option
     expect(mockOnChange).toHaveBeenCalledWith("option2");
   });
 
@@ -75,7 +75,7 @@ describe("Chooser Component", () => {
       />,
     );
 
-    // Überprüfen, dass der Button den korrekten Initialwert anzeigt
+    // Verifies the button shows the initial value
     expect(
       screen.getByText((content, element) => {
         return (
