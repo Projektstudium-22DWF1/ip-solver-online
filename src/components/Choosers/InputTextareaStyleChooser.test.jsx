@@ -10,9 +10,9 @@ describe("ImportTextareaStyleChooser Component", () => {
     guided: "Guided",
     gmplTooltip: "GMPL mode requires Raw input.",
   };
-  
+
   const mockSetTextareaStyle = jest.fn();
-  const mockSetProblem = jest.fn();  // Mock für setProblem
+  const mockSetProblem = jest.fn(); // Mock für setProblem
 
   const renderComponent = (textareaStyle, inputFormat) => {
     render(
@@ -21,7 +21,7 @@ describe("ImportTextareaStyleChooser Component", () => {
           textareaStyle={textareaStyle}
           setTextareaStyle={mockSetTextareaStyle}
           inputFormat={inputFormat}
-          setProblem={mockSetProblem}  // Hinzufügen der Mock-Funktion für setProblem
+          setProblem={mockSetProblem} // Hinzufügen der Mock-Funktion für setProblem
         />
       </LanguageContext.Provider>,
     );
