@@ -6,29 +6,33 @@ import "uikit/dist/css/uikit.min.css";
 UIkit.use(Icons);
 
 function Chooser({ options, onChange, label, value }) {
-  const uniqueId = `chooser-${label.replace(/\s+/g, "-")}`; // Erstelle eine eindeutige ID für das Label
+  // Create a unique ID for the label based on the provided label text
+  const uniqueId = `chooser-${label.replace(/\s+/g, "-")}`;
+
   return (
     <React.Fragment>
       <div id={"dropdowns"}>
         <div className="uk-margin">
-          {/********** Beschriftung (Label) **********/}
+          {/********** Label for the dropdown **********/}
           <label htmlFor={uniqueId} className="uk-form-label">
             {label}:
           </label>
 
-          {/********** Chooser Box **********/}
+          {/********** Dropdown Chooser Box **********/}
           <div uk-form-custom="target: > * > span:first-child">
             <select
-              id={uniqueId} // Verknüpft das Label mit dem Dropdown
+              id={uniqueId}
               aria-label={label}
               onChange={(e) => onChange(e.target.value)}
             >
+              {/* Maps over the options and creates each option element */}
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
+
             <button
               className="uk-button uk-button-default"
               type="button"

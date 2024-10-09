@@ -32,7 +32,7 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
             <a
               onClick={() => {
                 setActiveComponent("LandingPageTab");
-                UIkit.offcanvas("#offcanvas-nav").hide(); // Close off-canvas on click
+                UIkit.offcanvas("#offcanvas-nav").hide();
               }}
               style={{ color: "#000" }}
             >
@@ -43,7 +43,7 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
             <a
               onClick={() => {
                 setActiveComponent("SolverTab");
-                UIkit.offcanvas("#offcanvas-nav").hide(); // Close off-canvas on click
+                UIkit.offcanvas("#offcanvas-nav").hide();
               }}
               style={{ color: "#000" }}
             >
@@ -54,7 +54,7 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
             <a
               onClick={() => {
                 setActiveComponent("DescriptionTab");
-                UIkit.offcanvas("#offcanvas-nav").hide(); // Close off-canvas on click
+                UIkit.offcanvas("#offcanvas-nav").hide();
               }}
               style={{ color: "#000" }}
             >

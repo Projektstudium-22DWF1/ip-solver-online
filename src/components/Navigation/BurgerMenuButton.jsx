@@ -8,18 +8,17 @@ const BurgerMenuButton = () => {
       uk-toggle="target: #offcanvas-nav"
       aria-label="Open Menu"
       style={{
-        width: "40px", // Set the width
-        height: "40px", // Set the height
-        backgroundColor: "#fff", // Set background color to white
+        width: "40px",
+        height: "40px",
+        backgroundColor: "#fff",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        border: "1px solid #ccc", // Optional: Add a border
-        borderRadius: "5px", // Optional: Slightly rounded corners
+        border: "1px solid #ccc",
+        borderRadius: "5px",
       }}
     >
       <span uk-navbar-toggle-icon="true"></span>{" "}
-      {/* Correctly use uk-navbar-toggle-icon */}
     </button>
   );
 };
