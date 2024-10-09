@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+## Table of Contents
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Learn More](#learn-lore)
+4. [License](#license)
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+1. Modeling/solving of specific and general linear programs!
+2. HIGHS and GLPK Solver supported!
+3. LP and GMPL input languages supported!
+4. Intuitive to use through guided input and issue highlighting!
+5. Optimized for running in webbrowser. Runs in frontend only. No backend!
+6. Export and Import functions for general linear problems provided!
+7. Currently supports the languages english and german!
+8. Usable on mobile devices as well!
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
+To get the project running locally, follow these steps:
+
+### Prerequisites
+
+- Node.js (version 14 or later)
+- NPM
+
+### Setup
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Projektstudium-22DWF1/ip-solver-online.git
+   cd ip-solver-online
+
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   npm install
+
+   ```
+
+3. **Run the project**:
+   ```bash
+   npm start
+   ```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
 ## Learn More
+
+This project was bootstrapped with Create React App (https://github.com/facebook/create-react-app).
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is licensed under the **GNU General Public License v3.0 (GPLv3)** due to dependencies covered by the GPL license.
 
-### Analyzing the Bundle Size
+### Dependencies Licenses
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- This project also includes dependencies licensed with **MIT License** and **Apache License 2.0**.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Please see the individual dependency licenses for more details.

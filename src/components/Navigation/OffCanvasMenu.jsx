@@ -1,27 +1,48 @@
+// components/Tabs/OffCanvasMenu.jsx
 import React, { useContext } from "react";
 import UIkit from "uikit";
 import { LanguageContext } from "../../context/LanguageContext";
+import logo from "../../assets/logo.png";
 
 const OffCanvasMenu = ({ setActiveComponent }) => {
-  const { translations } = useContext(LanguageContext); 
+  const { translations } = useContext(LanguageContext);
 
   return (
     <div id="offcanvas-nav" uk-offcanvas="overlay: true">
-      <div className="uk-offcanvas-bar" style={{ backgroundColor: "#fff" }}>
-        {/* Close button for off-canvas */}
+      <div
+        className="uk-offcanvas-bar uk-width-1-2"
+        style={{ backgroundColor: "#fff" }}
+      >
         <button
           className="uk-offcanvas-close"
           type="button"
           uk-close="true"
         ></button>
-        
-        {/* Navigation list for mobile view */}
+        <div
+          style={{
+            textAlign: "center",
+            marginBottom: "30px",
+            marginTop: "5px",
+          }}
+        >
+          <img src={logo} alt="OptiMize Logo" style={{ width: "60px" }} />
+        </div>
         <ul className="uk-nav uk-nav-default">
-          {/* SolverTab link */}
           <li>
             <a
               onClick={() => {
-                setActiveComponent("SolverTab"); 
+                setActiveComponent("LandingPageTab");
+                UIkit.offcanvas("#offcanvas-nav").hide(); 
+              }}
+              style={{ color: "#000" }}
+            >
+              {translations.landingpage}
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                setActiveComponent("SolverTab");
                 UIkit.offcanvas("#offcanvas-nav").hide(); 
               }}
               style={{ color: "#000" }}
@@ -29,13 +50,11 @@ const OffCanvasMenu = ({ setActiveComponent }) => {
               {translations.solver}
             </a>
           </li>
-          
-          {/* DescriptionTab link */}
           <li>
             <a
               onClick={() => {
                 setActiveComponent("DescriptionTab");
-                UIkit.offcanvas("#offcanvas-nav").hide();
+                UIkit.offcanvas("#offcanvas-nav").hide(); 
               }}
               style={{ color: "#000" }}
             >
