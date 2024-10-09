@@ -2,20 +2,19 @@
 
 1. [Features](#features)
 2. [Installation](#installation)
-3. [Usage](#usage)
-4. [Learn More](#learn-lore)
-5. [License](#license)
+3. [Learn More](#learn-lore)
+4. [License](#license)
 
 ## Features
 
-- **Feature 1**: Modeling/solving of specific and general linear programs!
-- **Feature 2**: HIGHS and GLPK Solver supported!
-- **Feature 3**: LP and GMPL input languages supported!
-- **Feature 4**: Intuitive to use through guided input and issue highlighting!
-- **Feature 5**: Optimized for running in webbrowser. Runs in frontend only. No backend!
-- **Feature 6**: Export and Import functions for general linear problems provided!
-- **Feature 7**: Currently supports the languages english and german!
-- **Feature 8**: Usable on mobile devices as well!
+1. Modeling/solving of specific and general linear programs!
+2. HIGHS and GLPK Solver supported!
+3. LP and GMPL input languages supported!
+4. Intuitive to use through guided input and issue highlighting!
+5. Optimized for running in webbrowser. Runs in frontend only. No backend!
+6. Export and Import functions for general linear problems provided!
+7. Currently supports the languages english and german!
+8. Usable on mobile devices as well!
 
 ## Installation
 
