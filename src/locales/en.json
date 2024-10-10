@@ -19,7 +19,7 @@
   "problemStatement": "Problem Statement",
   "constraints": "Constraints",
   "bounds": "Bounds",
-  "oneConstraintRequired": "One constraint required",
+  "oneConstraintRequired": "One constraint or bound required",
   "input": "Input",
   "solveProblem": "Solve problem",
   "import": "Import",

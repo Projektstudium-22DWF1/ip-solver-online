@@ -15,7 +15,6 @@ import {
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
-import { validateGuidedProblem } from "../../services/Validation";
 
 export function SolverTab() {
   const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
@@ -87,6 +86,7 @@ export function SolverTab() {
             setProblem={setProblem}
             solverData={solverData}
             setSolverData={handleDataFromChild}
+            setErrorData={setErrorData}
           />
         )}
         {textareaStyle === "Raw" && (
