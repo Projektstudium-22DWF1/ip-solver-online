@@ -111,8 +111,8 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       return; // Skip Validation
     }
 
-    const allValid = validateOnChange;
-    validProblem.every(Boolean) &&
+    const allValid =
+      validProblem.every(Boolean) &&
       validConstraint.every(Boolean) &&
       validConstraintNames.every(Boolean) &&
       validBound.every(Boolean);
