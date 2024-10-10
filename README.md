@@ -1,18 +1,26 @@
 <div align="center">
    <p><strong>Optimized Solutions - Enhance your success with OptiMize</strong></p>
-   <img src="./src/assets/logo.png" alt="Logo" width="200"/>
+   <img src="./src/assets/logo.png" alt="Logo" width="150"/>
    <p>A Reliable lightweigt web-based linear problem optimizer <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/" target="_blank">running in your browser</a></p>
 </div>
 
-![Latest Release](https://img.shields.io/github/v/release/Projektstudium-22DWF1/ip-solver-online)
-![Last Commit](https://img.shields.io/github/last-commit/Projektstudium-22DWF1/ip-solver-online)
-![Open Issues](https://img.shields.io/github/issues/Projektstudium-22DWF1/ip-solver-online)
-![Open PRs](https://img.shields.io/github/issues-pr/Projektstudium-22DWF1/ip-solver-online)
-![License](https://img.shields.io/github/license/Projektstudium-22DWF1/ip-solver-online)
-![Repo size](https://img.shields.io/github/repo-size/Projektstudium-22DWF1/ip-solver-online)
+<div align="center">
+  
+  ![Last Commit](https://img.shields.io/github/last-commit/Projektstudium-22DWF1/ip-solver-online)
+  ![Open Issues](https://img.shields.io/github/issues/Projektstudium-22DWF1/ip-solver-online)
+  ![Open PRs](https://img.shields.io/github/issues-pr/Projektstudium-22DWF1/ip-solver-online)
+  ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+  ![Repo size](https://img.shields.io/github/repo-size/Projektstudium-22DWF1/ip-solver-online)
+
+</div>
 
 <div align="center">
-  [Features](#features) • [Usage](#usage) • [Installation](#installation) • [Testing](#testing) • [Learn More](#learn-more) • [License](#license)
+  <a href="#features">Features</a> • 
+  <a href="#usage">Usage</a> • 
+  <a href="#installation">Installation</a> • 
+  <a href="#testing">Testing</a> • 
+  <a href="#learn-more">Learn More</a> • 
+  <a href="#license">License</a>
 </div>
 
 
