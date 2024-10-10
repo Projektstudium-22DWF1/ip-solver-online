@@ -51,7 +51,7 @@ export function validateConstraintNames(
   setValidConstraintNames,
 ) {
   let valid = true;
-  const regexConstraintName = /^[A-Za-z_][A-Za-z0-9_]*$/;
+  const regexConstraintName = /^[A-Za-z_][A-Za-z0-9_]*\s*$/;
   const newValidConstraintNames = [...validConstraintNames];
 
   // Validation for constraint names
