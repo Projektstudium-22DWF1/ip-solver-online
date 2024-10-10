@@ -91,9 +91,10 @@ function GuidedTextarea({ setProblem, setSolverData, setErrorData }) {
     setValidRestriction,
   ) => {
     if (restriction.length === 1) {
-
-      setErrorData({ message: translations.oneConstraintRequired, id: Date.now() });
-
+      setErrorData({
+        message: translations.oneConstraintRequired,
+        id: Date.now(),
+      });
     } else {
       const newRestriction = restriction.filter((_, i) => i !== index);
       setRestriction(newRestriction);
