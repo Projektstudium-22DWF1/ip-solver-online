@@ -23,25 +23,23 @@
   <a href="#license">License</a>
 </div>
 
-
 ## Features
 
-- 🧮 Modeling/solving of specific and general linear programs!  
-- ⚙️ HIGHS and GLPK Solver supported!  
-- 📝 LP and GMPL input languages supported!  
-- 🌟 Intuitive to use through guided input and issue highlighting!  
-- 🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!  
-- 📦 Export and Import functions for general linear problems provided!  
-- 🌍 Currently supports the languages english and german!  
-- 📱 Usable on mobile devices as well!  
-- ✅ Unit- and E2E-Tests provided!  
+- 🧮 Modeling/solving of specific and general linear programs!
+- ⚙️ HIGHS and GLPK Solver supported!
+- 📝 LP and GMPL input languages supported!
+- 🌟 Intuitive to use through guided input and issue highlighting!
+- 🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!
+- 📦 Export and Import functions for general linear problems provided!
+- 🌍 Currently supports the languages english and german!
+- 📱 Usable on mobile devices as well!
+- ✅ Unit- and E2E-Tests provided!
 
 ## Usage
 
 <div align="center">
   <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/"><strong>Optimize your solutions now!</strong></a>
 </div>
-
 
 ## Installation
 
@@ -81,6 +79,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ### Unit Tests
 
 1. **Run unit tests**:
+
    ```bash
    cd ip-solver-online
    npm test
@@ -90,12 +89,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
    Press **a** to run all tests or choose other options that are shown to you
 
-
 ### End-to-End Tests
 
-Make sure to run the project locally on localhost:3000 **before running the E2E-Test**.  
+Make sure to run the project locally on localhost:3000 **before running the E2E-Test**.
 
-Open a second terminal window and follow the steps below.  
+Open a second terminal window and follow the steps below.
 
 1. **Install cypress**
 
@@ -112,14 +110,13 @@ Open a second terminal window and follow the steps below.
 
 3. **Follow the UI**
 
-   Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.  
+   Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.
 
 The E2E Test are now running. You can **click the spec.cy.js file** to visually see the E2E Test.
 
 <div>
   <a href="https://docs.cypress.io/guides/component-testing/react/overview">Further information on cypress</a>
 </div>
-
 
 ## Learn More
 
