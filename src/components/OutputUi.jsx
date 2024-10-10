@@ -10,14 +10,6 @@ const OutputUi = ({ outputData }) => {
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("summary");
 
-  // Check if Status and Dual exist for Variables and Constraints
-  const hasStatus = outputData?.Columns && Object.values(outputData.Columns).some(
-    (variable) => variable.Status !== undefined && variable.Status !== null
-  );
-  const hasDual = outputData?.Columns && Object.values(outputData.Columns).some(
-    (variable) => variable.Dual !== undefined && variable.Dual !== null
-  );
-
   // Function to render the summary tab content
   const renderSummary = () => {
     // If there is no output data, display a message
@@ -79,6 +71,14 @@ const OutputUi = ({ outputData }) => {
     if (!outputData?.Columns || Object.keys(outputData.Columns).length === 0)
       return <p>{translations.noVariablesAvailable}</p>;
 
+    // Check if Status and Dual exist for Variables
+    const hasStatus = Object.values(outputData.Columns).some(
+      (variable) => variable.Status !== undefined && variable.Status !== null
+    );
+    const hasDual = Object.values(outputData.Columns).some(
+      (variable) => variable.Dual !== undefined && variable.Dual !== null
+    );
+
     // Render a table of variables with their properties, wrapped in a scrollable div
     return (
       <div
@@ -133,10 +133,7 @@ const OutputUi = ({ outputData }) => {
     // Display message if no constraints are available
     if (!Array.isArray(outputData?.Rows)) return <p>{translations.noConstraintsAvailable}</p>;
 
-    // Check if Status and Dual exist for Constraints
-    const hasConstraintStatus = outputData.Rows.some(
-      (row) => row.Status !== undefined && row.Status !== null
-    );
+    // Check if Dual exist for Constraints
     const hasConstraintDual = outputData.Rows.some(
       (row) => row.Dual !== undefined && row.Dual !== null
     );
@@ -222,4 +219,4 @@ const OutputUi = ({ outputData }) => {
   );
 };
 
-export default OutputUi;
+export default OutputUi
