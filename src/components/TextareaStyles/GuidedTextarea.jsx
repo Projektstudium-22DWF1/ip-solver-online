@@ -26,7 +26,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [validConstraint, setValidConstraint] = useState(
     Array(constraints.length).fill(false),
   );
-  const [validBound, setValidBound] = useState(Array(bounds.length).fill(false));
+  const [validBound, setValidBound] = useState(Array(bounds.length).fill(true));
   const [validConstraintNames, setValidConstraintNames] = useState(
     Array(constraintNames.length).fill(true),
   );
@@ -93,9 +93,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
 
     const allValid =
       validProblem.every(Boolean) &&
-      validConstraint.every(Boolean) &&
+      validConstraint.every(Boolean)
       // validConstraintNames.every(Boolean) &&
-      validBound.every(Boolean);
+      // validBound.every(Boolean);
 
     setSolveControl(!allValid);
   }, [validProblem, validConstraint, validBound]);
