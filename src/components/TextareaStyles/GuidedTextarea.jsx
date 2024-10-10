@@ -96,12 +96,12 @@ function GuidedTextarea({ setProblem, setSolverData }) {
 
     const allValid =
       validProblem.every(Boolean) &&
-      validConstraint.every(Boolean)
-      // validConstraintNames.every(Boolean) &&
-      // validBound.every(Boolean);
+      validConstraint.every(Boolean) &&
+      validConstraintNames.every(Boolean) &&
+      validBound.every(Boolean);
 
     setSolveControl(!allValid);
-  }, [validProblem, validConstraint, validBound]);
+  }, [validProblem, validConstraint, validConstraintNames, validBound]);
 
   return (
     <React.Fragment>
@@ -276,8 +276,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     className="removeButton"
                     uk-icon="close"
                     onClick={() => {
-                      deleteRestriction(index, bounds, setBounds);
-                      returnProblem();
+                      deleteRestriction(index, bounds, setBounds, validBound, setValidBound);
                     }}
                   ></span>
                 </td>

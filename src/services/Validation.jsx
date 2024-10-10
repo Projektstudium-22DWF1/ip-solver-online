@@ -31,7 +31,6 @@ export function validateConstraints(
   const regexConstraint =
     /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*\s*)*\s*(<=|>=|=)\s*[0-9]\d*\s*$/;
   const newValidConstraint = [...validConstraint];
-  console.log(constraints);
   // Validation for constraints
   constraints.forEach((e, index) => {
     if (e.value.trim() === "" || !regexConstraint.test(e.value)) {
@@ -84,7 +83,8 @@ export function validateBound(bounds, validBound, setValidBound) {
     if (
       !regexBounds.test(e.value) &&
       !regexDualBounds.test(e.value) &&
-      !regexScalarBounds.test(e.value)
+      !regexScalarBounds.test(e.value) &&
+      e.value !== ""
     ) {
       valid = false;
       newValidBound[index] = false;
