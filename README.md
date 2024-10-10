@@ -1,5 +1,5 @@
 <div align="center">
-   <p style="font-size: 28px;"><strong>Optimized Solutions - Enhance your success with OptiMize</strong></p>
+   <p style="font-size: 40px;"><strong>OptiMize - Enhance your success!</strong></p>
    <img src="./src/assets/logo.png" alt="Logo" width="150"/>
    <p>A Reliable lightweigt web-based linear problem optimizer <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/" target="_blank">running in your browser</a></p>
 </div>
@@ -115,6 +115,11 @@ Open a second terminal window and follow the steps below.
    Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.  
 
 The E2E Test are now running. You can **click the spec.cy.js file** to visually see the E2E Test.
+
+<div>
+  <a href="https://docs.cypress.io/guides/component-testing/react/overview">Further information on cypress</a>
+</div>
+
 
 ## Learn More
 
