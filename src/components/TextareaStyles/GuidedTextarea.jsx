@@ -9,9 +9,8 @@ import {
   validateConstraints,
   validateProblem,
 } from "../../services/Validation";
-import { solve } from "../../services/SolverInterface";
 
-function GuidedTextarea({ setProblem, setSolverData }) {
+function GuidedTextarea({ setProblem, setSolverData, setErrorData }) {
   const { translations } = useContext(LanguageContext);
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
@@ -92,7 +91,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     setValidRestriction,
   ) => {
     if (restriction.length === 1) {
-      alert(translations.oneConstraintRequired);
+
+      setErrorData({ message: translations.oneConstraintRequired, id: Date.now() });
+
     } else {
       const newRestriction = restriction.filter((_, i) => i !== index);
       setRestriction(newRestriction);
