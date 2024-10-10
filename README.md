@@ -1,23 +1,32 @@
-## Table of Contents
+<div align="center">
+   <p><strong>Optimized Solutions - Enhance your success with OptiMize</strong></p>
+   <img src="./src/assets/logo.png" alt="Logo" width="200"/>
+   <p>A Reliable lightweigt web-based linear problem optimizer <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/" target="_blank">running in your browser</a></p>
+</div>
 
-1. [Features](#features)
-2. [Usage](#usage)
-3. [Installation](#installation)
-4. [Testing](#testing)
-5. [Learn More](#learn-lore)
-6. [License](#license)
+![Latest Release](https://img.shields.io/github/v/release/Projektstudium-22DWF1/ip-solver-online)
+![Last Commit](https://img.shields.io/github/last-commit/Projektstudium-22DWF1/ip-solver-online)
+![Open Issues](https://img.shields.io/github/issues/Projektstudium-22DWF1/ip-solver-online)
+![Open PRs](https://img.shields.io/github/issues-pr/Projektstudium-22DWF1/ip-solver-online)
+![License](https://img.shields.io/github/license/Projektstudium-22DWF1/ip-solver-online)
+![Repo size](https://img.shields.io/github/repo-size/Projektstudium-22DWF1/ip-solver-online)
+
+<div align="center">
+  [Features](#features) • [Usage](#usage) • [Installation](#installation) • [Testing](#testing) • [Learn More](#learn-more) • [License](#license)
+</div>
+
 
 ## Features
 
-   🧮 Modeling/solving of specific and general linear programs!  
-   ⚙️ HIGHS and GLPK Solver supported!  
-   📝 LP and GMPL input languages supported!  
-   🌟 Intuitive to use through guided input and issue highlighting!  
-   🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!  
-   📦 Export and Import functions for general linear problems provided!  
-   🌍 Currently supports the languages english and german!  
-   📱 Usable on mobile devices as well!  
-   ✅ Unit- and E2E-Tests provided!  
+- 🧮 Modeling/solving of specific and general linear programs!  
+- ⚙️ HIGHS and GLPK Solver supported!  
+- 📝 LP and GMPL input languages supported!  
+- 🌟 Intuitive to use through guided input and issue highlighting!  
+- 🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!  
+- 📦 Export and Import functions for general linear problems provided!  
+- 🌍 Currently supports the languages english and german!  
+- 📱 Usable on mobile devices as well!  
+- ✅ Unit- and E2E-Tests provided!  
 
 ## Usage
 
