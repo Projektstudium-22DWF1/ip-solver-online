@@ -11,12 +11,13 @@ function SolveProblemButton({
   const { translations } = useContext(LanguageContext);
   // disabled-button
   // {textareaStyle === "Guided" ? translations.raw : translations.guided}
+  // console.log(solveControl);
 
-  useEffect(() => {
-    if (textAreaStyle) {
-      console.log("TextAreaStyle updated:", textAreaStyle);
-    }
-  }, [textAreaStyle]);
+  // useEffect(() => {
+  //   if (textAreaStyle) {
+  //     console.log("TextAreaStyle updated:", textAreaStyle);
+  //   }
+  // }, [textAreaStyle]);
 
   return (
     <button
@@ -25,7 +26,7 @@ function SolveProblemButton({
         solveProblem();
         setErrorData("");
       }}
-      className={`uk-button uk-button-secondary uk-button-large ${solveControl ? "disabled-button" : ""}`}
+      className={`uk-button uk-button-secondary uk-button-large ${solveControl && textAreaStyle === "Guided" ? "disabled-button" : ""}`}
       disabled={solveControl && textAreaStyle === "Guided"}
     >
       {translations.solveProblem}

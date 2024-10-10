@@ -26,11 +26,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [validConstraint, setValidConstraint] = useState(
     Array(constraints.length).fill(false),
   );
-  const [validBound, setValidBound] = useState(
-    Array(bounds.length).fill(false),
-  );
+  const [validBound, setValidBound] = useState(Array(bounds.length).fill(true));
   const [validConstraintNames, setValidConstraintNames] = useState(
-    Array(constraintNames.length).fill(false),
+    Array(constraintNames.length).fill(true),
   );
   const [solveControl, setSolveControl] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -94,13 +92,12 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
 
     const allValid =
-      validProblem.every(Boolean) &&
-      validConstraint.every(Boolean) &&
-      validConstraintNames.every(Boolean) &&
-      validBound.every(Boolean);
+      validProblem.every(Boolean) && validConstraint.every(Boolean);
+    // validConstraintNames.every(Boolean) &&
+    // validBound.every(Boolean);
 
     setSolveControl(!allValid);
-  }, [validProblem, validConstraint, validConstraintNames, validBound]);
+  }, [validProblem, validConstraint, validBound]);
 
   return (
     <React.Fragment>
