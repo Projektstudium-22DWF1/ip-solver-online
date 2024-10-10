@@ -73,10 +73,10 @@ const OutputUi = ({ outputData }) => {
 
     // Check if Status and Dual exist for Variables
     const hasStatus = Object.values(outputData.Columns).some(
-      (variable) => variable.Status !== undefined && variable.Status !== null
+      (variable) => variable.Status !== undefined && variable.Status !== null,
     );
     const hasDual = Object.values(outputData.Columns).some(
-      (variable) => variable.Dual !== undefined && variable.Dual !== null
+      (variable) => variable.Dual !== undefined && variable.Dual !== null,
     );
 
     // Render a table of variables with their properties, wrapped in a scrollable div
@@ -117,9 +117,7 @@ const OutputUi = ({ outputData }) => {
                     ? "∞"
                     : variable.Upper}
                 </td>
-                {hasDual && (
-                  <td className="uk-text-center">{variable.Dual}</td>
-                )}
+                {hasDual && <td className="uk-text-center">{variable.Dual}</td>}
               </tr>
             ))}
           </tbody>
@@ -131,11 +129,12 @@ const OutputUi = ({ outputData }) => {
   // Function to render the constraints tab content
   const renderConstraints = () => {
     // Display message if no constraints are available
-    if (!Array.isArray(outputData?.Rows)) return <p>{translations.noConstraintsAvailable}</p>;
+    if (!Array.isArray(outputData?.Rows))
+      return <p>{translations.noConstraintsAvailable}</p>;
 
     // Check if Dual exist for Constraints
     const hasConstraintDual = outputData.Rows.some(
-      (row) => row.Dual !== undefined && row.Dual !== null
+      (row) => row.Dual !== undefined && row.Dual !== null,
     );
 
     // Render a table of constraints with their properties, wrapped in a scrollable div
@@ -219,4 +218,4 @@ const OutputUi = ({ outputData }) => {
   );
 };
 
-export default OutputUi
+export default OutputUi;
