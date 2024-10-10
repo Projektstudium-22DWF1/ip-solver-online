@@ -1,9 +1,6 @@
 export function validateGuidedProblem(states) {
   let valid = true;
 
-
-
-
   return valid;
 }
 

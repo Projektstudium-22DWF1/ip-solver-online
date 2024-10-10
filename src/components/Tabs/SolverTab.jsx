@@ -15,7 +15,7 @@ import {
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
-import {validateGuidedProblem} from "../../services/Validation";
+import { validateGuidedProblem } from "../../services/Validation";
 
 export function SolverTab() {
   const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);

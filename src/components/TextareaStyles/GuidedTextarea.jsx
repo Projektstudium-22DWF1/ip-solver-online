@@ -9,7 +9,7 @@ import {
   validateConstraints,
   validateProblem,
 } from "../../services/Validation";
-import {solve} from "../../services/SolverInterface";
+import { solve } from "../../services/SolverInterface";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext);
@@ -87,15 +87,13 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
 
     const allValid =
-        validProblem.every(Boolean) &&
-        validConstraint.every(Boolean) &&
-        validConstraintNames.every(Boolean) &&
-        validBound.every(Boolean);
+      validProblem.every(Boolean) &&
+      validConstraint.every(Boolean) &&
+      validConstraintNames.every(Boolean) &&
+      validBound.every(Boolean);
 
     setSolveControl(!allValid);
   }, [validProblem, validConstraint, validConstraintNames, validBound]);
-
-
 
   return (
     <React.Fragment>
@@ -160,7 +158,11 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraintNames,
                         setConstraintNames,
                       );
-                      validateConstraintNames(constraintNames, validConstraintNames, setValidConstraintNames);
+                      validateConstraintNames(
+                        constraintNames,
+                        validConstraintNames,
+                        setValidConstraintNames,
+                      );
                       returnProblem();
                     }}
                   />
@@ -182,7 +184,11 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                         constraints,
                         setConstraints,
                       );
-                      validateConstraints(constraints, validConstraint, setValidConstraint);
+                      validateConstraints(
+                        constraints,
+                        validConstraint,
+                        setValidConstraint,
+                      );
                       returnProblem();
                     }}
                   />
