@@ -9,15 +9,15 @@
 
 ## Features
 
-   🧮 Modeling/solving of specific and general linear programs!
-   ⚙️ HIGHS and GLPK Solver supported!
-   📝 LP and GMPL input languages supported!
-   🌟 Intuitive to use through guided input and issue highlighting!
-   🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!
-   📦 Export and Import functions for general linear problems provided!
-   🌍 Currently supports the languages english and german!
-   📱 Usable on mobile devices as well!
-   ✅ Unit- and E2E-Tests provided!
+   🧮 Modeling/solving of specific and general linear programs!  
+   ⚙️ HIGHS and GLPK Solver supported!  
+   📝 LP and GMPL input languages supported!  
+   🌟 Intuitive to use through guided input and issue highlighting!  
+   🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!  
+   📦 Export and Import functions for general linear problems provided!  
+   🌍 Currently supports the languages english and german!  
+   📱 Usable on mobile devices as well!  
+   ✅ Unit- and E2E-Tests provided!  
 
 ## Usage
 
