@@ -71,10 +71,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 Press **a** to run all tests or choose other options that are shown to you
 
+
 ### End-to-End Tests
 
-**Make sure to run the project locally on localhost:3000 before running the E2E-Test.**
-**Open a second terminal window and follow the steps below.**
+**Make sure to run the project locally on localhost:3000 before running the E2E-Test.**  
+
+**Open a second terminal window and follow the steps below.**  
 
 1. **Install cypress**
 
