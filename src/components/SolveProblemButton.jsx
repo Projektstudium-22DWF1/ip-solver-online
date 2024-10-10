@@ -12,7 +12,7 @@ function SolveProblemButton({
   // disabled-button
   // {textareaStyle === "Guided" ? translations.raw : translations.guided}
   // console.log(solveControl);
-  
+
   // useEffect(() => {
   //   if (textAreaStyle) {
   //     console.log("TextAreaStyle updated:", textAreaStyle);

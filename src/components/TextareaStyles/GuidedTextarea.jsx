@@ -95,6 +95,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
 
     const allValid =
+validateOnChange
       validProblem.every(Boolean) &&
       validConstraint.every(Boolean) &&
       validConstraintNames.every(Boolean) &&
