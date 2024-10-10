@@ -1,5 +1,5 @@
 <div align="center">
-   <p><strong>Optimized Solutions - Enhance your success with OptiMize</strong></p>
+   <p style="font-size: 28px;"><strong>Optimized Solutions - Enhance your success with OptiMize</strong></p>
    <img src="./src/assets/logo.png" alt="Logo" width="150"/>
    <p>A Reliable lightweigt web-based linear problem optimizer <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/" target="_blank">running in your browser</a></p>
 </div>
@@ -9,7 +9,7 @@
   ![Last Commit](https://img.shields.io/github/last-commit/Projektstudium-22DWF1/ip-solver-online)
   ![Open Issues](https://img.shields.io/github/issues/Projektstudium-22DWF1/ip-solver-online)
   ![Open PRs](https://img.shields.io/github/issues-pr/Projektstudium-22DWF1/ip-solver-online)
-  ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
+  ![License](https://img.shields.io/badge/License-GPLv3-orange.svg)
   ![Repo size](https://img.shields.io/github/repo-size/Projektstudium-22DWF1/ip-solver-online)
 
 </div>
