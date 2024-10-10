@@ -1,21 +1,19 @@
 import { fileOpen, fileSave } from "browser-fs-access";
 
+// Import
 export const openProblemFile = async () => {
   const file = await fileOpen({
-    //mimeTypes: ["text/plain"], // Nur Textdateien zulassen
-    //extensions: ['.txt'], // TODO define sesible File Input Formats
-    description: "Text-Dateien",
+    description: "Text",
   });
   const text = await file.text();
-  console.log(text);
   return text;
 };
 
-// Speichern einer Datei
+// Export
 export const saveProblemToFile = async (content) => {
   const blob = new Blob([content], { type: "text/plain" });
   await fileSave(blob, {
-    fileName: "LP.txt", //TODO define sensible standard output name
+    fileName: "LP.txt",
     extensions: [".txt"],
   });
 };

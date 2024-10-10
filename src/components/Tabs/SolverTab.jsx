@@ -100,13 +100,8 @@ export function SolverTab() {
 
       {/* Solve problem button with validation for guided mode */}
       <SolveProblemButton
-        solveProblem={() => {
-          if (textareaStyle === "Guided") {
-            solveProblem();
-          } else if (textareaStyle === "Raw") {
-            solveProblem();
-          }
-        }}
+        solveProblem={solveProblem}
+        setErrorData={setErrorData}
       />
 
       {/* File buttons for problem management */}
