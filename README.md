@@ -64,19 +64,20 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 1. **Run unit tests**:
    ```bash
+   cd ip-solver-online
    npm test
    ```
 
 2. **Select which tests to run**
 
-Press **a** to run all tests or choose other options that are shown to you
+   Press **a** to run all tests or choose other options that are shown to you
 
 
 ### End-to-End Tests
 
-**Make sure to run the project locally on localhost:3000 before running the E2E-Test.**  
+Make sure to run the project locally on localhost:3000 **before running the E2E-Test**.  
 
-**Open a second terminal window and follow the steps below.**  
+Open a second terminal window and follow the steps below.  
 
 1. **Install cypress**
 
@@ -93,9 +94,9 @@ Press **a** to run all tests or choose other options that are shown to you
 
 3. **Follow the UI**
 
-Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.
+   Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.  
 
-The E2E Test are now running. You can **click the spec.cy.js file** to visually see the E2E Test running.
+The E2E Test are now running. You can **click the spec.cy.js file** to visually see the E2E Test.
 
 ## Learn More
 
