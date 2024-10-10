@@ -146,112 +146,112 @@ const solveLpProblemWithGlpk = (problem) => {
 
 const formatGlpkInput = (input) => {
   //all valid CPLEX LP Keywords
-const keywords = [
-  // Objectives
-  "Maximize",
-  "Minimize",
-  // Constraints
-  "Subject To",
-  "Such That",
-  "St",
-  // Variable Declarations
-  "Bounds",
-  "General",
-  "Generals",
-  "Gen",
-  "Gens",
-  "Integer",
-  "Integers",
-  "Int",
-  "Ints",
-  "Binary",
-  "Binaries",
-  "Bin",
-  "Bins",
-  // End Statement
-  "End",
-];
+  const keywords = [
+    // Objectives
+    "Maximize",
+    "Minimize",
+    // Constraints
+    "Subject To",
+    "Such That",
+    "St",
+    // Variable Declarations
+    "Bounds",
+    "General",
+    "Generals",
+    "Gen",
+    "Gens",
+    "Integer",
+    "Integers",
+    "Int",
+    "Ints",
+    "Binary",
+    "Binaries",
+    "Bin",
+    "Bins",
+    // End Statement
+    "End",
+  ];
 
-//regex to detect Keywords
-const regex = new RegExp("\\b(" + keywords.join("|") + ")\\b", "gi");
+  //regex to detect Keywords
+  const regex = new RegExp("\\b(" + keywords.join("|") + ")\\b", "gi");
 
-//split input string to keywords and content
-const sections = input.split(regex);
+  //split input string to keywords and content
+  const sections = input.split(regex);
 
-let output = "";
-for (let i = 0; i < sections.length; i++) {
-  const section = sections[i].trim();
-  if (keywords.map((k) => k.toLowerCase()).includes(section.toLowerCase())) {
-    output += section + "\n";
+  let output = "";
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i].trim();
+    if (keywords.map((k) => k.toLowerCase()).includes(section.toLowerCase())) {
+      output += section + "\n";
 
-    const content = sections[i + 1];
-    i++;
-    if (typeof content === "string" && content.trim()) {
-      const trimmedContent = content.trim();
-      // parse Content by keyword
-      if (
-        ["Subject To", "Such That", "St"]
-          .map((k) => k.toLowerCase())
-          .includes(section.toLowerCase())
-      ) {
-        // Constraints
-        // Regex to detect end of constraint (=/>=/<= + number)
-        const constraintRegex =
-          /(?:\b\w+\s*:\s*)?.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
-        const lines = trimmedContent.match(constraintRegex) || [];
-        //newline for each constraint
-        for (const line of lines) {
-          if (line.trim()) {
-            output += "  " + line.trim() + "\n";
+      const content = sections[i + 1];
+      i++;
+      if (typeof content === "string" && content.trim()) {
+        const trimmedContent = content.trim();
+        // parse Content by keyword
+        if (
+          ["Subject To", "Such That", "St"]
+            .map((k) => k.toLowerCase())
+            .includes(section.toLowerCase())
+        ) {
+          // Constraints
+          // Regex to detect end of constraint (=/>=/<= + number)
+          const constraintRegex =
+            /(?:\b\w+\s*:\s*)?.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
+          const lines = trimmedContent.match(constraintRegex) || [];
+          //newline for each constraint
+          for (const line of lines) {
+            if (line.trim()) {
+              output += "  " + line.trim() + "\n";
+            }
           }
-        }
-      } else if (section.toLowerCase() === "bounds") {
-        // Bounds
-        // Regex to detect bounds
-        const boundRegex = /(?:[^\s]+(?:\s*[<>]=?\s*[^\s]+)+)/g;
-        const lines = trimmedContent.match(boundRegex) || [];
-        //newline for each bound
-        for (const line of lines) {
-          if (line.trim()) {
-            output += "  " + line.trim() + "\n";
+        } else if (section.toLowerCase() === "bounds") {
+          // Bounds
+          // Regex to detect bounds
+          const boundRegex = /(?:[^\s]+(?:\s*[<>]=?\s*[^\s]+)+)/g;
+          const lines = trimmedContent.match(boundRegex) || [];
+          //newline for each bound
+          for (const line of lines) {
+            if (line.trim()) {
+              output += "  " + line.trim() + "\n";
+            }
           }
-        }
-      } else if (
-        [
-          "General",
-          "Generals",
-          "Gen",
-          "Gens",
-          "Integer",
-          "Integers",
-          "Int",
-          "Ints",
-          "Binary",
-          "Binaries",
-          "Bin",
-          "Bins",
-        ]
-          .map((k) => k.toLowerCase())
-          .includes(section.toLowerCase())
-      ) {
-        // Variables
-        // Regex to detect variables
-        const variables = trimmedContent.split(/\s+/);
-        //newline for each variable
-        for (const variable of variables) {
-          if (variable.trim()) {
-            output += "  " + variable.trim() + "\n";
+        } else if (
+          [
+            "General",
+            "Generals",
+            "Gen",
+            "Gens",
+            "Integer",
+            "Integers",
+            "Int",
+            "Ints",
+            "Binary",
+            "Binaries",
+            "Bin",
+            "Bins",
+          ]
+            .map((k) => k.toLowerCase())
+            .includes(section.toLowerCase())
+        ) {
+          // Variables
+          // Regex to detect variables
+          const variables = trimmedContent.split(/\s+/);
+          //newline for each variable
+          for (const variable of variables) {
+            if (variable.trim()) {
+              output += "  " + variable.trim() + "\n";
+            }
           }
+        } else {
+          // Other sections (Maximize, Minimize) in newline
+          output += "  " + trimmedContent + "\n";
         }
-      } else {
-        // Other sections (Maximize, Minimize) in newline
-        output += "  " + trimmedContent + "\n";
       }
     }
   }
-}
-//console.log(output.trim());
-return output.trim();
+  //console.log(output.trim());
+  return output.trim();
 };
 
 //function to format Glpk output to a javascript object, that is uniform to highs solver return value
