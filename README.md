@@ -3,8 +3,9 @@
 1. [Features](#features)
 2. [Usage](#usage)
 3. [Installation](#installation)
-4. [Learn More](#learn-lore)
-5. [License](#license)
+4. [Testing](#testing)
+5. [Learn More](#learn-lore)
+6. [License](#license)
 
 ## Features
 
@@ -18,6 +19,11 @@
 8. Usable on mobile devices as well!
 
 ## Usage
+
+<div align="center">
+  <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/"><strong>Optimize your solutions now!</strong></a>
+</div>
+
 
 ## Installation
 
@@ -51,6 +57,43 @@ To get the project running locally, follow these steps:
    ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## Testing
+
+### Unit Tests
+
+1. **Run unit tests**:
+   ```bash
+   npm test
+   ```
+
+2. **Select which tests to run**
+
+Press **a** to run all tests or choose other options that are shown to you
+
+### End-to-End Tests
+
+**Make sure to run the project locally on localhost:3000 before running the E2E-Test.**
+**Open a second terminal window and follow the steps below.**
+
+1. **Install cypress**
+
+   ```bash
+   cd ip-solver-online
+   npm install cypress --save-dev
+   ```
+
+2. **Open Cypress**
+
+   ```bash
+   npx cypress open
+   ```
+
+3. **Follow the UI**
+
+Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.
+
+The E2E Test are now running. You can **click the spec.cy.js file** to visually see the E2E Test running.
 
 ## Learn More
 
