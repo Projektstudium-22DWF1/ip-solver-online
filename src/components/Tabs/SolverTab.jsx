@@ -40,7 +40,6 @@ export function SolverTab() {
       setErrorData({ message: error.message, id: Date.now() }); // Handles error
     }
   };
-
   return (
     <React.Fragment>
       <div
@@ -102,6 +101,7 @@ export function SolverTab() {
       {/* Solve problem button with validation for guided mode */}
       <SolveProblemButton
         solveControl={solverData.solveControl}
+        textAreaStyle={textareaStyle}
         solveProblem={() => {
           if (textareaStyle === "Guided") {
             solveProblem();

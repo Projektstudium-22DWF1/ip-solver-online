@@ -22,22 +22,23 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
   const [validProblem, setValidProblem] = useState(
-    Array(prob.length).fill(true),
+    Array(prob.length).fill(false),
   );
   const [validConstraint, setValidConstraint] = useState(
-    Array(constraints.length).fill(true),
+    Array(constraints.length).fill(false),
   );
-  const [validBound, setValidBound] = useState(Array(bounds.length).fill(true));
+  const [validBound, setValidBound] = useState(Array(bounds.length).fill(false));
   const [validConstraintNames, setValidConstraintNames] = useState(
-    Array(constraintNames.length).fill(true),
+    Array(constraintNames.length).fill(false),
   );
   const [solveControl, setSolveControl] = useState(true);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
     const dataToSend = { prob, setProb, solveControl, setSolveControl };
     setSolverData(dataToSend); // Updates parent with current solver data
   }, [prob, setProb, solveControl, setSolveControl]);
-
+  console.log(solveControl);
   // Helper function to generate the complete problem text
   const returnProblem = () => {
     console.log(prob[0].value);
@@ -80,6 +81,11 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   };
 
   useEffect(() => {
+    if (initialLoad) {
+      setInitialLoad(false);
+      return; // Skip Validation
+    }
+
     const allValid =
         validProblem.every(Boolean) &&
         validConstraint.every(Boolean) &&
