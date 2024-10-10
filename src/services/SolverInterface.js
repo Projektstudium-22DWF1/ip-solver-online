@@ -1,20 +1,24 @@
+//enum for valid solver options
 export const SolverOptions = Object.freeze({
   GLPK: "GLPK",
   HIGHS: "HIGHS",
 });
-
+//enum for vaild input options
 export const InputOptions = Object.freeze({
   LP: "LP",
   GMPL: "GMPL",
 });
 
+//initialize highs solver
 const highs_settings = {
   locateFile: (file) => "https://lovasoa.github.io/highs-js/" + file,
 };
 const highs_promise = require("highs")(highs_settings);
 
+//initialize glpk solver
 let glpk = require("../dist/glpk.min.js");
 
+//main solve interface function
 export const solve = async (problem, inputFormat, solver) => {
   console.log(
     "Solver:" +
@@ -24,10 +28,13 @@ export const solve = async (problem, inputFormat, solver) => {
       "\n\nProblem:" +
       problem,
   );
+  //record walltime
   const startTime = performance.now();
   var result;
+  //choosen solver
   switch (solver) {
     case SolverOptions.GLPK:
+      //choosen input format
       if (inputFormat === InputOptions.GMPL) {
         result = solveGmplProblemWithGlpk(problem);
       } else if (inputFormat === InputOptions.LP) {
@@ -36,9 +43,12 @@ export const solve = async (problem, inputFormat, solver) => {
       }
       break;
     case SolverOptions.HIGHS:
+      //choosen input format
       if (inputFormat === InputOptions.GMPL) {
+        //Convert GMPL Problem to LP problem to make it readable for Highs
         problem = convertGmplToLp(problem);
       }
+      //else solve it native
       const highs = await highs_promise;
       result = highs.solve(problem);
       break;
@@ -48,7 +58,6 @@ export const solve = async (problem, inputFormat, solver) => {
   }
   const endTime = performance.now();
   result["Walltime"] = (endTime - startTime) / 1000;
-  console.log(JSON.stringify(result, null, 2));
   return result;
 };
 
@@ -136,7 +145,7 @@ const solveLpProblemWithGlpk = (problem) => {
 };
 
 const formatGlpkInput = (input) => {
-  // Liste aller möglichen Keywords in CPLEX-Problemdefinitionen
+  //all valid CPLEX LP Keywords
   const keywords = [
     // Objectives
     "Maximize",
@@ -170,33 +179,34 @@ const formatGlpkInput = (input) => {
     "End",
   ];
 
-  // Erstellen eines Regex, um die Keywords zu erkennen (Case-Insensitive)
+  //regex to detect Keywords
   const regex = new RegExp("\\b(" + keywords.join("|") + ")\\b", "gi");
 
-  // Teilt den Input-String in Abschnitte basierend auf den Keywords
+  //split input string to keywords and content
   const sections = input.split(regex);
 
   let output = "";
   for (let i = 0; i < sections.length; i++) {
     const section = sections[i].trim();
     if (keywords.map((k) => k.toLowerCase()).includes(section.toLowerCase())) {
-      // Fügt das Keyword zur Ausgabe hinzu
+      
       output += section + "\n";
-      // Nächster Abschnitt ist der Inhalt
+      
       const content = sections[i + 1];
-      i++; // Überspringt den Inhalt im nächsten Loop
+      i++; 
       if (typeof content === "string" && content.trim()) {
         const trimmedContent = content.trim();
-        // Bestimmt den Sektionstyp und parst entsprechend
+        // parse Content by keyword
         if (
           ["Subject To", "Such That", "St"]
             .map((k) => k.toLowerCase())
             .includes(section.toLowerCase())
         ) {
           // Constraints
-          // Regex zum Erkennen von Constraints, die mit einem Gleichheits- oder Ungleichheitszeichen gefolgt von einer Zahl enden
+          // Regex to detect end of constraint (=/>=/<= + number)
           const constraintRegex = /(?:\b\w+\s*:\s*)?.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
           const lines = trimmedContent.match(constraintRegex) || [];
+          //newline for each constraint
           for (const line of lines) {
             if (line.trim()) {
               output += "  " + line.trim() + "\n";
@@ -204,9 +214,10 @@ const formatGlpkInput = (input) => {
           }
         } else if (section.toLowerCase() === "bounds") {
           // Bounds
-          // Regex zum Erkennen von Bounds
+          // Regex to detect bounds
           const boundRegex = /.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
           const lines = trimmedContent.match(boundRegex) || [];
+          //newline for each bound
           for (const line of lines) {
             if (line.trim()) {
               output += "  " + line.trim() + "\n";
@@ -233,28 +244,30 @@ const formatGlpkInput = (input) => {
             .map((k) => k.toLowerCase())
             .includes(section.toLowerCase())
         ) {
-          // Variablendeklarationen
+          // Variables
+          // Regex to detect variables
           const variables = trimmedContent.split(/\s+/);
+          //newline for each variable
           for (const variable of variables) {
             if (variable.trim()) {
               output += "  " + variable.trim() + "\n";
             }
           }
         } else {
-          // Andere Sektionen (z.B. Maximize, Minimize)
+          // Other sections (Maximize, Minimize) in newline
           output += "  " + trimmedContent + "\n";
         }
       }
     }
   }
-
-  // Ausgabe zurückgeben
   console.log(output.trim());
   return output.trim();
 };
 
+//function to format Glpk output to a javascript object, that is uniform to highs solver return value
 const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
   var status;
+  
   switch (glpk.glp_mip_status(lp)) {
     case glpk.GLP_OPT:
       status = "Optimal";
@@ -299,53 +312,52 @@ const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
 
     var ub = glpk.glp_get_col_ub(lp, i);
     if (ub >= Number.MAX_VALUE) {
-      ub = null;
+      ub = null; //If upperbounds is infinity, set output to null
     }
 
     var lb = glpk.glp_get_col_lb(lp, i);
     if (lb <= -Number.MAX_VALUE) {
-      lb = null;
+      lb = null; //If lowerbounds is infinity, set output to null
     }
 
-    var primal = glpk.glp_get_col_prim(lp, i); // Primalwert der Spalte
-    var dual = glpk.glp_get_col_dual(lp, i); // Dualwert der Spalte
-    var colStatus = glpk.glp_get_col_stat(lp, i); // Status der Spalte
+    var primal = glpk.glp_get_col_prim(lp, i); // primal
+    var dual = glpk.glp_get_col_dual(lp, i); // dual
+    var colStatus = glpk.glp_get_col_stat(lp, i); // status
     var statusStr;
 
     // Setze den Status je nach Statuscode
     switch (colStatus) {
       case glpk.GLP_BS:
-        statusStr = "BS"; // Basis
+        statusStr = "BS"; // basis
         break;
       case glpk.GLP_NL:
-        statusStr = "LB"; // Nicht Basis, untere Schranke
+        statusStr = "LB"; // lowerbounds
         break;
       case glpk.GLP_NU:
-        statusStr = "UB"; // Nicht Basis, obere Schranke
+        statusStr = "UB"; // upperbounds
         break;
       default:
-        statusStr = "Unknown";
+        statusStr = "Unknown"; 
         break;
     }
 
-    // Erstelle den Namen der Variablen (z.B. x1, x2, etc.)
+    //get variables names
     var colName = glpk.glp_get_col_name(lp, i);
 
-    // Füge die Spalte zum 'columns'-Objekt hinzu
+    // add to variables object
     columns[colName] = {
-      Index: i - 1, // Index beginnt bei 0
-      Status: statusStr, // Status der Spalte
-      Lower: lb, // Untere Schranke
-      Upper: ub, // Obere Schranke
-      Primal: primal, // Primalwert
-      Dual: dual, // Dualwert
-      Type: colType, // Typ der Spalte
-      Name: colName, // Name der Spalte
+      Index: i - 1, // start index at 0
+      Status: statusStr, 
+      Lower: lb, 
+      Upper: ub, 
+      Primal: primal, 
+      Dual: dual, 
+      Type: colType, 
+      Name: colName, 
     };
   }
 
   var rows = [];
-  //j = 2 to skip objective function, similar to HIGHS Output
   for (var j = 1; j <= glpk.glp_get_num_rows(lp); j++) {
     var ubR = glpk.glp_get_row_ub(lp, j);
     if (ubR >= Number.MAX_VALUE) {
@@ -357,27 +369,26 @@ const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
       lbR = null;
     }
 
-    var primalR = glpk.glp_get_row_prim(lp, j); // Primalwert der Zeile
-    var dualR = glpk.glp_get_row_dual(lp, j); // Dualwert der Zeile
-    var statusR = glpk.glp_get_row_stat(lp, j); // Status der Zeile
+    var primalR = glpk.glp_get_row_prim(lp, j); // primal
+    var dualR = glpk.glp_get_row_dual(lp, j); // dual
+    var statusR = glpk.glp_get_row_stat(lp, j); // status (unused)
     var statusStrR;
 
-    // Setze den Status je nach Statuscode
     switch (statusR) {
       case glpk.GLP_BS:
-        statusStrR = "BS"; // Basis
+        statusStrR = "BS"; // basis
         break;
       case glpk.GLP_NL:
-        statusStrR = "LB"; // Nicht Basis, untere Schranke
+        statusStrR = "LB"; // lowerbounds
         break;
       case glpk.GLP_NU:
-        statusStrR = "UB"; // Nicht Basis, obere Schranke
+        statusStrR = "UB"; // ub
         break;
       case glpk.GLP_NF:
-        statusStrR = "NF"; // Nicht Basis, freie Variable
+        statusStrR = "NF"; // free
         break;
       case glpk.GLP_NS:
-        statusStrR = "NS "; // Nicht Basis, festgesetzt
+        statusStrR = "NS "; // stuck
         break;
       default:
         statusStrR = "Unknown";
@@ -387,18 +398,19 @@ const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
     var rowName = glpk.glp_get_row_name(lp, j);
 
     rows.push({
-      Index: j - 1, // Index beginnt bei 0
-      Status: statusStrR, // Status der Zeile
-      Lower: lbR, // Untere Schranke
-      Upper: ubR, // Obere Schranke
-      Primal: primalR, // Primalwert der Zeile
-      Dual: dualR, // Dualwert der Zeile
-      Name: rowName, // Name der Zeile (z.B. c1, c2)
+      Index: j - 1, // start index at 0
+      Status: statusStrR, //status
+      Lower: lbR, // lowerbounds
+      Upper: ubR, // upperbounds
+      Primal: primalR, // primal
+      Dual: dualR, // dual
+      Name: rowName, // name
     });
   }
 
   var objectiveValue = glpk.glp_mip_obj_val(lp);
 
+  //construct result object and return
   var result = {
     Status: status,
     Columns: columns,
