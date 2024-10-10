@@ -100,6 +100,7 @@ export function SolverTab() {
 
       {/* Solve problem button with validation for guided mode */}
       <SolveProblemButton
+
         solveProblem={solveProblem}
         setErrorData={setErrorData}
         solveControl={solverData.solveControl}
