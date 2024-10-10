@@ -10,6 +10,14 @@ const OutputUi = ({ outputData }) => {
   // State to keep track of the active tab
   const [activeTab, setActiveTab] = useState("summary");
 
+  // Check if Status and Dual exist for Variables and Constraints
+  const hasStatus = outputData?.Columns && Object.values(outputData.Columns).some(
+    (variable) => variable.Status !== undefined && variable.Status !== null
+  );
+  const hasDual = outputData?.Columns && Object.values(outputData.Columns).some(
+    (variable) => variable.Dual !== undefined && variable.Dual !== null
+  );
+
   // Function to render the summary tab content
   const renderSummary = () => {
     // If there is no output data, display a message
@@ -68,7 +76,8 @@ const OutputUi = ({ outputData }) => {
   // Function to render the variables tab content
   const renderVariables = () => {
     // Display message if no variables are available
-    if (!outputData?.Columns) return <p>{translations.noVariablesAvailable}</p>;
+    if (!outputData?.Columns || Object.keys(outputData.Columns).length === 0)
+      return <p>{translations.noVariablesAvailable}</p>;
 
     // Render a table of variables with their properties, wrapped in a scrollable div
     return (
@@ -80,10 +89,14 @@ const OutputUi = ({ outputData }) => {
             <tr>
               <th className="uk-text-center">{translations.variable}</th>
               <th className="uk-text-center">{translations.primalValue}</th>
-              <th className="uk-text-center">{translations.status}</th>
+              {hasStatus && (
+                <th className="uk-text-center">{translations.status}</th>
+              )}
               <th className="uk-text-center">{translations.lowerBound}</th>
               <th className="uk-text-center">{translations.upperBound}</th>
-              <th className="uk-text-center">{translations.dualValue}</th>
+              {hasDual && (
+                <th className="uk-text-center">{translations.dualValue}</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -91,7 +104,9 @@ const OutputUi = ({ outputData }) => {
               <tr key={key}>
                 <td className="uk-text-center">{variable.Name}</td>
                 <td className="uk-text-center">{variable.Primal}</td>
-                <td className="uk-text-center">{variable.Status}</td>
+                {hasStatus && (
+                  <td className="uk-text-center">{variable.Status}</td>
+                )}
                 <td className="uk-text-center">
                   {variable.Lower === null || variable.Lower === -Infinity
                     ? "-∞"
@@ -102,7 +117,9 @@ const OutputUi = ({ outputData }) => {
                     ? "∞"
                     : variable.Upper}
                 </td>
-                <td className="uk-text-center">{variable.Dual}</td>
+                {hasDual && (
+                  <td className="uk-text-center">{variable.Dual}</td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -114,7 +131,15 @@ const OutputUi = ({ outputData }) => {
   // Function to render the constraints tab content
   const renderConstraints = () => {
     // Display message if no constraints are available
-    if (!outputData?.Rows) return <p>{translations.noConstraintsAvailable}</p>;
+    if (!Array.isArray(outputData?.Rows)) return <p>{translations.noConstraintsAvailable}</p>;
+
+    // Check if Status and Dual exist for Constraints
+    const hasConstraintStatus = outputData.Rows.some(
+      (row) => row.Status !== undefined && row.Status !== null
+    );
+    const hasConstraintDual = outputData.Rows.some(
+      (row) => row.Dual !== undefined && row.Dual !== null
+    );
 
     // Render a table of constraints with their properties, wrapped in a scrollable div
     return (
@@ -128,7 +153,9 @@ const OutputUi = ({ outputData }) => {
               <th className="uk-text-center">{translations.primalValue}</th>
               <th className="uk-text-center">{translations.lowerBound}</th>
               <th className="uk-text-center">{translations.upperBound}</th>
-              <th className="uk-text-center">{translations.dualValue}</th>
+              {hasConstraintDual && (
+                <th className="uk-text-center">{translations.dualValue}</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -146,7 +173,9 @@ const OutputUi = ({ outputData }) => {
                     ? "∞"
                     : row.Upper}
                 </td>
-                <td className="uk-text-center">{row.Dual}</td>
+                {hasConstraintDual && (
+                  <td className="uk-text-center">{row.Dual}</td>
+                )}
               </tr>
             ))}
           </tbody>
