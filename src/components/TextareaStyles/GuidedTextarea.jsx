@@ -92,10 +92,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
 
     const allValid =
-      validProblem.every(Boolean) &&
-      validConstraint.every(Boolean)
-      // validConstraintNames.every(Boolean) &&
-      // validBound.every(Boolean);
+      validProblem.every(Boolean) && validConstraint.every(Boolean);
+    // validConstraintNames.every(Boolean) &&
+    // validBound.every(Boolean);
 
     setSolveControl(!allValid);
   }, [validProblem, validConstraint, validBound]);
