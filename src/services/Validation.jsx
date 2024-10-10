@@ -63,7 +63,7 @@ export function validateConstraintNames(
   // Validation for constraint names
   constraintNames.forEach((e, index) => {
     // console.log(e);
-    if (!regexConstraintName.test(e.value)) {
+    if (!regexConstraintName.test(e.value) && e.value !== "") {
       valid = false;
       newValidConstraintNames[index] = false;
       console.log(
@@ -92,7 +92,6 @@ export function validateBound(bounds, validBound, setValidBound) {
 
   bounds.forEach((e, index) => {
     if (
-      e.value !== "" &&
       !regexBounds.test(e.value) &&
       !regexDualBounds.test(e.value) &&
       !regexScalarBounds.test(e.value)
