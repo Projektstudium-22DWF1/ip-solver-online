@@ -136,7 +136,7 @@ const solveLpProblemWithGlpk = (problem) => {
 };
 
 const formatGlpkInput = (input) => {
-  // List of all possible keywords in CPLEX problem definitions
+  // Liste aller möglichen Keywords in CPLEX-Problemdefinitionen
   const keywords = [
     // Objectives
     "Maximize",
@@ -194,8 +194,9 @@ const formatGlpkInput = (input) => {
             .includes(section.toLowerCase())
         ) {
           // Constraints
-          // Annahme: Jede Restriktion beginnt mit optionalem Namen gefolgt von einem Doppelpunkt
-          const lines = trimmedContent.split(/(?=\b\w+:)/g);
+          // Regex zum Erkennen von Constraints, die mit einem Gleichheits- oder Ungleichheitszeichen gefolgt von einer Zahl enden
+          const constraintRegex = /(?:\b\w+\s*:\s*)?.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
+          const lines = trimmedContent.match(constraintRegex) || [];
           for (const line of lines) {
             if (line.trim()) {
               output += "  " + line.trim() + "\n";
@@ -203,8 +204,9 @@ const formatGlpkInput = (input) => {
           }
         } else if (section.toLowerCase() === "bounds") {
           // Bounds
-          // Annahme: Jede Bound ist eine separate Ungleichung
-          const lines = trimmedContent.split(/(?<=\d)(?=\s*[a-zA-Z_])/g);
+          // Regex zum Erkennen von Bounds
+          const boundRegex = /.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
+          const lines = trimmedContent.match(boundRegex) || [];
           for (const line of lines) {
             if (line.trim()) {
               output += "  " + line.trim() + "\n";
@@ -246,7 +248,7 @@ const formatGlpkInput = (input) => {
     }
   }
 
-  // Return the formatted output string without trailing whitespace
+  // Ausgabe zurückgeben
   console.log(output.trim());
   return output.trim();
 };
