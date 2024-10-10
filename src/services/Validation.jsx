@@ -51,7 +51,7 @@ export function validateConstraintNames(
   setValidConstraintNames,
 ) {
   let valid = true;
-  const regexConstraintName = /^[A-Za-z_][A-Za-z0-9_]*$/;
+  const regexConstraintName = /^[A-Za-z_][A-Za-z0-9_]*\s*$/;
   const newValidConstraintNames = [...validConstraintNames];
 
   // Validation for constraint names
@@ -71,11 +71,12 @@ export function validateConstraintNames(
 export function validateBound(bounds, validBound, setValidBound) {
   let valid = true;
   const regexBounds =
-    /^([0-9]*\s*[a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|>=|<|>|=)\s*([0-9]\d*)$/;
+    /^([0-9]*\s*[a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|>=|<|>|=)\s*([0-9]\d*)\s*$/;
   const regexDualBounds =
-    /^(\d+)\s*(<=|<)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|<)\s*(\d+)$/;
+    /^(\d+)\s*(<=|<)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|<)\s*(\d+)\s*$/;
   const regexScalarBounds =
     /^(\d+)\s*(<=|<|=|>|>=)\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*$/;
+
   const newValidBound = [...validBound];
 
   bounds.forEach((e, index) => {
