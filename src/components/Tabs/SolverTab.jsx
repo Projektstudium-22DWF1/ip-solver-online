@@ -104,7 +104,6 @@ export function SolverTab() {
         setErrorData={setErrorData}
         solveControl={solverData.solveControl}
         textAreaStyle={textareaStyle}
-        
       />
 
       {/* File buttons for problem management */}

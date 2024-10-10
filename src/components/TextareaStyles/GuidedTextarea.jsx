@@ -26,7 +26,9 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [validConstraint, setValidConstraint] = useState(
     Array(constraints.length).fill(false),
   );
-  const [validBound, setValidBound] = useState(Array(bounds.length).fill(false));
+  const [validBound, setValidBound] = useState(
+    Array(bounds.length).fill(false),
+  );
   const [validConstraintNames, setValidConstraintNames] = useState(
     Array(constraintNames.length).fill(false),
   );
