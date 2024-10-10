@@ -168,13 +168,6 @@ const formatGlpkInput = (input) => {
     "Binaries",
     "Bin",
     "Bins",
-    "Semi-Continuous",
-    "Semi",
-    "Semis",
-    // Special Ordered Sets
-    "SOS",
-    "SOS1",
-    "SOS2",
     // End Statement
     "End",
   ];
@@ -215,7 +208,7 @@ const formatGlpkInput = (input) => {
         } else if (section.toLowerCase() === "bounds") {
           // Bounds
           // Regex to detect bounds
-          const boundRegex = /.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
+          const boundRegex = /(?:[^\s]+(?:\s*[<>]=?\s*[^\s]+)+)/g;
           const lines = trimmedContent.match(boundRegex) || [];
           //newline for each bound
           for (const line of lines) {
@@ -237,9 +230,6 @@ const formatGlpkInput = (input) => {
             "Binaries",
             "Bin",
             "Bins",
-            "Semi-Continuous",
-            "Semi",
-            "Semis",
           ]
             .map((k) => k.toLowerCase())
             .includes(section.toLowerCase())
@@ -260,7 +250,7 @@ const formatGlpkInput = (input) => {
       }
     }
   }
-  console.log(output.trim());
+  //console.log(output.trim());
   return output.trim();
 };
 
