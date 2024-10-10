@@ -13,7 +13,7 @@ export const openProblemFile = async () => {
 export const saveProblemToFile = async (content) => {
   const blob = new Blob([content], { type: "text/plain" });
   await fileSave(blob, {
-    fileName: "LP.txt", 
+    fileName: "LP.txt",
     extensions: [".txt"],
   });
 };

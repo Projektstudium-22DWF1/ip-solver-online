@@ -189,11 +189,10 @@ const formatGlpkInput = (input) => {
   for (let i = 0; i < sections.length; i++) {
     const section = sections[i].trim();
     if (keywords.map((k) => k.toLowerCase()).includes(section.toLowerCase())) {
-      
       output += section + "\n";
-      
+
       const content = sections[i + 1];
-      i++; 
+      i++;
       if (typeof content === "string" && content.trim()) {
         const trimmedContent = content.trim();
         // parse Content by keyword
@@ -204,7 +203,8 @@ const formatGlpkInput = (input) => {
         ) {
           // Constraints
           // Regex to detect end of constraint (=/>=/<= + number)
-          const constraintRegex = /(?:\b\w+\s*:\s*)?.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
+          const constraintRegex =
+            /(?:\b\w+\s*:\s*)?.+?[<>=]=?\s*-?\d+(\.\d+)?/g;
           const lines = trimmedContent.match(constraintRegex) || [];
           //newline for each constraint
           for (const line of lines) {
@@ -267,7 +267,7 @@ const formatGlpkInput = (input) => {
 //function to format Glpk output to a javascript object, that is uniform to highs solver return value
 const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
   var status;
-  
+
   switch (glpk.glp_mip_status(lp)) {
     case glpk.GLP_OPT:
       status = "Optimal";
@@ -337,7 +337,7 @@ const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
         statusStr = "UB"; // upperbounds
         break;
       default:
-        statusStr = "Unknown"; 
+        statusStr = "Unknown";
         break;
     }
 
@@ -347,13 +347,13 @@ const formatGlpkOutput = (lp, glpkOutput, glpkLog) => {
     // add to variables object
     columns[colName] = {
       Index: i - 1, // start index at 0
-      Status: statusStr, 
-      Lower: lb, 
-      Upper: ub, 
-      Primal: primal, 
-      Dual: dual, 
-      Type: colType, 
-      Name: colName, 
+      Status: statusStr,
+      Lower: lb,
+      Upper: ub,
+      Primal: primal,
+      Dual: dual,
+      Type: colType,
+      Name: colName,
     };
   }
 

@@ -41,10 +41,20 @@ function GuidedTextarea({ setProblem, setSolverData }) {
 
   // Helper function to generate the complete problem text
   const returnProblem = () => {
-    let problem = optimizationDirection + " obj: " + prob[0].value + " Subject To " + constraints.map((e, index) => {
-      const name = constraintNames[index].value;
-      return name ? name + ": " + e.value : e.value;
-  }).join(" ") + " Bounds " + bounds.map((e) => e.value).join(" ") + " End";
+    let problem =
+      optimizationDirection +
+      " obj: " +
+      prob[0].value +
+      " Subject To " +
+      constraints
+        .map((e, index) => {
+          const name = constraintNames[index].value;
+          return name ? name + ": " + e.value : e.value;
+        })
+        .join(" ") +
+      " Bounds " +
+      bounds.map((e) => e.value).join(" ") +
+      " End";
 
     setProblem(problem);
   };
