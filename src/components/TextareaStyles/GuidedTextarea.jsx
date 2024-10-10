@@ -14,7 +14,6 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext);
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
-  const [problemStatement, setProblemStatement] = useState("");
 
   const [prob, setProb] = useState([{ value: "" }]);
   const [constraints, setConstraints] = useState([{ value: "" }]);
@@ -34,22 +33,18 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   useEffect(() => {
     const dataToSend = { prob, setProb };
     setSolverData(dataToSend); // Updates parent with current solver data
-  }, [prob, setProb]);
+  }, [prob, setProb, setSolverData]);
+
+  useEffect(() => {
+    returnProblem();
+  }, [optimizationDirection, setOptimizationDirection]);
 
   // Helper function to generate the complete problem text
   const returnProblem = () => {
-    console.log(prob[0].value);
-    let problem =
-      optimizationDirection +
-      " obj: \n" +
-      prob[0].value +
-      "\nSubject To \n" +
-      constraints
-        .map((e, index) => constraintNames[index].value + ": " + e.value)
-        .join("\n") +
-      "\nBounds \n" +
-      bounds.map((e) => e.value).join("\n") +
-      "\nEnd";
+    let problem = optimizationDirection + " obj: " + prob[0].value + " Subject To " + constraints.map((e, index) => {
+      const name = constraintNames[index].value;
+      return name ? name + ": " + e.value : e.value;
+  }).join(" ") + " Bounds " + bounds.map((e) => e.value).join(" ") + " End";
 
     setProblem(problem);
   };
@@ -83,6 +78,7 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       <OptimizationDirectionChooser
         optimizationDirection={optimizationDirection}
         setOptimizationDirection={setOptimizationDirection}
+        returnProblem={returnProblem}
       />
 
       <div>

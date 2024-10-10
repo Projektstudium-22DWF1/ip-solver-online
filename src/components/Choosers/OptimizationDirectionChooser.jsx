@@ -4,7 +4,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 
 function OptimizationDirectionChooser({
   optimizationDirection,
-  setOptimizationDirection,
+  setOptimizationDirection
 }) {
   const { translations } = useContext(LanguageContext); // Access translations from context
 
