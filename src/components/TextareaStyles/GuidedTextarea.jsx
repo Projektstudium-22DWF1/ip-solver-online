@@ -9,6 +9,7 @@ import {
   validateConstraints,
   validateProblem,
 } from "../../services/Validation";
+import { solve } from "../../services/SolverInterface";
 
 function GuidedTextarea({ setProblem, setSolverData }) {
   const { translations } = useContext(LanguageContext);
@@ -20,20 +21,24 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   const [bounds, setBounds] = useState([{ value: "" }]);
   const [constraintNames, setConstraintNames] = useState([{ value: "" }]);
   const [validProblem, setValidProblem] = useState(
-    Array(prob.length).fill(true),
+    Array(prob.length).fill(false),
   );
   const [validConstraint, setValidConstraint] = useState(
-    Array(constraints.length).fill(true),
+    Array(constraints.length).fill(false),
   );
-  const [validBound, setValidBound] = useState(Array(bounds.length).fill(true));
+  const [validBound, setValidBound] = useState(
+    Array(bounds.length).fill(false),
+  );
   const [validConstraintNames, setValidConstraintNames] = useState(
-    Array(constraintNames.length).fill(true),
+    Array(constraintNames.length).fill(false),
   );
+  const [solveControl, setSolveControl] = useState(true);
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
-    const dataToSend = { prob, setProb };
+    const dataToSend = { prob, setProb, solveControl, setSolveControl };
     setSolverData(dataToSend); // Updates parent with current solver data
-  }, [prob, setProb, setSolverData]);
+  }, [prob, setProb, setSolverData, solveControl, setSolveControl]);
 
   useEffect(() => {
     returnProblem();
@@ -81,6 +86,21 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       setRestriction(newRestriction);
     }
   };
+
+  useEffect(() => {
+    if (initialLoad) {
+      setInitialLoad(false);
+      return; // Skip Validation
+    }
+
+    const allValid =
+      validProblem.every(Boolean) &&
+      validConstraint.every(Boolean) &&
+      validConstraintNames.every(Boolean) &&
+      validBound.every(Boolean);
+
+    setSolveControl(!allValid);
+  }, [validProblem, validConstraint, validConstraintNames, validBound]);
 
   return (
     <React.Fragment>

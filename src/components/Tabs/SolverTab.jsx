@@ -15,6 +15,7 @@ import {
 } from "../../services/SolverInterface";
 import InputFormatInformationIcon from "../InputFormatInformationIcon";
 import ErrorMessage from "../ErrorMessage";
+import { validateGuidedProblem } from "../../services/Validation";
 
 export function SolverTab() {
   const [solverOption, setSolverOption] = useState(SolverOptions.HIGHS);
@@ -39,7 +40,6 @@ export function SolverTab() {
       setErrorData({ message: error.message, id: Date.now() }); // Handles error
     }
   };
-
   return (
     <React.Fragment>
       <div
@@ -102,6 +102,8 @@ export function SolverTab() {
       <SolveProblemButton
         solveProblem={solveProblem}
         setErrorData={setErrorData}
+        solveControl={solverData.solveControl}
+        textAreaStyle={textareaStyle}
       />
 
       {/* File buttons for problem management */}
