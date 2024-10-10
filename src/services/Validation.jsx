@@ -69,7 +69,6 @@ export function validateConstraintNames(
 }
 
 export function validateBound(bounds, validBound, setValidBound) {
-
   let valid = true;
   const regexBounds =
     /^([0-9]*\s*[a-zA-Z_][a-zA-Z0-9_]*)\s*(<=|>=|<|>|=)\s*([0-9]\d*)$/;

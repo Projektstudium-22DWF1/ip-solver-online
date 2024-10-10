@@ -40,7 +40,16 @@ function GuidedTextarea({ setProblem, setSolverData }) {
 
   useEffect(() => {
     returnProblem();
-  }, [optimizationDirection, setOptimizationDirection, constraints, constraintNames, bounds, prob, validConstraint, setValidConstraint]);
+  }, [
+    optimizationDirection,
+    setOptimizationDirection,
+    constraints,
+    constraintNames,
+    bounds,
+    prob,
+    validConstraint,
+    setValidConstraint,
+  ]);
 
   // Helper function to generate the complete problem text
   const returnProblem = () => {
@@ -75,14 +84,22 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   };
 
   // Delete a constraint, bound, or name
-  const deleteRestriction = (index, restriction, setRestriction, validRestriction, setValidRestriction) => {
+  const deleteRestriction = (
+    index,
+    restriction,
+    setRestriction,
+    validRestriction,
+    setValidRestriction,
+  ) => {
     if (restriction.length === 1) {
       alert(translations.oneConstraintRequired);
     } else {
       const newRestriction = restriction.filter((_, i) => i !== index);
       setRestriction(newRestriction);
 
-      const newValidRestriction = validRestriction.filter((_, i) => i !== index);
+      const newValidRestriction = validRestriction.filter(
+        (_, i) => i !== index,
+      );
       setValidRestriction(newValidRestriction);
       returnProblem();
     }
@@ -94,9 +111,8 @@ function GuidedTextarea({ setProblem, setSolverData }) {
       return; // Skip Validation
     }
 
-    const allValid =
-validateOnChange
-      validProblem.every(Boolean) &&
+    const allValid = validateOnChange;
+    validProblem.every(Boolean) &&
       validConstraint.every(Boolean) &&
       validConstraintNames.every(Boolean) &&
       validBound.every(Boolean);
@@ -210,8 +226,15 @@ validateOnChange
                     value={constraint.value}
                     onClick={() => {
                       setConstraints((prevConstraints) => {
-                        const newConstraints = [...prevConstraints, { value: "" }];
-                        validateConstraints(newConstraints, validConstraint, setValidConstraint);
+                        const newConstraints = [
+                          ...prevConstraints,
+                          { value: "" },
+                        ];
+                        validateConstraints(
+                          newConstraints,
+                          validConstraint,
+                          setValidConstraint,
+                        );
                         returnProblem();
                         return newConstraints;
                       });
@@ -220,19 +243,29 @@ validateOnChange
                         return [...prevNames, { value: "" }];
                       });
                     }}
-
                   ></span>
                 </td>
                 <td>
                   <span
-                      className="removeButton"
-                      uk-icon="close"
-                      onClick={() => {
-                        deleteRestriction(index, constraints, setConstraints, validConstraint, setValidConstraint);
-                        deleteRestriction(index, constraintNames, setConstraintNames, validConstraintNames, setValidConstraintNames);
-                      }}
+                    className="removeButton"
+                    uk-icon="close"
+                    onClick={() => {
+                      deleteRestriction(
+                        index,
+                        constraints,
+                        setConstraints,
+                        validConstraint,
+                        setValidConstraint,
+                      );
+                      deleteRestriction(
+                        index,
+                        constraintNames,
+                        setConstraintNames,
+                        validConstraintNames,
+                        setValidConstraintNames,
+                      );
+                    }}
                   ></span>
-
                 </td>
               </tr>
             ))}
@@ -243,7 +276,7 @@ validateOnChange
         <label htmlFor="#bounds">{translations.bounds}</label>
         <table className={"mainArea"}>
           <tbody>
-          {bounds.map((bound, index) => (
+            {bounds.map((bound, index) => (
               <tr key={index}>
                 <td>
                   <input
@@ -277,7 +310,13 @@ validateOnChange
                     className="removeButton"
                     uk-icon="close"
                     onClick={() => {
-                      deleteRestriction(index, bounds, setBounds, validBound, setValidBound);
+                      deleteRestriction(
+                        index,
+                        bounds,
+                        setBounds,
+                        validBound,
+                        setValidBound,
+                      );
                     }}
                   ></span>
                 </td>
