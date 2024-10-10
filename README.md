@@ -1,23 +1,45 @@
-## Table of Contents
+<div align="center">
+   <p style="font-size: 40px;"><strong>OptiMize - Enhance your success!</strong></p>
+   <img src="./src/assets/logo.png" alt="Logo" width="150"/>
+   <p>A Reliable lightweigt web-based linear problem optimizer <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/" target="_blank">running in your browser</a></p>
+</div>
 
-1. [Features](#features)
-2. [Usage](#usage)
-3. [Installation](#installation)
-4. [Learn More](#learn-lore)
-5. [License](#license)
+<div align="center">
+  
+  ![Last Commit](https://img.shields.io/github/last-commit/Projektstudium-22DWF1/ip-solver-online)
+  ![Open Issues](https://img.shields.io/github/issues/Projektstudium-22DWF1/ip-solver-online)
+  ![Open PRs](https://img.shields.io/github/issues-pr/Projektstudium-22DWF1/ip-solver-online)
+  ![License](https://img.shields.io/badge/License-GPLv3-orange.svg)
+  ![Repo size](https://img.shields.io/github/repo-size/Projektstudium-22DWF1/ip-solver-online)
+
+</div>
+
+<div align="center">
+  <a href="#features">Features</a> • 
+  <a href="#usage">Usage</a> • 
+  <a href="#installation">Installation</a> • 
+  <a href="#testing">Testing</a> • 
+  <a href="#learn-more">Learn More</a> • 
+  <a href="#license">License</a>
+</div>
 
 ## Features
 
-1. Modeling/solving of specific and general linear programs!
-2. HIGHS and GLPK Solver supported!
-3. LP and GMPL input languages supported!
-4. Intuitive to use through guided input and issue highlighting!
-5. Optimized for running in webbrowser. Runs in frontend only. No backend!
-6. Export and Import functions for general linear problems provided!
-7. Currently supports the languages english and german!
-8. Usable on mobile devices as well!
+- 🧮 Modeling/solving of specific and general linear programs!
+- ⚙️ HIGHS and GLPK Solver supported!
+- 📝 LP and GMPL input languages supported!
+- 🌟 Intuitive to use through guided input and issue highlighting!
+- 🌐 Optimized for running in webbrowser. Runs in frontend only. No backend!
+- 📦 Export and Import functions for general linear problems provided!
+- 🌍 Currently supports the languages english and german!
+- 📱 Usable on mobile devices as well!
+- ✅ Unit- and E2E-Tests provided!
 
 ## Usage
+
+<div align="center">
+  <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/"><strong>Optimize your solutions now!</strong></a>
+</div>
 
 ## Installation
 
@@ -51,6 +73,50 @@ To get the project running locally, follow these steps:
    ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+## Testing
+
+### Unit Tests
+
+1. **Run unit tests**:
+
+   ```bash
+   cd ip-solver-online
+   npm test
+   ```
+
+2. **Select which tests to run**
+
+   Press **a** to run all tests or choose other options that are shown to you
+
+### End-to-End Tests
+
+Make sure to run the project locally on localhost:3000 **before running the E2E-Test**.
+
+Open a second terminal window and follow the steps below.
+
+1. **Install cypress**
+
+   ```bash
+   cd ip-solver-online
+   npm install cypress --save-dev
+   ```
+
+2. **Open Cypress**
+
+   ```bash
+   npx cypress open
+   ```
+
+3. **Follow the UI**
+
+   Select **E2E Testing**, then **choose the webbrowser** you want to test the application in. Hit **Start E2E Testing in xxxxx**.
+
+The E2E Test are now running. You can **click the spec.cy.js file** to visually see the E2E Test.
+
+<div>
+  <a href="https://docs.cypress.io/guides/component-testing/react/overview">Further information on cypress</a>
+</div>
 
 ## Learn More
 
