@@ -84,18 +84,18 @@ table td {
 
 /* LandingPage Button */
 .landing-page-button {
-  background-color: #28a745; /* Grüner Hintergrund */
-  color: #fff; /* Weiße Schrift */
-  border: none; /* Kein Rand */
-  padding: 10px 20px; /* Innenabstand */
-  border-radius: 5px; /* Abgerundete Ecken */
-  font-size: 1.2em; /* Größere Schrift */
-  cursor: pointer; /* Hand-Cursor beim Hover */
-  transition: background-color 0.3s ease; /* Weicher Übergang bei Hover */
+  background-color: #28a745; 
+  color: #fff; 
+  border: none; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  font-size: 1.2em; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
 }
 
 .landing-page-button:hover {
-  background-color: #218838; /* Dunkleres Grün bei Hover */
+  background-color: #218838; 
 }
 
 /* Label styling for constraints and bounds */

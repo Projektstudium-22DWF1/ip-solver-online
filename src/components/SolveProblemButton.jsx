@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
 import { LanguageContext } from "../context/LanguageContext";
 

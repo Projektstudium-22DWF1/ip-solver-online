@@ -3,7 +3,7 @@ import { openProblemFile, saveProblemToFile } from "../services/FileHandler";
 import "uikit/dist/css/uikit.min.css";
 import { LanguageContext } from "../context/LanguageContext";
 
-function FileButtons({ problem, setProblem }) {
+function FileButtons({ problem, setProblem, textAreaStyle }) {
   const { translations } = useContext(LanguageContext);
 
   // Handle importing a file (reads a file and sets the content as problem)
@@ -29,8 +29,9 @@ function FileButtons({ problem, setProblem }) {
     <div style={{ marginBottom: "10px" }}>
       {/* Button for importing a file */}
       <button
-        className="uk-button uk-button-secondary"
-        onClick={handleImport}
+      className={`uk-button uk-button-secondary ${textAreaStyle === "Guided" ? "disabled-button" : ""}`}
+      onClick={handleImport}
+      disabled={textAreaStyle === "Guided"}
         style={{ marginRight: "10px" }}
       >
         {translations.import} <span uk-icon="icon: upload"></span>

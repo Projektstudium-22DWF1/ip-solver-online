@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useContext } from "react";
 import "uikit/dist/css/uikit.min.css";
 import { LanguageContext } from "../context/LanguageContext"; // Import the LanguageContext for translations
