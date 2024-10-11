@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react";
 import OutputUi from "./OutputUi";
 import { LanguageContext } from "../context/LanguageContext";
@@ -67,13 +67,12 @@ describe("OutputUi Component", () => {
     );
 
     // Wrap the fireEvent in `act` to ensure it triggers state updates correctly
+    // eslint-disable-next-line testing-library/no-unnecessary-act
     await act(async () => {
       fireEvent.click(screen.getByText("Logs"));
     });
 
     // Wait for the log content to appear
-    await waitFor(() =>
-      expect(screen.getByText("Sample log data")).toBeInTheDocument(),
-    );
+    await screen.findByText("Sample log data");
   });
 });

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 // components/Tabs/OffCanvasMenu.jsx
 import React, { useContext } from "react";
 import UIkit from "uikit";

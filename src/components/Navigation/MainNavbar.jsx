@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 // components/Tabs/MainNavbar.jsx
 import React, { useContext, useState } from "react";
 import { LanguageContext } from "../../context/LanguageContext";

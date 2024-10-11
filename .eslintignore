@@ -1,4 +1,4 @@
-# Node modules und Build-Ordner ignorieren
+# ignore Node modules and Build-Ordner 
 node_modules/
 build/
 dist/
@@ -11,7 +11,7 @@ yarn.lock
 .github/workflows/*.yml
 Dockerfile
 
-# Bilder und Medien
+# Images and Media
 *.png
 *.jpg
 *.jpeg

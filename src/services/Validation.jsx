@@ -7,7 +7,7 @@ export function validateGuidedProblem(states) {
 export function validateProblem(prob, validProblem, setValidProblem) {
   let valid = true;
   const regexProblem =
-    /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)*\s*$/;
+    /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[+-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)*\s*$/;
   const newValidProb = [...validProblem];
 
   prob.forEach((e, index) => {
@@ -29,7 +29,7 @@ export function validateConstraints(
 ) {
   let valid = true;
   const regexConstraint =
-    /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[\+\-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*\s*)*\s*(<=|>=|=)\s*[0-9]\d*\s*$/;
+    /^(-?\d*\s*[a-zA-Z_][a-zA-Z0-9_]*)(\s*[+-]\s*\d*\s*[a-zA-Z_][a-zA-Z0-9_]*\s*)*\s*(<=|>=|=)\s*[0-9]\d*\s*$/;
   const newValidConstraint = [...validConstraint];
   // Validation for constraints
   constraints.forEach((e, index) => {
