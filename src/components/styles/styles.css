@@ -84,18 +84,18 @@ table td {
 
 /* LandingPage Button */
 .landing-page-button {
-  background-color: #28a745; 
-  color: #fff; 
-  border: none; 
-  padding: 10px 20px; 
-  border-radius: 5px; 
-  font-size: 1.2em; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease; 
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .landing-page-button:hover {
-  background-color: #218838; 
+  background-color: #218838;
 }
 
 /* Label styling for constraints and bounds */

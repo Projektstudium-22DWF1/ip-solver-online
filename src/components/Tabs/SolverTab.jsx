@@ -107,7 +107,11 @@ export function SolverTab() {
       />
 
       {/* File buttons for problem management */}
-      <FileButtons problem={problem} setProblem={setProblem} textAreaStyle={textareaStyle} />
+      <FileButtons
+        problem={problem}
+        setProblem={setProblem}
+        textAreaStyle={textareaStyle}
+      />
 
       {/* Output UI rendering if output data is available */}
       {outputData && (

@@ -29,9 +29,9 @@ function FileButtons({ problem, setProblem, textAreaStyle }) {
     <div style={{ marginBottom: "10px" }}>
       {/* Button for importing a file */}
       <button
-      className={`uk-button uk-button-secondary ${textAreaStyle === "Guided" ? "disabled-button" : ""}`}
-      onClick={handleImport}
-      disabled={textAreaStyle === "Guided"}
+        className={`uk-button uk-button-secondary ${textAreaStyle === "Guided" ? "disabled-button" : ""}`}
+        onClick={handleImport}
+        disabled={textAreaStyle === "Guided"}
         style={{ marginRight: "10px" }}
       >
         {translations.import} <span uk-icon="icon: upload"></span>
