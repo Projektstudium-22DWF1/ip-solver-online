@@ -38,7 +38,8 @@
 ## Usage
 
 <div align="center">
-  <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/"><strong>Optimize your solutions now!</strong></a>
+   <img src="./src/assets/demo.gif" alt="Demo" width="auto"/>
+   <a href="https://projektstudium-22dwf1.github.io/ip-solver-online/"><strong>Optimize your solutions now!</strong></a>
 </div>
 
 ## Installation
