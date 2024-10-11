@@ -9,9 +9,8 @@ import {
   validateConstraints,
   validateProblem,
 } from "../../services/Validation";
-import { solve } from "../../services/SolverInterface";
 
-function GuidedTextarea({ setProblem, setSolverData }) {
+function GuidedTextarea({ setProblem, setSolverData, setErrorData }) {
   const { translations } = useContext(LanguageContext);
   const [optimizationDirection, setOptimizationDirection] =
     useState("Maximize");
@@ -40,7 +39,16 @@ function GuidedTextarea({ setProblem, setSolverData }) {
 
   useEffect(() => {
     returnProblem();
-  }, [optimizationDirection, setOptimizationDirection]);
+  }, [
+    optimizationDirection,
+    setOptimizationDirection,
+    constraints,
+    constraintNames,
+    bounds,
+    prob,
+    validConstraint,
+    setValidConstraint,
+  ]);
 
   // Helper function to generate the complete problem text
   const returnProblem = () => {
@@ -70,18 +78,32 @@ function GuidedTextarea({ setProblem, setSolverData }) {
   // Modify existing constraint, bound, or name
   const handleRestrictionChange = (index, e, restriction, setRestriction) => {
     const newRestriction = [...restriction];
-    console.log(newRestriction);
     newRestriction[index].value = e.target.value;
     setRestriction(newRestriction);
   };
 
   // Delete a constraint, bound, or name
-  const deleteRestriction = (index, restriction, setRestriction) => {
+  const deleteRestriction = (
+    index,
+    restriction,
+    setRestriction,
+    validRestriction,
+    setValidRestriction,
+  ) => {
     if (restriction.length === 1) {
-      alert(translations.oneConstraintRequired);
+      setErrorData({
+        message: translations.oneConstraintRequired,
+        id: Date.now(),
+      });
     } else {
       const newRestriction = restriction.filter((_, i) => i !== index);
       setRestriction(newRestriction);
+
+      const newValidRestriction = validRestriction.filter(
+        (_, i) => i !== index,
+      );
+      setValidRestriction(newValidRestriction);
+      returnProblem();
     }
   };
 
@@ -92,12 +114,13 @@ function GuidedTextarea({ setProblem, setSolverData }) {
     }
 
     const allValid =
-      validProblem.every(Boolean) && validConstraint.every(Boolean);
-    // validConstraintNames.every(Boolean) &&
-    // validBound.every(Boolean);
+      validProblem.every(Boolean) &&
+      validConstraint.every(Boolean) &&
+      validConstraintNames.every(Boolean) &&
+      validBound.every(Boolean);
 
     setSolveControl(!allValid);
-  }, [validProblem, validConstraint, validBound]);
+  }, [validProblem, validConstraint, validConstraintNames, validBound]);
 
   return (
     <React.Fragment>
@@ -202,9 +225,25 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                   <span
                     className="addButton"
                     uk-icon="plus"
+                    value={constraint.value}
                     onClick={() => {
-                      addRestriction(setConstraints, constraints);
-                      addRestriction(setConstraintNames, constraintNames);
+                      setConstraints((prevConstraints) => {
+                        const newConstraints = [
+                          ...prevConstraints,
+                          { value: "" },
+                        ];
+                        validateConstraints(
+                          newConstraints,
+                          validConstraint,
+                          setValidConstraint,
+                        );
+                        returnProblem();
+                        return newConstraints;
+                      });
+
+                      setConstraintNames((prevNames) => {
+                        return [...prevNames, { value: "" }];
+                      });
                     }}
                   ></span>
                 </td>
@@ -213,7 +252,20 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     className="removeButton"
                     uk-icon="close"
                     onClick={() => {
-                      deleteRestriction(index, constraints, setConstraints);
+                      deleteRestriction(
+                        index,
+                        constraints,
+                        setConstraints,
+                        validConstraint,
+                        setValidConstraint,
+                      );
+                      deleteRestriction(
+                        index,
+                        constraintNames,
+                        setConstraintNames,
+                        validConstraintNames,
+                        setValidConstraintNames,
+                      );
                     }}
                   ></span>
                 </td>
@@ -239,7 +291,6 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     }}
                     value={bound.value}
                     onChange={(e) => {
-                      console.log(bound);
                       handleRestrictionChange(index, e, bounds, setBounds);
                       validateBound(bounds, validBound, setValidBound);
                       returnProblem();
@@ -261,8 +312,13 @@ function GuidedTextarea({ setProblem, setSolverData }) {
                     className="removeButton"
                     uk-icon="close"
                     onClick={() => {
-                      deleteRestriction(index, bounds, setBounds);
-                      returnProblem();
+                      deleteRestriction(
+                        index,
+                        bounds,
+                        setBounds,
+                        validBound,
+                        setValidBound,
+                      );
                     }}
                   ></span>
                 </td>

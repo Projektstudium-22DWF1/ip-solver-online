@@ -18,7 +18,7 @@
   "problemStatement": "Zielfunktion",
   "constraints": "Restriktionen",
   "bounds": "Schranken",
-  "oneConstraintRequired": "Eine Einschränkung erforderlich",
+  "oneConstraintRequired": "Eine Einschränkung oder Schranke erforderlich",
   "input": "Eingabe",
   "solveProblem": "Problem lösen",
   "import": "Importieren",
