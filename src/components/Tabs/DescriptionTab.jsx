@@ -7,17 +7,17 @@ function DescriptionTab() {
 
   // Inline styles for the container to handle layout on small and large screens
   const containerStyle = {
-    maxWidth: "100%", // Ensures the container doesn't exceed the viewport width on small screens
-    padding: "0 1rem", // Adds padding on the left and right to create space around the content
-    boxSizing: "border-box", // Ensures that padding and borders are included in the element's width
-    margin: "0 auto", // On larger screens, this centers the container horizontally
+    maxWidth: "100%",
+    padding: "0 1rem",
+    boxSizing: "border-box",
+    margin: "0 auto",
   };
 
   // Inline styles for the code blocks to ensure proper formatting and scrolling behavior
   const codeBlockStyle = {
-    whiteSpace: "pre-wrap", // Allows text inside <pre> tags to wrap and avoid overflow
-    wordWrap: "break-word", // Forces long words or code snippets to break if necessary
-    overflowX: "auto", // Enables horizontal scrolling if the content is too wide for the container
+    whiteSpace: "pre-wrap",
+    wordWrap: "break-word",
+    overflowX: "auto",
   };
 
   return (
